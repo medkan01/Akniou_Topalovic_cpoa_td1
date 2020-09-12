@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class tLigne_commande {
-	public static void ajouterLigne_commande(int id_commande, int id_produit, int quantite, double tarif_unitaire) {
+	private static Scanner sc = new Scanner(System.in);
+	
+	public static void ajouterLigne_commandeSQL(int id_commande, int id_produit, int quantite, double tarif_unitaire) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -20,11 +23,11 @@ public class tLigne_commande {
 		}
 	}
 	
-	public static void suppLigne_commande(int id_commande, int id_produit) {
+	public static void suppLigne_commandeSQL(int id_commande, int id_produit) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
-			requete.executeUpdate("DELETE FROM `akniou1u_cpoa`.`Ligne_commande` WHERE `Commande`.`id_commande` = "+id_commande+" AND `id_produit` = "+id_produit);
+			requete.executeUpdate("DELETE FROM `akniou1u_cpoa`.`Ligne_commande` WHERE `Ligne_commande`.`id_commande` = "+id_commande+" AND `id_produit` = "+id_produit);
 			affLigne_commande();
 			requete.close();
 			laConnexion.close();
@@ -33,11 +36,11 @@ public class tLigne_commande {
 		}
 	}
 	
-	public static void editLigne_commande(int id_commande, int id_produit, int quantite, double tarif_unitaire) {
+	public static void editLigne_commandeSQL(int id_commande, int id_produit1, int quantite, double tarif_unitaire, int id_produit2) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
-			requete.executeUpdate("UPDATE `akniou1u_cpoa`.`Commande` SET `id_produit` = '"+id_produit+"', `quantite` = '"+quantite+"', `tarif_unitaire` = '"+tarif_unitaire+" WHERE `Commande`.`id_commande` = "+id_commande+" AND `id_produit` = "+id_produit+";");
+			requete.executeUpdate("UPDATE `akniou1u_cpoa`.`Ligne_commande` SET `id_produit` = '"+id_produit2+"', `quantite` = '"+quantite+"', `tarif_unitaire` = '"+tarif_unitaire+"' WHERE `Ligne_commande`.`id_commande` = '"+id_commande+"' AND `id_produit` = '"+id_produit1+"';");
 			affLigne_commande();
 			requete.close();
 			laConnexion.close();
@@ -64,4 +67,58 @@ public class tLigne_commande {
 			System.out.println("Pb select"+sqle.getMessage());
 		}
 	}
+	
+	public static void ajouterLigne_commande() {
+		System.out.println("Ajout d'une ligne de commande: \n");
+		
+		System.out.println("id_commande: ");
+		int id_commande = sc.nextInt();
+		
+		System.out.println("id_produit: ");
+		int id_produit = sc.nextInt();
+		
+		System.out.println("quantite: ");
+		int quantite = sc.nextInt();
+		
+		System.out.println("tarif_unitaire: ");
+		double tarif_unitaire = Double.parseDouble(sc.next());
+
+		tLigne_commande.ajouterLigne_commandeSQL(id_commande, id_produit, quantite, tarif_unitaire);
+	}
+	
+	public static void editLigne_commande() {
+		System.out.println("Modifier d'une ligne de commande: \n");
+		
+		System.out.println("id_commande à modifier: ");
+		int id_commande = sc.nextInt();
+		
+		System.out.println("id_produit à modifier: ");
+		int id_produit1 = sc.nextInt();
+		
+		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("id_produit: ");
+		int id_produit2 = sc.nextInt();
+		
+		System.out.println("quantite: ");
+		int quantite = sc.nextInt();
+		
+		System.out.println("tarif_unitaire: ");
+		double tarif_unitaire = Double.parseDouble(sc.next());
+		
+		tLigne_commande.editLigne_commandeSQL(id_commande, id_produit1, quantite, tarif_unitaire, id_produit2);
+	}
+	
+	public static void suppLigne_commande() {
+		System.out.println("Suppression d'une ligne de commande: \n");
+		
+		System.out.println("id_commande: ");
+		int id_commande = sc.nextInt();
+		
+		System.out.println("id_produit: ");
+		int id_produit = sc.nextInt();
+
+
+		tLigne_commande.suppLigne_commandeSQL(id_commande, id_produit);
+	}
+	
 }

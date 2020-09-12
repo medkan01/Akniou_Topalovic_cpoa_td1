@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class tClient {
-	public static void ajouterClient(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
+	private static Scanner sc = new Scanner(System.in);
+	
+	public static void ajouterClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -23,7 +26,7 @@ public class tClient {
 		}
 	}
 	
-	public static void suppClient(int id_client) {
+	public static void suppClientSQL(int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -36,7 +39,7 @@ public class tClient {
 		}
 	}
 	
-	public static void editClient(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
+	public static void editClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -70,5 +73,89 @@ public class tClient {
 		}catch(SQLException sqle) {
 			System.out.println("Pb select"+sqle.getMessage());
 		}
+	}
+	
+	@SuppressWarnings("resource")
+	public static void ajouterClient() {
+		System.out.println("Ajout d'un client: \n");
+		
+		System.out.println("id_client: ");
+		int id_client = sc.nextInt();
+		
+		System.out.println("nom: ");
+		String nom =  new Scanner(System.in).nextLine();
+		
+		System.out.println("prenom: ");
+		String prenom =  new Scanner(System.in).nextLine();
+		
+		System.out.println("identifiant: ");
+		String identifiant =  new Scanner(System.in).nextLine();
+		
+		System.out.println("mot_de_passe: ");
+		String mot_de_passe =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_numero: ");
+		String adr_numero =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_voie: ");
+		String adr_voie =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_code_postal: ");
+		String adr_code_postal =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_ville: ");
+		String adr_ville =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_pays: ");
+		String adr_pays =  new Scanner(System.in).nextLine();
+		
+		tClient.ajouterClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
+	}
+	
+	@SuppressWarnings("resource")
+	public static void editClient() {
+		System.out.println("Ajout d'un client: \n");
+		
+		System.out.println("id_client à modifier: ");
+		int id_client = sc.nextInt();
+		
+		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("nom: ");
+		String nom =  new Scanner(System.in).nextLine();
+		
+		System.out.println("prenom: ");
+		String prenom =  new Scanner(System.in).nextLine();
+		
+		System.out.println("identifiant: ");
+		String identifiant =  new Scanner(System.in).nextLine();
+		
+		System.out.println("mot_de_passe: ");
+		String mot_de_passe =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_numero: ");
+		String adr_numero =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_voie: ");
+		String adr_voie =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_code_postal: ");
+		String adr_code_postal =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_ville: ");
+		String adr_ville =  new Scanner(System.in).nextLine();
+		
+		System.out.println("adr_pays: ");
+		String adr_pays =  new Scanner(System.in).nextLine();
+		
+		tClient.editClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
+	}
+	
+	public static void suppClient() {
+		System.out.println("Suppression d'un client: \n");
+		
+		System.out.println("id_client: ");
+		int id_client = sc.nextInt();
+		
+		tClient.suppClientSQL(id_client);
 	}
 }

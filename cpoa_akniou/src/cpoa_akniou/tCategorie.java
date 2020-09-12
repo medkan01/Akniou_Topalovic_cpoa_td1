@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class tCategorie{
+	private static Scanner sc = new Scanner(System.in);
 	
-	public static void ajouterCategorie(int no_cat, String titre, String visuel) {
+	public static void ajouterCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -21,7 +23,7 @@ public class tCategorie{
 		}
 	}
 	
-	public static void suppCategorie(int no_cat) {
+	public static void suppCategorieSQL(int no_cat) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -34,7 +36,7 @@ public class tCategorie{
 		}
 	}
 	
-	public static void editCategorie(int no_cat, String titre, String visuel) {
+	public static void editCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -64,5 +66,47 @@ public class tCategorie{
 		}catch(SQLException sqle) {
 			System.out.println("Pb select"+sqle.getMessage());
 		}
+	}
+	
+	@SuppressWarnings("resource")
+	public static void ajouterCategorie() {
+		System.out.println("Ajout d'une catégorie: \n");
+		
+		System.out.println("id_categorie: ");
+		int id_categorie = sc.nextInt();
+		
+		System.out.println("titre: ");
+		String titre = new Scanner(System.in).nextLine();
+		
+		System.out.println("visuel: ");
+		String visuel = new Scanner(System.in).nextLine();
+		
+		tCategorie.ajouterCategorieSQL(id_categorie, titre, visuel);
+	}
+	
+	public static void suppCategorie() {
+		System.out.println("Suppression d'une catégorie: \n");
+		
+		System.out.println("id_categorie: ");
+		int id_categorie = sc.nextInt();
+		
+		tCategorie.suppCategorieSQL(id_categorie);
+	}
+	
+	@SuppressWarnings("resource")
+	public static void editCategorie() {
+		System.out.println("Modification d'une catégorie: \n");
+		
+		System.out.println("id_categorie à modifier: ");
+		int id_categorie = sc.nextInt();
+		
+		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("titre: ");
+		String titre =  new Scanner(System.in).nextLine();
+
+		System.out.println("visuel: ");
+		String visuel =  new Scanner(System.in).nextLine();
+		
+		tCategorie.editCategorieSQL(id_categorie, titre, visuel);
 	}
 }

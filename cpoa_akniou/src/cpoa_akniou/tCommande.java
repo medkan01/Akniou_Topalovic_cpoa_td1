@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class tCommande {
-	public static void ajouterCommande(int id_commande, String date, int id_client) {
+	private static Scanner sc = new Scanner(System.in);
+	
+	public static void ajouterCommandeSQL(int id_commande, String date, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -20,7 +23,7 @@ public class tCommande {
 		}
 	}
 	
-	public static void suppCommande(int id_commande) {
+	public static void suppCommandeSQL(int id_commande) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -33,7 +36,7 @@ public class tCommande {
 		}
 	}
 	
-	public static void editCommande(int id_commande, String date_commande, int id_client) {
+	public static void editCommandeSQL(int id_commande, String date_commande, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
@@ -63,5 +66,57 @@ public class tCommande {
 		}catch(SQLException sqle) {
 			System.out.println("Pb select"+sqle.getMessage());
 		}
+	}
+	
+	@SuppressWarnings("resource")
+	public static void ajouterCommande() {
+		System.out.println("Ajout d'une commande: \n");
+		
+		System.out.println("id_commande: ");
+		int id_commande = sc.nextInt();
+		
+		System.out.println("date au format 'yyyy-mm-jj': ");
+		String date = new Scanner(System.in).nextLine();
+		
+		System.out.println("heure au format 'hh:mm:ss");
+		String heure =  new Scanner(System.in).nextLine();
+		
+		String dateSQL = date + " " + heure;
+		
+		System.out.println("id_client: ");
+		int id_client = sc.nextInt();
+		
+		tCommande.ajouterCommandeSQL(id_commande, dateSQL, id_client);;
+	}
+	
+	@SuppressWarnings("resource")
+	public static void editCommande() {
+		System.out.println("Modification d'une commande: \n");
+		
+		System.out.println("id_commande à modifier: ");
+		int id_commande = sc.nextInt();
+		
+		System.out.println("Modifier les éléments suivant: ");
+		System.out.println("date au format 'yyyy-mm-jj': ");
+		String date = new Scanner(System.in).nextLine();
+		
+		System.out.println("heure au format 'hh:mm:ss");
+		String heure =  new Scanner(System.in).nextLine();
+		
+		String dateSQL = date + " " + heure;
+		
+		System.out.println("id_client: ");
+		int id_client = sc.nextInt();
+		
+		tCommande.editCommandeSQL(id_commande, dateSQL, id_client);;
+	}
+	
+	public static void suppCommande() {
+		System.out.println("Suppresion d'une commande: \n");
+		
+		System.out.println("id_commande: ");
+		int id_commande = sc.nextInt();
+		
+		tCommande.suppCommandeSQL(id_commande);;
 	}
 }
