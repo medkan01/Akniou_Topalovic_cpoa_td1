@@ -82,19 +82,23 @@ public class Gestion {
 		
 		switch (choix) {
 		case 1:
+			tCategorie.affCategorie();
 			tCategorie.ajouterCategorie();
 			Gestion.action();
 		case 2:
-
+			tClient.affClient();
 			tClient.ajouterClient();
 			Gestion.action();
 		case 3:
+			tCommande.affCommande();
 			tCommande.ajouterCommande();
 			Gestion.action();
 		case 4:
+			tLigne_commande.affLigne_commande();
 			tLigne_commande.ajouterLigne_commande();
 			Gestion.action();
 		case 5:
+			tProduit.affProduit();
 			tProduit.ajouterProduit();
 			Gestion.action();
 		case 6:
@@ -116,19 +120,23 @@ public class Gestion {
 		
 		switch (choix) {
 		case 1:
+			tCategorie.affCategorie();
 			tCategorie.suppCategorie();
 			Gestion.action();
 		case 2:
-
+			tClient.affClient();
 			tClient.suppClient();
 			Gestion.action();
 		case 3:
+			tCommande.affCommande();
 			tCommande.suppCommande();
 			Gestion.action();
 		case 4:
+			tLigne_commande.affLigne_commande();
 			tLigne_commande.suppLigne_commande();
 			Gestion.action();
 		case 5:
+			tProduit.affProduit();
 			tProduit.suppProduit();
 			Gestion.action();
 		case 6:
@@ -150,19 +158,23 @@ public class Gestion {
 		
 		switch (choix) {
 		case 1:
+			tCategorie.affCategorie();
 			tCategorie.editCategorie();
 			Gestion.action();
 		case 2:
-
+			tClient.affClient();
 			tClient.editClient();
 			Gestion.action();
 		case 3:
+			tCommande.affCommande();
 			tCommande.editCommande();
 			Gestion.action();
 		case 4:
+			tLigne_commande.affLigne_commande();
 			tLigne_commande.editLigne_commande();
 			Gestion.action();
 		case 5:
+			tProduit.affProduit();
 			tProduit.editProduit();
 			Gestion.action();
 		case 6:

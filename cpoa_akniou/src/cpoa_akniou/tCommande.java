@@ -19,7 +19,7 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Pb select" + sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
 		}
 	}
 	
@@ -32,7 +32,7 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class tCommande {
 				System.out.println(tCom.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	

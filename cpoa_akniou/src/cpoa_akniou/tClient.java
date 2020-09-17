@@ -22,7 +22,7 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Pb select" + sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class tClient {
 				System.out.println(tCli.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Pb select"+sqle.getMessage());
+			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
 	
