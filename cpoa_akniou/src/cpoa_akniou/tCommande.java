@@ -10,6 +10,16 @@ import java.util.Scanner;
 public class tCommande {
 	private static Scanner sc = new Scanner(System.in);
 	
+	/* 
+	 * Il est possible de réduire le nombre de méthodes en fusionnant
+	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
+	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les éléments de la table. On a choisi de les séparer pour
+	 * "clarifier" le code et ne pas surcharger visuellement une
+	 * méthode. 
+	*/
+	
+	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void ajouterCommandeSQL(int id_commande, String date, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -23,6 +33,7 @@ public class tCommande {
 		}
 	}
 	
+	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void suppCommandeSQL(int id_commande) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -36,6 +47,7 @@ public class tCommande {
 		}
 	}
 	
+	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void editCommandeSQL(int id_commande, String date_commande, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -49,6 +61,7 @@ public class tCommande {
 		}
 	}
 	
+	//Requête SQL pour afficher la table
 	public static void affCommande(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -67,7 +80,8 @@ public class tCommande {
 			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
-	
+
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterCommande() {
 		System.out.println("Ajout d'une commande: \n");
@@ -88,7 +102,8 @@ public class tCommande {
 		
 		tCommande.ajouterCommandeSQL(id_commande, dateSQL, id_client);;
 	}
-	
+
+	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
 	@SuppressWarnings("resource")
 	public static void editCommande() {
 		System.out.println("Modification d'une commande: \n");
@@ -111,6 +126,7 @@ public class tCommande {
 		tCommande.editCommandeSQL(id_commande, dateSQL, id_client);;
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
 	public static void suppCommande() {
 		System.out.println("Suppresion d'une commande: \n");
 		

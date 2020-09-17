@@ -10,6 +10,16 @@ import java.util.Scanner;
 public class tCategorie{
 	private static Scanner sc = new Scanner(System.in);
 	
+	/* 
+	 * Il est possible de réduire le nombre de méthodes en fusionnant
+	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
+	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les éléments de la table. On a choisi de les séparer pour
+	 * "clarifier" le code et ne pas surcharger visuellement une
+	 * méthode. 
+	*/
+	
+	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void ajouterCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -23,6 +33,7 @@ public class tCategorie{
 		}
 	}
 	
+	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void suppCategorieSQL(int no_cat) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -36,6 +47,7 @@ public class tCategorie{
 		}
 	}
 	
+	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void editCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -49,6 +61,7 @@ public class tCategorie{
 		}
 	}
 	
+	//Requête SQL pour afficher la table
 	public static void affCategorie(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -67,7 +80,8 @@ public class tCategorie{
 			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
 		}
 	}
-	
+
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterCategorie() {
 		System.out.println("Ajout d'une catégorie: \n");
@@ -83,16 +97,8 @@ public class tCategorie{
 		
 		tCategorie.ajouterCategorieSQL(id_categorie, titre, visuel);
 	}
-	
-	public static void suppCategorie() {
-		System.out.println("Suppression d'une catégorie: \n");
-		
-		System.out.println("id_categorie: ");
-		int id_categorie = sc.nextInt();
-		
-		tCategorie.suppCategorieSQL(id_categorie);
-	}
-	
+
+	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
 	@SuppressWarnings("resource")
 	public static void editCategorie() {
 		System.out.println("Modification d'une catégorie: \n");
@@ -108,5 +114,15 @@ public class tCategorie{
 		String visuel =  new Scanner(System.in).nextLine();
 		
 		tCategorie.editCategorieSQL(id_categorie, titre, visuel);
+	}
+	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
+	public static void suppCategorie() {
+		System.out.println("Suppression d'une catégorie: \n");
+		
+		System.out.println("id_categorie: ");
+		int id_categorie = sc.nextInt();
+		
+		tCategorie.suppCategorieSQL(id_categorie);
 	}
 }

@@ -10,6 +10,16 @@ import java.util.Scanner;
 public class tProduit {
 	private static Scanner sc = new Scanner(System.in);
 	
+	/* 
+	 * Il est possible de réduire le nombre de méthodes en fusionnant
+	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
+	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les éléments de la table. On a choisi de les séparer pour
+	 * "clarifier" le code et ne pas surcharger visuellement une
+	 * méthode. 
+	*/
+	
+	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void ajouterProduitSQL(int id_produit, String nom, String description, double tarif, String visuel, int id_categorie) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -23,6 +33,7 @@ public class tProduit {
 		}
 	}
 	
+	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void suppProduitSQL(int id_produit) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -36,6 +47,7 @@ public class tProduit {
 		}
 	}
 	
+	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void editProduitSQL(int id_produit, String nom, String description, double tarif, String visuel, int id_categorie) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -49,6 +61,7 @@ public class tProduit {
 		}
 	}
 	
+	//Requête SQL pour afficher la table
 	public static void affProduit(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -68,6 +81,7 @@ public class tProduit {
 		}
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterProduit() {
 		System.out.println("Ajout d'un produit: \n");
@@ -93,6 +107,7 @@ public class tProduit {
 		tProduit.ajouterProduitSQL(id_produit, nom, description, tarif, visuel, id_categorie);
 	}
 	
+	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
 	@SuppressWarnings("resource")
 	public static void editProduit() {
 		System.out.println("Modification d'un produit: \n");
@@ -119,6 +134,7 @@ public class tProduit {
 		tProduit.editProduitSQL(id_produit, nom, description, tarif, visuel, id_categorie);
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
 	public static void suppProduit() {
 		System.out.println("Suppression d'un produit: \n");
 		

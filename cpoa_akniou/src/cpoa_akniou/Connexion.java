@@ -2,7 +2,8 @@ package cpoa_akniou;
 
 import java.sql.*;
 abstract public class Connexion {
-
+	
+	//Méthodes permettant d'établir la connection au serveur SQL de l'université
 	public static Connection creeConnexion() {
 		String url ="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr";
 		url += "?serverTimezone=Europe/Paris";

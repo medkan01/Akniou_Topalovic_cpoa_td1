@@ -10,6 +10,16 @@ import java.util.Scanner;
 public class tClient {
 	private static Scanner sc = new Scanner(System.in);
 	
+	/* 
+	 * Il est possible de réduire le nombre de méthodes en fusionnant
+	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
+	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les éléments de la table. On a choisi de les séparer pour
+	 * "clarifier" le code et ne pas surcharger visuellement une
+	 * méthode. 
+	*/
+	
+	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void ajouterClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
@@ -26,6 +36,7 @@ public class tClient {
 		}
 	}
 	
+	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void suppClientSQL(int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -39,6 +50,7 @@ public class tClient {
 		}
 	}
 	
+	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void editClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
@@ -55,6 +67,7 @@ public class tClient {
 		}
 	}
 	
+	//Requête SQL pour afficher la table
 	public static void affClient(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -75,6 +88,7 @@ public class tClient {
 		}
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterClient() {
 		System.out.println("Ajout d'un client: \n");
@@ -111,7 +125,8 @@ public class tClient {
 		
 		tClient.ajouterClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
 	}
-	
+
+	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
 	@SuppressWarnings("resource")
 	public static void editClient() {
 		System.out.println("Ajout d'un client: \n");
@@ -150,6 +165,7 @@ public class tClient {
 		tClient.editClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
 	public static void suppClient() {
 		System.out.println("Suppression d'un client: \n");
 		

@@ -10,6 +10,16 @@ import java.util.Scanner;
 public class tLigne_commande {
 	private static Scanner sc = new Scanner(System.in);
 	
+	/* 
+	 * Il est possible de réduire le nombre de méthodes en fusionnant
+	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
+	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les éléments de la table. On a choisi de les séparer pour
+	 * "clarifier" le code et ne pas surcharger visuellement une
+	 * méthode. 
+	*/
+	
+	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void ajouterLigne_commandeSQL(int id_commande, int id_produit, int quantite, double tarif_unitaire) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -23,6 +33,7 @@ public class tLigne_commande {
 		}
 	}
 	
+	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void suppLigne_commandeSQL(int id_commande, int id_produit) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -36,6 +47,7 @@ public class tLigne_commande {
 		}
 	}
 	
+	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
 	public static void editLigne_commandeSQL(int id_commande, int id_produit1, int quantite, double tarif_unitaire, int id_produit2) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -49,6 +61,7 @@ public class tLigne_commande {
 		}
 	}
 	
+	//Requête SQL pour afficher la table
 	public static void affLigne_commande(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -68,6 +81,7 @@ public class tLigne_commande {
 		}
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
 	public static void ajouterLigne_commande() {
 		System.out.println("Ajout d'une ligne de commande: \n");
 		
@@ -86,6 +100,7 @@ public class tLigne_commande {
 		tLigne_commande.ajouterLigne_commandeSQL(id_commande, id_produit, quantite, tarif_unitaire);
 	}
 	
+	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
 	public static void editLigne_commande() {
 		System.out.println("Modifier d'une ligne de commande: \n");
 		
@@ -108,6 +123,7 @@ public class tLigne_commande {
 		tLigne_commande.editLigne_commandeSQL(id_commande, id_produit1, quantite, tarif_unitaire, id_produit2);
 	}
 	
+	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
 	public static void suppLigne_commande() {
 		System.out.println("Suppression d'une ligne de commande: \n");
 		

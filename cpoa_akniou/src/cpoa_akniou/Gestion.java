@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Gestion {
 	private static Scanner sc = new Scanner(System.in);
 	
+	//Menu principal, avec le choix des différentes actions possibles
 	public static void action() {
 		System.out.println("\nQue souhaitez vous faire: \n");
 		System.out.println("1. Afficher une table");
@@ -29,6 +30,7 @@ public class Gestion {
 		}
 	}
 	
+	//Choix de la table à afficher
 	public static void choixAffTable() {
 		System.out.println("\nQuelle table souhaitez vous afficher: \n");
 		System.out.println("1. Catégorie");
@@ -69,6 +71,7 @@ public class Gestion {
 		
 	}
 	
+	//Choix de la table dans laquelle on va ajouter un élément
 	public static void choixAddTable() {
 		System.out.println("\nDans quelle table souhaitez vous ajouter un élément: \n");
 		System.out.println("1. Catégorie");
@@ -107,6 +110,7 @@ public class Gestion {
 		}
 	}
 	
+	//Choix de la table dans laquelle on va supprimer un élément
 	public static void choixSuppTable() {
 		System.out.println("\nDans quelle table souhaitez vous supprimer un élément: \n");
 		System.out.println("1. Catégorie");
@@ -145,6 +149,7 @@ public class Gestion {
 		}
 	}
 	
+	//Choix de la table dans laquelle on va editer un élément
 	public static void choixEditTable() {
 		System.out.println("\nDans quelle table souhaitez vous modifier un élément: \n");
 		System.out.println("1. Catégorie");
