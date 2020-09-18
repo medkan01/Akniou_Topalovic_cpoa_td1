@@ -1,4 +1,4 @@
-package td2.dao;
+package td2.connexion;
 
 public class Connexion {
 
