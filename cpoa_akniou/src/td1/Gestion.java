@@ -1,4 +1,4 @@
-package TD1;
+package td1;
 import java.util.Scanner;
 
 public class Gestion {
