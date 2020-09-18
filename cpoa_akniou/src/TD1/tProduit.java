@@ -1,4 +1,4 @@
-package cpoa_akniou;
+package TD1;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +11,15 @@ public class tProduit {
 	private static Scanner sc = new Scanner(System.in);
 	
 	/* 
-	 * Il est possible de réduire le nombre de méthodes en fusionnant
-	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
-	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
-	 * les éléments de la table. On a choisi de les séparer pour
+	 * Il est possible de rï¿½duire le nombre de mï¿½thodes en fusionnant
+	 * les mï¿½thodes des requetes SQL avec les mï¿½thodes qui vont gï¿½rer
+	 * les entrï¿½es clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les ï¿½lï¿½ments de la table. On a choisi de les sï¿½parer pour
 	 * "clarifier" le code et ne pas surcharger visuellement une
-	 * méthode. 
+	 * mï¿½thode. 
 	*/
 	
-	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour ajouter un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void ajouterProduitSQL(int id_produit, String nom, String description, double tarif, String visuel, int id_categorie) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -29,11 +29,11 @@ public class tProduit {
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n" + sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour supprimer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void suppProduitSQL(int id_produit) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -43,11 +43,11 @@ public class tProduit {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour editer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void editProduitSQL(int id_produit, String nom, String description, double tarif, String visuel, int id_categorie) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -57,11 +57,11 @@ public class tProduit {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour afficher la table
+	//Requï¿½te SQL pour afficher la table
 	public static void affProduit(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -77,11 +77,11 @@ public class tProduit {
 				System.out.println(tProd.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterProduit() {
 		System.out.println("Ajout d'un produit: \n");
@@ -107,15 +107,15 @@ public class tProduit {
 		tProduit.ajouterProduitSQL(id_produit, nom, description, tarif, visuel, id_categorie);
 	}
 	
-	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
+	//Mï¿½thodes qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ï¿½diter
 	@SuppressWarnings("resource")
 	public static void editProduit() {
 		System.out.println("Modification d'un produit: \n");
 		
-		System.out.println("id_produit à modifier: ");
+		System.out.println("id_produit ï¿½ modifier: ");
 		int id_produit = sc.nextInt();
 		
-		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("Modifier les ï¿½lï¿½ments suivants: ");
 		System.out.println("nom: ");
 		String nom = new Scanner(System.in).nextLine();
 		
@@ -134,7 +134,7 @@ public class tProduit {
 		tProduit.editProduitSQL(id_produit, nom, description, tarif, visuel, id_categorie);
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ supprimer
 	public static void suppProduit() {
 		System.out.println("Suppression d'un produit: \n");
 		

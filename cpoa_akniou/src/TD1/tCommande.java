@@ -1,4 +1,4 @@
-package cpoa_akniou;
+package TD1;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +11,15 @@ public class tCommande {
 	private static Scanner sc = new Scanner(System.in);
 	
 	/* 
-	 * Il est possible de réduire le nombre de méthodes en fusionnant
-	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
-	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
-	 * les éléments de la table. On a choisi de les séparer pour
+	 * Il est possible de rï¿½duire le nombre de mï¿½thodes en fusionnant
+	 * les mï¿½thodes des requetes SQL avec les mï¿½thodes qui vont gï¿½rer
+	 * les entrï¿½es clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les ï¿½lï¿½ments de la table. On a choisi de les sï¿½parer pour
 	 * "clarifier" le code et ne pas surcharger visuellement une
-	 * méthode. 
+	 * mï¿½thode. 
 	*/
 	
-	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour ajouter un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void ajouterCommandeSQL(int id_commande, String date, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -29,11 +29,11 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n" + sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour supprimer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void suppCommandeSQL(int id_commande) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -43,11 +43,11 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour editer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void editCommandeSQL(int id_commande, String date_commande, int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -57,11 +57,11 @@ public class tCommande {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour afficher la table
+	//Requï¿½te SQL pour afficher la table
 	public static void affCommande(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -77,11 +77,11 @@ public class tCommande {
 				System.out.println(tCom.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterCommande() {
 		System.out.println("Ajout d'une commande: \n");
@@ -103,15 +103,15 @@ public class tCommande {
 		tCommande.ajouterCommandeSQL(id_commande, dateSQL, id_client);;
 	}
 
-	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
+	//Mï¿½thodes qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ï¿½diter
 	@SuppressWarnings("resource")
 	public static void editCommande() {
 		System.out.println("Modification d'une commande: \n");
 		
-		System.out.println("id_commande à modifier: ");
+		System.out.println("id_commande ï¿½ modifier: ");
 		int id_commande = sc.nextInt();
 		
-		System.out.println("Modifier les éléments suivant: ");
+		System.out.println("Modifier les ï¿½lï¿½ments suivant: ");
 		System.out.println("date au format 'yyyy-mm-jj': ");
 		String date = new Scanner(System.in).nextLine();
 		
@@ -126,7 +126,7 @@ public class tCommande {
 		tCommande.editCommandeSQL(id_commande, dateSQL, id_client);;
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ supprimer
 	public static void suppCommande() {
 		System.out.println("Suppresion d'une commande: \n");
 		

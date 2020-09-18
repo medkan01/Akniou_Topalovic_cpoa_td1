@@ -1,4 +1,4 @@
-package cpoa_akniou;
+package TD1;
 import java.util.Scanner;
 
 public class Gestion {

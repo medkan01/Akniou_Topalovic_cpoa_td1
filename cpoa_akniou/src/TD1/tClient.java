@@ -1,4 +1,4 @@
-package cpoa_akniou;
+package TD1;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +11,15 @@ public class tClient {
 	private static Scanner sc = new Scanner(System.in);
 	
 	/* 
-	 * Il est possible de réduire le nombre de méthodes en fusionnant
-	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
-	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
-	 * les éléments de la table. On a choisi de les séparer pour
+	 * Il est possible de rï¿½duire le nombre de mï¿½thodes en fusionnant
+	 * les mï¿½thodes des requetes SQL avec les mï¿½thodes qui vont gï¿½rer
+	 * les entrï¿½es clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les ï¿½lï¿½ments de la table. On a choisi de les sï¿½parer pour
 	 * "clarifier" le code et ne pas surcharger visuellement une
-	 * méthode. 
+	 * mï¿½thode. 
 	*/
 	
-	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour ajouter un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void ajouterClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
@@ -32,11 +32,11 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n" + sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour supprimer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void suppClientSQL(int id_client) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -46,11 +46,11 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour editer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void editClientSQL(int id_client, String nom, String prenom, String identifiant, String mdp, String adr_numero, String adr_voie, 
 			String adr_code_postal, String adr_ville, String adr_pays) {
 		try {
@@ -63,11 +63,11 @@ public class tClient {
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour afficher la table
+	//Requï¿½te SQL pour afficher la table
 	public static void affClient(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -84,11 +84,11 @@ public class tClient {
 				System.out.println(tCli.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterClient() {
 		System.out.println("Ajout d'un client: \n");
@@ -126,15 +126,15 @@ public class tClient {
 		tClient.ajouterClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
 	}
 
-	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
+	//Mï¿½thodes qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ï¿½diter
 	@SuppressWarnings("resource")
 	public static void editClient() {
 		System.out.println("Ajout d'un client: \n");
 		
-		System.out.println("id_client à modifier: ");
+		System.out.println("id_client ï¿½ modifier: ");
 		int id_client = sc.nextInt();
 		
-		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("Modifier les ï¿½lï¿½ments suivants: ");
 		System.out.println("nom: ");
 		String nom =  new Scanner(System.in).nextLine();
 		
@@ -165,7 +165,7 @@ public class tClient {
 		tClient.editClientSQL(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays);
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ supprimer
 	public static void suppClient() {
 		System.out.println("Suppression d'un client: \n");
 		

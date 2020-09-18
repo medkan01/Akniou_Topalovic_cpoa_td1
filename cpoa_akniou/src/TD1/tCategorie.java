@@ -1,4 +1,4 @@
-package cpoa_akniou;
+package TD1;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +11,15 @@ public class tCategorie{
 	private static Scanner sc = new Scanner(System.in);
 	
 	/* 
-	 * Il est possible de réduire le nombre de méthodes en fusionnant
-	 * les méthodes des requetes SQL avec les méthodes qui vont gérer
-	 * les entrées clavier afin d'ajouter, de supprimer, ou d'editer
-	 * les éléments de la table. On a choisi de les séparer pour
+	 * Il est possible de rï¿½duire le nombre de mï¿½thodes en fusionnant
+	 * les mï¿½thodes des requetes SQL avec les mï¿½thodes qui vont gï¿½rer
+	 * les entrï¿½es clavier afin d'ajouter, de supprimer, ou d'editer
+	 * les ï¿½lï¿½ments de la table. On a choisi de les sï¿½parer pour
 	 * "clarifier" le code et ne pas surcharger visuellement une
-	 * méthode. 
+	 * mï¿½thode. 
 	*/
 	
-	//Requête SQL pour ajouter un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour ajouter un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void ajouterCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -29,11 +29,11 @@ public class tCategorie{
 			requete.close();
 			laConnexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n" + sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n" + sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour supprimer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour supprimer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void suppCategorieSQL(int no_cat) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -43,11 +43,11 @@ public class tCategorie{
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour editer un élément de la table, la table s'affiche une fois la modification effectuée
+	//Requï¿½te SQL pour editer un ï¿½lï¿½ment de la table, la table s'affiche une fois la modification effectuï¿½e
 	public static void editCategorieSQL(int no_cat, String titre, String visuel) {
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -57,11 +57,11 @@ public class tCategorie{
 			requete.close();
 			laConnexion.close();
 		} catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 	
-	//Requête SQL pour afficher la table
+	//Requï¿½te SQL pour afficher la table
 	public static void affCategorie(){
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
@@ -77,14 +77,14 @@ public class tCategorie{
 				System.out.println(tCat.get(i));
 			}
 		}catch(SQLException sqle) {
-			System.out.println("Il y a un problème avec la base de donnée: \n"+sqle.getMessage());
+			System.out.println("Il y a un problï¿½me avec la base de donnï¿½e: \n"+sqle.getMessage());
 		}
 	}
 
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à ajouter
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ajouter
 	@SuppressWarnings("resource")
 	public static void ajouterCategorie() {
-		System.out.println("Ajout d'une catégorie: \n");
+		System.out.println("Ajout d'une catï¿½gorie: \n");
 		
 		System.out.println("id_categorie: ");
 		int id_categorie = sc.nextInt();
@@ -98,15 +98,15 @@ public class tCategorie{
 		tCategorie.ajouterCategorieSQL(id_categorie, titre, visuel);
 	}
 
-	//Méthodes qui va permettre la saisie clavier des attributs d'un élément à éditer
+	//Mï¿½thodes qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ ï¿½diter
 	@SuppressWarnings("resource")
 	public static void editCategorie() {
-		System.out.println("Modification d'une catégorie: \n");
+		System.out.println("Modification d'une catï¿½gorie: \n");
 		
-		System.out.println("id_categorie à modifier: ");
+		System.out.println("id_categorie ï¿½ modifier: ");
 		int id_categorie = sc.nextInt();
 		
-		System.out.println("Modifier les éléments suivants: ");
+		System.out.println("Modifier les ï¿½lï¿½ments suivants: ");
 		System.out.println("titre: ");
 		String titre =  new Scanner(System.in).nextLine();
 
@@ -116,9 +116,9 @@ public class tCategorie{
 		tCategorie.editCategorieSQL(id_categorie, titre, visuel);
 	}
 	
-	//Méthode qui va permettre la saisie clavier des attributs d'un élément à supprimer
+	//Mï¿½thode qui va permettre la saisie clavier des attributs d'un ï¿½lï¿½ment ï¿½ supprimer
 	public static void suppCategorie() {
-		System.out.println("Suppression d'une catégorie: \n");
+		System.out.println("Suppression d'une catï¿½gorie: \n");
 		
 		System.out.println("id_categorie: ");
 		int id_categorie = sc.nextInt();
