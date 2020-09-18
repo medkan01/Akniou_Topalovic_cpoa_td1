@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class Gestion {
 	private static Scanner sc = new Scanner(System.in);
 	
-	//Menu principal, avec le choix des différentes actions possibles
+	//Menu principal, avec le choix des differentes actions possibles
 	public static void action() {
 		System.out.println("\nQue souhaitez vous faire: \n");
 		System.out.println("1. Afficher une table");
-		System.out.println("2. Ajouter des éléments à une table");
-		System.out.println("3. Supprimer un élément d'une table");
-		System.out.println("4. Modifier un élément d'une table");
-		System.out.println("Choix n°: ");
+		System.out.println("2. Ajouter des ï¿½lï¿½ments ï¿½ une table");
+		System.out.println("3. Supprimer un element d'une table");
+		System.out.println("4. Modifier un ï¿½lï¿½ment d'une table");
+		System.out.println("Choix nï¿½: ");
 		int choix = sc.nextInt();
 		
 		switch (choix) {
@@ -30,16 +30,16 @@ public class Gestion {
 		}
 	}
 	
-	//Choix de la table à afficher
+	//Choix de la table ï¿½ afficher
 	public static void choixAffTable() {
 		System.out.println("\nQuelle table souhaitez vous afficher: \n");
-		System.out.println("1. Catégorie");
+		System.out.println("1. Catï¿½gorie");
 		System.out.println("2. Client");
 		System.out.println("3. Commande");
 		System.out.println("4. Ligne_commande");
 		System.out.println("5. Produit");
 		System.out.println("6. Retour");
-		System.out.println("Choix n°: ");
+		System.out.println("Choix nï¿½: ");
 		int choix = sc.nextInt();
 		
 		switch (choix) {
@@ -71,16 +71,16 @@ public class Gestion {
 		
 	}
 	
-	//Choix de la table dans laquelle on va ajouter un élément
+	//Choix de la table dans laquelle on va ajouter un ï¿½lï¿½ment
 	public static void choixAddTable() {
-		System.out.println("\nDans quelle table souhaitez vous ajouter un élément: \n");
-		System.out.println("1. Catégorie");
+		System.out.println("\nDans quelle table souhaitez vous ajouter un ï¿½lï¿½ment: \n");
+		System.out.println("1. Catï¿½gorie");
 		System.out.println("2. Client");
 		System.out.println("3. Commande");
 		System.out.println("4. Ligne_commande");
 		System.out.println("5. Produit");
 		System.out.println("6. Retour");
-		System.out.println("Choix n°: ");
+		System.out.println("Choix nï¿½: ");
 		int choix = sc.nextInt();
 		
 		switch (choix) {
@@ -110,16 +110,16 @@ public class Gestion {
 		}
 	}
 	
-	//Choix de la table dans laquelle on va supprimer un élément
+	//Choix de la table dans laquelle on va supprimer un ï¿½lï¿½ment
 	public static void choixSuppTable() {
-		System.out.println("\nDans quelle table souhaitez vous supprimer un élément: \n");
-		System.out.println("1. Catégorie");
+		System.out.println("\nDans quelle table souhaitez vous supprimer un ï¿½lï¿½ment: \n");
+		System.out.println("1. Catï¿½gorie");
 		System.out.println("2. Client");
 		System.out.println("3. Commande");
 		System.out.println("4. Ligne_commande");
 		System.out.println("5. Produit");
 		System.out.println("6. Retour");
-		System.out.println("Choix n°: ");
+		System.out.println("Choix nï¿½: ");
 		int choix = sc.nextInt();
 		
 		switch (choix) {
@@ -149,16 +149,16 @@ public class Gestion {
 		}
 	}
 	
-	//Choix de la table dans laquelle on va editer un élément
+	//Choix de la table dans laquelle on va editer un ï¿½lï¿½ment
 	public static void choixEditTable() {
-		System.out.println("\nDans quelle table souhaitez vous modifier un élément: \n");
-		System.out.println("1. Catégorie");
+		System.out.println("\nDans quelle table souhaitez vous modifier un ï¿½lï¿½ment: \n");
+		System.out.println("1. Catï¿½gorie");
 		System.out.println("2. Client");
 		System.out.println("3. Commande");
 		System.out.println("4. Ligne_commande");
 		System.out.println("5. Produit");
 		System.out.println("6. Retour");
-		System.out.println("Choix n°: ");
+		System.out.println("Choix nï¿½: ");
 		int choix = sc.nextInt();
 		
 		switch (choix) {
