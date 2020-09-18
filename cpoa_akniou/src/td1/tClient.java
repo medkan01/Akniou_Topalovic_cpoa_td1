@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import td2.connexion.Connexion;
+
 public class tClient {
 	private static Scanner sc = new Scanner(System.in);
 	
