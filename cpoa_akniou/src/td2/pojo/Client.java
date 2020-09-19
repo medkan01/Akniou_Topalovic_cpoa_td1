@@ -7,25 +7,25 @@ public class Client {
 	private String nom;
 	private String prenom;
 	private String identifiant;
-	private String mdp;
-	private int adrNumero;
+	private String motDePasse;
+	private String adrNumero;
 	private String adrVoie;
-	private int adrCp;
+	private String adrCodePostal;
 	private String adrVille;
 	private String adrPays;
 	
 	//CONSTRUCTEUR
-	public Client(int id, String nom, String prenom, String identifiant, String mdp, int adrNumero, String adrVoie,
-			int adrCp, String adrVille, String adrPays) {
+	public Client(int id, String nom, String prenom, String identifiant, String motDePasse, String adrNumero, String adrVoie,
+			String adrCodePostal, String adrVille, String adrPays) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.identifiant = identifiant;
-		this.mdp = mdp;
+		this.motDePasse = motDePasse;
 		this.adrNumero = adrNumero;
 		this.adrVoie = adrVoie;
-		this.adrCp = adrCp;
+		this.adrCodePostal = adrCodePostal;
 		this.adrVille = adrVille;
 		this.adrPays = adrPays;
 	}
@@ -63,19 +63,19 @@ public class Client {
 		this.identifiant = identifiant;
 	}
 
-	public String getMdp() {
-		return mdp;
+	public String getMotDePasse() {
+		return motDePasse;
 	}
 
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 
-	public int getAdrNumero() {
+	public String getAdrNumero() {
 		return adrNumero;
 	}
 
-	public void setAdrNumero(int adrNumero) {
+	public void setAdrNumero(String adrNumero) {
 		this.adrNumero = adrNumero;
 	}
 
@@ -87,12 +87,12 @@ public class Client {
 		this.adrVoie = adrVoie;
 	}
 
-	public int getAdrCp() {
-		return adrCp;
+	public String getAdrCodePostal() {
+		return adrCodePostal;
 	}
 
-	public void setAdrCp(int adrCp) {
-		this.adrCp = adrCp;
+	public void setAdrCodePostal(String adrCodePostal) {
+		this.adrCodePostal = adrCodePostal;
 	}
 
 	public String getAdrVille() {

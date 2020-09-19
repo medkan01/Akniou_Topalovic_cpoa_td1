@@ -10,7 +10,7 @@ public class MySQLCategorieDAO {
 	public static void insert(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		Statement requete = laConnexion.createStatement();
-		requete.executeUpdate("INSERT INTO `akniou1u_cpoa`.`Categorie` (`titre`, `visuel`) VALUES ('"+categorie.getTitre()+"', '"+categorie.getVisuel()+"');");
+		requete.executeUpdate("INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('"+categorie.getTitre()+"', '"+categorie.getVisuel()+"');");
 		requete.close();
 		laConnexion.close();
 	}
@@ -18,7 +18,7 @@ public class MySQLCategorieDAO {
 	public static void delete(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		Statement requete = laConnexion.createStatement();
-		requete.executeUpdate("DELETE FROM `akniou1u_cpoa`.`Categorie` WHERE `Categorie`.`id_categorie` = "+categorie.getId());
+		requete.executeUpdate("DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = "+categorie.getId());
 		requete.close();
 		laConnexion.close();
 	}
@@ -26,7 +26,7 @@ public class MySQLCategorieDAO {
 	public static void update(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		Statement requete = laConnexion.createStatement();
-		requete.executeUpdate("UPDATE `akniou1u_cpoa`.`Categorie` SET `titre` = '"+categorie.getTitre()+"', `visuel` = '"+categorie.getVisuel()+"' WHERE `Categorie`.`id_categorie` = "+categorie.getId()+";");
+		requete.executeUpdate("UPDATE akniou1u_cpoa.Categorie SET titre = '"+categorie.getTitre()+"', visuel = '"+categorie.getVisuel()+"' WHERE Categorie.id_categorie = "+categorie.getId()+";");
 		requete.close();
 		laConnexion.close();
 	}
