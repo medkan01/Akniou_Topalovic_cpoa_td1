@@ -58,11 +58,11 @@ public class Produit {
 		this.visuel = visuel;
 	}
 
-	public int getId_categorie() {
+	public int getIdCategorie() {
 		return idCategorie;
 	}
 
-	public void setId_categorie(int id_categorie) {
+	public void setIdCategorie(int id_categorie) {
 		this.idCategorie = id_categorie;
 	}
 	
