@@ -22,13 +22,17 @@ public class tCategorie{
 	*/
 	
 	//Requ�te SQL pour ajouter un �l�ment de la table, la table s'affiche une fois la modification effectu�e
-	public static void ajouterCategorieSQL(int no_cat, String titre, String visuel) throws SQLException {
+	public static void ajouterCategorieSQL(int no_cat, String titre, String visuel) {
+		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			Statement requete = laConnexion.createStatement();
 			requete.executeUpdate("INSERT INTO `akniou1u_cpoa`.`Categorie` (`id_categorie`, `titre`, `visuel`) VALUES ('"+no_cat+"', '"+titre+"', '"+visuel+"');");
 			affCategorie();
 			requete.close();
 			laConnexion.close();
+		} catch(SQLException sqle) {
+			System.out.println("Il y a un probl�me avec la base de donn�e: \n"+sqle.getMessage());
+		}
 	}
 	
 	//Requ�te SQL pour supprimer un �l�ment de la table, la table s'affiche une fois la modification effectu�e
@@ -81,7 +85,7 @@ public class tCategorie{
 
 	//M�thode qui va permettre la saisie clavier des attributs d'un �l�ment � ajouter
 	@SuppressWarnings("resource")
-	public static void ajouterCategorie() throws SQLException {
+	public static void ajouterCategorie(){
 		System.out.println("Ajout d'une cat�gorie: \n");
 		
 		System.out.println("id_categorie: ");
