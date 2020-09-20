@@ -12,6 +12,7 @@ public class MySQLClientDAO {
 				+"', '"+client.getIdentifiant()+"', '"+client.getMotDePasse()+"', '"+client.getAdrNumero()+"', '"+client.getAdrVoie()+"', '"+client.getAdrCodePostal()+"', '"+client.getAdrVille()+"', '"+client.getAdrPays()+"';");
 		requete.close();
 		laConnexion.close();
+	
 	}
 	
 	public static void delete(Client client) throws SQLException {
