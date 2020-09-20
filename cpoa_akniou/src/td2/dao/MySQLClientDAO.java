@@ -5,11 +5,11 @@ import td1.Connexion;
 import td2.pojo.Client;
 
 public class MySQLClientDAO {
+	
 	public static void insert(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.preapareStatement(
-			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) 
-			VALUES ('?','?','?','?','?','?','?','?','?';");
+		PreparedStatement requete = laConnexion.prepareStatement(
+			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';");
 				requete.setString(1, client.getNom());
 				requete.setString(2, client.getPrenom());
 				requete.setString(3, client.getIdentifiant());
@@ -27,9 +27,9 @@ public class MySQLClientDAO {
 	
 	public static void delete(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.preapareStatement(
+		PreparedStatement requete = laConnexion.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'");
-				requete.setString(1, client.getId());
+				requete.setInt(1, client.getId());
 			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
@@ -37,9 +37,8 @@ public class MySQLClientDAO {
 	
 	public static void update(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.preapareStatement(	
-			"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')
-			WHERE Client.id_client = '?';");
+		PreparedStatement requete = laConnexion.prepareStatement(	
+			"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')WHERE Client.id_client = '?';");
 				requete.setString(1, client.getNom());
 				requete.setString(2, client.getPrenom());
 				requete.setString(3, client.getIdentifiant());
@@ -49,7 +48,7 @@ public class MySQLClientDAO {
 				requete.setString(7, client.getAdrCodePostal());
 				requete.setString(8, client.getAdrVille());
 				requete.setString(9, client.getAdrPays());
-				requete.setString(10, client.getId());
+				requete.setInt(10, client.getId());
 			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
