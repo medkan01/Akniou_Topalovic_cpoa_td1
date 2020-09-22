@@ -19,7 +19,6 @@ public class MySQLClientDAO {
 				requete.setString(7, client.getAdrCodePostal());
 				requete.setString(8, client.getAdrVille());
 				requete.setString(9, client.getAdrPays());
-			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
 	
@@ -31,10 +30,8 @@ public class MySQLClientDAO {
 			"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'");
 				requete.setInt(1, client.getId());
 			ResultSet res = requete.executeQuery();
-		requete.close();
 		laConnexion.close();
 	}
-	
 	public static void update(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(	
@@ -49,7 +46,6 @@ public class MySQLClientDAO {
 				requete.setString(8, client.getAdrVille());
 				requete.setString(9, client.getAdrPays());
 				requete.setInt(10, client.getId());
-			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
 	}
