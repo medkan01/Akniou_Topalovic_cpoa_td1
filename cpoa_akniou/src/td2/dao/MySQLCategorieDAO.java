@@ -12,7 +12,6 @@ public class MySQLCategorieDAO {
 			"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?');");
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
-			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
 	}
@@ -22,7 +21,6 @@ public class MySQLCategorieDAO {
 		PreparedStatement requete = laConnexion.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';");
 				requete.setInt(1, categorie.getId());
-			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
 	}
@@ -34,7 +32,6 @@ public class MySQLCategorieDAO {
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
 				requete.setInt(3, categorie.getId());
-			ResultSet res = requete.executeQuery();
 		requete.close();
 		laConnexion.close();
 	}
