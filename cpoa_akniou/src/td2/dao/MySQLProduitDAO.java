@@ -18,7 +18,7 @@ public class MySQLProduitDAO {
 	public static void insert(Produit produit) throws SQLException{
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES ('?', '?', '?','?', '?');");
+		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES ('?', '?', '?', '?', '?');");
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
 			requete.setDouble(3, produit.getTarif());
