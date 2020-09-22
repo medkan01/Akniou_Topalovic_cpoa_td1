@@ -44,4 +44,17 @@ public class MySQLCategorieDAO {
 		requete.close();
 		laConnexion.close();
 	}
+
+	public static Categorie getById(int id) throws SQLException {
+		Connection laConnexion = Connexion.creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement(
+			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie ='?';");
+				requete.setInt(1, id);
+		ResultSet res = requete.getResultSet();
+		Categorie categorieRes = new Categorie(
+			res.getInt("id_categorie"),
+			res.getString("titre"),
+			res.getString("visuel"));
+		return categorieRes;
+	}
 }
