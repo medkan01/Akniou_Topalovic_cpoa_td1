@@ -5,6 +5,16 @@ import td2.connexion.Connexion;
 import td2.pojo.LigneCommande;
 
 public class MySQLLigneCommandeDAO {
+
+	private static MySQLLigneCommandeDAO instance;
+
+	public static MySQLLigneCommandeDAO getInstance(){
+		if (instance == null){
+			instance = new MySQLLigneCommandeDAO();
+		}
+		return instance;
+	}
+
 	public static void insert(LigneCommande ligneCommande) throws SQLException{
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(

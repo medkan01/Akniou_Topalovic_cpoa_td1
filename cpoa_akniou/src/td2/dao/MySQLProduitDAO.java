@@ -5,6 +5,16 @@ import td1.Connexion;
 import td2.pojo.Produit;
 
 public class MySQLProduitDAO {
+
+	private static MySQLProduitDAO instance;
+
+	public static MySQLProduitDAO getInstance(){
+		if (instance == null){
+			instance = new MySQLProduitDAO();
+		}
+		return instance;
+	}
+
 	public static void insert(Produit produit) throws SQLException{
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(

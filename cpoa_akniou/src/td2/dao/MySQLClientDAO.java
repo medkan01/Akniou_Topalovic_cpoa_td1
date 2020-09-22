@@ -5,6 +5,15 @@ import td1.Connexion;
 import td2.pojo.Client;
 
 public class MySQLClientDAO {
+
+	private static MySQLClientDAO instance;
+
+	public static MySQLClientDAO getInstance(){
+		if (instance == null) {
+			instance = new MySQLClientDAO();
+		}
+		return instance;
+	}
 	
 	public static void insert(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();

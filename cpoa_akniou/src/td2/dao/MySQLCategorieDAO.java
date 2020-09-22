@@ -6,6 +6,15 @@ import td2.pojo.Categorie;
 
 public class MySQLCategorieDAO {
 
+	private static MySQLCategorieDAO instance;
+
+	public static MySQLCategorieDAO getInstance() {
+		if (instance == null){
+			instance = new MySQLCategorieDAO();
+		}
+		return instance;
+	}
+
 	public static void insert(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
