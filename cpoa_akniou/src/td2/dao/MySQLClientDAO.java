@@ -38,7 +38,6 @@ public class MySQLClientDAO {
 		PreparedStatement requete = laConnexion.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'");
 				requete.setInt(1, client.getId());
-			ResultSet res = requete.executeQuery();
 		laConnexion.close();
 	}
 	public static void update(Client client) throws SQLException {
