@@ -57,4 +57,24 @@ public class MySQLClientDAO {
 		requete.close();
 		laConnexion.close();
 	}
+
+	public static Client getById(int id) throws SQLException {
+		Connection laConnexion = Connexion.creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement(
+			"SELECT FROM akbiou1u.Client WHERE id_client='?';");
+				requete.setInt(1, id);
+		ResultSet res = requete.getResultSet();
+		Client client = new Client(
+			res.getInt("id_client"),
+			res.getString("nom"),
+			res.getString("prenom"),
+			res.getString("identifiant"),
+			res.getString("mot_de_pase"),
+			res.getString("adr_numero"),
+			res.getString("adr_voie"),
+			res.getString("adr_code_postal"),
+			res.getString("adr_ville"),
+			res.getString("adr_pays"));
+		return client;
+	}
 }
