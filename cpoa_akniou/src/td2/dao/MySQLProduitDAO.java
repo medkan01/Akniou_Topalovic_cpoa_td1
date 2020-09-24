@@ -1,6 +1,9 @@
 package td2.dao;
 
 import java.sql.*;
+
+import com.mysql.cj.xdevapi.Result;
+
 import td1.Connexion;
 import td2.pojo.Produit;
 
@@ -49,5 +52,21 @@ public class MySQLProduitDAO {
 			requete.setInt(6, produit.getId());
 		requete.close();
 		laConnexion.close();
+	}
+
+	public static Produit getById(int id) throws SQLException {
+		Connection laConnexion = Connexion.creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement(
+			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = '?';");
+				requete.setInt(1,id);
+		ResultSet res = requete.getResultSet();
+		Produit produit = new Produit(
+			res.getInt("id_produit"),
+			res.getString("nom"),
+			res.getString("description"),
+			res.getDouble("tarif"),
+			res.getString("visuel"),
+			res.getInt("id_categorie"));
+		return produit;
 	}
 }
