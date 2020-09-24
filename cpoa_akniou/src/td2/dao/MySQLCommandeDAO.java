@@ -44,4 +44,17 @@ public class MySQLCommandeDAO {
 		requete.close();
 		laConnexion.close();
 	}
+
+	public static Commande getById(int id) throws SQLException {
+		Connection laConnexion = Connexion.creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement(
+			"SELECT FROM akniou1u_cpoa.Commande WHERE id_commande = '?';");
+				requete.setInt(1, id);
+		ResultSet res = requete.getResultSet();
+		Commande commande = new Commande(
+			res.getInt("id_commande"),
+			res.getDate("date_commande"),
+			res.getInt("id_client"));
+		return commande;
+	}
 }

@@ -61,7 +61,7 @@ public class MySQLClientDAO {
 	public static Client getById(int id) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-			"SELECT FROM akbiou1u.Client WHERE id_client='?';");
+			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client='?';");
 				requete.setInt(1, id);
 		ResultSet res = requete.getResultSet();
 		Client client = new Client(
