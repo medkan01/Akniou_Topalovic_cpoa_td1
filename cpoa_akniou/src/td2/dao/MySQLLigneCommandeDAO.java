@@ -48,4 +48,20 @@ public class MySQLLigneCommandeDAO {
 		requete.close();
 		laConnexion.close();
 	}
+
+	public static LigneCommande getById(int id_commande, int id_produit) throws SQLException {
+		Connection laConnexion = Connexion.creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement(
+		"SELECT FROM akniou1u_cpoa.Ligne_commande WHERE id_commande='?' AND id_produit='?';");
+			requete.setInt(1, id_commande);
+			requete.setInt(2, id_produit);
+		ResultSet res = requete.getResultSet();
+		LigneCommande ligneCommande = new LigneCommande(
+			res.getInt("id_commande"),
+			res.getInt("id_produit"),
+			res.getInt("quantite"),
+			res.getDouble("tarif_unitaire"));
+		return ligneCommande;
+	}
+	
 }
