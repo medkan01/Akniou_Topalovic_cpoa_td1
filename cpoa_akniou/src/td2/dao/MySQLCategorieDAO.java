@@ -28,10 +28,13 @@ public class MySQLCategorieDAO {
 	public static void delete(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';");
+			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';", Statement.RETURN_GENERATED_KEYS);
 				requete.setInt(1, categorie.getId());
+		int nbLignes = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
 		requete.close();
 		laConnexion.close();
+		return nbLignes == 1;
 	}
 	
 	public static void update(Categorie categorie) throws SQLException {
