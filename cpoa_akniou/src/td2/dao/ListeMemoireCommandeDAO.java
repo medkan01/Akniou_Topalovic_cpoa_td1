@@ -46,4 +46,16 @@ public class ListeMemoireCommandeDAO {
         }
         return true;
     }
+
+    /*
+    public Commande getById(int id) {
+        int idx = this.donnees.indexOf(new Categorie(id, "titre", "visuel"));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucune categorie ne possede cet id");
+        }
+        else {
+            return this.donnees.get(idx);
+        }
+    }
+    */
 }

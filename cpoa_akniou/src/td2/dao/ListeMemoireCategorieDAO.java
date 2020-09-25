@@ -48,7 +48,7 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
     }
 
     public Categorie getById(int id) {
-        int idx = this.donnees.indexOf(new Categorie(id, "titre", "visuel"));
+        int idx = this.donnees.indexOf(new Categorie(id, "", ""));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucune categorie ne possede cet id");
         }

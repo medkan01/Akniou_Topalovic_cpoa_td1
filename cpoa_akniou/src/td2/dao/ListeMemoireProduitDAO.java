@@ -46,4 +46,14 @@ public class ListeMemoireProduitDAO {
         }
         return true;
     }
+
+    public Produit getById(int id) {
+        int idx = this.donnees.indexOf(new Produit(id, "", "", 0, "", 0));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun produit ne possede cet id");
+        }
+        else {
+            return this.donnees.get(idx);
+        }
+    }
 }

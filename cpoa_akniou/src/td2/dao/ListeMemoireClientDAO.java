@@ -46,4 +46,14 @@ public class ListeMemoireClientDAO {
         }
         return true;
     }
+
+    public Client getById(int id) {
+        int idx = this.donnees.indexOf(new Client(id, "", "", "", "", "", "", "", "", ""));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun client ne possede cet id");
+        }
+        else {
+            return this.donnees.get(idx);
+        }
+    }
 }

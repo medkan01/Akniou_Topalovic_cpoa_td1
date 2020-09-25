@@ -51,7 +51,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 		requete.close();
 	}
 
-	public static Categorie getById(int id) throws SQLException {
+	public Categorie getById(int id) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie ='?';");
