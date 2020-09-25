@@ -18,7 +18,7 @@ public class MySQLLigneCommandeDAO {
 	public static void insert(LigneCommande ligneCommande) throws SQLException{
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-		"INSERT INTO akniou1u.Ligne_commande (id_produit, quantite, tarif_unitaire) VALUES ('?', '?', '?');");
+		"INSERT INTO akniou1u.Ligne_commande (id_produit, quantite, tarif_unitaire) VALUES ('?', '?', '?');",Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, ligneCommande.getIdProduit());
 			requete.setInt(2, ligneCommande.getQuantite());
 			requete.setDouble(3, ligneCommande.getTarifUnitaire());

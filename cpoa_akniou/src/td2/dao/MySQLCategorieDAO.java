@@ -18,7 +18,7 @@ public class MySQLCategorieDAO {
 	public static void insert(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-			"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?');");
+			"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
 		requete.close();
