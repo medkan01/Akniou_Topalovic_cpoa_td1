@@ -3,7 +3,7 @@ package td2.dao;
 import java.util.List;
 import td2.pojo.Client;
 
-public class ListeMemoireClientDAO {
+public class ListeMemoireClientDAO implements ClientDAO{
 
     private static ListeMemoireClientDAO instance;
     private List<Client> donnees;

@@ -3,7 +3,7 @@ package td2.dao;
 import java.util.List;
 import td2.pojo.Produit;
 
-public class ListeMemoireProduitDAO {
+public class ListeMemoireProduitDAO implements ProduitDAO {
 
     private static ListeMemoireProduitDAO instance;
     private List<Produit> donnees;

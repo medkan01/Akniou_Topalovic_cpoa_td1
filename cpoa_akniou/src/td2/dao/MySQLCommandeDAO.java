@@ -4,7 +4,7 @@ import java.sql.*;
 import td2.connexion.*;
 import td2.pojo.Commande;
 
-public class MySQLCommandeDAO {
+public class MySQLCommandeDAO implements CommandeDAO{
 
 	private static MySQLCommandeDAO instance;
 

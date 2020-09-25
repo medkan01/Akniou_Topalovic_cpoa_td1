@@ -5,7 +5,7 @@ import java.sql.*;
 import td2.connexion.*;
 import td2.pojo.Produit;
 
-public class MySQLProduitDAO {
+public class MySQLProduitDAO implements ProduitDAO {
 
 	private static MySQLProduitDAO instance;
 

@@ -4,7 +4,7 @@ import java.sql.*;
 import td2.connexion.*;
 import td2.pojo.Client;
 
-public class MySQLClientDAO {
+public class MySQLClientDAO implements ClientDAO{
 
 	private static MySQLClientDAO instance;
 

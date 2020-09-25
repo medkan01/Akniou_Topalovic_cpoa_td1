@@ -3,7 +3,7 @@ package td2.dao;
 import java.util.List;
 import td2.pojo.Commande;
 
-public class ListeMemoireCommandeDAO {
+public class ListeMemoireCommandeDAO implements CommandeDAO{
 
     private static ListeMemoireCommandeDAO instance;
     private List<Commande> donnees;
