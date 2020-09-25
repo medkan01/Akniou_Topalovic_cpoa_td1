@@ -24,12 +24,14 @@ public class MySQLCommandeDAO {
 		requete.close();
 	}
 	
-	public static void delete(Commande commande) throws SQLException{
+	public boolean delete(Commande commande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Commande WHERE id_commande='?';");
+		"DELETE FROM akniou1u.Commande WHERE id_commande='?';", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, commande.getId());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 	
 	public static void update(Commande commande) throws SQLException{

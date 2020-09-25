@@ -38,11 +38,14 @@ public class MySQLClientDAO {
 		return nbligne == 1;
 	}
 	
-	public static void delete(Client client) throws SQLException {
+	public boolean delete(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'");
-				requete.setInt(1, client.getId());
+		"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'", Statement.RETURN_GENERATED_KEYS);
+			requete.setInt(1, client.getId());
+		int nbLignes = requete.executeUpdate();
+		requete.close();
+		return nbLignes == 1;
 	}
 	public static void update(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();

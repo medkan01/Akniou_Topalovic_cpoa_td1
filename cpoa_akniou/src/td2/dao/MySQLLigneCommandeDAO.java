@@ -25,13 +25,15 @@ public class MySQLLigneCommandeDAO {
 		requete.close();
 	}
 	
-	public static void delete(LigneCommande ligneCommande) throws SQLException{
+	public boolean delete(LigneCommande ligneCommande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = '?' AND id_produit ='?';");
+		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = '?' AND id_produit ='?';", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, ligneCommande.getIdCommande());
 			requete.setInt(2, ligneCommande.getIdProduit());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 	
 	public static void update(LigneCommande ligneCommande) throws SQLException{

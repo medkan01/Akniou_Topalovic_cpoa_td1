@@ -28,12 +28,14 @@ public class MySQLProduitDAO {
 		requete.close();
 	}
 	
-	public static void delete(Produit produit) throws SQLException{
+	public boolean delete(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Produit WHERE id_produit = '?';");
+		"DELETE FROM akniou1u.Produit WHERE id_produit = '?';", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, produit.getId());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 	
 	public static void update(Produit produit) throws SQLException{
