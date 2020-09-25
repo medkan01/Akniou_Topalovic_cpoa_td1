@@ -28,7 +28,7 @@ public class ListeMemoireClientDAO {
         boolean ok;
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-			throw new IllegalArgumentException("Tentative de suppression d'une Client inexistante");
+			throw new IllegalArgumentException("Tentative de suppression d'un client inexistant");
         }
         else{
             ok = this.donnees.remove(objet);
@@ -39,7 +39,7 @@ public class ListeMemoireClientDAO {
     public boolean update(Client objet){
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un catégorie inexistante");
+            throw new IllegalArgumentException("Tentative de modification d'un client inexistant");
         }
         else{
             this.donnees.set(idx, objet);

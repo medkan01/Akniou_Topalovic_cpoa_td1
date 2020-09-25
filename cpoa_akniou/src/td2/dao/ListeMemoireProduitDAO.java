@@ -28,7 +28,7 @@ public class ListeMemoireProduitDAO {
         boolean ok;
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-			throw new IllegalArgumentException("Tentative de suppression d'une Produit inexistante");
+			throw new IllegalArgumentException("Tentative de suppression d'un produit inexistant");
         }
         else{
             ok = this.donnees.remove(objet);
@@ -39,7 +39,7 @@ public class ListeMemoireProduitDAO {
     public boolean update(Produit objet){
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un catégorie inexistante");
+            throw new IllegalArgumentException("Tentative de modification d'un produit inexistant");
         }
         else{
             this.donnees.set(idx, objet);

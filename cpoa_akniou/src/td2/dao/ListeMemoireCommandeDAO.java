@@ -28,7 +28,7 @@ public class ListeMemoireCommandeDAO {
         boolean ok;
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-			throw new IllegalArgumentException("Tentative de suppression d'une Commande inexistante");
+			throw new IllegalArgumentException("Tentative de suppression d'une commande inexistante");
         }
         else{
             ok = this.donnees.remove(objet);
@@ -39,7 +39,7 @@ public class ListeMemoireCommandeDAO {
     public boolean update(Commande objet){
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un catégorie inexistante");
+            throw new IllegalArgumentException("Tentative de modification d'une commande inexistante");
         }
         else{
             this.donnees.set(idx, objet);

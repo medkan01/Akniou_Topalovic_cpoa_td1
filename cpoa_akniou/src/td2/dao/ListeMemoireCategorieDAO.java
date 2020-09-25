@@ -39,7 +39,7 @@ public class ListeMemoireCategorieDAO {
     public boolean update(Categorie objet){
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un catégorie inexistante");
+            throw new IllegalArgumentException("Tentative de modification d'une catégorie inexistante");
         }
         else{
             this.donnees.set(idx, objet);
