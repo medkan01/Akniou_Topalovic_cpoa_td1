@@ -16,8 +16,8 @@ public class MySQLCategorieDAO {
 	}
 
 	public static void insert(Categorie categorie) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
@@ -25,19 +25,18 @@ public class MySQLCategorieDAO {
 	}
 
 	public boolean delete(Categorie categorie) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';", Statement.RETURN_GENERATED_KEYS);
 				requete.setInt(1, categorie.getId());
 		int nbLignes = requete.executeUpdate();
-		ResultSet res = requete.getGeneratedKeys();
 		requete.close();
 		return nbLignes == 1;
 	}
 	
 	public static void update(Categorie categorie) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"UPDATE akniou1u_cpoa.Categorie SET titre = '?', visuel = '?' WHERE Categorie.id_categorie = '?';");
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
@@ -46,8 +45,8 @@ public class MySQLCategorieDAO {
 	}
 
 	public static Categorie getById(int id) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie ='?';");
 				requete.setInt(1, id);
 		ResultSet res = requete.getResultSet();
