@@ -16,9 +16,9 @@ public class ListeMemoireLigneCommandeDAO {
     }
 
     public boolean insert(LigneCommande objet){
-        objet.setId(1);
+        objet.setIdCommande(1);
         while(this.donnees.contains(objet)){
-            objet.setId(objet.getId()+1);
+            objet.setIdCommande(objet.getIdCommande()+1);
         }
         boolean ok = this.donnees.add(objet);
         return ok;

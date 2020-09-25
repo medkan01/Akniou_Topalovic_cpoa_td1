@@ -15,10 +15,10 @@ public class MySQLClientDAO {
 		return instance;
 	}
 	
-	public static void insert(Client client) throws SQLException {
+	public boolean insert(Client client) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';");
+			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';",Statement.RETURN_GENERATED_KEYS);
 				requete.setString(1, client.getNom());
 				requete.setString(2, client.getPrenom());
 				requete.setString(3, client.getIdentifiant());
@@ -28,9 +28,15 @@ public class MySQLClientDAO {
 				requete.setString(7, client.getAdrCodePostal());
 				requete.setString(8, client.getAdrVille());
 				requete.setString(9, client.getAdrPays());
+			int nbligne = requete.executeUpdate();
+			ResultSet res = requete.getGeneratedKeys();
+			if (res.next()) {
+				int cle = res.getInt(1);
+				client.setId(cle);
+			}
 		requete.close();
 		laConnexion.close();
-	
+		return nbligne == 1;
 	}
 	
 	public static void delete(Client client) throws SQLException {

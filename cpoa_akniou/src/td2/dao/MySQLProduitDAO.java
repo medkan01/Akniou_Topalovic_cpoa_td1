@@ -2,8 +2,6 @@ package td2.dao;
 
 import java.sql.*;
 
-import com.mysql.cj.xdevapi.Result;
-
 import td1.Connexion;
 import td2.pojo.Produit;
 
