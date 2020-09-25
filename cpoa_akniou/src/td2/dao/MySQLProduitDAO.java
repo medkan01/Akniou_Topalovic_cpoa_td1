@@ -2,7 +2,7 @@ package td2.dao;
 
 import java.sql.*;
 
-import td1.Connexion;
+import td2.connexion.*;
 import td2.pojo.Produit;
 
 public class MySQLProduitDAO {
@@ -17,8 +17,8 @@ public class MySQLProduitDAO {
 	}
 
 	public static void insert(Produit produit) throws SQLException{
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES ('?', '?', '?', '?', '?');",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
@@ -26,21 +26,19 @@ public class MySQLProduitDAO {
 			requete.setString(4, produit.getVisuel());
 			requete.setInt(5, produit.getIdCategorie());
 		requete.close();
-		laConnexion.close();
 	}
 	
 	public static void delete(Produit produit) throws SQLException{
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u.Produit WHERE id_produit = '?';");
 			requete.setInt(1, produit.getId());
 		requete.close();
-		laConnexion.close();
 	}
 	
 	public static void update(Produit produit) throws SQLException{
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Produit SET nom = '?', description= '?', tarif='?', visuel='?', id_categorie='?' WHERE id_produit'?';");
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
@@ -49,12 +47,11 @@ public class MySQLProduitDAO {
 			requete.setInt(5, produit.getIdCategorie());
 			requete.setInt(6, produit.getId());
 		requete.close();
-		laConnexion.close();
 	}
 
 	public static Produit getById(int id) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = '?';");
 				requete.setInt(1,id);
 		ResultSet res = requete.getResultSet();

@@ -1,7 +1,7 @@
 package td2.dao;
 
 import java.sql.*;
-import td1.Connexion;
+import td2.connexion.*;
 import td2.pojo.Client;
 
 public class MySQLClientDAO {
@@ -16,8 +16,8 @@ public class MySQLClientDAO {
 	}
 	
 	public boolean insert(Client client) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';",Statement.RETURN_GENERATED_KEYS);
 				requete.setString(1, client.getNom());
 				requete.setString(2, client.getPrenom());
@@ -35,20 +35,18 @@ public class MySQLClientDAO {
 				client.setId(cle);
 			}
 		requete.close();
-		laConnexion.close();
 		return nbligne == 1;
 	}
 	
 	public static void delete(Client client) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'");
 				requete.setInt(1, client.getId());
-		laConnexion.close();
 	}
 	public static void update(Client client) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(	
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(	
 			"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')WHERE Client.id_client = '?';");
 				requete.setString(1, client.getNom());
 				requete.setString(2, client.getPrenom());
@@ -61,12 +59,11 @@ public class MySQLClientDAO {
 				requete.setString(9, client.getAdrPays());
 				requete.setInt(10, client.getId());
 		requete.close();
-		laConnexion.close();
 	}
 
 	public static Client getById(int id) throws SQLException {
-		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement(
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client='?';");
 				requete.setInt(1, id);
 		ResultSet res = requete.getResultSet();

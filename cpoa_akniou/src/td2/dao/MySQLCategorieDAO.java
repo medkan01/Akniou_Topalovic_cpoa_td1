@@ -1,7 +1,7 @@
 package td2.dao;
 
 import java.sql.*;
-import td2.connexion.Connexion;
+import td2.connexion.*;
 import td2.pojo.Categorie;
 
 public class MySQLCategorieDAO {
