@@ -24,7 +24,7 @@ public class MySQLCategorieDAO {
 		requete.close();
 		laConnexion.close();
 	}
-	
+	//erfsdgsdg
 	public static void delete(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
