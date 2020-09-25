@@ -16,7 +16,7 @@ public class MySQLProduitDAO {
 		return instance;
 	}
 
-	public static void insert(Produit produit) throws SQLException{
+	public boolean insert(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES ('?', '?', '?', '?', '?');",Statement.RETURN_GENERATED_KEYS);
@@ -25,7 +25,14 @@ public class MySQLProduitDAO {
 			requete.setDouble(3, produit.getTarif());
 			requete.setString(4, produit.getVisuel());
 			requete.setInt(5, produit.getIdCategorie());
+		int nbligne = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
+		if (res.next()) {
+			int cle = res.getInt(1);
+			produit.setId(cle);
+		}
 		requete.close();
+		return nbligne == 1;
 	}
 	
 	public boolean delete(Produit produit) throws SQLException{

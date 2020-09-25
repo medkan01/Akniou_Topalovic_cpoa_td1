@@ -15,13 +15,20 @@ public class MySQLCommandeDAO {
 		return instance;
 	}
 
-	public static void insert(Commande commande) throws SQLException{
+	public boolean insert(Commande commande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u.Commande (date_commande, id_client) VALUES ('?', '?');");
+		"INSERT INTO akniou1u.Commande (date_commande, id_client) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
 			requete.setDate(1, commande.getDate());
 			requete.setInt(2, commande.getIdClient());
+		int nbligne = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
+		if (res.next()) {
+			int cle = res.getInt(1);
+			commande.setId(cle);
+		}
 		requete.close();
+		return nbligne == 1;
 	}
 	
 	public boolean delete(Commande commande) throws SQLException{

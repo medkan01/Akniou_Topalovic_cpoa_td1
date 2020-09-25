@@ -15,14 +15,21 @@ public class MySQLLigneCommandeDAO {
 		return instance;
 	}
 
-	public static void insert(LigneCommande ligneCommande) throws SQLException{
+	public boolean insert(LigneCommande ligneCommande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u.Ligne_commande (id_produit, quantite, tarif_unitaire) VALUES ('?', '?', '?');",Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, ligneCommande.getIdProduit());
 			requete.setInt(2, ligneCommande.getQuantite());
 			requete.setDouble(3, ligneCommande.getTarifUnitaire());
+		int nbligne = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
+		if (res.next()) {
+	//		int cle = res.getInt(1);
+	//		ligneCommande.setId(cle);
+		}
 		requete.close();
+		return nbligne == 1;
 	}
 	
 	public boolean delete(LigneCommande ligneCommande) throws SQLException{

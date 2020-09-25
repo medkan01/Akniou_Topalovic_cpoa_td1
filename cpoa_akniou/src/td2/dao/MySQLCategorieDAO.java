@@ -15,13 +15,20 @@ public class MySQLCategorieDAO {
 		return instance;
 	}
 
-	public static void insert(Categorie categorie) throws SQLException {
+	public boolean insert(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
-				requete.setString(1, categorie.getTitre());
-				requete.setString(2, categorie.getVisuel());
+		"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
+			requete.setString(1, categorie.getTitre());
+			requete.setString(2, categorie.getVisuel());
+		int nbligne = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
+		if (res.next()) {
+			int cle = res.getInt(1);
+			categorie.setId(cle);
+		}
 		requete.close();
+		return nbligne == 1;
 	}
 
 	public boolean delete(Categorie categorie) throws SQLException {

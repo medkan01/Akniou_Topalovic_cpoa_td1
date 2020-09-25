@@ -18,22 +18,22 @@ public class MySQLClientDAO {
 	public boolean insert(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';",Statement.RETURN_GENERATED_KEYS);
-				requete.setString(1, client.getNom());
-				requete.setString(2, client.getPrenom());
-				requete.setString(3, client.getIdentifiant());
-				requete.setString(4, client.getMotDePasse());
-				requete.setString(5, client.getAdrNumero());
-				requete.setString(6, client.getAdrVoie());
-				requete.setString(7, client.getAdrCodePostal());
-				requete.setString(8, client.getAdrVille());
-				requete.setString(9, client.getAdrPays());
-			int nbligne = requete.executeUpdate();
-			ResultSet res = requete.getGeneratedKeys();
-			if (res.next()) {
-				int cle = res.getInt(1);
-				client.setId(cle);
-			}
+		"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';",Statement.RETURN_GENERATED_KEYS);
+			requete.setString(1, client.getNom());
+			requete.setString(2, client.getPrenom());
+			requete.setString(3, client.getIdentifiant());
+			requete.setString(4, client.getMotDePasse());
+			requete.setString(5, client.getAdrNumero());
+			requete.setString(6, client.getAdrVoie());
+			requete.setString(7, client.getAdrCodePostal());
+			requete.setString(8, client.getAdrVille());
+			requete.setString(9, client.getAdrPays());
+		int nbligne = requete.executeUpdate();
+		ResultSet res = requete.getGeneratedKeys();
+		if (res.next()) {
+			int cle = res.getInt(1);
+			client.setId(cle);
+		}
 		requete.close();
 		return nbligne == 1;
 	}
