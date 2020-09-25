@@ -7,7 +7,6 @@ public class LigneCommande {
 	private double tarifUnitaire;
 	
 	public LigneCommande(int idCommande, int idProduit, int quantite, double tarifUnitaire) {
-		super();
 		this.idCommande = idCommande;
 		this.idProduit = idProduit;
 		this.quantite = quantite;
@@ -38,4 +37,23 @@ public class LigneCommande {
 	public void setTarifUnitaire(double tarifUnitaire) {
 		this.tarifUnitaire = tarifUnitaire;
 	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof LigneCommande)) {
+			return false;
+		}
+		LigneCommande ligneCommande = (LigneCommande) o;
+		return idCommande == ligneCommande.idCommande && idProduit == ligneCommande.idProduit && quantite == ligneCommande.quantite && tarifUnitaire == ligneCommande.tarifUnitaire;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCommande, idProduit, quantite, tarifUnitaire);
+	}
+
+
 }
