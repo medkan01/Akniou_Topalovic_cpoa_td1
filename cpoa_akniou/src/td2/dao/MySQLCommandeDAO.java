@@ -19,7 +19,7 @@ public class MySQLCommandeDAO {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u.Commande (date_commande, id_client) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
-			requete.setDate(1, commande.getDate());
+			requete.setDate(1,  java.sql.Date.valueOf(commande.getDate()));
 			requete.setInt(2, commande.getIdClient());
 		int nbligne = requete.executeUpdate();
 		ResultSet res = requete.getGeneratedKeys();
@@ -45,7 +45,7 @@ public class MySQLCommandeDAO {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Commande SET date_commande='?', id_client='?' WHERE id_commande='?';");
-			requete.setDate(1, commande.getDate());
+			requete.setDate(1, java.sql.Date.valueOf(commande.getDate()));
 			requete.setInt(2, commande.getIdClient());
 			requete.setInt(3, commande.getId());
 		requete.close();
@@ -59,7 +59,7 @@ public class MySQLCommandeDAO {
 		ResultSet res = requete.getResultSet();
 		Commande commande = new Commande(
 			res.getInt("id_commande"),
-			res.getDate("date_commande"),
+			res.getDate("date_commande").toLocalDate(),
 			res.getInt("id_client"));
 		return commande;
 	}

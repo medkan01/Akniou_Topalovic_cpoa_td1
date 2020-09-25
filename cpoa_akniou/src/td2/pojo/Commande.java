@@ -1,16 +1,16 @@
 package td2.pojo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Commande {
 
 	//VARIABLES
 	private int id;
-	private Date date;
+	private LocalDate date;
 	private int idClient;
 	
 	//CONSTRUCTEUR
-	public Commande(int id, Date date, int idClient) {
+	public Commande(int id, LocalDate date, int idClient) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -26,11 +26,11 @@ public class Commande {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -41,9 +41,4 @@ public class Commande {
 	public void setIdClient(int idClient) {
 		this.idClient = idClient;
 	}
-	
-	
-	
-	
-	
 }
