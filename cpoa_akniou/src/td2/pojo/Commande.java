@@ -60,4 +60,22 @@ public class Commande {
 			lignes.put(p,l);
 		}
 	}
+
+	public void supprimerLigne(Produit p, LigneCommande l){
+		if (lignes.containsKey(p) == false){
+			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
+		}
+		else{
+			lignes.remove(p);
+		}
+	}
+
+	public void ajouterModifier(Produit p, LigneCommande l){
+		if (lignes.containsKey(p) == false){
+			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
+		}
+		else{
+			lignes.put(p,l);
+		}
+	}
 }
