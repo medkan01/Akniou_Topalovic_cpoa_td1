@@ -4,7 +4,7 @@ import java.sql.*;
 import td2.connexion.*;
 import td2.pojo.Categorie;
 
-public class MySQLCategorieDAO {
+public class MySQLCategorieDAO implements CategorieDAO{
 
 	private static MySQLCategorieDAO instance;
 

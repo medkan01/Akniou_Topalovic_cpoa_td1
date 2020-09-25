@@ -3,7 +3,7 @@ package td2.dao;
 import java.util.List;
 import td2.pojo.Categorie;
 
-public class ListeMemoireCategorieDAO {
+public class ListeMemoireCategorieDAO implements CategorieDAO{
 
     private static ListeMemoireCategorieDAO instance;
     private List<Categorie> donnees;
@@ -45,5 +45,15 @@ public class ListeMemoireCategorieDAO {
             this.donnees.set(idx, objet);
         }
         return true;
+    }
+
+    public Categorie getById(int id) {
+        int idx = this.donnees.indexOf(new Categorie(id, "titre", "visuel"));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucune categorie ne possede cet id");
+        }
+        else {
+            return this.donnees.get(idx);
+        }
     }
 }
