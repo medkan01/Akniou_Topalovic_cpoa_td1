@@ -22,10 +22,9 @@ public class MySQLCategorieDAO {
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
 		requete.close();
-		laConnexion.close();
 	}
 
-	public static void delete(Categorie categorie) throws SQLException {
+	public boolean delete(Categorie categorie) throws SQLException {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';", Statement.RETURN_GENERATED_KEYS);
@@ -33,7 +32,6 @@ public class MySQLCategorieDAO {
 		int nbLignes = requete.executeUpdate();
 		ResultSet res = requete.getGeneratedKeys();
 		requete.close();
-		laConnexion.close();
 		return nbLignes == 1;
 	}
 	
@@ -45,7 +43,6 @@ public class MySQLCategorieDAO {
 				requete.setString(2, categorie.getVisuel());
 				requete.setInt(3, categorie.getId());
 		requete.close();
-		laConnexion.close();
 	}
 
 	public static Categorie getById(int id) throws SQLException {

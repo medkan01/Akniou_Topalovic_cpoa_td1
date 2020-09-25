@@ -18,7 +18,7 @@ public class MySQLCommandeDAO {
 	public static void insert(Commande commande) throws SQLException{
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement(
-		"INSERT INTO akniou1u.Commande (date_commande, id_client) VALUES ('?', '?');",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u.Commande (date_commande, id_client) VALUES ('?', '?');");
 			requete.setDate(1, commande.getDate());
 			requete.setInt(2, commande.getIdClient());
 		requete.close();
