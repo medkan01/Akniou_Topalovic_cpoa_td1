@@ -1,6 +1,7 @@
 package td2.pojo;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Commande {
 
@@ -8,16 +9,25 @@ public class Commande {
 	private int id;
 	private LocalDate date;
 	private int idClient;
+	private HashMap<Produit, LigneCommande> lignes; 
 	
 	//CONSTRUCTEUR
 	public Commande(int id, LocalDate date, int idClient) {
-		super();
 		this.id = id;
 		this.date = date;
 		this.idClient = idClient;
+		lignes = new HashMap<Produit, LigneCommande>();
 	}
 
 	//ACCESSEURS
+	public HashMap<Produit,LigneCommande> getLignes() {
+		return this.lignes;
+	}
+
+	public void setLignes(HashMap<Produit,LigneCommande> lignes) {
+		this.lignes = lignes;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -40,5 +50,14 @@ public class Commande {
 
 	public void setIdClient(int idClient) {
 		this.idClient = idClient;
+	}
+
+	public void ajouterLigne(Produit p, LigneCommande l){
+		if (lignes.containsKey(p)){
+			throw new IllegalArgumentException("Produit deja existant dans la liste");
+		}
+		else{
+			lignes.put(p,l);
+		}
 	}
 }
