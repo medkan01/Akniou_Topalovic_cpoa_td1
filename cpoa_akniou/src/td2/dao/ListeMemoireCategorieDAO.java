@@ -1,7 +1,6 @@
-package td2.dao.ListeMemoireDAO;
+package td2.dao;
 
 import java.util.List;
-import td2.dao.interfaces.CategorieDAO;
 import td2.pojo.Categorie;
 
 public class ListeMemoireCategorieDAO implements CategorieDAO{

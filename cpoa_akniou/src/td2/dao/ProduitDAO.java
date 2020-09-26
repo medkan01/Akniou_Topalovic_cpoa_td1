@@ -1,4 +1,4 @@
-package td2.dao.interfaces;
+package td2.dao;
 
 import java.sql.SQLException;
 import td2.pojo.Produit;

@@ -1,8 +1,7 @@
-package td2.dao.ListeMemoireDAO;
+package td2.dao;
 
 import java.time.LocalDate;
 import java.util.*;
-import td2.dao.interfaces.CommandeDAO;
 import td2.pojo.*;
 
 public class ListeMemoireCommandeDAO implements CommandeDAO {
