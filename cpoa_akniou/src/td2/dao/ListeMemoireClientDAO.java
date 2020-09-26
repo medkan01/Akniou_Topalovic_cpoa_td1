@@ -1,7 +1,6 @@
-package td2.dao.ListeMemoireDAO;
+package td2.dao;
 
 import java.util.List;
-import td2.dao.ClientDAO;
 import td2.pojo.Client;
 
 public class ListeMemoireClientDAO implements ClientDAO{
