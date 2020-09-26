@@ -1,7 +1,8 @@
-package td2.dao;
+package td2.dao.MySQLDAO;
 
 import java.sql.*;
 import td2.connexion.*;
+import td2.dao.interfaces.CategorieDAO;
 import td2.pojo.Categorie;
 
 public class MySQLCategorieDAO implements CategorieDAO{

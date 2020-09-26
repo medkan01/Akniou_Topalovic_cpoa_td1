@@ -1,5 +1,5 @@
 /*
-package td2.dao;
+package td2.dao.ListeMemoireDAO;
 
 import java.util.List;
 import td2.pojo.LigneCommande;

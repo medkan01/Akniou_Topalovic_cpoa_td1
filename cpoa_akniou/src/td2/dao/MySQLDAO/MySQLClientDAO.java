@@ -1,7 +1,8 @@
-package td2.dao;
+package td2.dao.MySQLDAO;
 
 import java.sql.*;
 import td2.connexion.*;
+import td2.dao.interfaces.ClientDAO;
 import td2.pojo.Client;
 
 public class MySQLClientDAO implements ClientDAO{

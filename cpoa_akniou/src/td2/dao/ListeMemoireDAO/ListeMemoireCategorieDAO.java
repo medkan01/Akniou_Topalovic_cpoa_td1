@@ -1,22 +1,22 @@
-package td2.dao;
+package td2.dao.ListeMemoireDAO;
 
-import java.time.LocalDate;
-import java.util.*;
-import td2.pojo.*;
+import java.util.List;
+import td2.dao.interfaces.CategorieDAO;
+import td2.pojo.Categorie;
 
-public class ListeMemoireCommandeDAO implements CommandeDAO{
+public class ListeMemoireCategorieDAO implements CategorieDAO{
 
-    private static ListeMemoireCommandeDAO instance;
-    private List<Commande> donnees;
+    private static ListeMemoireCategorieDAO instance;
+    private List<Categorie> donnees;
 
-    public static ListeMemoireCommandeDAO getInstance(){
+    public static ListeMemoireCategorieDAO getInstance(){
         if (instance == null){
-            instance = new ListeMemoireCommandeDAO();
+            instance = new ListeMemoireCategorieDAO();
         }
         return instance;
     }
 
-    public boolean insert(Commande objet){
+    public boolean insert(Categorie objet){
         objet.setId(1);
         while(this.donnees.contains(objet)){
             objet.setId(objet.getId()+1);
@@ -25,11 +25,11 @@ public class ListeMemoireCommandeDAO implements CommandeDAO{
         return ok;
     }
 
-    public boolean delete(Commande objet){
+    public boolean delete(Categorie objet){
         boolean ok;
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-			throw new IllegalArgumentException("Tentative de suppression d'une commande inexistante");
+			throw new IllegalArgumentException("Tentative de suppression d'une categorie inexistante");
         }
         else{
             ok = this.donnees.remove(objet);
@@ -37,10 +37,10 @@ public class ListeMemoireCommandeDAO implements CommandeDAO{
         return ok;
     }
 
-    public boolean update(Commande objet){
+    public boolean update(Categorie objet){
         int idx = this.donnees.indexOf(objet);
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'une commande inexistante");
+            throw new IllegalArgumentException("Tentative de modification d'une catégorie inexistante");
         }
         else{
             this.donnees.set(idx, objet);
@@ -48,9 +48,8 @@ public class ListeMemoireCommandeDAO implements CommandeDAO{
         return true;
     }
 
-    
-    public Commande getById(int id) {
-		int idx = this.donnees.indexOf(new Commande(id, LocalDate.now(), 0));
+    public Categorie getById(int id) {
+        int idx = this.donnees.indexOf(new Categorie(id, "", ""));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucune categorie ne possede cet id");
         }

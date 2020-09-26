@@ -1,6 +1,7 @@
-package td2.dao;
+package td2.dao.ListeMemoireDAO;
 
 import java.util.List;
+import td2.dao.interfaces.ProduitDAO;
 import td2.pojo.Produit;
 
 public class ListeMemoireProduitDAO implements ProduitDAO {

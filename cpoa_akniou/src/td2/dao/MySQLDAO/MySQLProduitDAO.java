@@ -1,8 +1,8 @@
-package td2.dao;
+package td2.dao.MySQLDAO;
 
 import java.sql.*;
-
 import td2.connexion.*;
+import td2.dao.interfaces.ProduitDAO;
 import td2.pojo.Produit;
 
 public class MySQLProduitDAO implements ProduitDAO {
