@@ -47,24 +47,26 @@ public class MySQLClientDAO implements ClientDAO{
 		requete.close();
 		return nbLignes == 1;
 	}
-	public static void update(Client client) throws SQLException {
+	public boolean update(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(	
-			"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')WHERE Client.id_client = '?';");
-				requete.setString(1, client.getNom());
-				requete.setString(2, client.getPrenom());
-				requete.setString(3, client.getIdentifiant());
-				requete.setString(4, client.getMotDePasse());
-				requete.setString(5, client.getAdrNumero());
-				requete.setString(6, client.getAdrVoie());
-				requete.setString(7, client.getAdrCodePostal());
-				requete.setString(8, client.getAdrVille());
-				requete.setString(9, client.getAdrPays());
-				requete.setInt(10, client.getId());
+		"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')WHERE Client.id_client = '?';");
+			requete.setString(1, client.getNom());
+			requete.setString(2, client.getPrenom());
+			requete.setString(3, client.getIdentifiant());
+			requete.setString(4, client.getMotDePasse());
+			requete.setString(5, client.getAdrNumero());
+			requete.setString(6, client.getAdrVoie());
+			requete.setString(7, client.getAdrCodePostal());
+			requete.setString(8, client.getAdrVille());
+			requete.setString(9, client.getAdrPays());
+			requete.setInt(10, client.getId());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 
-	public static Client getById(int id) throws SQLException {
+	public Client getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client='?';");

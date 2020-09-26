@@ -45,7 +45,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return nbLignes == 1;
 	}
 	
-	public static void update(Produit produit) throws SQLException{
+	public boolean update(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Produit SET nom = '?', description= '?', tarif='?', visuel='?', id_categorie='?' WHERE id_produit'?';");
@@ -55,10 +55,12 @@ public class MySQLProduitDAO implements ProduitDAO {
 			requete.setString(4, produit.getVisuel());
 			requete.setInt(5, produit.getIdCategorie());
 			requete.setInt(6, produit.getId());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 
-	public static Produit getById(int id) throws SQLException {
+	public Produit getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = '?';");

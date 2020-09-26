@@ -41,17 +41,19 @@ public class MySQLCommandeDAO implements CommandeDAO{
 		return nbLignes == 1;
 	}
 	
-	public static void update(Commande commande) throws SQLException{
+	public boolean update(Commande commande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Commande SET date_commande='?', id_client='?' WHERE id_commande='?';");
 			requete.setDate(1, java.sql.Date.valueOf(commande.getDate()));
 			requete.setInt(2, commande.getIdClient());
 			requete.setInt(3, commande.getId());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 
-	public static Commande getById(int id) throws SQLException {
+	public Commande getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 			"SELECT FROM akniou1u_cpoa.Commande WHERE id_commande = '?';");

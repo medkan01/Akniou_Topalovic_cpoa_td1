@@ -1,7 +1,8 @@
 package td2.dao;
 
-import java.util.List;
-import td2.pojo.Commande;
+import java.time.LocalDate;
+import java.util.*;
+import td2.pojo.*;
 
 public class ListeMemoireCommandeDAO implements CommandeDAO{
 
@@ -47,9 +48,9 @@ public class ListeMemoireCommandeDAO implements CommandeDAO{
         return true;
     }
 
-    /*
+    
     public Commande getById(int id) {
-        int idx = this.donnees.indexOf(new Categorie(id, "titre", "visuel"));
+		int idx = this.donnees.indexOf(new Commande(id, LocalDate.now(), 0));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucune categorie ne possede cet id");
         }
@@ -57,5 +58,4 @@ public class ListeMemoireCommandeDAO implements CommandeDAO{
             return this.donnees.get(idx);
         }
     }
-    */
 }

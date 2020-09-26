@@ -1,10 +1,11 @@
+/*
 package td2.dao;
 
 import java.sql.*;
 import td2.connexion.*;
 import td2.pojo.LigneCommande;
 
-public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
+public class MySQLLigneCommandeDAO{
 
 	private static MySQLLigneCommandeDAO instance;
 
@@ -35,7 +36,7 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 	public boolean delete(LigneCommande ligneCommande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = '?' AND id_produit ='?';", Statement.RETURN_GENERATED_KEYS);
+		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = '?' AND id_produit ='?';");
 			requete.setInt(1, ligneCommande.getIdCommande());
 			requete.setInt(2, ligneCommande.getIdProduit());
 		int nbLignes = requete.executeUpdate();
@@ -43,16 +44,16 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		return nbLignes == 1;
 	}
 	
-	public static void update(LigneCommande ligneCommande) throws SQLException{
+	public boolean update(LigneCommande ligneCommande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Ligne_commande SET id_produit = '?', quantite= '?', tarif_unitaire='?' WHERE id_commande='?' AND id_produit = '?';");
 			requete.setInt(1, ligneCommande.getIdProduit());
 			requete.setInt(2, ligneCommande.getQuantite());
 			requete.setDouble(3, ligneCommande.getTarifUnitaire());
-			requete.setInt(1, ligneCommande.getIdCommande());
-			requete.setInt(2, ligneCommande.getIdProduit());
+		int nbLignes = requete.executeUpdate();
 		requete.close();
+		return nbLignes == 1;
 	}
 
 	public static LigneCommande getById(int id_commande, int id_produit) throws SQLException {
@@ -71,3 +72,4 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 	}
 	
 }
+*/
