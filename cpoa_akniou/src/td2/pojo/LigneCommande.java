@@ -24,10 +24,10 @@ public class LigneCommande {
 
 	@Override
 	public String toString() {
-		return "{" +
+		return
 			" quantite='" + quantite + "'" +
-			", tarifUnitaire='" + tarifUnitaire + "'" +
-			"}";
+			", tarifUnitaire='" + tarifUnitaire + "'"
+			;
 	}
 
 }

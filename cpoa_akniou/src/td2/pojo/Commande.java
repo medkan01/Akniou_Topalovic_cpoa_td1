@@ -14,6 +14,7 @@ public class Commande {
 	private int idClient;
 	private HashMap<Produit, LigneCommande> lignes; 
 	
+
 	//CONSTRUCTEUR
 	public Commande(int id, LocalDate date, int idClient) {
 		this.id = id;
@@ -21,6 +22,7 @@ public class Commande {
 		this.idClient = idClient;
 		lignes = new HashMap<Produit, LigneCommande>();
 	}
+
 
 	//ACCESSEURS
 	public int getId() {
@@ -47,6 +49,8 @@ public class Commande {
 		this.idClient = idClient;
 	}
 
+
+	//METHODES
 	public void ajouterLigne(Produit p, LigneCommande l){
 		if (lignes.containsKey(p)){
 			throw new IllegalArgumentException("Produit deja existant dans la liste");
@@ -65,7 +69,7 @@ public class Commande {
 		}
 	}
 
-	public void ajouterModifier(Produit p, LigneCommande l){
+	public void modifierLigne(Produit p, LigneCommande l){
 		if (lignes.containsKey(p) == false){
 			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
 		}
