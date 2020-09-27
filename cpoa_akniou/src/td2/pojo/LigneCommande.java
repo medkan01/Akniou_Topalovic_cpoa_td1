@@ -21,4 +21,13 @@ public class LigneCommande {
 	public void setTarifUnitaire(double tarifUnitaire) {
 		this.tarifUnitaire = tarifUnitaire;
 	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" quantite='" + quantite + "'" +
+			", tarifUnitaire='" + tarifUnitaire + "'" +
+			"}";
+	}
+
 }

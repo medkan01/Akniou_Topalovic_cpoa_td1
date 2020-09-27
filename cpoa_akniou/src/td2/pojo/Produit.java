@@ -66,6 +66,17 @@ public class Produit {
 		this.idCategorie = id_categorie;
 	}
 	
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + id + "'" +
+			", nom='" + nom + "'" +
+			", description='" + description + "'" +
+			", tarif='" + tarif + "'" +
+			", visuel='" + visuel + "'" +
+			", idCategorie='" + idCategorie + "'" +
+			"}";
+	}
 	
 	
 }

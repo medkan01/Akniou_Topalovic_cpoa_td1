@@ -78,7 +78,7 @@ public class Commande {
 		Iterator it = lignes.entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry l = (Map.Entry) it.next();
-			System.out.println("Produit : "+l.getKey()+"Ligne Commande : "+l.getValue());
+			System.out.println("Produit : "+l.getKey()+"\nLigne Commande : "+l.getValue());
 		}
 	}
 }
