@@ -3,6 +3,9 @@ package td2.pojo;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class Commande {
 
 	//VARIABLES
@@ -20,14 +23,6 @@ public class Commande {
 	}
 
 	//ACCESSEURS
-	public HashMap<Produit,LigneCommande> getLignes() {
-		return this.lignes;
-	}
-
-	public void setLignes(HashMap<Produit,LigneCommande> lignes) {
-		this.lignes = lignes;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -76,6 +71,14 @@ public class Commande {
 		}
 		else{
 			lignes.put(p,l);
+		}
+	}
+
+	public void afficher(){
+		Iterator it = lignes.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry l = (Map.Entry) it.next();
+			System.out.println("Produit : "+l.getKey()+"Ligne Commande : "+l.getValue());
 		}
 	}
 }
