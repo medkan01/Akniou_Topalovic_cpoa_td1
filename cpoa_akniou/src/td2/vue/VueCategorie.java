@@ -36,15 +36,15 @@ public class VueCategorie {
         return liste.toString();
     }
 
-    public static void ajoutCategorie(){
-        System.out.println("Veuillez saisir les attributs de la catégorie:\n");
+    public static void insert(){
+        System.out.println("Veuillez saisir les attributs de la categorie a ajouter:\n");
         System.out.println("Titre: ");
         String titre = sc.next();
         System.out.println("Visuel: ");
         String visuel = sc.next();
         try{
             if (daos.getCategorieDAO().insert(new Categorie(5, titre, visuel)) == true){
-                System.out.println("Categorie ajoutee");
+                System.out.println("Categorie ajoutee avec succes");
             }
             else{
                 System.out.println("Impossible d'ajouter cette categorie");
@@ -52,6 +52,41 @@ public class VueCategorie {
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
-        
+    }
+    
+    public static void update(){
+        System.out.println("Veuillez saisir les attributs de la categorie a modifier:\n");
+        System.out.println("ID: ");
+        int id = sc.nextInt();
+        System.out.println("Titre: ");
+        String titre = sc.nextLine();
+        System.out.println("Visuel: ");
+        String visuel = sc.nextLine();
+        try{
+            if(daos.getCategorieDAO().update(new Categorie(id,titre,visuel)) == true){
+                System.out.println("Catégorie mise a jour avec succes");
+            }
+            else{
+                System.out.println("Impossible de mettre a jour cette categorie");
+            }
+        } catch (SQLException sqle){
+            System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
+        }
+    }
+
+    public static void delete(){
+        System.out.println("Veuillez saisir l'id de la categorie a supprimer:\n");
+        System.out.println("ID: ");
+        int id = sc.nextInt();
+        try{
+            if(daos.getCategorieDAO().delete(new Categorie(id, "",""))==true){
+                System.out.println("Categorie supprimee avec succes");
+            }
+            else{
+                System.out.println("Impossible de supprimer cette categorie");
+            }
+        } catch (SQLException sqle){
+            System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
+        }
     }
 }
