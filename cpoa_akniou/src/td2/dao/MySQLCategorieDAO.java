@@ -36,7 +36,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 	public boolean delete(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = '?';", Statement.RETURN_GENERATED_KEYS);
+			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = ?;", Statement.RETURN_GENERATED_KEYS);
 				requete.setInt(1, categorie.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
@@ -46,7 +46,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 	public boolean update(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"UPDATE akniou1u_cpoa.Categorie SET titre = '?', visuel = '?' WHERE Categorie.id_categorie = '?';", Statement.RETURN_GENERATED_KEYS);
+			"UPDATE akniou1u_cpoa.Categorie SET titre = ?, visuel = ? WHERE Categorie.id_categorie = ?;", Statement.RETURN_GENERATED_KEYS);
 				requete.setString(1, categorie.getTitre());
 				requete.setString(2, categorie.getVisuel());
 				requete.setInt(3, categorie.getId());
@@ -58,7 +58,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 	public Categorie getById(int id) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie ='?';");
+			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie =?;");
 				requete.setInt(1, id);
 		ResultSet res = requete.getResultSet();
 		Categorie categorieRes = new Categorie(

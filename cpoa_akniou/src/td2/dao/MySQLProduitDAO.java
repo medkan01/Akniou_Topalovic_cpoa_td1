@@ -20,7 +20,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public boolean insert(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES ('?', '?', '?', '?', '?');",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
 			requete.setDouble(3, produit.getTarif());
@@ -39,7 +39,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public boolean delete(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Produit WHERE id_produit = '?';", Statement.RETURN_GENERATED_KEYS);
+		"DELETE FROM akniou1u.Produit WHERE id_produit = ?;", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, produit.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
@@ -49,7 +49,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public boolean update(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"UPDATE akniou1u.Produit SET nom = '?', description= '?', tarif='?', visuel='?', id_categorie='?' WHERE id_produit'?';");
+		"UPDATE akniou1u.Produit SET nom = ?, description= ?, tarif=?, visuel=?, id_categorie=? WHERE id_produit = ?;");
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
 			requete.setDouble(3, produit.getTarif());
@@ -64,7 +64,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public Produit getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = '?';");
+			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = ?;");
 				requete.setInt(1,id);
 		ResultSet res = requete.getResultSet();
 		Produit produit = new Produit(

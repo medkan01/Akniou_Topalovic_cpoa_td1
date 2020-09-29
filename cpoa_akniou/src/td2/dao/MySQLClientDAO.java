@@ -20,7 +20,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public boolean insert(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES ('?','?','?','?','?','?','?','?','?';",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES (?,?,?,?,?,?,?,?,?;",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, client.getNom());
 			requete.setString(2, client.getPrenom());
 			requete.setString(3, client.getIdentifiant());
@@ -43,7 +43,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public boolean delete(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u_cpoa.Client WHERE id_client='?'", Statement.RETURN_GENERATED_KEYS);
+		"DELETE FROM akniou1u_cpoa.Client WHERE id_client=?", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, client.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
@@ -52,7 +52,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public boolean update(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(	
-		"UPDATE akniou1u.Client SET nom='?', prenom='?', identifiant='?', mot_de_passe='?', adr_numero='?', adr_voie='?', adr_code_postale='?', adr_ville='?', adr_pays='?')WHERE Client.id_client = '?';");
+		"UPDATE akniou1u.Client SET nom=?, prenom=?, identifiant=?, mot_de_passe=?, adr_numero=?, adr_voie=?, adr_code_postale=?, adr_ville=?, adr_pays=?)WHERE Client.id_client = ?;");
 			requete.setString(1, client.getNom());
 			requete.setString(2, client.getPrenom());
 			requete.setString(3, client.getIdentifiant());
@@ -71,7 +71,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public Client getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client='?';");
+			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client=?;");
 				requete.setInt(1, id);
 		ResultSet res = requete.getResultSet();
 		Client client = new Client(
