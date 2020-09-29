@@ -54,4 +54,8 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
             return this.donnees.get(idx);
         }
     }
+
+    public ArrayList<Commande> getAll(){
+        return (ArrayList<Commande>) this.donnees;
+    }
 }

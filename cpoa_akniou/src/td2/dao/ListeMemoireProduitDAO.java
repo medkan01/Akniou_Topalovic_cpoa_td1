@@ -1,5 +1,6 @@
 package td2.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import td2.pojo.Produit;
 
@@ -55,5 +56,9 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
         else {
             return this.donnees.get(idx);
         }
+    }
+
+    public ArrayList<Produit> getAll(){
+        return (ArrayList<Produit>) this.donnees;
     }
 }

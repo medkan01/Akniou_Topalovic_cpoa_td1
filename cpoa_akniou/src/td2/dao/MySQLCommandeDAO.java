@@ -1,6 +1,8 @@
 package td2.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import td2.connexion.*;
 import td2.pojo.Commande;
 
@@ -65,4 +67,17 @@ public class MySQLCommandeDAO implements CommandeDAO{
 			res.getInt("id_client"));
 		return commande;
 	}
+
+	public ArrayList<Commande> getAll() throws SQLException{
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Commande;");
+		ResultSet res = requete.getResultSet();
+		ArrayList<Commande> liste = new ArrayList<Commande>();
+		while (res.next()) {
+			Commande commande = new Commande(res.getInt("id_commande"),res.getDate("date_commande").toLocalDate(),res.getInt("id_client"));
+			liste.add(commande);
+		}
+		return liste;
+	}
+
 }

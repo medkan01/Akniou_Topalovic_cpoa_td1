@@ -1,5 +1,6 @@
 package td2.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import td2.pojo.Client;
 
@@ -55,5 +56,8 @@ public class ListeMemoireClientDAO implements ClientDAO{
         else {
             return this.donnees.get(idx);
         }
+    }
+    public ArrayList<Client> getAll(){
+        return (ArrayList<Client>) this.donnees;
     }
 }

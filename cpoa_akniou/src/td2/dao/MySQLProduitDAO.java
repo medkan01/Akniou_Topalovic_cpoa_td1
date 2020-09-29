@@ -1,6 +1,8 @@
 package td2.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import td2.connexion.*;
 import td2.pojo.Produit;
 
@@ -74,4 +76,17 @@ public class MySQLProduitDAO implements ProduitDAO {
 			res.getInt("id_categorie"));
 		return produit;
 	}
+	
+	public ArrayList<Produit> getAll() throws SQLException{
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Produit;");
+		ResultSet res = requete.getResultSet();
+		ArrayList<Produit> liste = new ArrayList<Produit>();
+		while (res.next()) {
+			Produit produit = new Produit(res.getInt("id_produit"),res.getString("nom"),res.getString("description"),res.getFloat("tarif"),res.getString("visuel"),res.getInt("id_categorie"));
+			liste.add(produit);
+		}
+		return liste;
+	}
+	
 }

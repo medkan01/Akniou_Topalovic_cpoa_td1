@@ -1,6 +1,8 @@
 package td2.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import td2.connexion.*;
 import td2.pojo.Client;
 
@@ -84,5 +86,17 @@ public class MySQLClientDAO implements ClientDAO{
 			res.getString("adr_ville"),
 			res.getString("adr_pays"));
 		return client;
+	}
+
+	public ArrayList<Client> getAll() throws SQLException{
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Client;");
+		ResultSet res = requete.getResultSet();
+		ArrayList<Client> liste = new ArrayList<Client>();
+		while (res.next()) {
+			Client client = new Client(res.getInt("id_client"),res.getString("nom"),res.getString("prenom"),res.getString("identifiant"),res.getString("mot_de_passe"),res.getString("adr_numero"),res.getString("adr_voie"),res.getString("adr_code_postal"),res.getString("adr_ville"),res.getString("adr_pays"));
+			liste.add(client);
+		}
+		return liste;
 	}
 }
