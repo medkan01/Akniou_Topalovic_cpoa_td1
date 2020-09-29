@@ -15,6 +15,6 @@ public class test {
         c1.ajouterLigne(p1, l1);
         c1.afficher();}*/
 
-        VueCategorie.ajoutCategorie();
+        VueCategorie.afficherTableCategorie();
     }
 }
