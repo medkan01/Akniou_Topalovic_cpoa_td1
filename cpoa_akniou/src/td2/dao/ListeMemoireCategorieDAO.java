@@ -1,5 +1,6 @@
 package td2.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import td2.pojo.Categorie;
 
@@ -55,5 +56,9 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
         else {
             return this.donnees.get(idx);
         }
+    }
+
+    public ArrayList<Categorie> getAll(){
+        return (ArrayList<Categorie>) this.donnees;
     }
 }

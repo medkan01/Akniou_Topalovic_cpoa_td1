@@ -1,6 +1,8 @@
 package td2.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import td2.connexion.*;
 import td2.pojo.Categorie;
 
@@ -18,7 +20,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 	public boolean insert(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES ('?', '?')",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u_cpoa.Categorie (titre, visuel) VALUES (?, ?);",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, categorie.getTitre());
 			requete.setString(2, categorie.getVisuel());
 		int nbligne = requete.executeUpdate();
@@ -64,5 +66,17 @@ public class MySQLCategorieDAO implements CategorieDAO{
 			res.getString("titre"),
 			res.getString("visuel"));
 		return categorieRes;
+	}
+
+	public ArrayList<Categorie> getAll() throws SQLException{
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Categorie;");
+		ResultSet res = requete.getResultSet();
+		ArrayList<Categorie> liste = new ArrayList<Categorie>();
+		while (res.next()) {
+			Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
+			liste.add(categorie);
+		}
+		return liste;
 	}
 }

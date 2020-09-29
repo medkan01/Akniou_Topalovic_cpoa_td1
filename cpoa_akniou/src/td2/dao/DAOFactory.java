@@ -13,4 +13,9 @@ public abstract class DAOFactory {
         }
         return daoF;
     }
+    
+    public abstract CategorieDAO getCategorieDAO();
+    public abstract ClientDAO getClientDAO();
+    public abstract CommandeDAO getCommandeDAO();
+    public abstract ProduitDAO getProduitDAO();
 }
