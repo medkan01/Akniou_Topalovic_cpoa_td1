@@ -12,28 +12,28 @@ public class VueCategorie {
     static Scanner sc = new Scanner(System.in);
 
     public static String afficherCategorie(Categorie categorie) {
-        Categorie afficher = categorie;
+        Categorie element = categorie;
         try {
-            afficher = daos.getCategorieDAO().getById(categorie.getId());
+            element = daos.getCategorieDAO().getById(categorie.getId());
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
-        return afficher.toString();
+        String afficher = "["+element.getId()+", "+element.getTitre()+", "+element.getVisuel()+"]\n";
+        return afficher;
     }
 
     public static String afficherTableCategorie(){
         ArrayList<Categorie> liste = new ArrayList<Categorie>();
+        String afficher = "";
         try{
             liste = daos.getCategorieDAO().getAll();
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
-        String afficher="[";
         for(int i = 0; i < liste.size();i++){
-            afficher = afficher+"("+afficherCategorie(liste.get(i))+")";
+            afficher = afficher+afficherCategorie(liste.get(i));
         }
-        afficher = afficher + "]\n";
-        return liste.toString();
+        return afficher;
     }
 
     public static void insert(){
@@ -59,9 +59,9 @@ public class VueCategorie {
         System.out.println("ID: ");
         int id = sc.nextInt();
         System.out.println("Titre: ");
-        String titre = sc.nextLine();
+        String titre = sc.next();
         System.out.println("Visuel: ");
-        String visuel = sc.nextLine();
+        String visuel = sc.next();
         try{
             if(daos.getCategorieDAO().update(new Categorie(id,titre,visuel)) == true){
                 System.out.println("Catégorie mise a jour avec succes");

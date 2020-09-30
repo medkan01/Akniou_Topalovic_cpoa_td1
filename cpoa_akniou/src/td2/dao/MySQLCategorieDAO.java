@@ -57,10 +57,10 @@ public class MySQLCategorieDAO implements CategorieDAO{
 
 	public Categorie getById(int id) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akniou1u_cpoa.Categorie WHERE id_categorie =?;");
-				requete.setInt(1, id);
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Categorie WHERE id_categorie ='"+id+"';");
 		ResultSet res = requete.getResultSet();
+		res.next();
 		Categorie categorieRes = new Categorie(
 			res.getInt("id_categorie"),
 			res.getString("titre"),
@@ -70,7 +70,8 @@ public class MySQLCategorieDAO implements CategorieDAO{
 
 	public ArrayList<Categorie> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Categorie;");
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Categorie");
 		ResultSet res = requete.getResultSet();
 		ArrayList<Categorie> liste = new ArrayList<Categorie>();
 		while (res.next()) {

@@ -20,7 +20,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public boolean insert(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postale, adr_ville, adr_pays) VALUES (?,?,?,?,?,?,?,?,?;",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u_cpoa.Client (nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES (?,?,?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, client.getNom());
 			requete.setString(2, client.getPrenom());
 			requete.setString(3, client.getIdentifiant());
@@ -52,7 +52,7 @@ public class MySQLClientDAO implements ClientDAO{
 	public boolean update(Client client) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(	
-		"UPDATE akniou1u.Client SET nom=?, prenom=?, identifiant=?, mot_de_passe=?, adr_numero=?, adr_voie=?, adr_code_postale=?, adr_ville=?, adr_pays=?)WHERE Client.id_client = ?;");
+		"UPDATE akniou1u_cpoa.Client SET nom=?, prenom=?, identifiant=?, mot_de_passe=?, adr_numero=?, adr_voie=?, adr_code_postal=?, adr_ville=?, adr_pays=? WHERE Client.id_client = ?;");
 			requete.setString(1, client.getNom());
 			requete.setString(2, client.getPrenom());
 			requete.setString(3, client.getIdentifiant());
@@ -70,16 +70,16 @@ public class MySQLClientDAO implements ClientDAO{
 
 	public Client getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akbiou1u_cpoa.Client WHERE id_client=?;");
-				requete.setInt(1, id);
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Client WHERE id_client="+id+";");
 		ResultSet res = requete.getResultSet();
+		res.next();
 		Client client = new Client(
 			res.getInt("id_client"),
 			res.getString("nom"),
 			res.getString("prenom"),
 			res.getString("identifiant"),
-			res.getString("mot_de_pase"),
+			res.getString("mot_de_passe"),
 			res.getString("adr_numero"),
 			res.getString("adr_voie"),
 			res.getString("adr_code_postal"),
@@ -90,7 +90,8 @@ public class MySQLClientDAO implements ClientDAO{
 
 	public ArrayList<Client> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Client;");
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Client;");
 		ResultSet res = requete.getResultSet();
 		ArrayList<Client> liste = new ArrayList<Client>();
 		while (res.next()) {

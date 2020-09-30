@@ -7,31 +7,41 @@ import td2.pojo.*;
 
 public class VueClient {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     public static String afficherClient(Client client) {
-        Client afficher = client;
+        Client element = client;
         try {
-            afficher = daos.getClientDAO().getById(client.getId());
+            element = daos.getClientDAO().getById(client.getId());
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
-        return afficher.toString();
+        String afficher = "["
+            +element.getId()+", "
+            +element.getNom()+", "
+            +element.getPrenom()+", "
+            +element.getIdentifiant()+", "
+            +element.getMotDePasse()+", "
+            +element.getAdrNumero()+", "
+            +element.getAdrVoie()+", "
+            +element.getAdrCodePostal()+", "
+            +element.getAdrVille()+", "
+            +element.getAdrPays()+"]\n";
+        return afficher;
     }
 
     public static String afficherTableClient(){
         ArrayList<Client> liste = new ArrayList<Client>();
+        String afficher = "";
         try{
             liste = daos.getClientDAO().getAll();
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
-        String afficher="[";
         for(int i = 0; i < liste.size();i++){
-            afficher = afficher+"("+afficherClient(liste.get(i))+")";
+            afficher = afficher+afficherClient(liste.get(i));
         }
-        afficher = afficher + "]\n";
-        return liste.toString();
+        return afficher;
     }
 
     public static void insert(){
@@ -53,7 +63,8 @@ public class VueClient {
         String adrNumero = sc.next();
 
         System.out.println("Adresse Voie: ");
-        String adrVoie = sc.next();
+        Scanner voie = new Scanner(System.in);
+        String adrVoie = voie.nextLine();
 
         System.out.println("Adresse Code Postal: ");
         String adrCodePostal = sc.next();
@@ -63,7 +74,8 @@ public class VueClient {
 
         System.out.println("Adresse Pays: ");
         String adrPays = sc.next();
-        
+
+        voie.close();
         try{
             if (daos.getClientDAO().insert(new Client(1, nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
                 System.out.println("Client ajoute avec succes");
@@ -98,7 +110,8 @@ public class VueClient {
         String adrNumero = sc.next();
 
         System.out.println("Adresse Voie: ");
-        String adrVoie = sc.next();
+        Scanner voie = new Scanner(System.in);
+        String adrVoie = voie.nextLine();
 
         System.out.println("Adresse Code Postal: ");
         String adrCodePostal = sc.next();
@@ -109,19 +122,20 @@ public class VueClient {
         System.out.println("Adresse Pays: ");
         String adrPays = sc.next();
         
+        voie.close();
         try{
-            if (daos.getClientDAO().insert(new Client(id, nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
+            if (daos.getClientDAO().update(new Client(id, nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
                 System.out.println("Client mis a jour avec succes");
             }
             else{
-                System.out.println("Impossible dde modifier ce client");
+                System.out.println("Impossible de modifier ce client");
             }
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
     }
 
-    public static void delete(Client client){
+    public static void delete(){
         System.out.println("Veuillez saisir l'id du client a supprimer:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
