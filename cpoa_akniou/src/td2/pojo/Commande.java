@@ -5,17 +5,17 @@ import java.util.HashMap;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Commande {
 
-	//VARIABLES
+	// VARIABLES
 	private int id;
 	private LocalDate date;
 	private int idClient;
-	private HashMap<Produit, LigneCommande> lignes; 
-	
+	private HashMap<Produit, LigneCommande> lignes;
 
-	//CONSTRUCTEUR
+	// CONSTRUCTEUR
 	public Commande(int id, LocalDate date, int idClient) {
 		this.id = id;
 		this.date = date;
@@ -23,8 +23,7 @@ public class Commande {
 		lignes = new HashMap<Produit, LigneCommande>();
 	}
 
-
-	//ACCESSEURS
+	// ACCESSEURS
 	public int getId() {
 		return id;
 	}
@@ -49,39 +48,35 @@ public class Commande {
 		this.idClient = idClient;
 	}
 
-
-	//METHODES
-	public void ajouterLigne(Produit p, LigneCommande l){
-		if (lignes.containsKey(p)){
+	// METHODES
+	public void ajouterLigne(Produit p, LigneCommande l) {
+		if (lignes.containsKey(p)) {
 			throw new IllegalArgumentException("Produit deja existant dans la liste");
-		}
-		else{
-			lignes.put(p,l);
+		} else {
+			lignes.put(p, l);
 		}
 	}
 
-	public void supprimerLigne(Produit p, LigneCommande l){
-		if (lignes.containsKey(p) == false){
+	public void supprimerLigne(Produit p, LigneCommande l) {
+		if (lignes.containsKey(p) == false) {
 			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
-		}
-		else{
+		} else {
 			lignes.remove(p);
 		}
 	}
 
-	public void modifierLigne(Produit p, LigneCommande l){
-		if (lignes.containsKey(p) == false){
+	public void modifierLigne(Produit p, LigneCommande l) {
+		if (lignes.containsKey(p) == false) {
 			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
-		}
-		else{
-			lignes.put(p,l);
+		} else {
+			lignes.put(p, l);
 		}
 	}
 
-	public void afficher(){
-		Iterator it = lignes.entrySet().iterator();
+	public void afficher() {
+		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
 		while(it.hasNext()){
-			Map.Entry l = (Map.Entry) it.next();
+			Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
 			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue());
 		}
 	}
