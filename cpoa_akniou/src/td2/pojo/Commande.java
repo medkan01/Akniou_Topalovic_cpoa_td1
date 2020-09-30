@@ -48,6 +48,15 @@ public class Commande {
 		this.idClient = idClient;
 	}
 
+	public Produit getKeys() {
+		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
+		while(it.hasNext()){
+		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
+		return l.getKey();
+		}
+	}
+
+	
 	// METHODES
 	public void ajouterLigne(Produit p, LigneCommande l) {
 		if (lignes.containsKey(p)) {
@@ -80,4 +89,5 @@ public class Commande {
 			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue());
 		}
 	}
+
 }

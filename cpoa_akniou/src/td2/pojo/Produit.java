@@ -9,7 +9,6 @@ public class Produit {
 	private int idCategorie;
 	
 	public Produit(int id, String nom, String description, double tarif, String visuel, int idCategorie) {
-		super();
 		this.id = id;
 		this.nom = nom;
 		this.description = description;
