@@ -28,10 +28,7 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
     }
 
 	public boolean delete(Categorie objet) {
-
 		Categorie supprime;
-		
-		// Ne fonctionne que si l'objet métier est bien fait...
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
 			throw new IllegalArgumentException("Tentative de suppression d'une categorie inexistante");
@@ -43,7 +40,7 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
 	}
 
     public boolean update(Categorie objet){
-        int idx = this.donnees.indexOf(objet);
+        int idx = objet.getId()-1;
         if (idx == -1){
             throw new IllegalArgumentException("Tentative de modification d'une catégorie inexistante");
         }
@@ -55,7 +52,7 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
     
 	public Categorie getById(int id) {
 		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(new Categorie(id, "test", "test.png"));
+		int idx = this.donnees.indexOf(this.donnees.get(id-1));
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucune categorie ne possède cet identifiant");
 		} else {

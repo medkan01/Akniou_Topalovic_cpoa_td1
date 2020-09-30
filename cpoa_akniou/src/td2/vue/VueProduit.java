@@ -27,7 +27,7 @@ public class VueProduit {
         return afficher;
     }
     
-    public static String afficherTableProduit(){
+    public static String afficherTable(){
         ArrayList<Produit> liste = new ArrayList<Produit>();
         String afficher = "";
         try{
@@ -36,7 +36,8 @@ public class VueProduit {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
         for(int i = 0; i < liste.size();i++){
-            afficher = afficher+afficherProduit(liste.get(i));
+            Produit objet = liste.get(i);
+            afficher=afficher+"["+objet.getId()+", "+objet.getNom()+", "+objet.getDescription()+objet.getTarif()+", "+objet.getVisuel()+", "+objet.getIdCategorie()+"]\n";
         }
         return afficher;
     }
@@ -58,10 +59,10 @@ public class VueProduit {
         System.out.println("Visuel: ");
         String visuel = sc.next();
 
-        System.out.println("ID Categorie: ");
-        int idCategorie = sc.nextInt();
+        System.out.println("ID Produit: ");
+        int idProduit = sc.nextInt();
         try{
-            if (daos.getProduitDAO().insert(new Produit(1, nom, description, tarif, visuel, idCategorie)) == true){
+            if (daos.getProduitDAO().insert(new Produit(1, nom, description, tarif, visuel, idProduit)) == true){
                 System.out.println("Produit ajoute avec succes");
             }
             else{
@@ -92,12 +93,13 @@ public class VueProduit {
         System.out.println("Visuel: ");
         String visuel = sc.next();
 
-        System.out.println("ID Categorie: ");
-        int idCategorie = sc.nextInt();
+        System.out.println("ID Produit: ");
+        int idProduit = sc.nextInt();
 
         scan.close();
         try{
-            if(daos.getProduitDAO().update(new Produit(id,nom, description, tarif, visuel, idCategorie)) == true){
+            Produit modifier = daos.getProduitDAO().getById(id);
+            if(daos.getProduitDAO().update(new Produit(modifier.getId(),nom, description, tarif, visuel, idProduit)) == true){
                 System.out.println("Produit mis a jour avec succes");
             }
             else{
@@ -113,7 +115,8 @@ public class VueProduit {
         System.out.println("ID: ");
         int id = sc.nextInt();
         try{
-            if(daos.getProduitDAO().delete(new Produit(id, "","",0,"",0))==true){
+            Produit supprimer = daos.getProduitDAO().getById(id);
+            if(daos.getProduitDAO().delete(supprimer)==true){
                 System.out.println("Produit supprime avec succes");
             }
             else{
@@ -136,7 +139,7 @@ public class VueProduit {
         switch(choix){
             case 1:
                 System.out.println("Produit: \n");
-                System.out.println(afficherTableProduit());
+                System.out.println(afficherTable());
                 selection();
                 break;
             case 2:

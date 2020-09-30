@@ -11,7 +11,7 @@ public class VueCategorie {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     private static Scanner sc = new Scanner(System.in);
 
-    public static String afficherTableCategorie(){
+    public static String afficherTable(){
         ArrayList<Categorie> liste = new ArrayList<Categorie>();
         String afficher = "";
         try{
@@ -20,8 +20,8 @@ public class VueCategorie {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
         for(int i = 0; i < liste.size();i++){
-            Categorie cat = liste.get(i);
-            afficher=afficher+"["+cat.getId()+", "+cat.getTitre()+", "+cat.getVisuel()+"]\n";
+            Categorie objet = liste.get(i);
+            afficher=afficher+"["+objet.getId()+", "+objet.getTitre()+", "+objet.getVisuel()+"]\n";
         }
         return afficher;
     }
@@ -71,9 +71,9 @@ public class VueCategorie {
         System.out.println("Veuillez saisir l'id de la categorie a supprimer:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
-        Categorie supprimer = Categorie
         try{
-            if(daos.getCategorieDAO().delete(new Categorie(id, "",""))==true){
+            Categorie supprimer = daos.getCategorieDAO().getById(id);
+            if(daos.getCategorieDAO().delete(supprimer)==true){
                 System.out.println("Categorie supprimee avec succes");
             }
             else{
@@ -101,7 +101,7 @@ public class VueCategorie {
         switch(choix){
             case 1:
                 System.out.println("Categorie: \n");
-                System.out.println(afficherTableCategorie());
+                System.out.println(afficherTable());
                 selection();
                 break;
             case 2:
@@ -110,6 +110,7 @@ public class VueCategorie {
                 break;
             case 3:
                 update();
+                selection();
                 break;
             case 4:
                 delete();

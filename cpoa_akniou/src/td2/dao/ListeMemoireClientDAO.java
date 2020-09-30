@@ -25,20 +25,20 @@ public class ListeMemoireClientDAO implements ClientDAO{
         return ok;
     }
 
-    public boolean delete(Client objet){
-        boolean ok;
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1){
+	public boolean delete(Client objet) {
+		Client supprime;
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
 			throw new IllegalArgumentException("Tentative de suppression d'un client inexistant");
-        }
-        else{
-            ok = this.donnees.remove(objet);
-        }
-        return ok;
-    }
+		} else {
+			supprime = this.donnees.remove(idx);
+		}
+		
+		return objet.equals(supprime);
+	}
 
     public boolean update(Client objet){
-        int idx = this.donnees.indexOf(objet);
+        int idx = objet.getId()-1;
         if (idx == -1){
             throw new IllegalArgumentException("Tentative de modification d'un client inexistant");
         }
@@ -49,7 +49,7 @@ public class ListeMemoireClientDAO implements ClientDAO{
     }
 
     public Client getById(int id) {
-        int idx = this.donnees.indexOf(new Client(id, "", "", "", "", "", "", "", "", ""));
+        int idx = this.donnees.indexOf(this.donnees.get(id-1));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucun client ne possede cet id");
         }

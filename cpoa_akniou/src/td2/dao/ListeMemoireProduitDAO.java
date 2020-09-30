@@ -25,20 +25,20 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
         return ok;
     }
 
-    public boolean delete(Produit objet){
-        boolean ok;
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1){
+	public boolean delete(Produit objet) {
+		Produit supprime;
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
 			throw new IllegalArgumentException("Tentative de suppression d'un produit inexistant");
-        }
-        else{
-            ok = this.donnees.remove(objet);
-        }
-        return ok;
-    }
+		} else {
+			supprime = this.donnees.remove(idx);
+		}
+		
+		return objet.equals(supprime);
+	}
 
     public boolean update(Produit objet){
-        int idx = this.donnees.indexOf(objet);
+        int idx = objet.getId()-1;
         if (idx == -1){
             throw new IllegalArgumentException("Tentative de modification d'un produit inexistant");
         }
@@ -48,15 +48,14 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
         return true;
     }
 
-    public Produit getById(int id) {
-        int idx = this.donnees.indexOf(new Produit(id, "", "", 0, "", 0));
-        if (idx == -1) {
-            throw new IllegalArgumentException("Aucun produit ne possede cet id");
-        }
-        else {
-            return this.donnees.get(idx);
-        }
-    }
+	public Produit getById(int id) {
+		int idx = this.donnees.indexOf(this.donnees.get(id-1));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucune produit ne possède cet identifiant");
+		} else {
+			return this.donnees.get(idx);
+		}
+	}
 
     public ArrayList<Produit> getAll(){
         return (ArrayList<Produit>) this.donnees;

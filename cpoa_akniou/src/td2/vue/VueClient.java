@@ -10,7 +10,7 @@ public class VueClient {
     private static Scanner sc = new Scanner(System.in);
     private static Scanner scanLn = new Scanner(System.in);
 
-    public static String afficherTableClient(){
+    public static String afficherTable(){
         ArrayList<Client> liste = new ArrayList<Client>();
         String afficher = "";
         try{
@@ -19,7 +19,19 @@ public class VueClient {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
         for(int i = 0; i < liste.size();i++){
-            afficher = afficher+afficherClient(liste.get(i));
+            Client cat = liste.get(i);
+            afficher=afficher+"["
+                +cat.getId()+", "
+                +cat.getNom()+", "
+                +cat.getPrenom()+", "
+                +cat.getId()+", "
+                +cat.getIdentifiant()+", "
+                +cat.getMotDePasse()+", "
+                +cat.getAdrNumero()+", "
+                +cat.getAdrVoie()+", "
+                +cat.getAdrCodePostal()+", "
+                +cat.getAdrVille()+", "
+                +cat.getAdrPays()+"]\n";
         }
         return afficher;
     }
@@ -103,7 +115,8 @@ public class VueClient {
         
         scan.close();
         try{
-            if (daos.getClientDAO().update(new Client(id, nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
+            Client modifier = daos.getClientDAO().getById(id);
+            if (daos.getClientDAO().update(new Client(modifier.getId(), nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
                 System.out.println("Client mis a jour avec succes");
             }
             else{
@@ -119,7 +132,8 @@ public class VueClient {
         System.out.println("ID: ");
         int id = sc.nextInt();
         try{
-            if(daos.getClientDAO().delete(new Client(id, "","","","","","","","",""))==true){
+            Client supprimer = daos.getClientDAO().getById(id);
+            if(daos.getClientDAO().delete(supprimer)==true){
                 System.out.println("Client supprime avec succes");
             }
             else{
@@ -145,7 +159,7 @@ public class VueClient {
         switch(choix){
             case 1:
                 System.out.println("Client: \n");
-                System.out.println(afficherTableClient());
+                System.out.println(afficherTable());
                 selection();
                 break;
             case 2:
