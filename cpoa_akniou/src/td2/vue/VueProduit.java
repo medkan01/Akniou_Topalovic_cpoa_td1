@@ -9,25 +9,7 @@ public class VueProduit {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     private static Scanner sc = new Scanner(System.in);
     private static Scanner scanLn = new Scanner(System.in);
-
-    public static String afficherProduit(Produit produit) {
-        Produit element = produit;
-        try {
-            element = daos.getProduitDAO().getById(produit.getId());
-        } catch (SQLException sqle) {
-            System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
-        }
-        String afficher = "["
-            +element.getId()+", "
-            +element.getNom()+", "
-            +element.getDescription()+", "
-            +element.getTarif()+", "
-            +element.getVisuel()+", "
-            +element.getIdCategorie()+"]\n";
-        return afficher;
-    }
     
-
     public static String afficherTableProduit(){
         ArrayList<Produit> liste = new ArrayList<Produit>();
         String afficher = "";

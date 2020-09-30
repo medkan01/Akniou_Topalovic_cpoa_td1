@@ -11,17 +11,6 @@ public class VueCategorie {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     private static Scanner sc = new Scanner(System.in);
 
-    public static String afficherCategorie(Categorie categorie) {
-        Categorie element = categorie;
-        try {
-            element = daos.getCategorieDAO().getById(categorie.getId());
-        } catch (SQLException sqle) {
-            System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
-        }
-        String afficher = "["+element.getId()+", "+element.getTitre()+", "+element.getVisuel()+"]\n";
-        return afficher;
-    }
-
     public static String afficherTableCategorie(){
         ArrayList<Categorie> liste = new ArrayList<Categorie>();
         String afficher = "";
@@ -31,19 +20,21 @@ public class VueCategorie {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
         for(int i = 0; i < liste.size();i++){
-            afficher = afficher+afficherCategorie(liste.get(i));
+            Categorie cat = liste.get(i);
+            afficher=afficher+"["+cat.getId()+", "+cat.getTitre()+", "+cat.getVisuel()+"]\n";
         }
         return afficher;
     }
 
     public static void insert(){
+        sc.reset();
         System.out.println("Veuillez saisir les attributs de la categorie a ajouter:\n");
         System.out.println("Titre: ");
         String titre = sc.next();
         System.out.println("Visuel: ");
         String visuel = sc.next();
         try{
-            if (daos.getCategorieDAO().insert(new Categorie(5, titre, visuel)) == true){
+            if (daos.getCategorieDAO().insert(new Categorie(1, titre, visuel)) == true){
                 System.out.println("Categorie ajoutee avec succes");
             }
             else{
@@ -55,6 +46,7 @@ public class VueCategorie {
     }
     
     public static void update(){
+        sc.reset();
         System.out.println("Veuillez saisir les attributs de la categorie a modifier:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
@@ -75,9 +67,11 @@ public class VueCategorie {
     }
 
     public static void delete(){
+        sc.reset();
         System.out.println("Veuillez saisir l'id de la categorie a supprimer:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
+        Categorie supprimer = Categorie
         try{
             if(daos.getCategorieDAO().delete(new Categorie(id, "",""))==true){
                 System.out.println("Categorie supprimee avec succes");
@@ -91,12 +85,15 @@ public class VueCategorie {
     }
 
     public static void selection(){
+        sc.reset();
         System.out.println("Que souhaitez-vous faire dans cette table: ");
         System.out.println("1. Afficher la table");
         System.out.println("2. Ajouter a la table");
         System.out.println("3. Modifier un element de la table");
         System.out.println("4. Supprimer un element de la table");
-        System.out.println("5. Retour");
+        System.out.println("5. Changer de persistance");
+        System.out.println("6. Retour\n");
+        System.out.println("Persistance actuelle: "+ DAOFactory.getPersistanceActuelle()+"\n");
 
         int choix = sc.nextInt();
         choix = 0;
@@ -119,6 +116,15 @@ public class VueCategorie {
                 selection();
                 break;
             case 5:
+                System.out.println("Changement de persistance...");
+                if (DAOFactory.getPersistanceActuelle() == "MySQL"){
+                    daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+                } else {
+                    daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+                }
+                selection();
+                break;
+            case 6:
                 System.out.println("Retour...");
                 VuePrincipale.selection();
                 break;

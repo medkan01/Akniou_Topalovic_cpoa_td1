@@ -9,7 +9,6 @@ public class Categorie {
 	
 	// CONSTRUCTEUR
 	public Categorie(int id, String titre, String visuel) {
-		super();
 		this.id = id;
 		this.titre = titre;
 		this.visuel = visuel;

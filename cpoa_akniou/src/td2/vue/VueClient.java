@@ -10,27 +10,6 @@ public class VueClient {
     private static Scanner sc = new Scanner(System.in);
     private static Scanner scanLn = new Scanner(System.in);
 
-    public static String afficherClient(Client client) {
-        Client element = client;
-        try {
-            element = daos.getClientDAO().getById(client.getId());
-        } catch (SQLException sqle) {
-            System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
-        }
-        String afficher = "["
-            +element.getId()+", "
-            +element.getNom()+", "
-            +element.getPrenom()+", "
-            +element.getIdentifiant()+", "
-            +element.getMotDePasse()+", "
-            +element.getAdrNumero()+", "
-            +element.getAdrVoie()+", "
-            +element.getAdrCodePostal()+", "
-            +element.getAdrVille()+", "
-            +element.getAdrPays()+"]\n";
-        return afficher;
-    }
-
     public static String afficherTableClient(){
         ArrayList<Client> liste = new ArrayList<Client>();
         String afficher = "";
@@ -157,11 +136,12 @@ public class VueClient {
         System.out.println("2. Ajouter a la table");
         System.out.println("3. Modifier un element de la table");
         System.out.println("4. Supprimer un element de la table");
-        System.out.println("5. Retour");
+        System.out.println("5. Changer de persistance");
+        System.out.println("6. Retour\n");
+        System.out.println("Persistance actuelle: "+ DAOFactory.getPersistanceActuelle()+"\n");
+        
 
         int choix = sc.nextInt();
-        choix = 0;
-        choix = sc.nextInt();
         switch(choix){
             case 1:
                 System.out.println("Client: \n");
@@ -181,6 +161,15 @@ public class VueClient {
                 selection();
                 break;
             case 5:
+                System.out.println("Changement de persistance...");
+                if (DAOFactory.getPersistanceActuelle() == "MySQL"){
+                    daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+                } else {
+                    daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+                }
+                selection();
+                break;
+            case 6:
                 System.out.println("Retour...");
                 VuePrincipale.selection();
                 break;
