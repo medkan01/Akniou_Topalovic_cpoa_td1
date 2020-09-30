@@ -9,7 +9,7 @@ import td2.pojo.Categorie;
 
 public class VueCategorie {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     public static String afficherCategorie(Categorie categorie) {
         Categorie element = categorie;
@@ -120,6 +120,7 @@ public class VueCategorie {
                 break;
             case 5:
                 System.out.println("Retour...");
+                VuePrincipale.selection();
                 break;
             default:
                 System.out.println("Choix invalide, veuillez réessayer");

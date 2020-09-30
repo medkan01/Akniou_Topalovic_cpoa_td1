@@ -182,6 +182,7 @@ public class VueClient {
                 break;
             case 5:
                 System.out.println("Retour...");
+                VuePrincipale.selection();
                 break;
             default:
                 System.out.println("Choix invalide, veuillez réessayer");

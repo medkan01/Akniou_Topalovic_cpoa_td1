@@ -7,8 +7,8 @@ import td2.dao.*;
 
 public class VueProduit {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    static Scanner sc = new Scanner(System.in);
-    static Scanner scanLn = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+    private static Scanner scanLn = new Scanner(System.in);
 
     public static String afficherProduit(Produit produit) {
         Produit element = produit;
@@ -154,6 +154,7 @@ public class VueProduit {
                 break;
             case 5:
                 System.out.println("Retour...");
+                VuePrincipale.selection();
                 break;
             default:
                 System.out.println("Choix invalide, veuillez réessayer");
