@@ -10,7 +10,7 @@ public class VuePrincipale {
     private static Scanner sc = new Scanner(System.in);
 
     public static void selection(){
-        System.out.println("Quelle table souhaitez vous modifier:\n");
+        System.out.println("Quelle table souhaitez vous consulter:\n");
         System.out.println("1. Categorie");
         System.out.println("2. Client");
         System.out.println("3. Commande");

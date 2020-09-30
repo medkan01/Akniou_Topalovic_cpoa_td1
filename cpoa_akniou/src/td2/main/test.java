@@ -1,7 +1,7 @@
 package td2.main;
 
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
@@ -20,10 +20,14 @@ public class test {
        c1.ajouterLigne(p2, l1);
        c1.ajouterLigne(p3, l1);
        c1.ajouterLigne(p4, l1);
-       //c1.afficher();
-       Produit cle = c1.getKeys();
-       System.out.println(cle.getId());
-    }
+       c1.afficher();
+       ArrayList<Integer> T = new ArrayList<Integer>();
+       c1.getKeys(T);
+       System.out.println(T.get(0));
+       System.out.println(T.get(1));
+       System.out.println(T.get(2));
+       System.out.println(T.get(3));
+}
 }
 
 

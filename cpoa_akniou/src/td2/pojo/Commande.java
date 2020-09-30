@@ -1,6 +1,7 @@
 package td2.pojo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.Iterator;
@@ -48,13 +49,25 @@ public class Commande {
 		this.idClient = idClient;
 	}
 
-	public Produit getKeys() {
+	public void getKeys(ArrayList<Integer> T) {
 		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
+		Produit cle;
 		while(it.hasNext()){
-		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
-		return l.getKey();
+		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next(); 
+		cle = l.getKey();
+		T.add(cle.getId());
 		}
 	}
+
+/*	public void getValues(ArrayList<Integer> T) {
+		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
+		LigneCommande cle;
+		while(it.hasNext()){
+		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next(); 
+		cle = l.getValue();
+		T.add(cle.get());
+		}
+	}*/
 
 	
 	// METHODES
@@ -86,7 +99,7 @@ public class Commande {
 		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
-			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue());
+			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue()+"\n-----------------------");
 		}
 	}
 
