@@ -89,4 +89,43 @@ public class VueCategorie {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
         }
     }
+
+    public static void selection(){
+        System.out.println("Que souhaitez-vous faire dans cette table: ");
+        System.out.println("1. Afficher la table");
+        System.out.println("2. Ajouter a la table");
+        System.out.println("3. Modifier un element de la table");
+        System.out.println("4. Supprimer un element de la table");
+        System.out.println("5. Retour");
+
+        int choix = sc.nextInt();
+        choix = 0;
+        choix = sc.nextInt();
+        switch(choix){
+            case 1:
+                System.out.println("Categorie: \n");
+                System.out.println(afficherTableCategorie());
+                selection();
+                break;
+            case 2:
+                insert();
+                selection();
+                break;
+            case 3:
+                update();
+                break;
+            case 4:
+                delete();
+                selection();
+                break;
+            case 5:
+                System.out.println("Retour...");
+                break;
+            default:
+                System.out.println("Choix invalide, veuillez réessayer");
+                selection();
+                break;
+
+        }
+    }
 }

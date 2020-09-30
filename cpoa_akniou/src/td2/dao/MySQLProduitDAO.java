@@ -20,26 +20,26 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public boolean insert(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u.Produit (nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u_cpoa.Produit (nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
 			requete.setDouble(3, produit.getTarif());
 			requete.setString(4, produit.getVisuel());
 			requete.setInt(5, produit.getIdCategorie());
-		int nbligne = requete.executeUpdate();
+		int nblignes = requete.executeUpdate();
 		ResultSet res = requete.getGeneratedKeys();
 		if (res.next()) {
 			int cle = res.getInt(1);
 			produit.setId(cle);
 		}
 		requete.close();
-		return nbligne == 1;
+		return nblignes == 1;
 	}
 	
 	public boolean delete(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Produit WHERE id_produit = ?;", Statement.RETURN_GENERATED_KEYS);
+		"DELETE FROM akniou1u_cpoa.Produit WHERE id_produit = ?;", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, produit.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
@@ -49,7 +49,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	public boolean update(Produit produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"UPDATE akniou1u.Produit SET nom = ?, description= ?, tarif=?, visuel=?, id_categorie=? WHERE id_produit = ?;");
+		"UPDATE akniou1u_cpoa.Produit SET nom = ?, description= ?, tarif=?, visuel=?, id_categorie=? WHERE id_produit = ?;");
 			requete.setString(1, produit.getNom());
 			requete.setString(2, produit.getDescription());
 			requete.setDouble(3, produit.getTarif());
@@ -63,10 +63,10 @@ public class MySQLProduitDAO implements ProduitDAO {
 
 	public Produit getById(int id) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement(
-			"SELECT FROM akniou1u_cpoa.Produit WHERE id_produit = ?;");
-				requete.setInt(1,id);
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Produit WHERE id_produit = "+id+";");
 		ResultSet res = requete.getResultSet();
+		res.next();
 		Produit produit = new Produit(
 			res.getInt("id_produit"),
 			res.getString("nom"),
@@ -79,11 +79,12 @@ public class MySQLProduitDAO implements ProduitDAO {
 	
 	public ArrayList<Produit> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u.Produit;");
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Produit;");
 		ResultSet res = requete.getResultSet();
 		ArrayList<Produit> liste = new ArrayList<Produit>();
 		while (res.next()) {
-			Produit produit = new Produit(res.getInt("id_produit"),res.getString("nom"),res.getString("description"),res.getFloat("tarif"),res.getString("visuel"),res.getInt("id_categorie"));
+			Produit produit = new Produit(res.getInt("id_produit"),res.getString("nom"),res.getString("description"),res.getDouble("tarif"),res.getString("visuel"),res.getInt("id_categorie"));
 			liste.add(produit);
 		}
 		return liste;
