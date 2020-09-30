@@ -55,7 +55,8 @@ public class VueCategorie {
         System.out.println("Visuel: ");
         String visuel = sc.next();
         try{
-            if(daos.getCategorieDAO().update(new Categorie(id,titre,visuel)) == true){
+            Categorie modifier = daos.getCategorieDAO().getById(id);
+            if(daos.getCategorieDAO().update(new Categorie(modifier.getId(),titre,visuel)) == true){
                 System.out.println("Catégorie mise a jour avec succes");
             }
             else{
