@@ -93,12 +93,14 @@ public class Commande {
 		}
 	}
 
-	public void afficher() {
+	public String afficher() {
 		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
+		String afficher = "";
 		while(it.hasNext()){
 			Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
-			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue()+"\n-----------------------");
+			afficher = afficher + "["+this.id+", "+this.date+", "+this.idClient+", Produit: "+l.getKey()+", Ligne Commande: "+l.getValue()+"\n";
 		}
+		return afficher;
 	}
 	
 }
