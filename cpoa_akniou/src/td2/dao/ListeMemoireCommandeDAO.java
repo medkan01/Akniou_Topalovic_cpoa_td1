@@ -30,14 +30,11 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
         this.donnees.add(commande2);
 	}
 
-    public boolean insert(Commande objet) {
-        objet.setId(1);
-        while (this.donnees.contains(objet)) {
-            objet.setId(objet.getId() + 1);
-        }
-        boolean ok = this.donnees.add(objet);
-        return ok;
-    }
+    public boolean insert(Commande objet){
+		objet.setId(this.donnees.get(donnees.size()-1).getId()+1);
+		boolean ok = this.donnees.add(objet);
+		return ok;
+	}
 
 	public boolean delete(Commande objet) {
 		Commande supprime;
@@ -51,11 +48,12 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 		return objet.equals(supprime);
 	}
 
-    public boolean update(Commande objet) {
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de modification d'une commande inexistante");
-        } else {
+    public boolean update(Commande objet){
+        int idx = objet.getId()-1;
+        if (idx == -1){
+            throw new IllegalArgumentException("Tentative de modification d'une catégorie inexistante");
+        }
+        else{
             this.donnees.set(idx, objet);
         }
         return true;
