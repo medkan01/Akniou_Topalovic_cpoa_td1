@@ -16,14 +16,17 @@ public class ListeMemoireClientDAO implements ClientDAO{
         return instance;
     }
 
-    public boolean insert(Client objet){
-        objet.setId(1);
-        while(this.donnees.contains(objet)){
-            objet.setId(objet.getId()+1);
-        }
-        boolean ok = this.donnees.add(objet);
-        return ok;
+    private ListeMemoireClientDAO() {
+        donnees = new ArrayList<Client>();
+        this.donnees.add(new Client(1, "Laroche", "Pierre", "laroche5@ul.fr", "toto", "12", "Rue des etudiants", "57000", "Metz", "France"));
+		this.donnees.add(new Client(2, "akniou", "medkan", "larocqdqzdhe5@ul.fr", "toqzdto", "12", "Rue dqzdes etudiants", "570zd00", "Metz", "France"));
     }
+    
+    public boolean insert(Client objet){
+		objet.setId(this.donnees.get(donnees.size()-1).getId()+1);
+		boolean ok = this.donnees.add(objet);
+		return ok;
+	}
 
 	public boolean delete(Client objet) {
 		Client supprime;

@@ -22,10 +22,10 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
 	}
 
     public boolean insert(Categorie objet){
-        objet.setId(this.donnees.size()+1);
-        boolean ok = this.donnees.add(objet);
-        return ok;
-    }
+		objet.setId(this.donnees.get(donnees.size()-1).getId()+1);
+		boolean ok = this.donnees.add(objet);
+		return ok;
+	}
 
 	public boolean delete(Categorie objet) {
 		Categorie supprime;

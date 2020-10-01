@@ -9,7 +9,7 @@ import td2.pojo.Categorie;
 
 public class VueCategorie {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    private static Scanner sc = new Scanner(System.in);
+    private static Scanner sc;
 
     public static String afficherTable(){
         ArrayList<Categorie> liste = new ArrayList<Categorie>();
@@ -27,7 +27,7 @@ public class VueCategorie {
     }
 
     public static void insert(){
-        sc.reset();
+        sc = new Scanner(System.in);
         System.out.println("Veuillez saisir les attributs de la categorie a ajouter:\n");
         System.out.println("Titre: ");
         String titre = sc.next();
@@ -35,10 +35,10 @@ public class VueCategorie {
         String visuel = sc.next();
         try{
             if (daos.getCategorieDAO().insert(new Categorie(1, titre, visuel)) == true){
-                System.out.println("Categorie ajoutee avec succes");
+                System.out.println("\nCategorie ajoutee avec succes\n");
             }
             else{
-                System.out.println("Impossible d'ajouter cette categorie");
+                System.out.println("\nImpossible d'ajouter cette categorie\n");
             }
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -46,8 +46,8 @@ public class VueCategorie {
     }
     
     public static void update(){
-        sc.reset();
-        System.out.println("Veuillez saisir les attributs de la categorie a modifier:\n");
+        sc = new Scanner(System.in);
+        System.out.println("\nVeuillez saisir les attributs de la categorie a modifier:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
         System.out.println("Titre: ");
@@ -57,10 +57,10 @@ public class VueCategorie {
         try{
             Categorie modifier = daos.getCategorieDAO().getById(id);
             if(daos.getCategorieDAO().update(new Categorie(modifier.getId(),titre,visuel)) == true){
-                System.out.println("Catégorie mise a jour avec succes");
+                System.out.println("\nCatégorie mise a jour avec succes\n");
             }
             else{
-                System.out.println("Impossible de mettre a jour cette categorie");
+                System.out.println("\nImpossible de mettre a jour cette categorie\n");
             }
         } catch (SQLException sqle){
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -68,17 +68,17 @@ public class VueCategorie {
     }
 
     public static void delete(){
-        sc.reset();
-        System.out.println("Veuillez saisir l'id de la categorie a supprimer:\n");
+        sc = new Scanner(System.in);
+        System.out.println("\nVeuillez saisir l'id de la categorie a supprimer:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
         try{
             Categorie supprimer = daos.getCategorieDAO().getById(id);
             if(daos.getCategorieDAO().delete(supprimer)==true){
-                System.out.println("Categorie supprimee avec succes");
+                System.out.println("\nCategorie supprimee avec succes\n");
             }
             else{
-                System.out.println("Impossible de supprimer cette categorie");
+                System.out.println("\nImpossible de supprimer cette categorie\n");
             }
         } catch (SQLException sqle){
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -86,7 +86,7 @@ public class VueCategorie {
     }
 
     public static void selection(){
-        sc.reset();
+        sc = new Scanner(System.in);
         System.out.println("Que souhaitez-vous faire dans cette table: ");
         System.out.println("1. Afficher la table");
         System.out.println("2. Ajouter a la table");
@@ -97,8 +97,6 @@ public class VueCategorie {
         System.out.println("Persistance actuelle: "+ DAOFactory.getPersistanceActuelle()+"\n");
 
         int choix = sc.nextInt();
-        choix = 0;
-        choix = sc.nextInt();
         switch(choix){
             case 1:
                 System.out.println("Categorie: \n");

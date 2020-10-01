@@ -17,12 +17,15 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
     }
 
     public boolean insert(Produit objet){
-        objet.setId(1);
-        while(this.donnees.contains(objet)){
-            objet.setId(objet.getId()+1);
-        }
-        boolean ok = this.donnees.add(objet);
-        return ok;
+		objet.setId(this.donnees.get(donnees.size()-1).getId()+1);
+		boolean ok = this.donnees.add(objet);
+		return ok;
+	}
+    
+    private ListeMemoireProduitDAO() {
+        donnees = new ArrayList<Produit>();
+        this.donnees.add(new Produit(1, "Sonic te claque", "Sonic te claque parce qu'il est mechant", 25.2, "sonic.png", 1));
+		this.donnees.add(new Produit(2, "MarioGros", "Il a grossi", 25.2, "mario.png", 1));
     }
 
 	public boolean delete(Produit objet) {
@@ -40,7 +43,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
     public boolean update(Produit objet){
         int idx = objet.getId()-1;
         if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un produit inexistant");
+            throw new IllegalArgumentException("Tentative de modification d'un client inexistant");
         }
         else{
             this.donnees.set(idx, objet);

@@ -7,8 +7,8 @@ import td2.pojo.*;
 
 public class VueClient {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    private static Scanner sc = new Scanner(System.in);
-    private static Scanner scanLn = new Scanner(System.in);
+    private static Scanner sc;
+    private static Scanner scanLn;
 
     public static String afficherTable(){
         ArrayList<Client> liste = new ArrayList<Client>();
@@ -37,6 +37,8 @@ public class VueClient {
     }
 
     public static void insert(){
+        sc = new Scanner(System.in);
+        scanLn = new Scanner(System.in);
         System.out.println("Veuillez saisir les attributs du client a ajouter:\n");
 
         System.out.println("Nom: ");
@@ -69,10 +71,10 @@ public class VueClient {
 
         try{
             if (daos.getClientDAO().insert(new Client(1, nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
-                System.out.println("Client ajoute avec succes");
+                System.out.println("\nClient ajoute avec succes\n");
             }
             else{
-                System.out.println("Impossible d'ajouter ce client");
+                System.out.println("\nImpossible d'ajouter ce client\n");
             }
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -80,6 +82,8 @@ public class VueClient {
     }
     
     public static void update(){
+        sc = new Scanner(System.in);
+        scanLn = new Scanner(System.in);
         System.out.println("Veuillez saisir les attributs du client a modifier:\n");
 
         System.out.println("ID:");
@@ -101,8 +105,7 @@ public class VueClient {
         String adrNumero = sc.next();
 
         System.out.println("Adresse Voie: ");
-        Scanner scan = new Scanner(System.in);
-        String adrVoie = scan.nextLine();
+        String adrVoie = scanLn.nextLine();
 
         System.out.println("Adresse Code Postal: ");
         String adrCodePostal = sc.next();
@@ -113,14 +116,13 @@ public class VueClient {
         System.out.println("Adresse Pays: ");
         String adrPays = sc.next();
         
-        scan.close();
         try{
             Client modifier = daos.getClientDAO().getById(id);
             if (daos.getClientDAO().update(new Client(modifier.getId(), nom, prenom,identifiant,motDePasse,adrNumero,adrVoie,adrCodePostal,adrVille,adrPays)) == true){
-                System.out.println("Client mis a jour avec succes");
+                System.out.println("\nClient mis a jour avec succes\n");
             }
             else{
-                System.out.println("Impossible de modifier ce client");
+                System.out.println("\nImpossible de modifier ce client\n");
             }
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -128,16 +130,17 @@ public class VueClient {
     }
 
     public static void delete(){
+        sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du client a supprimer:\n");
         System.out.println("ID: ");
         int id = sc.nextInt();
         try{
             Client supprimer = daos.getClientDAO().getById(id);
             if(daos.getClientDAO().delete(supprimer)==true){
-                System.out.println("Client supprime avec succes");
+                System.out.println("\nClient supprime avec succes\n");
             }
             else{
-                System.out.println("Impossible de supprimer ce client");
+                System.out.println("\nImpossible de supprimer ce client\n");
             }
         } catch (SQLException sqle){
             System.out.println("Message d'erreur SQL:\n"+sqle.getMessage());
@@ -145,6 +148,7 @@ public class VueClient {
     }
 
     public static void selection(){
+        sc = new Scanner(System.in);
         System.out.println("Que souhaitez-vous faire dans cette table: ");
         System.out.println("1. Afficher la table");
         System.out.println("2. Ajouter a la table");
