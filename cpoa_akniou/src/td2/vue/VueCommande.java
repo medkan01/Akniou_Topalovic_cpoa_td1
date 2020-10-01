@@ -1,11 +1,14 @@
 package td2.vue;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import td2.dao.DAOFactory;
 import td2.dao.Persistance;
 import td2.pojo.Commande;
+import td2.pojo.LigneCommande;
+import td2.pojo.Produit;
 
 public class VueCommande {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
@@ -28,7 +31,30 @@ public class VueCommande {
     }
 
     public static void insert(){
-        
+        sc = new Scanner(System.in);
+        System.out.println("\nVeuillez saisir les attributs de la categorie a modifier:\n");
+        System.out.println("ID Client:");
+        int idClient = sc.nextInt();
+        System.out.println("ID Produit:");
+        int idProduit = sc.nextInt();
+        System.out.println("Quantite:");
+        int quantite = sc.nextInt();
+        System.out.println("Tarif unitaire:");
+        double tarifUnitaire = sc.nextDouble();
+
+        try {
+            Produit produit = daos.getProduitDAO().getById(idProduit);
+            LigneCommande ligneCommande = new LigneCommande(quantite, tarifUnitaire);
+            Commande commande = new Commande(1, LocalDate.now(), idClient);
+            commande.ajouterLigne(produit, ligneCommande);
+            if(daos.getCommandeDAO().insert(commande)==true){
+                System.out.println("Commande ajoutée avec succes");
+            } else {
+                System.out.println("Impossible d'ajouter cette commande");
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Message d'erreur SQL;\n" + sqle.getMessage());
+        }
     }
     
     public static void update(){

@@ -44,7 +44,6 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 		} else {
 			supprime = this.donnees.remove(idx);
 		}
-		
 		return objet.equals(supprime);
 	}
 

@@ -3,8 +3,6 @@ package td2.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-
 import td2.connexion.*;
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
