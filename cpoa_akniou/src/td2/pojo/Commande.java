@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import td2.dao.ListeMemoireCommandeDAO;
+
 public class Commande {
 
 	// VARIABLES
@@ -59,15 +61,13 @@ public class Commande {
 		}
 	}
 
-/*	public void getValues(ArrayList<Integer> T) {
+	public void getValues(ArrayList<LigneCommande> T) {
 		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
-		LigneCommande cle;
 		while(it.hasNext()){
 		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next(); 
-		cle = l.getValue();
-		T.add(cle.get());
+		T.add(l.getValue());
 		}
-	}*/
+	}
 
 	
 	// METHODES
@@ -102,5 +102,5 @@ public class Commande {
 			System.out.println("id : "+this.id+"\nDate : "+this.date+"\nClient : "+this.idClient+"\nProduit : "+l.getKey()+"\nLigne Commande : "+l.getValue()+"\n-----------------------");
 		}
 	}
-
+	
 }
