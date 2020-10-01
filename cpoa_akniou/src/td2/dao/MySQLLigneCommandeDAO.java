@@ -1,16 +1,13 @@
 
 package td2.dao;
 
-import java.security.KeyStore.Entry;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
+
 
 import td2.connexion.*;
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
-import td2.pojo.Produit;
 
 public class MySQLLigneCommandeDAO{
 
@@ -26,7 +23,7 @@ public class MySQLLigneCommandeDAO{
 	public boolean insert(Commande commande) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u.Ligne_commande (id_commande, id_produit, quantite, tarif_unitaire) VALUES (?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
+		"INSERT INTO akniou1u.Ligne_commande (id_commande, id_produit, quantite, tarif_unitaire) VALUES (?, ?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
 		ArrayList<Integer> Tk = new ArrayList<Integer>();
 		ArrayList<LigneCommande> Tv = new ArrayList<LigneCommande>();
 		commande.getKeys(Tk);
@@ -49,46 +46,47 @@ public class MySQLLigneCommandeDAO{
 			commande.setId(cle);
 		}	
 		requete.close();
-		return nbligne == 1;
+		return nbligne != 0;
 	}
 	
 	
-	public boolean delete(LigneCommande ligneCommande) throws SQLException{
+	public boolean delete(Commande commande,int id_produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = ? AND id_produit =?;");
-			requete.setInt(1, ligneCommande.getIdCommande());
-			requete.setInt(2, ligneCommande.getIdProduit());
-		int nbLignes = requete.executeUpdate();
+		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = ? AND id_produit=?");
+		int nbLignes = 0;
+		ArrayList<Integer> Tk = new ArrayList<Integer>();
+		commande.getKeys(Tk);
+		if(Tk.contains(id_produit)){	
+			requete.setInt(1, commande.getId());
+			requete.setInt(2, Tk.get(Tk.indexOf(id_produit)));	
+			nbLignes = requete.executeUpdate();
+		}else{
+			throw new IllegalArgumentException("Ce produit ne se trouve pas dans la commande");
+		}
 		requete.close();
 		return nbLignes == 1;
 	}
 	
-	public boolean update(LigneCommande ligneCommande) throws SQLException{
+	public boolean update(Commande commande,int id_produit) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"UPDATE akniou1u.Ligne_commande SET id_produit = ?, quantite= ?, tarif_unitaire=? WHERE id_commande=? AND id_produit = ?;");
-			requete.setInt(1, ligneCommande.getIdProduit());
-			requete.setInt(2, ligneCommande.getQuantite());
-			requete.setDouble(3, ligneCommande.getTarifUnitaire());
-		int nbLignes = requete.executeUpdate();
+		"UPDATE akniou1u.Ligne_commande SET id_commande = ? ,id_produit = ?, quantite= ?, tarif_unitaire=? WHERE id_commande=? AND id_produit = ?;");
+		ArrayList<Integer> Tk = new ArrayList<Integer>();
+		ArrayList<LigneCommande> Tv = new ArrayList<LigneCommande>();
+		commande.getKeys(Tk);
+		commande.getValues(Tv);
+		int nbLignes = 0;
+		if(Tk.contains(id_produit)){	
+			requete.setInt(1, commande.getId());
+			requete.setInt(2, Tk.get(Tk.indexOf(id_produit)));
+			requete.setInt(3, Tv.get(Tk.indexOf(id_produit)).getQuantite());
+			requete.setDouble(4, Tv.get(Tk.indexOf(id_produit)).getTarifUnitaire());
+			nbLignes = requete.executeUpdate();
+		}else{
+			throw new IllegalArgumentException("Ce produit ne se trouve pas dans la commande");
+		}
 		requete.close();
 		return nbLignes == 1;
 	}
-
-	public static LigneCommande getById(int id_commande, int id_produit) throws SQLException {
-		Connection c = Connexion.getInstance().getMaConnexion();
-		PreparedStatement requete = c.prepareStatement(
-		"SELECT FROM akniou1u_cpoa.Ligne_commande WHERE id_commande=? AND id_produit=?;");
-			requete.setInt(1, id_commande);
-			requete.setInt(2, id_produit);
-		ResultSet res = requete.getResultSet();
-		LigneCommande ligneCommande = new LigneCommande(
-			res.getInt("id_commande"),
-			res.getInt("id_produit"),
-			res.getInt("quantite"),
-			res.getDouble("tarif_unitaire"));
-		return ligneCommande;
-	}
-	
 }
