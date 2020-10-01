@@ -1,5 +1,6 @@
 package td2.dao;
 
+import java.time.LocalDate;
 import java.util.*;
 import td2.pojo.*;
 
@@ -14,6 +15,20 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
         }
         return instance;
     }
+
+    private ListeMemoireCommandeDAO() {
+        donnees = new ArrayList<Commande>();
+        Produit p1 = new Produit(2, "Pomme","Pomme verte",1,"Pomme.jpg",3);
+        Produit p2 = new Produit(3, "Pommmme","Pomme verte",1,"Pomme.jpg",3);
+        LigneCommande l1 = new LigneCommande(2, 1);
+        LigneCommande l2 = new LigneCommande(3, 1);
+        Commande commande1 = new Commande(1, LocalDate.now(), 1);
+        Commande commande2 = new Commande(2, LocalDate.now(), 3);
+        commande1.ajouterLigne(p1, l1);
+        commande2.ajouterLigne(p2, l2);
+        this.donnees.add(commande1);
+        this.donnees.add(commande2);
+	}
 
     public boolean insert(Commande objet) {
         objet.setId(1);
