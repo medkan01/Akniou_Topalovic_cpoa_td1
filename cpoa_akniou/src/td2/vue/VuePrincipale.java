@@ -1,9 +1,8 @@
 package td2.vue;
 
 import java.util.Scanner;
-
-import td2.dao.DAOFactory;
-import td2.dao.Persistance;
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 
 public class VuePrincipale {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);

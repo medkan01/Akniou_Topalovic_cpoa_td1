@@ -1,6 +1,7 @@
-package td2.dao;
+package td2.dao.daofactory;
+import td2.dao.daolistememoire.*;
 
-public class ListeMemoireDAOFactory extends DAOFactory{
+public class ListeMemoireDAOFactory extends DAOFactory {
     public CategorieDAO getCategorieDAO(){
         return ListeMemoireCategorieDAO.getInstance();
     }

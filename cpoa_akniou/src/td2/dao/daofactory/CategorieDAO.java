@@ -1,4 +1,4 @@
-package td2.dao;
+package td2.dao.daofactory;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

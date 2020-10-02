@@ -3,8 +3,9 @@ package td2.vue;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import td2.dao.DAOFactory;
-import td2.dao.Persistance;
+
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
 
 public class VueCategorie {

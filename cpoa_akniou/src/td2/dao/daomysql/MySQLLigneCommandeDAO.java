@@ -1,5 +1,5 @@
 
-package td2.dao;
+package td2.dao.daomysql;
 
 import java.sql.*;
 import java.util.ArrayList;

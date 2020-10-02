@@ -1,6 +1,7 @@
-package td2.dao;
+package td2.dao.daofactory;
+import td2.dao.daomysql.*;
 
-public class MySQLDAOFactory extends DAOFactory{
+public class MySQLDAOFactory extends DAOFactory {
     public CategorieDAO getCategorieDAO(){
         return MySQLCategorieDAO.getInstance();
     }

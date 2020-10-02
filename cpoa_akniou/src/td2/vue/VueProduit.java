@@ -3,7 +3,8 @@ package td2.vue;
 import td2.pojo.*;
 import java.sql.SQLException;
 import java.util.*;
-import td2.dao.*;
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 
 public class VueProduit {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);

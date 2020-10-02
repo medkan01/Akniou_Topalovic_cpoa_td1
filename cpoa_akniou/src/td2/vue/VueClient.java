@@ -2,7 +2,8 @@ package td2.vue;
 
 import java.sql.SQLException;
 import java.util.*;
-import td2.dao.*;
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.*;
 
 public class VueClient {

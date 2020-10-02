@@ -1,4 +1,4 @@
-package td2.dao;
+package td2.dao.daofactory;
 
 public interface LigneCommandeDAO {
     
