@@ -52,7 +52,7 @@ public class ListeMemoireClientDAO implements ClientDAO{
                 return this.donnees.get(i);
             }
         }
-		throw new IllegalArgumentException("Aucune produit ne possède cet identifiant");
+		throw new IllegalArgumentException("Aucun client ne possède cet identifiant");
     }
 
     public ArrayList<Client> getAll(){

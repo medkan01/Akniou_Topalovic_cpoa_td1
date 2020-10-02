@@ -73,27 +73,27 @@ public class Commande {
 
 	
 	// METHODES
-	public void ajouterLigne(Produit p, LigneCommande l) {
-		if (lignes.containsKey(p)) {
+	public void ajouterLigne(Produit produit, LigneCommande ligne) {
+		if (lignes.containsKey(produit)) {
 			throw new IllegalArgumentException("Produit deja existant dans la liste");
 		} else {
-			lignes.put(p, l);
+			lignes.put(produit, ligne);
 		}
 	}
 
-	public void supprimerLigne(Produit p, LigneCommande l) {
-		if (lignes.containsKey(p) == false) {
+	public void supprimerLigne(Produit produit) {
+		if (lignes.containsKey(produit) == false) {
 			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
 		} else {
-			lignes.remove(p);
+			lignes.remove(produit);
 		}
 	}
 
-	public void modifierLigne(Produit p, LigneCommande l) {
-		if (lignes.containsKey(p) == false) {
+	public void modifierLigne(Produit produit, LigneCommande ligne) {
+		if (lignes.containsKey(produit) == false) {
 			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
 		} else {
-			lignes.put(p, l);
+			lignes.replace(produit, ligne);
 		}
 	}
 

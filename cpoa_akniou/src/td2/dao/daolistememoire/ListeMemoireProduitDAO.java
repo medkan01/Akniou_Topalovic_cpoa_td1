@@ -52,7 +52,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
                 return this.donnees.get(i);
             }
         }
-		throw new IllegalArgumentException("Aucune produit ne possède cet identifiant");
+		throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
 	}
 
     public ArrayList<Produit> getAll(){
