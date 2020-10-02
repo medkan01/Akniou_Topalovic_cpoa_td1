@@ -54,4 +54,6 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		requete.close();
 		return nbLignes == 1;
 	}
+
+	public ArrayList<>
 }

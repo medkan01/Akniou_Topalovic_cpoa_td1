@@ -51,7 +51,4 @@ public class ListeMemoireLigneCommandeDAO {
         return true;
     }
 
-    public ArrayList<Commande> getAll(int idCommande){
-        ArrayList<Commande>
-    }
 }
