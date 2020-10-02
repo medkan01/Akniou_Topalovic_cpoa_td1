@@ -18,33 +18,17 @@ public class MySQLLigneCommandeDAO{
 		return instance;
 	}
 
-	public boolean insert(Commande commande) throws SQLException{
+	public boolean insert(int idProduit,int idCommande,LigneCommande ligne) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
-		"INSERT INTO akniou1u.Ligne_commande (id_commande, id_produit, quantite, tarif_unitaire) VALUES (?, ?, ?, ?);",Statement.RETURN_GENERATED_KEYS);
-		ArrayList<Integer> Tk = new ArrayList<Integer>();
-		ArrayList<LigneCommande> Tv = new ArrayList<LigneCommande>();
-		commande.getKeys(Tk);
-		commande.getValues(Tv);
-		int nbligne = 0 ;
-		int key ;
-		LigneCommande values;
-		for(int i = 0 ; i < Tk.size(); i++){
-			key = Tk.get(i);
-			values = Tv.get(i);
-			requete.setInt(1, commande.getId());
-			requete.setInt(2, key);
-			requete.setInt(2, values.getQuantite());
-			requete.setDouble(3, values.getTarifUnitaire());
-		nbligne = requete.executeUpdate();
-	}
-		ResultSet res = requete.getGeneratedKeys();
-		if (res.next()) {
-			int cle = res.getInt(1);
-			commande.setId(cle);
-		}	
+		"INSERT INTO akniou1u.Ligne_commande (id_commande, id_produit, quantite, tarif_unitaire) VALUES (?, ?, ?, ?);");
+			requete.setInt(1, idCommande);
+			requete.setInt(2, idProduit);
+			requete.setInt(3, ligne.getQuantite());
+			requete.setDouble(4, ligne.getTarifUnitaire());
+		int nbligne = requete.executeUpdate();
 		requete.close();
-		return nbligne != 0;
+		return nbligne == 1;
 	}
 	
 	
@@ -53,11 +37,11 @@ public class MySQLLigneCommandeDAO{
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u.Ligne_commande WHERE id_commande = ? AND id_produit=?");
 		int nbLignes = 0;
-		ArrayList<Integer> Tk = new ArrayList<Integer>();
-		commande.getKeys(Tk);
-		if(Tk.contains(id_produit)){	
+		ArrayList<Integer> tKey = new ArrayList<Integer>();
+		commande.getKeys(tKey);
+		if(tKey.contains(id_produit)){	
 			requete.setInt(1, commande.getId());
-			requete.setInt(2, Tk.get(Tk.indexOf(id_produit)));	
+			requete.setInt(2, tKey.get(tKey.indexOf(id_produit)));	
 			nbLignes = requete.executeUpdate();
 		}else{
 			throw new IllegalArgumentException("Ce produit ne se trouve pas dans la commande");
@@ -70,16 +54,16 @@ public class MySQLLigneCommandeDAO{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u.Ligne_commande SET id_commande = ? ,id_produit = ?, quantite= ?, tarif_unitaire=? WHERE id_commande=? AND id_produit = ?;");
-		ArrayList<Integer> Tk = new ArrayList<Integer>();
-		ArrayList<LigneCommande> Tv = new ArrayList<LigneCommande>();
-		commande.getKeys(Tk);
-		commande.getValues(Tv);
+		ArrayList<Integer> tKey = new ArrayList<Integer>();
+		ArrayList<LigneCommande> tValue = new ArrayList<LigneCommande>();
+		commande.getKeys(tKey);
+		commande.getValues(tValue);
 		int nbLignes = 0;
-		if(Tk.contains(id_produit)){	
+		if(tKey.contains(id_produit)){	
 			requete.setInt(1, commande.getId());
-			requete.setInt(2, Tk.get(Tk.indexOf(id_produit)));
-			requete.setInt(3, Tv.get(Tk.indexOf(id_produit)).getQuantite());
-			requete.setDouble(4, Tv.get(Tk.indexOf(id_produit)).getTarifUnitaire());
+			requete.setInt(2, tKey.get(tKey.indexOf(id_produit)));
+			requete.setInt(3, tValue.get(tKey.indexOf(id_produit)).getQuantite());
+			requete.setDouble(4, tValue.get(tKey.indexOf(id_produit)).getTarifUnitaire());
 			nbLignes = requete.executeUpdate();
 		}else{
 			throw new IllegalArgumentException("Ce produit ne se trouve pas dans la commande");
