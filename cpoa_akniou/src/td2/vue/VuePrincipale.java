@@ -27,7 +27,7 @@ public class VuePrincipale {
                 VueClient.selection();
                 break;               
             case 3:
-                System.out.println("Table Commande:\n");
+                System.out.println("Table Commande et Ligne_commande:\n");
                 VueCommande.selection();
                 break;
             case 4:
