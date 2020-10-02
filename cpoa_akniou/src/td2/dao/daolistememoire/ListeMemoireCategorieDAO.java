@@ -41,25 +41,18 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
 	}
 
     public boolean update(Categorie objet){
-        int idx = objet.getId()-1;
-        if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'une catégorie inexistante");
-        }
-        else{
-            this.donnees.set(idx, objet);
-        }
+        this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }
     
 	public Categorie getById(int id) {
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(this.donnees.get(id-1));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucune categorie ne possède cet identifiant");
-		} else {
-			return this.donnees.get(idx);
-		}
-	}
+        for (int i = 0; i<this.donnees.size();i++){
+            if(this.donnees.get(i).getId()==id){
+                return this.donnees.get(i);
+            }
+        }
+		throw new IllegalArgumentException("Aucune produit ne possède cet identifiant");
+    }
 
     public ArrayList<Categorie> getAll(){
         return (ArrayList<Categorie>) donnees;

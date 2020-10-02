@@ -42,25 +42,19 @@ public class ListeMemoireClientDAO implements ClientDAO{
 	}
 
     public boolean update(Client objet){
-        int idx = objet.getId()-1;
-        if (idx == -1){
-            throw new IllegalArgumentException("Tentative de modification d'un client inexistant");
-        }
-        else{
-            this.donnees.set(idx, objet);
-        }
+        this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }
 
     public Client getById(int id) {
-        int idx = this.donnees.indexOf(this.donnees.get(id-1));
-        if (idx == -1) {
-            throw new IllegalArgumentException("Aucun client ne possede cet id");
+        for (int i = 0; i<this.donnees.size();i++){
+            if(this.donnees.get(i).getId()==id){
+                return this.donnees.get(i);
+            }
         }
-        else {
-            return this.donnees.get(idx);
-        }
+		throw new IllegalArgumentException("Aucune produit ne possède cet identifiant");
     }
+
     public ArrayList<Client> getAll(){
         return (ArrayList<Client>) this.donnees;
     }
