@@ -1,11 +1,13 @@
 package td2.dao.daolistememoire;
 
 import java.util.HashMap;
+
+import td2.dao.daofactory.LigneCommandeDAO;
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
 import td2.pojo.Produit;
 
-public class ListeMemoireLigneCommandeDAO {
+public class ListeMemoireLigneCommandeDAO implements LigneCommandeDAO {
     private ListeMemoireCommandeDAO commandeInstance = ListeMemoireCommandeDAO.getInstance();
     private ListeMemoireProduitDAO produitInstance = ListeMemoireProduitDAO.getInstance();
     private static ListeMemoireLigneCommandeDAO instance;

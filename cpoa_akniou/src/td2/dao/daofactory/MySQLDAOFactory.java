@@ -17,4 +17,9 @@ public class MySQLDAOFactory extends DAOFactory {
     public ProduitDAO getProduitDAO(){
         return MySQLProduitDAO.getInstance();
     }
+
+    @Override
+    public LigneCommandeDAO getLigneCommandeDAO() {
+        return MySQLLigneCommandeDAO.getInstance();
+    }
 }

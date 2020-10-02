@@ -17,4 +17,9 @@ public class ListeMemoireDAOFactory extends DAOFactory {
     public ProduitDAO getProduitDAO(){
         return ListeMemoireProduitDAO.getInstance();
     }
+
+    @Override
+    public LigneCommandeDAO getLigneCommandeDAO() {
+        return ListeMemoireLigneCommandeDAO.getInstance();
+    }
 }
