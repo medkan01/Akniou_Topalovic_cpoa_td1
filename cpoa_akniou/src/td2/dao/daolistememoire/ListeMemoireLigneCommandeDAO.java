@@ -1,6 +1,7 @@
 package td2.dao.daolistememoire;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import td2.dao.daofactory.DAOFactory;
@@ -51,4 +52,9 @@ public class ListeMemoireLigneCommandeDAO {
         return true;
     }
 
+    public HashMap<Produit, LigneCommande> getAll(int idCommande){
+        Commande commande = commandeInstance.getById(idCommande);
+        return commande.getLigneCommande(idCommande);
+
+    }
 }
