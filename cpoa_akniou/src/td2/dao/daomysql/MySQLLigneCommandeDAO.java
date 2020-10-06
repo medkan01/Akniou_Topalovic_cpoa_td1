@@ -5,13 +5,15 @@ import java.sql.*;
 import java.util.HashMap;
 
 import td2.connexion.*;
+import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.LigneCommandeDAO;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.LigneCommande;
 import td2.pojo.Produit;
 
 public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
-	private MySQLProduitDAO produitInstance;
-	private static MySQLLigneCommandeDAO instance;
+	static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+	private static MySQLLigneCommandeDAO instance = MySQLLigneCommandeDAO.getInstance();
 
 	public static MySQLLigneCommandeDAO getInstance(){
 		if (instance == null){
@@ -60,16 +62,16 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 
 	public HashMap<Produit, LigneCommande> getAll(int idCommande)throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
-		Statement requete = c.createStatement();
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
-		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE id_commande ='"+idCommande+"';");
-		ResultSet res = requete.getResultSet();
-		while (res.next()){
-			Produit produit = produitInstance.getById(res.getInt("id_produit"));
-			LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
-			hash.put(produit, ligneCommande);
+		Statement requete = c.createStatement();
+		ResultSet res = requete.executeQuery("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE Ligne_commande.id_commande ="+idCommande+";");
+		if(res.next()){
+			while (res.next()){
+				Produit produit = daos.getProduitDAO().getById(res.getInt("id_produit"));
+				LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
+				hash.put(produit, ligneCommande);
+			}
 		}
 		return hash;
-
 	}
 }

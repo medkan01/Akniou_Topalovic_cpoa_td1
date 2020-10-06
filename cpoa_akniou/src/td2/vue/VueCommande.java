@@ -22,7 +22,7 @@ public class VueCommande {
        }
        for(int i = 0; i < liste.size(); i++){
             Commande objet = liste.get(i);
-            afficher = afficher + "[ID Commande: "+objet.getId()+", ID Client: "+objet.getIdClient()+"]\n";
+            afficher = afficher + "[ID Commande: "+objet.getId()+", Date: "+objet.getDate().toString()+", ID Client: "+objet.getIdClient()+"]\n";
        }
        return afficher;
     }
@@ -91,7 +91,8 @@ public class VueCommande {
         System.out.println("3. Modifier un element de la table");
         System.out.println("4. Supprimer un element de la table");
         System.out.println("5. Changer de persistance");
-        System.out.println("6. Retour\n");
+        System.out.println("6. Acceder aux lignes de commandes");
+        System.out.println("7. Retour\n");
         System.out.println("Persistance actuelle: "+ DAOFactory.getPersistanceActuelle()+"\n");
 
         int choix = sc.nextInt();
@@ -123,6 +124,10 @@ public class VueCommande {
                 selection();
                 break;
             case 6:
+                System.out.println("Table LigneCommande:\n");
+                VueLigneCommande.selection();
+                break;
+            case 7:
                 System.out.println("Retour...");
                 VuePrincipale.selection();
                 break;

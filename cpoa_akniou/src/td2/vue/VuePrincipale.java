@@ -12,7 +12,7 @@ public class VuePrincipale {
         System.out.println("Quelle table souhaitez vous consulter:\n");
         System.out.println("1. Categorie");
         System.out.println("2. Client");
-        System.out.println("3. Commande");
+        System.out.println("3. Commande et LigneCommande");
         System.out.println("4. Produit");
         System.out.println("5. Fermer le programme\n");
 
@@ -27,7 +27,7 @@ public class VuePrincipale {
                 VueClient.selection();
                 break;               
             case 3:
-                System.out.println("Table Commande et Ligne_commande:\n");
+                System.out.println("Table Commande et LigneCommande:\n");
                 VueCommande.selection();
                 break;
             case 4:
