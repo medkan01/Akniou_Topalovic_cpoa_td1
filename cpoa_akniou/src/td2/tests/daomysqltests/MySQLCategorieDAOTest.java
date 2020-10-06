@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import td2.dao.daomysql.MySQLCategorieDAO;
@@ -11,12 +12,19 @@ import td2.pojo.Categorie;
 
 class MySQLCategorieDAOTest {
 
+	private MySQLCategorieDAO instance;
+	private Categorie commande;
+	
+	@BeforeEach
+	public void setUp() {
+		this.instance = MySQLCategorieDAO.getInstance();
+		this.commande = new Categorie(1, "test","test.jpg");
+	}
+
 	@Test
 	void testInsertOK() {
 		try{
-			Categorie c1 = new Categorie(1, "test","test.jpg");
-			MySQLCategorieDAO instance = MySQLCategorieDAO.getInstance();
-			assertEquals(true, instance.insert(c1));
+			assertTrue(this.instance.insert(this.commande));
 		}catch (SQLException sqle) {
 			System.out.println("Erreur \n" + sqle.getMessage());
 		}
@@ -25,9 +33,8 @@ class MySQLCategorieDAOTest {
 	@Test
 	void testDeleteOK() {
 		try{
-			Categorie c1 = new Categorie(12, "","");
-			MySQLCategorieDAO instance = MySQLCategorieDAO.getInstance();
-			assertTrue(instance.delete(c1));
+			this.instance.insert(this.commande);
+			assertTrue(this.instance.delete(this.commande));
 		}catch (SQLException sqle) {
 			System.out.println("Erreur \n" + sqle.getMessage());
 		}
@@ -36,9 +43,8 @@ class MySQLCategorieDAOTest {
 	@Test
 	void testUpdateOK() {
 		try{
-			Categorie c1 = new Categorie(2, "Pull","Pull.png");
-			MySQLCategorieDAO instance = MySQLCategorieDAO.getInstance();
-			assertTrue(instance.update(c1));
+			this.instance.insert(this.commande);
+			assertTrue(this.instance.update(this.commande));
 		}catch (SQLException sqle) {
 			System.out.println("Erreur \n" + sqle.getMessage());
 		}
@@ -47,10 +53,8 @@ class MySQLCategorieDAOTest {
 	@Test
 	void testGetByIdOK() {
 		try{
-			MySQLCategorieDAO instance = MySQLCategorieDAO.getInstance();
-			Categorie c1 = new Categorie(2528, "test", "test.png");
-			instance.insert(c1);
-			assertEquals(c1, instance.getById(2528));
+			instance.insert(this.commande);
+			assertEquals(this.commande, this.instance.getById(2528));
 		}catch (SQLException sqle) {
 			System.out.println("Erreur \n" + sqle.getMessage());
 		}
@@ -59,10 +63,9 @@ class MySQLCategorieDAOTest {
 	@Test
 	void testGetAllOK(){
 		try{
-			MySQLCategorieDAO instance = MySQLCategorieDAO.getInstance();
+			this.instance.getAll();
 		}catch (SQLException sqle){
 			System.out.println("Erreur \n" + sqle.getMessage());	
 		}
 	}
-
 }
