@@ -1,11 +1,15 @@
 package td2.tests.daomysqltests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.sql.SQLException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import td2.dao.daomysql.MySQLLigneCommandeDAO;
 import td2.pojo.LigneCommande;
+
 public class MySQLLigneCommandeDAOTest {
 
     private MySQLLigneCommandeDAO instance;
@@ -14,7 +18,7 @@ public class MySQLLigneCommandeDAOTest {
     @BeforeEach
     public void setUp() {
         this.instance = MySQLLigneCommandeDAO.getInstance();
-        this.ligneCommande = new LigneCommande(1,1);
+        this.ligneCommande = new LigneCommande(2557,2557);
     }
 
 	@Test
