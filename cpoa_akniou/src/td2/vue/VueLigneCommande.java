@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
 import td2.pojo.LigneCommande;
 import td2.pojo.Produit;
 import td2.pojo.Commande;
