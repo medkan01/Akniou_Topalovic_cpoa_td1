@@ -47,8 +47,12 @@ public class ListeMemoireLigneCommandeDAOTest {
         }
     }
 
- /*   @Test
+    @Test
     void testGetAll(){
-        instance.getAll(ligneCommande);
-    }*/
+        try {
+        assertNotNull(instance.getAll(2550));
+    } catch(Exception e) {
+        System.out.println("Erreur:\n" + e.getMessage());
+    }
+}
 }

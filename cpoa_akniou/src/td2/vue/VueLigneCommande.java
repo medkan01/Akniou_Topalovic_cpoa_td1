@@ -1,7 +1,6 @@
 package td2.vue;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import td2.pojo.LigneCommande;
@@ -24,17 +23,11 @@ public class VueLigneCommande{
         try {
             Commande commande = daos.getCommandeDAO().getById(id);
             HashMap<Produit, LigneCommande> liste = daos.getLigneCommandeDAO().getAll(commande.getId());
-            ArrayList<Integer> keys = new ArrayList<Integer>();
-            commande.getKeys(keys);
-            for(int i = 0; i < keys.size(); i++) {
-                Produit produit = daos.getProduitDAO().getById(keys.get(i));
-                LigneCommande ligneCommande = liste.get(produit);
-                afficher = afficher + "[ID Produit: " + produit.getId() + ", quantite: " + ligneCommande.getQuantite() + ", tarif unitaire: " + ligneCommande.getTarifUnitaire() + "]\n";
-            }
+            commande.setLigneCommande(liste);
+            afficher = commande.afficher();
         } catch (SQLException sqle) {
             System.out.println("Message d'erreur SQL:\n" + sqle.getMessage());
         }
-        
         return afficher;
     }
 

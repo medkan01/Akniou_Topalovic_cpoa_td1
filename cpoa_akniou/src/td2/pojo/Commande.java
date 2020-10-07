@@ -67,10 +67,13 @@ public class Commande {
 		}
 	}
 
-	public HashMap<Produit, LigneCommande> getLigneCommande(int idCommande){
+	public HashMap<Produit, LigneCommande> getLigneCommande(){
 		return this.lignes;
 	}
 
+	public void setLigneCommande(HashMap<Produit, LigneCommande> l){
+		this.lignes = l;
+	}
 	
 	// METHODES
 	public void ajouterLigne(Produit produit, LigneCommande ligne) {
