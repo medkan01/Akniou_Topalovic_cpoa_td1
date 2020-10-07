@@ -3,13 +3,11 @@ package td2.tests.daomysqltests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import td2.dao.daomysql.MySQLLigneCommandeDAO;
-import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
 
 public class MySQLLigneCommandeDAOTest {
