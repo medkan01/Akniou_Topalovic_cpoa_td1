@@ -1,23 +1,21 @@
-package td2.tests.daomysqltests;
+package td2.tests.daolistememoiretests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import td2.dao.daomysql.MySQLCategorieDAO;
+import td2.dao.daolistememoire.ListeMemoireCategorieDAO;
 import td2.pojo.Categorie;
 
-public class MySQLCategorieDAOTest {
-
-	private MySQLCategorieDAO instance;
+public class ListeMemoireCategorieDAOTest {
+    
+	private ListeMemoireCategorieDAO instance;
 	private Categorie commande;
 	
 	@BeforeEach
 	public void setUp() {
-		this.instance = MySQLCategorieDAO.getInstance();
+		this.instance = ListeMemoireCategorieDAO.getInstance();
 		this.commande = new Categorie(1, "test","test.jpg");
 	}
 
@@ -25,8 +23,8 @@ public class MySQLCategorieDAOTest {
 	void testInsertOK() {
 		try{
 			assertTrue(this.instance.insert(this.commande));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -35,8 +33,8 @@ public class MySQLCategorieDAOTest {
 		try{
 			this.instance.insert(this.commande);
 			assertTrue(this.instance.delete(this.commande));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -45,8 +43,8 @@ public class MySQLCategorieDAOTest {
 		try{
 			this.instance.insert(this.commande);
 			assertTrue(this.instance.update(this.commande));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -55,8 +53,8 @@ public class MySQLCategorieDAOTest {
 		try{
 			instance.insert(this.commande);
 			assertEquals(this.commande, this.instance.getById(2528));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -64,16 +62,16 @@ public class MySQLCategorieDAOTest {
 	void testGetAllOK(){
 		try{
 			this.instance.getAll();
-		}catch (SQLException sqle){
-			System.out.println("Erreur \n" + sqle.getMessage());	
+		}catch (Exception e){
+			System.out.println("Erreur \n" + e.getMessage());	
 		}
 	}
 
 	void testGetAll(){
         try{
             assertNotNull(instance.getAll());
-        }catch (SQLException sqle){
-            System.out.println("Erreur : \n" + sqle.getMessage());
+        }catch (Exception e){
+            System.out.println("Erreur : \n" + e.getMessage());
         }
     }
 }

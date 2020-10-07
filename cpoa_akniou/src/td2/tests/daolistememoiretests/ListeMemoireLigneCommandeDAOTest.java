@@ -1,23 +1,21 @@
-package td2.tests.daomysqltests;
+package td2.tests.daolistememoiretests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import td2.dao.daomysql.MySQLLigneCommandeDAO;
+import td2.dao.daolistememoire.ListeMemoireLigneCommandeDAO;
 import td2.pojo.LigneCommande;
 
-public class MySQLLigneCommandeDAOTest {
+public class ListeMemoireLigneCommandeDAOTest {
 
-    private MySQLLigneCommandeDAO instance;
+    private ListeMemoireLigneCommandeDAO instance;
     private LigneCommande ligneCommande;
 
     @BeforeEach
     public void setUp() {
-        this.instance = MySQLLigneCommandeDAO.getInstance();
+        this.instance = ListeMemoireLigneCommandeDAO.getInstance();
         this.ligneCommande = new LigneCommande(3667,3449);
     }
 
@@ -25,8 +23,8 @@ public class MySQLLigneCommandeDAOTest {
 	void testInsert() {
 		try{
 		    assertTrue(this.instance.insert(1,1,this.ligneCommande));
-		} catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
     }
     
@@ -35,8 +33,8 @@ public class MySQLLigneCommandeDAOTest {
         try {
             this.instance.insert(1,1,this.ligneCommande);
             assertTrue(this.instance.delete(1, 1));
-        } catch(SQLException sqle) {
-            System.out.println("Erreur:\n" +sqle.getMessage());
+        } catch(Exception e) {
+            System.out.println("Erreur:\n" +e.getMessage());
         }
     }
 
@@ -44,15 +42,13 @@ public class MySQLLigneCommandeDAOTest {
     void testUpdate() {
         try {
             assertTrue(this.instance.update(1, 1, this.ligneCommande));
-        } catch(SQLException sqle) {
-            System.out.println("Erreur:\n" + sqle.getMessage());
+        } catch(Exception e) {
+            System.out.println("Erreur:\n" + e.getMessage());
         }
     }
 
  /*   @Test
     void testGetAll(){
-        this.instance.insert(this.commande)
-        instance.getAll();
-    }
-}*/
+        instance.getAll(ligneCommande);
+    }*/
 }

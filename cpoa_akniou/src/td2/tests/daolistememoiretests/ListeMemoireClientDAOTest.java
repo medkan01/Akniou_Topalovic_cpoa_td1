@@ -1,23 +1,21 @@
-package td2.tests.daomysqltests;
+package td2.tests.daolistememoiretests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import td2.dao.daomysql.MySQLClientDAO;
+import td2.dao.daolistememoire.ListeMemoireClientDAO;
 import td2.pojo.Client;
 
-public class MySQLClientDAOTest {
+public class ListeMemoireClientDAOTest {
 
-	private MySQLClientDAO instance;
+	private ListeMemoireClientDAO instance;
 	private Client client;
 
     @BeforeEach
 	public void setUp() {
-		this.instance = MySQLClientDAO.getInstance();
+		this.instance = ListeMemoireClientDAO.getInstance();
 		this.client = new Client(2550, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test");
     }
     
@@ -25,8 +23,8 @@ public class MySQLClientDAOTest {
 	void testInsertOK() {
 		try{
 			assertTrue(this.instance.insert(this.client));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -35,8 +33,8 @@ public class MySQLClientDAOTest {
 		try{
 			this.instance.insert(this.client);
 			assertTrue(this.instance.delete(this.client));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -45,8 +43,8 @@ public class MySQLClientDAOTest {
 		try{
 			this.instance.insert(this.client);
 			assertTrue(this.instance.update(this.client));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
 	}
 
@@ -55,17 +53,17 @@ public class MySQLClientDAOTest {
 		try{
 			instance.insert(this.client);
 			assertEquals(this.client, this.instance.getById(2528));
-		}catch (SQLException sqle) {
-			System.out.println("Erreur \n" + sqle.getMessage());
+		}catch (Exception e) {
+			System.out.println("Erreur \n" + e.getMessage());
 		}
-	}
-
-	@Test
+    }
+    
+    @Test
 	void testGetAll(){
         try{
             assertNotNull(instance.getAll());
-        }catch (SQLException sqle){
-            System.out.println("Erreur : \n" + sqle.getMessage());
+        }catch (Exception e){
+            System.out.println("Erreur : \n" + e.getMessage());
         }
     }
 }
