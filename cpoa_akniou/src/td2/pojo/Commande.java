@@ -71,8 +71,8 @@ public class Commande {
 		return this.lignes;
 	}
 
-	public void setLigneCommande(HashMap<Produit, LigneCommande> l){
-		this.lignes = l;
+	public void setLigneCommande(HashMap<Produit, LigneCommande> ligne){
+		this.lignes = ligne;
 	}
 	
 	// METHODES
