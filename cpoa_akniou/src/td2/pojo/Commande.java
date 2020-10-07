@@ -103,9 +103,10 @@ public class Commande {
 	public String afficher() {
 		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
 		String afficher = "";
+		Map.Entry<Produit, LigneCommande> l = it.next();
 		while(it.hasNext()){
-			Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next();
 			afficher = afficher + "["+this.id+", "+this.date+", "+this.idClient+", Produit: "+l.getKey()+", Ligne Commande: "+l.getValue()+"\n";
+			l = (Map.Entry<Produit, LigneCommande>) it.next();
 		}
 		return afficher;
 	}
