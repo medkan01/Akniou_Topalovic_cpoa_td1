@@ -28,6 +28,7 @@ public class ListeMemoireLigneCommandeDAO implements LigneCommandeDAO {
     }
 
     public boolean update(int idCommande, int idProduit, LigneCommande objet){
+        if((idCommande<=0) || (idProduit<=0)) throw new IllegalArgumentException("IDs Incorrects");
         Commande commande = commandeInstance.getById(idCommande);
         Produit produit= produitInstance.getById(idProduit);
         commande.modifierLigne(produit, objet);
@@ -35,6 +36,7 @@ public class ListeMemoireLigneCommandeDAO implements LigneCommandeDAO {
         return true;
     }
     public boolean delete(int idCommande, int idProduit){
+        if((idCommande<=0) || (idProduit<=0)) throw new IllegalArgumentException("IDs Incorrects");
         Commande commande = commandeInstance.getById(idCommande);
         Produit produit= produitInstance.getById(idProduit);
         commande.supprimerLigne(produit);

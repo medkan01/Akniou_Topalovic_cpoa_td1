@@ -37,6 +37,7 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 	
 	
 	public boolean delete(int idCommande,int idProduit) throws SQLException{
+		if((idCommande<=0) || (idProduit<=0)) throw new IllegalArgumentException("IDs Incorrects");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u_cpoa.Ligne_commande WHERE id_commande = ? AND id_produit=?");	
@@ -44,10 +45,12 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 			requete.setInt(2, idProduit);	
 			int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("IDs Incorrects");
+		else return true;
 	}
 	
 	public boolean update(int idCommande,int idProduit, LigneCommande ligne) throws SQLException{
+		if((idCommande<=0) || (idProduit<=0)) throw new IllegalArgumentException("IDs Incorrects");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u_cpoa.Ligne_commande SET quantite= ?, tarif_unitaire=? WHERE id_commande=? AND id_produit = ?;");
@@ -57,7 +60,8 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		requete.setDouble(4, idProduit);
 		int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("IDs Incorrects");
+		else return true;
 	}
 
 	public HashMap<Produit, LigneCommande> getAll(int idCommande)throws SQLException{
