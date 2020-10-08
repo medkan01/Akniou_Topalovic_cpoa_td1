@@ -65,13 +65,11 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
 		Statement requete = c.createStatement();
 		ResultSet res = requete.executeQuery("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE Ligne_commande.id_commande ="+idCommande+";");
-		if(res.next()){
 			while (res.next()){
 				Produit produit = daos.getProduitDAO().getById(res.getInt("id_produit"));
 				LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
 				hash.put(produit, ligneCommande);
 			}
-		}
 		return hash;
 	}
 }

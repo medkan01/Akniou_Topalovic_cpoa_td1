@@ -31,6 +31,15 @@ public class MySQLCategorieDAOTest {
 	}
 
 	@Test
+	void testInsertFalse() {
+		try{
+			assertTrue(this.instance.insert(this.commande));
+		}catch (SQLException sqle) {
+			System.out.println("Erreur \n" + sqle.getMessage());
+		}
+	}
+
+	@Test
 	void testDeleteOK() {
 		try{
 			this.instance.insert(this.commande);
