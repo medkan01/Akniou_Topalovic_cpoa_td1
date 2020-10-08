@@ -30,7 +30,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
     }
 
 	public boolean delete(Produit objet) {
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		Produit supprime;
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -43,7 +43,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
 	}
 
     public boolean update(Produit objet){
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
         this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }

@@ -72,37 +72,40 @@ public class MySQLProduitDAOTest {
     @Test
 	void testDeleteIdNegatif(){
 		try {
-			assertFalse(this.instance.delete(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.delete(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testDeleteIdInexistant(){
 		try {
-			assertFalse(this.instance.delete(new Produit(9999, "Test", "Test", 222.222, "test.png", 2556)));
-		} catch (SQLException sqle) {
-			System.out.println("Erreur sql:\n" + sqle.getMessage());
+			this.instance.delete(new Produit(9999, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 	
 	@Test
 	void testUpdateIdNegatif(){
 		try {
-			assertFalse(this.instance.update(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testUpdateIdInexistant() {
 		try {
-			assertFalse(this.instance.update(new Produit(9999,  "Test", "Test", 222.222, "test.png", 2556)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Produit(9999,  "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
-
 }

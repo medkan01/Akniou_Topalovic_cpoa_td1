@@ -65,5 +65,45 @@ public class ListeMemoireClientDAOTest {
         }catch (Exception e){
             System.out.println("Erreur : \n" + e.getMessage());
         }
-    }
+	}
+	
+	@Test
+	void testDeleteIdNegatif(){
+		try {
+			this.instance.delete(new Client(-10, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test"));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			this.instance.delete(new Client(9999, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test"));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			this.instance.update(new Client(-10, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test"));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			assertFalse(this.instance.update(new Client(9999, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test")));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
 }

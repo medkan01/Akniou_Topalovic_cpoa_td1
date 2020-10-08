@@ -90,36 +90,40 @@ public class MySQLCategorieDAOTest {
 	@Test
 	void testDeleteIdNegatif(){
 		try {
-			assertFalse(this.instance.delete(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.delete(new Categorie(-10, "testIdNeg", "testIdNeg.png"));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testDeleteIdInexistant(){
 		try {
-			assertFalse(this.instance.delete(new Categorie(9999, "testIdInexistant", "testIdInexistant.png")));
-		} catch (SQLException sqle) {
-			System.out.println("Erreur sql:\n" + sqle.getMessage());
+			this.instance.delete(new Categorie(9999, "testIdInexistant", "testIdInexistant.png"));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch (Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
-	
+
 	@Test
 	void testUpdateIdNegatif(){
 		try {
-			assertFalse(this.instance.update(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Categorie(-10, "testIdNeg", "testIdNeg.png"));
+			fail("Pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testUpdateIdInexistant() {
 		try {
-			assertFalse(this.instance.update(new Categorie(9999, "testIdInexistant", "testIdInexistant.png")));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Categorie(9999, "testIdInexistant", "testIdInexistant.png"));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 }

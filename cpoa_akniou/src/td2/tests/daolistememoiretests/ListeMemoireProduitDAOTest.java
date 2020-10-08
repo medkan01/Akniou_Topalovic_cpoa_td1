@@ -66,4 +66,44 @@ public class ListeMemoireProduitDAOTest {
             System.out.println("Erreur : \n" + e.getMessage());
         }
     }
+
+    @Test
+	void testDeleteIdNegatif(){
+		try {
+			this.instance.delete(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			this.instance.delete(new Produit(9999, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			this.instance.update(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			this.instance.update(new Produit(9999,  "Test", "Test", 222.222, "test.png", 2556));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
 }

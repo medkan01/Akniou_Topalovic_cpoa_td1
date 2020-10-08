@@ -68,4 +68,44 @@ public class ListeMemoireCommandeDAOTest {
             System.out.println("Erreur : \n" + e.getMessage());
         }
     }
+
+    @Test
+	void testDeleteIdNegatif(){
+		try {
+			this.instance.delete(new Commande(-10,LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			this.instance.delete(new Commande(9999,LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			this.instance.update(new Commande(-10, LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			this.instance.update(new Commande(9999, LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+    }
 }

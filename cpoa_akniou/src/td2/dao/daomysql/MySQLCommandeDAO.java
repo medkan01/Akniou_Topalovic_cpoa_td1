@@ -37,18 +37,19 @@ public class MySQLCommandeDAO implements CommandeDAO{
 	}
 	
 	public boolean delete(Commande commande) throws SQLException{
-		if(commande.getId()<=0) return false;
+		if(commande.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u_cpoa.Commande WHERE id_commande=?;", Statement.RETURN_GENERATED_KEYS);
 			requete.setInt(1, commande.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("ID Incorrect");
+		else return true;
 	}
 	
 	public boolean update(Commande commande) throws SQLException{
-		if(commande.getId()<=0) return false;
+		if(commande.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u_cpoa.Commande SET date_commande=?, id_client=? WHERE id_commande=?;");
@@ -57,7 +58,8 @@ public class MySQLCommandeDAO implements CommandeDAO{
 			requete.setInt(3, commande.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("ID Incorrect");
+		else return true;
 	}
 
 	public Commande getById(int id) throws SQLException {

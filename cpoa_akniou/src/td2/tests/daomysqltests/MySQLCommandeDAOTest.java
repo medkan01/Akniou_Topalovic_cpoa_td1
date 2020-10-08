@@ -72,36 +72,40 @@ public class MySQLCommandeDAOTest {
     @Test
 	void testDeleteIdNegatif(){
 		try {
-			assertFalse(this.instance.delete(new Commande(-10,LocalDate.now() ,2550)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.delete(new Commande(-10,LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testDeleteIdInexistant(){
 		try {
-			assertFalse(this.instance.delete(new Commande(9999,LocalDate.now() ,2550)));
-		} catch (SQLException sqle) {
-			System.out.println("Erreur sql:\n" + sqle.getMessage());
+			this.instance.delete(new Commande(9999,LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 	
 	@Test
 	void testUpdateIdNegatif(){
 		try {
-			assertFalse(this.instance.update(new Commande(-10, LocalDate.now() ,2550)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Commande(-10, LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
 	}
 
 	@Test
 	void testUpdateIdInexistant() {
 		try {
-			assertFalse(this.instance.update(new Commande(9999, LocalDate.now() ,2550)));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+			this.instance.update(new Commande(9999, LocalDate.now() ,2550));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
 		}
     }
     

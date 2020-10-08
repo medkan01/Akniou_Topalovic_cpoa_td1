@@ -36,18 +36,19 @@ public class MySQLCategorieDAO implements CategorieDAO{
 
 	public boolean delete(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
-		if(categorie.getId()<=0) return false;
+		if(categorie.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		PreparedStatement requete = c.prepareStatement(
 			"DELETE FROM akniou1u_cpoa.Categorie WHERE Categorie.id_categorie = ?;");
 				requete.setInt(1, categorie.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("ID Incorrect");
+		else return true;
 	}
 	
 	public boolean update(Categorie categorie) throws SQLException {
 		Connection c = Connexion.getInstance().getMaConnexion();
-		if(categorie.getId()<=0) return false;
+		if(categorie.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		PreparedStatement requete = c.prepareStatement(
 			"UPDATE akniou1u_cpoa.Categorie SET titre = ?, visuel = ? WHERE Categorie.id_categorie = ?;");
 				requete.setString(1, categorie.getTitre());
@@ -55,7 +56,8 @@ public class MySQLCategorieDAO implements CategorieDAO{
 				requete.setInt(3, categorie.getId());
 		int nbLignes = requete.executeUpdate();
 		requete.close();
-		return nbLignes == 1;
+		if(nbLignes != 1) throw new IllegalArgumentException("ID Incorrect");
+		else return true;
 	}
 
 	public Categorie getById(int id) throws SQLException{

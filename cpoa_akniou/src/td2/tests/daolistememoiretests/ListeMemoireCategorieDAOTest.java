@@ -73,5 +73,45 @@ public class ListeMemoireCategorieDAOTest {
         }catch (Exception e){
             System.out.println("Erreur : \n" + e.getMessage());
         }
-    }
+	}
+	
+	@Test
+	void testDeleteIdNegatif(){
+		try {
+			this.instance.delete(new Categorie(-10, "testIdNeg", "testIdNeg.png"));
+			fail("pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			this.instance.delete(new Categorie(9999, "testIdInexistant", "testIdInexistant.png"));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch (Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			this.instance.update(new Categorie(-10, "testIdNeg", "testIdNeg.png"));
+			fail("Pas d'exception alors que l'id est negatif");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			this.instance.update(new Categorie(9999, "testIdInexistant", "testIdInexistant.png"));
+			fail("pas d'exception alors que l'id est inexistant");
+		} catch(Exception e) {
+			assertFalse(e.getMessage().isEmpty());
+		}
+	}
 }

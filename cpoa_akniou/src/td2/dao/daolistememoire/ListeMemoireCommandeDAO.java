@@ -38,7 +38,7 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 	}
 
 	public boolean delete(Commande objet) {
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		Commande supprime;
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -50,7 +50,7 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 	}
 
     public boolean update(Commande objet){
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
         this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }

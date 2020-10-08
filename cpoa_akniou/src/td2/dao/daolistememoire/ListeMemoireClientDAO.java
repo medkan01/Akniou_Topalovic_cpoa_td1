@@ -30,7 +30,7 @@ public class ListeMemoireClientDAO implements ClientDAO{
 	}
 
 	public boolean delete(Client objet) {
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
 		Client supprime;
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -43,7 +43,7 @@ public class ListeMemoireClientDAO implements ClientDAO{
 	}
 
     public boolean update(Client objet){
-        if(objet.getId()<=0) return false;
+        if(objet.getId()<=0) throw new IllegalArgumentException("ID Incorrect");
         this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }
