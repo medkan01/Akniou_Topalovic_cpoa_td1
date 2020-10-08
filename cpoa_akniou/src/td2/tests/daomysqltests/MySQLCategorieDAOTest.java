@@ -39,8 +39,6 @@ public class MySQLCategorieDAOTest {
 		}
 	}
 
-
-
 	@Test
 	void testDeleteOK() {
 		try{
@@ -52,30 +50,12 @@ public class MySQLCategorieDAOTest {
 	}
 
 	@Test
-	void testDeleteIdNegatif(){
-		try {
-			assertFalse(this.instance.delete(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
-		}
-	}
-
-	@Test
 	void testUpdateOK() {
 		try{
 			this.instance.insert(this.categorie);
 			assertTrue(this.instance.update(this.categorie));
 		}catch (SQLException sqle) {
 			System.out.println("Erreur \n" + sqle.getMessage());
-		}
-	}
-
-	@Test
-	void testUpdateIdNegatif(){
-		try {
-			assertFalse(this.instance.update(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
-		} catch(SQLException sqle) {
-			System.out.println("Erreur SQL:\n" + sqle.getMessage());
 		}
 	}
 
@@ -104,5 +84,42 @@ public class MySQLCategorieDAOTest {
         }catch (SQLException sqle){
             System.out.println("Erreur : \n" + sqle.getMessage());
         }
-    }
+	}
+	
+
+	@Test
+	void testDeleteIdNegatif(){
+		try {
+			assertFalse(this.instance.delete(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			assertFalse(this.instance.delete(new Categorie(9999, "testIdInexistant", "testIdInexistant.png")));
+		} catch (SQLException sqle) {
+			System.out.println("Erreur sql:\n" + sqle.getMessage());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			assertFalse(this.instance.update(new Categorie(-10, "testIdNeg", "testIdNeg.png")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			assertFalse(this.instance.update(new Categorie(9999, "testIdInexistant", "testIdInexistant.png")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
 }

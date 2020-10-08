@@ -42,6 +42,7 @@ public class MySQLClientDAO implements ClientDAO{
 	}
 	
 	public boolean delete(Client client) throws SQLException {
+		if(client.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u_cpoa.Client WHERE id_client=?", Statement.RETURN_GENERATED_KEYS);
@@ -51,6 +52,7 @@ public class MySQLClientDAO implements ClientDAO{
 		return nbLignes == 1;
 	}
 	public boolean update(Client client) throws SQLException {
+		if(client.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(	
 		"UPDATE akniou1u_cpoa.Client SET nom=?, prenom=?, identifiant=?, mot_de_passe=?, adr_numero=?, adr_voie=?, adr_code_postal=?, adr_ville=?, adr_pays=? WHERE Client.id_client = ?;");
@@ -70,6 +72,7 @@ public class MySQLClientDAO implements ClientDAO{
 	}
 
 	public Client getById(int id) throws SQLException {
+		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
 		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Client WHERE id_client="+id+";");

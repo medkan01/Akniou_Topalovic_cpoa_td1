@@ -30,6 +30,7 @@ public class ListeMemoireClientDAO implements ClientDAO{
 	}
 
 	public boolean delete(Client objet) {
+        if(objet.getId()<=0) return false;
 		Client supprime;
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -42,11 +43,13 @@ public class ListeMemoireClientDAO implements ClientDAO{
 	}
 
     public boolean update(Client objet){
+        if(objet.getId()<=0) return false;
         this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }
 
     public Client getById(int id) {
+        if(id<=0) throw new IllegalArgumentException("ID Incorrect");
         for (int i = 0; i<this.donnees.size();i++){
             if(this.donnees.get(i).getId()==id){
                 return this.donnees.get(i);

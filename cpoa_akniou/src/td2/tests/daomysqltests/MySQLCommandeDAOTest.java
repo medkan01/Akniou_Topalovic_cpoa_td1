@@ -69,4 +69,40 @@ public class MySQLCommandeDAOTest {
             System.out.println("Erreur : \n" + sqle.getMessage());
         }
     }
+    @Test
+	void testDeleteIdNegatif(){
+		try {
+			assertFalse(this.instance.delete(new Commande(-10,LocalDate.now() ,2550)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			assertFalse(this.instance.delete(new Commande(9999,LocalDate.now() ,2550)));
+		} catch (SQLException sqle) {
+			System.out.println("Erreur sql:\n" + sqle.getMessage());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			assertFalse(this.instance.update(new Commande(-10, LocalDate.now() ,2550)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			assertFalse(this.instance.update(new Commande(9999, LocalDate.now() ,2550)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+    }
+    
 }

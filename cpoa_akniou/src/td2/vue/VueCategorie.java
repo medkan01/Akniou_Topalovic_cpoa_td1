@@ -143,7 +143,6 @@ public class VueCategorie {
                 System.out.println("Choix invalide, veuillez réessayer");
                 selection();
                 break;
-
         }
     }
 }

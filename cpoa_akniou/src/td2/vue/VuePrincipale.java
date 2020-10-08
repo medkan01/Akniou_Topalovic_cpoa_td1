@@ -38,7 +38,7 @@ public class VuePrincipale {
                 System.out.println("A bientot !\n");
                 break;
             default:
-                System.out.println("Choix inconnu, veuillez reessayer:\n");
+                System.out.println("Choix invalide, veuillez reessayer:\n");
                 selection();
                 break;
         }

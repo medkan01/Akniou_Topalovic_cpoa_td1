@@ -66,8 +66,13 @@ public class VueProduit {
 
         System.out.println("Veuillez saisir les attributs du produit a modifier:\n");
 
-        System.out.println("ID:");
-        int id = sc.nextInt();
+        System.out.println("ID: ");
+        int id = -1;
+        do{
+            id = sc.nextInt();
+            if(id<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (id<=0);
+        
 
         System.out.println("Nom: ");
         String nom = scanLn.nextLine();
@@ -101,7 +106,12 @@ public class VueProduit {
         sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id de la Produit a supprimer:\n");
         System.out.println("ID: ");
-        int id = sc.nextInt();
+        int id = -1;
+        do{
+            id = sc.nextInt();
+            if(id<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (id<=0);
+        
         try{
             Produit supprimer = daos.getProduitDAO().getById(id);
             if(daos.getProduitDAO().delete(supprimer)==true){

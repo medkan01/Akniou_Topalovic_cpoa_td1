@@ -67,5 +67,40 @@ public class MySQLClientDAOTest {
         }catch (SQLException sqle){
             System.out.println("Erreur : \n" + sqle.getMessage());
         }
-    }
+	}
+	@Test
+	void testDeleteIdNegatif(){
+		try {
+			assertFalse(this.instance.delete(new Client(-10, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			assertFalse(this.instance.delete(new Client(9999, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test")));
+		} catch (SQLException sqle) {
+			System.out.println("Erreur sql:\n" + sqle.getMessage());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			assertFalse(this.instance.update(new Client(-10, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			assertFalse(this.instance.update(new Client(9999, "TEST", "Test", "tst", "Tst123", "0", "Rue du test", "00000", "Test", "Test")));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
 }

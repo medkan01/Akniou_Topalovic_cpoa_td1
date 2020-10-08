@@ -37,6 +37,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	}
 	
 	public boolean delete(Produit produit) throws SQLException{
+		if(produit.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u_cpoa.Produit WHERE id_produit = ?;", Statement.RETURN_GENERATED_KEYS);
@@ -47,6 +48,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	}
 	
 	public boolean update(Produit produit) throws SQLException{
+		if(produit.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u_cpoa.Produit SET nom = ?, description= ?, tarif=?, visuel=?, id_categorie=? WHERE id_produit = ?;");
@@ -62,6 +64,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 	}
 
 	public Produit getById(int id) throws SQLException {
+		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
 		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Produit WHERE id_produit = "+id+";");

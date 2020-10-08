@@ -29,6 +29,7 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
 	}
 
 	public boolean delete(Categorie objet) {
+        if(objet.getId()<=0) return false;
 		Categorie supprime;
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -41,11 +42,13 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
 	}
 
     public boolean update(Categorie objet){
+        if(objet.getId()<=0) return false;
         this.donnees.set(this.donnees.indexOf(getById(objet.getId())), objet);
         return true;
     }
     
 	public Categorie getById(int id) {
+        if(id<=0) throw new IllegalArgumentException("ID Incorrect");
         for (int i = 0; i<this.donnees.size();i++){
             if(this.donnees.get(i).getId()==id){
                 return this.donnees.get(i);

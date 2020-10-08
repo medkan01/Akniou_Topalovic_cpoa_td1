@@ -48,10 +48,20 @@ public class VueCommande {
     public static void update(){
         sc = new Scanner(System.in);
         System.out.println("\nVeuillez saisir les attributs de la commande a modifier:\n");
-        System.out.println("ID Commande:");
-        int idCommande = sc.nextInt();
-        System.out.println("ID Client:");
-        int idClient = sc.nextInt();
+        System.out.println("ID Commande: ");
+        int idCommande = -1;
+        do{
+            idCommande = sc.nextInt();
+            if(idCommande<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (idCommande<=0);
+        
+        System.out.println("ID Client: ");
+        int idClient = -1;
+        do{
+            idClient = sc.nextInt();
+            if(idClient<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (idClient<=0);
+        
 
         try {
             Commande commande = new Commande(idCommande, LocalDate.now(), idClient);
@@ -68,8 +78,13 @@ public class VueCommande {
     public static void delete(){
         sc = new Scanner(System.in);
         System.out.println("\nVeuillez saisir les attributs de la commande a modifier:\n");
-        System.out.println("ID Commande:");
-        int idCommande = sc.nextInt();
+        System.out.println("ID: ");
+        int idCommande = -1;
+        do{
+            idCommande = sc.nextInt();
+            if(idCommande<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (idCommande<=0);
+        
 
         try {
             Commande commande = daos.getCommandeDAO().getById(idCommande);

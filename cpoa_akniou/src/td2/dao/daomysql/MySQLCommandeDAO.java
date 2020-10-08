@@ -37,6 +37,7 @@ public class MySQLCommandeDAO implements CommandeDAO{
 	}
 	
 	public boolean delete(Commande commande) throws SQLException{
+		if(commande.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"DELETE FROM akniou1u_cpoa.Commande WHERE id_commande=?;", Statement.RETURN_GENERATED_KEYS);
@@ -47,6 +48,7 @@ public class MySQLCommandeDAO implements CommandeDAO{
 	}
 	
 	public boolean update(Commande commande) throws SQLException{
+		if(commande.getId()<=0) return false;
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"UPDATE akniou1u_cpoa.Commande SET date_commande=?, id_client=? WHERE id_commande=?;");
@@ -59,6 +61,7 @@ public class MySQLCommandeDAO implements CommandeDAO{
 	}
 
 	public Commande getById(int id) throws SQLException {
+		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 			"SELECT * FROM akniou1u_cpoa.Commande WHERE id_commande = ?;");

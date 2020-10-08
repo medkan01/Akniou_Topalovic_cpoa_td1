@@ -68,4 +68,41 @@ public class MySQLProduitDAOTest {
             System.out.println("Erreur : \n" + sqle.getMessage());
         }
     }
+
+    @Test
+	void testDeleteIdNegatif(){
+		try {
+			assertFalse(this.instance.delete(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testDeleteIdInexistant(){
+		try {
+			assertFalse(this.instance.delete(new Produit(9999, "Test", "Test", 222.222, "test.png", 2556)));
+		} catch (SQLException sqle) {
+			System.out.println("Erreur sql:\n" + sqle.getMessage());
+		}
+	}
+	
+	@Test
+	void testUpdateIdNegatif(){
+		try {
+			assertFalse(this.instance.update(new Produit(-10, "Test", "Test", 222.222, "test.png", 2556)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
+	@Test
+	void testUpdateIdInexistant() {
+		try {
+			assertFalse(this.instance.update(new Produit(9999,  "Test", "Test", 222.222, "test.png", 2556)));
+		} catch(SQLException sqle) {
+			System.out.println("Erreur SQL:\n" + sqle.getMessage());
+		}
+	}
+
 }
