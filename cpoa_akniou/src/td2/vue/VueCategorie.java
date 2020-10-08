@@ -50,7 +50,12 @@ public class VueCategorie {
         sc = new Scanner(System.in);
         System.out.println("\nVeuillez saisir les attributs de la categorie a modifier:\n");
         System.out.println("ID: ");
-        int id = sc.nextInt();
+        int id = -1;
+        do{
+            id = sc.nextInt();
+            if(id<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (id<=0);
+        
         System.out.println("Titre: ");
         String titre = sc.next();
         System.out.println("Visuel: ");
@@ -72,7 +77,12 @@ public class VueCategorie {
         sc = new Scanner(System.in);
         System.out.println("\nVeuillez saisir l'id de la categorie a supprimer:\n");
         System.out.println("ID: ");
-        int id = sc.nextInt();
+        int id = -1;
+        do{
+            id = sc.nextInt();
+            if(id<=0) System.out.println("L'ID saisie n'est pas valide, veuillez saisir un ID strictement positif");
+        } while (id<=0);
+        
         try{
             Categorie supprimer = daos.getCategorieDAO().getById(id);
             if(daos.getCategorieDAO().delete(supprimer)==true){
