@@ -3,8 +3,6 @@ package td2.dao.daomysql;
 
 import java.sql.*;
 import java.util.HashMap;
-
-import td2.connexion.*;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.LigneCommandeDAO;
 import td2.dao.daofactory.Persistance;
@@ -69,11 +67,11 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
 		Statement requete = c.createStatement();
 		ResultSet res = requete.executeQuery("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE Ligne_commande.id_commande ="+idCommande+";");
-			while (res.next()){
-				Produit produit = daos.getProduitDAO().getById(res.getInt("id_produit"));
-				LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
-				hash.put(produit, ligneCommande);
-			}
+		while (res.next()){
+			Produit produit = daos.getProduitDAO().getById(res.getInt("id_produit"));
+			LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
+			hash.put(produit, ligneCommande);
+		}
 		return hash;
 	}
 }

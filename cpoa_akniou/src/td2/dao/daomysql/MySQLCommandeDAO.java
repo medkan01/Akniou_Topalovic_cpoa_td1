@@ -3,7 +3,6 @@ package td2.dao.daomysql;
 
 import java.sql.*;
 import java.util.ArrayList;
-import td2.connexion.*;
 import td2.dao.daofactory.CommandeDAO;
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;

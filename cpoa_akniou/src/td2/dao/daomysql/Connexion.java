@@ -1,9 +1,9 @@
-package td2.connexion;
+package td2.dao.daomysql;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 public class Connexion {
 	private Connection maConnexion;
 	public static Connexion instance;

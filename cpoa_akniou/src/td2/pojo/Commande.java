@@ -101,12 +101,10 @@ public class Commande {
 	}
 
 	public String afficher() {
-		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
 		String afficher = "";
-		Map.Entry<Produit, LigneCommande> l = it.next();
-		while(it.hasNext()){
-			afficher = afficher + "["+this.id+", "+this.date+", "+this.idClient+", Produit: "+l.getKey()+", Ligne Commande: "+l.getValue()+"\n";
-			l = (Map.Entry<Produit, LigneCommande>) it.next();
+		for(Map.Entry<Produit, LigneCommande> p : this.lignes.entrySet()){
+			afficher = afficher + "[ id produit: "+p.getKey().getId() + ", quantite: " + this.lignes.get(p.getKey()).getQuantite()
+					+ ", tarif unitaire: " + this.lignes.get(p.getKey()).getTarifUnitaire() + "] \n";
 		}
 		return afficher;
 	}

@@ -2,7 +2,6 @@ package td2.dao.daomysql;
 
 import java.sql.*;
 import java.util.ArrayList;
-import td2.connexion.*;
 import td2.dao.daofactory.ProduitDAO;
 import td2.pojo.Produit;
 
