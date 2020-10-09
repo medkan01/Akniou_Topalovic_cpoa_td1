@@ -1,12 +1,8 @@
 package td2.pojo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Commande {
 
@@ -18,9 +14,9 @@ public class Commande {
 
 	// CONSTRUCTEUR
 	public Commande(int id, LocalDate date, int idClient) {
-		this.id = id;
-		this.date = date;
-		this.idClient = idClient;
+		this.setId(id);
+		this.setDate(date);
+		this.setIdClient(idClient);
 		lignes = new HashMap<Produit, LigneCommande>();
 	}
 
@@ -47,24 +43,6 @@ public class Commande {
 
 	public void setIdClient(int idClient) {
 		this.idClient = idClient;
-	}
-
-	public void getKeys(ArrayList<Integer> T) {
-		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
-		Produit cle;
-		while(it.hasNext()){
-		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next(); 
-		cle = l.getKey();
-		T.add(cle.getId());
-		}
-	}
-
-	public void getValues(ArrayList<LigneCommande> T) {
-		Iterator<Entry<Produit, LigneCommande>> it = lignes.entrySet().iterator();
-		while(it.hasNext()){
-		Map.Entry<Produit, LigneCommande> l = (Map.Entry<Produit, LigneCommande>) it.next(); 
-		T.add(l.getValue());
-		}
 	}
 
 	public HashMap<Produit, LigneCommande> getLigneCommande(){

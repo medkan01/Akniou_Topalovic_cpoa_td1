@@ -15,19 +15,17 @@ public class Client {
 	private String adrPays;
 	
 	//CONSTRUCTEUR
-	public Client(int id, String nom, String prenom, String identifiant, String motDePasse, String adrNumero, String adrVoie,
-			String adrCodePostal, String adrVille, String adrPays) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.identifiant = identifiant;
-		this.motDePasse = motDePasse;
-		this.adrNumero = adrNumero;
-		this.adrVoie = adrVoie;
-		this.adrCodePostal = adrCodePostal;
-		this.adrVille = adrVille;
-		this.adrPays = adrPays;
+	public Client(int id, String nom, String prenom, String identifiant, String motDePasse, String adrNumero, String adrVoie, String adrCodePostal, String adrVille, String adrPays) {
+		this.setId(id);
+		this.setNom(nom);
+		this.setPrenom(prenom);
+		this.setIdentifiant(identifiant);
+		this.setMotDePasse(motDePasse);
+		this.setAdrNumero(adrNumero);
+		this.setAdrVoie(adrVoie);
+		this.setAdrCodePostal(adrCodePostal);
+		this.setAdrVille(adrVille);
+		this.setAdrPays(adrPays);
 	}
 
 	//ACCESSEURS
@@ -40,11 +38,16 @@ public class Client {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		nom = nom.trim();
+		if(nom=="") {
+			throw new IllegalArgumentException("Le nom saisie est vide");
+		} else {
+			this.nom = nom;
+		}
 	}
 
 	public String getPrenom() {
@@ -52,7 +55,12 @@ public class Client {
 	}
 
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		prenom = prenom.trim();
+		if(prenom=="") {
+			throw new IllegalArgumentException("Le prenom saisie est vide");
+		} else {
+			this.prenom = prenom;
+		}
 	}
 
 	public String getIdentifiant() {
@@ -60,7 +68,12 @@ public class Client {
 	}
 
 	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
+		identifiant = identifiant.trim();
+		if(identifiant=="") {
+			throw new IllegalArgumentException("L'identifiant saisie est vide");
+		} else {
+			this.identifiant = identifiant;
+		}
 	}
 
 	public String getMotDePasse() {
@@ -68,7 +81,12 @@ public class Client {
 	}
 
 	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+		motDePasse= motDePasse.trim();
+		if(motDePasse=="") {
+			throw new IllegalArgumentException("Le mot de passe saisie est vide");
+		} else {
+			this.motDePasse = motDePasse;
+		}
 	}
 
 	public String getAdrNumero() {
@@ -76,7 +94,12 @@ public class Client {
 	}
 
 	public void setAdrNumero(String adrNumero) {
-		this.adrNumero = adrNumero;
+		adrNumero= adrNumero.trim();
+		if(adrNumero=="") {
+			throw new IllegalArgumentException("Le numero d'adresse saisie est vide");
+		} else {
+			this.adrNumero = adrNumero;
+		}
 	}
 
 	public String getAdrVoie() {
@@ -84,7 +107,12 @@ public class Client {
 	}
 
 	public void setAdrVoie(String adrVoie) {
-		this.adrVoie = adrVoie;
+		adrVoie= adrVoie.trim();
+		if(adrVoie=="") {
+			throw new IllegalArgumentException("La voie saisie est vide");
+		} else {
+			this.adrVoie = adrVoie;
+		}
 	}
 
 	public String getAdrCodePostal() {
@@ -92,7 +120,12 @@ public class Client {
 	}
 
 	public void setAdrCodePostal(String adrCodePostal) {
-		this.adrCodePostal = adrCodePostal;
+		adrCodePostal= adrCodePostal.trim();
+		if(adrCodePostal=="") {
+			throw new IllegalArgumentException("Le code postal saisie est vide");
+		} else {
+			this.adrCodePostal = adrCodePostal;
+		}
 	}
 
 	public String getAdrVille() {
@@ -100,7 +133,12 @@ public class Client {
 	}
 
 	public void setAdrVille(String adrVille) {
-		this.adrVille = adrVille;
+		adrVille= adrVille.trim();
+		if(adrVille=="") {
+			throw new IllegalArgumentException("La ville saisie est vide");
+		} else {
+
+		}
 	}
 
 	public String getAdrPays() {
@@ -108,10 +146,11 @@ public class Client {
 	}
 
 	public void setAdrPays(String adrPays) {
-		this.adrPays = adrPays;
+		adrPays= adrPays.trim();
+		if(adrPays=="") {
+			throw new IllegalArgumentException("Le pays saisie est vide");
+		} else {
+			this.adrPays = adrPays;
+		}
 	}
-	
-	
-	
-	
 }

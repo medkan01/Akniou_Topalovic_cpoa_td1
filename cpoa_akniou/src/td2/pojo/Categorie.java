@@ -9,9 +9,9 @@ public class Categorie {
 	
 	// CONSTRUCTEUR
 	public Categorie(int id, String titre, String visuel) {
-		this.id = id;
-		this.titre = titre;
-		this.visuel = visuel;
+		this.setId(id);
+		this.setTitre(titre);
+		this.setVisuel(visuel);;
 	}
 	
 	//ACCESSEURS
@@ -28,7 +28,12 @@ public class Categorie {
 	}
 
 	public void setTitre(String titre) {
-		this.titre = titre;
+		titre = titre.trim();
+		if(titre == "") {
+			throw new IllegalArgumentException("Le titre saisie est vide");
+		} else {
+			this.titre=titre;
+		}
 	}
 
 	public String getVisuel() {
@@ -36,7 +41,12 @@ public class Categorie {
 	}
 
 	public void setVisuel(String visuel) {
-		this.visuel = visuel;
+		visuel = visuel.trim();
+		if(visuel=="") {
+			throw new IllegalArgumentException("Le visuel saisie est vide");
+		} else {
+			this.visuel = visuel;
+		}
 	}
 
 	

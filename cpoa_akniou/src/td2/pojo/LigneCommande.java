@@ -5,8 +5,8 @@ public class LigneCommande {
 	private double tarifUnitaire;
 	
 	public LigneCommande(int quantite, double tarifUnitaire) {
-		this.quantite = quantite;
-		this.tarifUnitaire = tarifUnitaire;
+		this.setQuantite(quantite);
+		this.setTarifUnitaire(tarifUnitaire);
 	}
 	
 	public int getQuantite() {
@@ -21,13 +21,4 @@ public class LigneCommande {
 	public void setTarifUnitaire(double tarifUnitaire) {
 		this.tarifUnitaire = tarifUnitaire;
 	}
-
-	@Override
-	public String toString() {
-		return
-			" quantite='" + quantite + "'" +
-			", tarifUnitaire='" + tarifUnitaire + "'"
-			;
-	}
-
 }
