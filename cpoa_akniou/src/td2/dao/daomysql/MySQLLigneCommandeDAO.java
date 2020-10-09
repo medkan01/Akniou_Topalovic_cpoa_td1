@@ -1,4 +1,3 @@
-
 package td2.dao.daomysql;
 
 import java.sql.*;
@@ -65,8 +64,9 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 	public HashMap<Produit, LigneCommande> getAll(int idCommande)throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
-		Statement requete = c.createStatement();
-		ResultSet res = requete.executeQuery("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE Ligne_commande.id_commande ="+idCommande+";");
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE id_commande =? ORDER BY id_commande ASC");
+			requete.setInt(1, idCommande);
+		ResultSet res = requete.executeQuery();
 		while (res.next()){
 			Produit produit = daos.getProduitDAO().getById(res.getInt("id_produit"));
 			LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
