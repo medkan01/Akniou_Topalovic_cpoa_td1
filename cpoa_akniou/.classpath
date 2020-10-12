@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-15/"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="mysql-connector-java-8.0.21.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
+
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.21.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-jupiter-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-jupiter-api-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-jupiter-engine-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-jupiter-params-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-platform-commons-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-platform-console-standalone-1.6.0.jar"/>
+
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="lib/javafx/lib/src.zip"/>
+	
 </classpath>

@@ -6,7 +6,7 @@ import java.util.*;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 
-public class VueProduit {
+public class VueProduit{
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     static Scanner scanLn;
     static Scanner sc;
