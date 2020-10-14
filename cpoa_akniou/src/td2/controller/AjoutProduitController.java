@@ -89,7 +89,7 @@ public class AjoutProduitController implements Initializable {
         try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(dao.getCategorieDAO().getAll()));
         } catch (Exception e) {
-            this.labelResumeProduit.setText("erreur");
+            this.labelResumeProduit.setText("erreur Categorie");
         }
     }
 }
