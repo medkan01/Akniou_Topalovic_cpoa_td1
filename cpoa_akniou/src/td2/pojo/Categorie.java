@@ -49,6 +49,10 @@ public class Categorie {
 		}
 	}
 
-	
+	@Override
+	public String toString() {
+		return titre 
+	;
+	}
 	
 }

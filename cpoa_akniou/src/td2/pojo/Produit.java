@@ -67,14 +67,7 @@ public class Produit {
 	
 	@Override
 	public String toString() {
-		return
-			" id='" + id + "'" +
-			", nom='" + nom + "'" +
-			", description='" + description + "'" +
-			", tarif='" + tarif + "'" +
-			", visuel='" + visuel + "'" +
-			", idCategorie='" + idCategorie + "'"
-			;
+		return "le produit: " +	nom + " à été correctement ajouté pour un montant de " + tarif + " avec comme description: " + description ;
 	}
 	
 	

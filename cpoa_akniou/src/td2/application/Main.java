@@ -18,11 +18,12 @@ public class Main extends Application{
             URL fxmlURL=getClass().getResource("../javafx/AjoutProduit.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
-            Scene scene = new Scene((AnchorPane) root, 600, 400);
+            Scene scene = new Scene((AnchorPane) root, 680, 550);
             //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Ma première fenêtre JavaFX");
+            primaryStage.setTitle("Ajout produit");
             primaryStage.show();
+            primaryStage.setResizable(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
