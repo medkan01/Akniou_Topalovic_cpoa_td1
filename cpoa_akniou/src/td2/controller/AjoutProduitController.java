@@ -19,20 +19,12 @@ import td2.pojo.Produit;
 
 public class AjoutProduitController implements Initializable {
 
-    private static AjoutProduitController instance;
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     @FXML private ChoiceBox<Categorie> cbxCategorie;
     @FXML private Button boutonCreer;
     @FXML private Label labelResumeProduit;
     @FXML private TextField saisieNom,saisieTarif;
     @FXML private TextArea saisieDescription;
-
-    public static AjoutProduitController getInstance(){
-        if (instance == null){
-            instance = new AjoutProduitController();
-        }
-        return instance;
-    }
 
     @FXML
     public boolean creerProduit(){

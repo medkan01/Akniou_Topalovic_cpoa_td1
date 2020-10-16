@@ -10,33 +10,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="panelAjoutCategorie" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutProduitController">
+<AnchorPane fx:id="panelAjoutCategorie" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutProduitController">
    <children>
-      <VBox fx:id="vBoxFenetreCategorie" layoutX="-1.0" layoutY="-2.0" prefHeight="259.0" prefWidth="541.0">
+      <VBox fx:id="vBoxFenetreCategorie" layoutX="-1.0" layoutY="-2.0" prefHeight="150.0" prefWidth="541.0">
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </padding>
          <children>
-            <GridPane fx:id="gridPaneSaisie" prefHeight="139.0" prefWidth="637.0">
+            <GridPane fx:id="gridPaneSaisie" prefHeight="42.0" prefWidth="491.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="115.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="497.0" minWidth="10.0" prefWidth="376.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="labelTitre" text="Titre : " GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Label fx:id="labelVisuel" text="Visuel : " GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <TextField fx:id="saisieTitre" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="saisieVisuel" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelTitre" text="Titre : " GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <TextField fx:id="saisieTitre" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <GridPane fx:id="gridPaneCreer" prefHeight="70.0" prefWidth="491.0">
+            <GridPane fx:id="gridPaneCreer" prefHeight="55.0" prefWidth="491.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
