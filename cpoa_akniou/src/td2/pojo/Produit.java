@@ -9,12 +9,12 @@ public class Produit {
 	private int idCategorie;
 	
 	public Produit(int id, String nom, String description, double tarif, String visuel, int idCategorie) {
-		this.id = id;
-		this.nom = nom;
-		this.description = description;
-		this.tarif = tarif;
-		this.visuel = visuel;
-		this.idCategorie = idCategorie;
+		this.setId(id);
+		this.setNom(nom);
+		this.setDescription(description);
+		this.setTarif(tarif);
+		this.setVisuel(visuel);
+		this.setIdCategorie(idCategorie);
 	}
 
 	public int getId() {
@@ -30,7 +30,11 @@ public class Produit {
 	}
 
 	public void setNom(String nom) {
-		this.nom = nom;
+		if (nom.trim().isEmpty()){
+			throw new IllegalArgumentException("Le nom est vide. ");
+		} else {
+			this.nom = nom.trim();
+		}
 	}
 
 	public String getDescription() {
@@ -38,7 +42,11 @@ public class Produit {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		if (description.trim().isEmpty()){
+			throw new IllegalArgumentException("La description est vide. ");
+		} else {
+			this.description = description.trim();
+		}
 	}
 
 	public double getTarif() {
@@ -46,7 +54,11 @@ public class Produit {
 	}
 
 	public void setTarif(double tarif) {
-		this.tarif = tarif;
+		if (tarif <= 0){
+			throw new IllegalArgumentException("Le tarif doit être supérieur à 0");
+		} else {
+			this.tarif = tarif;
+		}
 	}
 
 	public String getVisuel() {
@@ -61,13 +73,12 @@ public class Produit {
 		return idCategorie;
 	}
 
-	public void setIdCategorie(int id_categorie) {
-		this.idCategorie = id_categorie;
+	public void setIdCategorie(int idCategorie) {
+		this.idCategorie = idCategorie;
 	}
-	
-	@Override
+
 	public String toString() {
-		return "le produit: " +	nom + " à été correctement ajouté pour un montant de " + tarif + " avec comme description: " + description ;
+		return "le produit: " +	this.nom + " à été correctement ajouté pour un montant de " + this.tarif + " avec comme description: " + this.description ;
 	}
 	
 	
