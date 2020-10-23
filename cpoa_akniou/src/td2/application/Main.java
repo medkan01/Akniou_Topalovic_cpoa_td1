@@ -15,10 +15,10 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("../javafx/MenuPrincipal.fxml");
+            URL fxmlURL=getClass().getResource("../javafx/AjoutCategorie.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
-            Scene scene = new Scene((AnchorPane) root, 980, 650);
+            Scene scene = new Scene((AnchorPane) root, 550, 150);
             //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.setTitle("EZ.Gestion");

@@ -17,14 +17,14 @@ public class AjoutCategorieController {
     static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     
     @FXML
-    public boolean creerProduit(){
+    public boolean creerCategorie(){
         try{
             String titre = saisieTitre.getText();
-
-            Categorie categorie = new Categorie(1, titre, "");
+            this.labelResume.setText("");;
+            Categorie categorie = new Categorie(1, titre, titre+".png");
             if (daos.getCategorieDAO().insert(categorie) == true){
                 labelResume.setTextFill(Color.web("#000000"));
-                labelResume.setText(categorie.toString());
+                labelResume.setText("La categorie "+ categorie.toString() + " a ete ajoutee avec succes");
             }
             else{
                throw new IllegalArgumentException("Impossible d'ajouter la categorie");
