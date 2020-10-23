@@ -24,16 +24,19 @@ public class MenuPrincipalController {
     @FXML
     public void afficherProduits() throws SQLException {
         
-        Tab tabProduit = new Tab("Produits", tableProduit);
-
+        Tab tabProduit = new Tab("Produits", tableProduit = new TableView<Produit>());
         this.tabPane.getTabs().add(tabProduit);
-
-        TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
-        colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
+        
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
 
-        this.tableProduit.getColumns().setAll(colLibelle,colTarif);
+        TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
+        colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
+
+        TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
+        colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
+
+        this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
 
         this.tableProduit.getItems().addAll(DAOFactory.getDAOFactory(Persistance.MySQL).getProduitDAO().getAll());
     }

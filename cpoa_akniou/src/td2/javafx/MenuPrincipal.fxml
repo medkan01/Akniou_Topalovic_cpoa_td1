@@ -6,107 +6,93 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="650.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.MenuPrincipalController">
-  <children>
-    <MenuBar>
-      <menus>
-        <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
-               <items>
-                  <RadioMenuItem mnemonicParsing="false" text="Mode Nuit">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="groupeModeNuit" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-               </items>
-        </Menu>
-        <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
-          <items>
-                  <RadioMenuItem mnemonicParsing="false" text="En Ligne">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="groupeInstance" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="980.0">
-         <children>
-            <SplitPane dividerPositions="0.29797979797979796" layoutX="-2.0" layoutY="-4.0" prefHeight="625.0" prefWidth="980.0">
-              <items>
-                <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
-                     <children>
-                        <Accordion fx:id="listeTable" layoutX="-1.0">
-                          <panes>
-                            <TitledPane fx:id="ListeTableCategories" animated="false" text="Catégories">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="boutonAfficher" layoutX="69.0" layoutY="31.0" mnemonicParsing="false" text="Afficher" />
-                                          <Button layoutX="74.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
-                                          <Button layoutX="74.0" layoutY="102.0" mnemonicParsing="false" text="Button" />
-                                       </children></AnchorPane>
-                              </content>
-                            </TitledPane>
-                            <TitledPane fx:id="ListeTableClients" animated="false" text="Clients">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </TitledPane>
-                            <TitledPane fx:id="ListeTableCommandes" animated="false" text="Commandes">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </TitledPane>
-                              <TitledPane fx:id="ListeTableProduits" animated="false" onMouseClicked="#afficherProduits" text="Produits">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="afficherProduits" layoutX="74.0" layoutY="26.0" mnemonicParsing="false" text="Afficher" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
-                          </panes>
-                        </Accordion>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false">
-                     <children>
-                        <TabPane prefHeight="625.0" prefWidth="684.0" tabClosingPolicy="ALL_TABS">
-                          <tabs>
-                            <Tab fx:id="tab" text="Untitled Tab 1">
-                                 <content>
-                                    <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="C1" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                      </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Untitled Tab">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </content>
-                              </Tab>
-                          </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-         </children>
-    </AnchorPane>
-  </children>
-</VBox>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.MenuPrincipalController">
+   <children>
+      <VBox layoutX="2.0" prefHeight="650.0" prefWidth="980.0">
+        <children>
+          <MenuBar>
+            <menus>
+              <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
+                     <items>
+                        <RadioMenuItem mnemonicParsing="false" text="Mode Nuit">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="groupeModeNuit" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                     </items>
+              </Menu>
+              <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
+                <items>
+                        <RadioMenuItem mnemonicParsing="false" text="En Ligne">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="groupeInstance" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
+                </items>
+              </Menu>
+            </menus>
+          </MenuBar>
+          <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="980.0">
+               <children>
+                  <SplitPane dividerPositions="0.29797979797979796" layoutX="-2.0" layoutY="-4.0" prefHeight="625.0" prefWidth="980.0">
+                    <items>
+                      <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <Accordion fx:id="listeTable" layoutX="-1.0">
+                                <panes>
+                                  <TitledPane fx:id="ListeTableCategories" animated="false" text="Catégories">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="boutonAfficher" layoutX="69.0" layoutY="31.0" mnemonicParsing="false" text="Afficher" />
+                                                <Button layoutX="74.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
+                                                <Button layoutX="74.0" layoutY="102.0" mnemonicParsing="false" text="Button" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </TitledPane>
+                                  <TitledPane fx:id="ListeTableClients" animated="false" text="Clients">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </TitledPane>
+                                  <TitledPane fx:id="ListeTableCommandes" animated="false" text="Commandes">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </TitledPane>
+                                    <TitledPane fx:id="ListeTableProduits" animated="false" onMouseClicked="#afficherProduits" text="Produits">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="afficherProduits" layoutX="69.0" layoutY="26.0" mnemonicParsing="false" onAction="#afficherProduits" text="Afficher" />
+                                                <Button layoutX="74.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                </panes>
+                              </Accordion>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <TabPane fx:id="tabPane" accessibleRole="BUTTON" prefHeight="625.0" prefWidth="772.0" tabClosingPolicy="ALL_TABS" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+          </AnchorPane>
+        </children>
+      </VBox>
+   </children>
+</AnchorPane>

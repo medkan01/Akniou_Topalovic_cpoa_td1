@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="209.0" layoutY="102.0" prefHeight="17.0" prefWidth="61.0" text="Username:" />
+      <Label layoutX="211.0" layoutY="181.0" text="Password:" />
+      <TextField layoutX="160.0" layoutY="133.0" />
+      <TextField layoutX="160.0" layoutY="210.0" />
+      <Label layoutX="160.0" layoutY="29.0" text="EZGestion">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErreur" layoutX="226.0" layoutY="254.0" />
+   </children>
+</AnchorPane>
