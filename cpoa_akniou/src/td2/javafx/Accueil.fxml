@@ -2,10 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,29 +10,6 @@
    <children>
       <VBox prefHeight="650.0" prefWidth="980.0">
         <children>
-          <MenuBar>
-            <menus>
-              <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
-                     <items>
-                        <RadioMenuItem fx:id="nightMode" mnemonicParsing="false" text="Mode Nuit">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="groupeModeNuit" />
-                           </toggleGroup>
-                        </RadioMenuItem>
-                     </items>
-              </Menu>
-              <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
-                <items>
-                        <RadioMenuItem fx:id="online" mnemonicParsing="false" text="En Ligne">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="groupeInstance" />
-                           </toggleGroup>
-                        </RadioMenuItem>
-                        <RadioMenuItem fx:id="offline" mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
-                </items>
-              </Menu>
-            </menus>
-          </MenuBar>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="980.0">
                <children>
                   <Label layoutX="469.0" layoutY="331.0" text="ou">
@@ -54,7 +27,8 @@
                         <Font size="96.0" />
                      </font>
                   </Label>
-                  <Button fx:id="boutonConnexion" layoutX="448.0" layoutY="276.0" mnemonicParsing="false" onAction="#connexion" prefHeight="32.0" prefWidth="87.0" text="Connexion" />
+                  <Button fx:id="boutonRetour" layoutX="426.0" layoutY="276.0" mnemonicParsing="false" onAction="#RetourMenuPrincipal" prefHeight="32.0" prefWidth="132.0" text="Accéder à la boutique" visible="false" />
+                  <Button fx:id="boutonConnexion" layoutX="447.0" layoutY="276.0" mnemonicParsing="false" onAction="#connexion" prefHeight="32.0" prefWidth="87.0" text="Connexion" />
                   <Label layoutX="279.0" layoutY="384.0" prefHeight="70.0" prefWidth="426.0" text="Continuer en mode local*">
                      <font>
                         <Font size="36.0" />
@@ -62,6 +36,7 @@
                   </Label>
                   <Button fx:id="boutonLocal" layoutX="448.0" layoutY="468.0" mnemonicParsing="false" onAction="#localHost" prefHeight="32.0" prefWidth="87.0" text="Local" />
                   <Label layoutX="188.0" layoutY="546.0" prefHeight="17.0" prefWidth="673.0" text="*En mode local vous pourrez effectuer uniquement des tests. Ils n'auront aucun impact sur votre boutique en ligne." />
+                  <Label fx:id="labelConnecter" layoutX="439.0" layoutY="317.0" />
                </children>
           </AnchorPane>
         </children>

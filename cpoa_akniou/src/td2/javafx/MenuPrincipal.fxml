@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.MenuPrincipalController">
    <children>
       <VBox layoutX="2.0" prefHeight="650.0" prefWidth="980.0">
@@ -30,12 +29,12 @@
               </Menu>
               <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
                 <items>
-                        <RadioMenuItem mnemonicParsing="false" text="En Ligne">
+                        <RadioMenuItem fx:id="online" mnemonicParsing="false" text="En Ligne">
                            <toggleGroup>
                               <ToggleGroup fx:id="groupeInstance" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
+                        <RadioMenuItem fx:id="offline" mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
                 </items>
               </Menu>
             </menus>
