@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
 import td2.pojo.Client;
 import td2.pojo.Commande;
@@ -27,7 +28,7 @@ import td2.pojo.Produit;
 
 public class MenuPrincipalController implements Initializable{
     
-    static DAOFactory daos;
+    private DAOFactory daos;
     @FXML private Button boutonCategories;
     @FXML private Button boutonClients;
     @FXML private Button boutonCommandes;
@@ -75,13 +76,43 @@ public class MenuPrincipalController implements Initializable{
         }
         
     }
+    @FXML 
+    public void setInstanceOnline(){
+        Stage connexionStage = new Stage();
+        try{
+            URL fxmlURLConnexion=getClass().getResource("../javafx/Connexion.fxml");
+            FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+            Node rootConnexion = fxmlLoaderConnexion.load();
+            ConnexionController controller = fxmlLoaderConnexion.getController();
+            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 505, 315);
+            connexionStage.setScene(sceneConnexion);
+            connexionStage.setTitle("Connexion");
+            connexionStage.initModality(Modality.APPLICATION_MODAL);
+            connexionStage.setResizable(false);
+            connexionStage.showAndWait();
+
+            if(controller.seConnecter()){
+                this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+                this.tabPane.getTabs().clear();
+           }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML 
+    public void setInstanceOffline(){
+        this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        this.tabPane.getTabs().clear();
+    }
 
     @FXML
-    public void afficherCategories() throws SQLException {
+    public void afficherCategories() throws SQLException{
         
         Tab tabCategorie = new Tab("Catégories", tableCategorie = new TableView<Categorie>());
         this.tabPane.getTabs().add(tabCategorie);
-        
+
         TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
 
@@ -91,16 +122,14 @@ public class MenuPrincipalController implements Initializable{
         this.tableCategorie.getColumns().setAll(colTitre,colVisuel);
 
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
+
     }
 
     @FXML
     public void afficherClients() throws SQLException {
+
         Tab tabClient = new Tab("Clients", tableClient = new TableView<Client>());
-        
-        if(!this.tabPane.getTabs().contains(tabClient))
-        {
         this.tabPane.getTabs().add(tabClient);
-        }
         
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));

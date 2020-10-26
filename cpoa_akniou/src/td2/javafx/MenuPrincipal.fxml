@@ -29,12 +29,12 @@
               </Menu>
               <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
                 <items>
-                        <RadioMenuItem fx:id="online" mnemonicParsing="false" text="En Ligne">
+                        <RadioMenuItem fx:id="online" mnemonicParsing="false" onAction="#setInstanceOnline" text="En Ligne">
                            <toggleGroup>
                               <ToggleGroup fx:id="groupeInstance" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem fx:id="offline" mnemonicParsing="false" text="Local" toggleGroup="$groupeInstance" />
+                        <RadioMenuItem fx:id="offline" mnemonicParsing="false" onAction="#setInstanceOffline" text="Local" toggleGroup="$groupeInstance" />
                 </items>
               </Menu>
             </menus>

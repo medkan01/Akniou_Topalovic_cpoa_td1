@@ -16,7 +16,7 @@ import td2.dao.daofactory.Persistance;
 
 public class AccueilController extends Stage{
     
-    DAOFactory daos;
+    private DAOFactory daos;
     @FXML private Button boutonConnexion;
     @FXML private Button boutonLocal;
     @FXML private Button boutonRetour;
