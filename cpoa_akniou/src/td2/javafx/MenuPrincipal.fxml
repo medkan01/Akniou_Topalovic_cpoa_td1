@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -45,46 +45,51 @@
                     <items>
                       <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                            <children>
-                              <Accordion fx:id="listeTable" layoutX="-1.0">
-                                <panes>
-                                  <TitledPane fx:id="ListeTableCategories" animated="false" text="Catégories">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <Button fx:id="boutonAfficher" layoutX="69.0" layoutY="31.0" mnemonicParsing="false" text="Afficher" />
-                                                <Button layoutX="74.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
-                                                <Button layoutX="74.0" layoutY="102.0" mnemonicParsing="false" text="Button" />
-                                             </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </TitledPane>
-                                  <TitledPane fx:id="ListeTableClients" animated="false" text="Clients">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                    </content>
-                                  </TitledPane>
-                                  <TitledPane fx:id="ListeTableCommandes" animated="false" text="Commandes">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                    </content>
-                                  </TitledPane>
-                                    <TitledPane fx:id="ListeTableProduits" animated="false" onMouseClicked="#afficherProduits" text="Produits">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <Button fx:id="afficherProduits" layoutX="69.0" layoutY="26.0" mnemonicParsing="false" onAction="#afficherProduits" text="Afficher" />
-                                                <Button layoutX="74.0" layoutY="65.0" mnemonicParsing="false" text="Button" />
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </TitledPane>
-                                </panes>
-                              </Accordion>
+                              <Button fx:id="boutonCategories" mnemonicParsing="false" onAction="#afficherCategories" prefHeight="41.0" prefWidth="200.0" text="Catégories" />
+                              <Button fx:id="boutonClients" layoutY="52.0" mnemonicParsing="false" onAction="#afficherClients" prefHeight="41.0" prefWidth="200.0" text="Clients" />
+                              <Button fx:id="boutonCommandes" layoutY="102.0" mnemonicParsing="false" onAction="#afficherCommandes" prefHeight="41.0" prefWidth="200.0" text="Commandes" />
+                              <Button fx:id="boutonProduits" layoutY="152.0" mnemonicParsing="false" onAction="#afficherProduits" prefHeight="41.0" prefWidth="200.0" text="Produits" />
+                              <Button fx:id="boutonDetails" layoutX="68.0" layoutY="244.0" mnemonicParsing="false">
+                                 <graphic>
+                                    <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/imageView.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="boutonAjouter" layoutX="68.0" layoutY="323.0" mnemonicParsing="false">
+                                 <graphic>
+                                    <ImageView fx:id="imageAdd" fitHeight="59.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/imageAdd.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="boutonModifier" layoutX="68.0" layoutY="400.0" mnemonicParsing="false">
+                                 <graphic>
+                                    <ImageView fx:id="imageEdit" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/imageEdit.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="boutonSupprimer" layoutX="68.0" layoutY="479.0" mnemonicParsing="false">
+                                 <graphic>
+                                    <ImageView fx:id="imageDelete" fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/imageDelete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false">
                            <children>
-                              <TabPane fx:id="tabPane" accessibleRole="BUTTON" prefHeight="625.0" prefWidth="772.0" tabClosingPolicy="ALL_TABS" />
+                              <TabPane fx:id="tabPane" accessibleRole="BUTTON" layoutX="-1.0" minHeight="-Infinity" prefHeight="625.0" prefWidth="1064.0" tabClosingPolicy="ALL_TABS" />
                            </children>
                         </AnchorPane>
                     </items>

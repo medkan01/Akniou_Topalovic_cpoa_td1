@@ -20,20 +20,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
+import td2.pojo.Categorie;
+import td2.pojo.Client;
+import td2.pojo.Commande;
 import td2.pojo.Produit;
 
 public class MenuPrincipalController implements Initializable{
     
     static DAOFactory daos;
-    @FXML private Button boutonAFficher;
+    @FXML private Button boutonCategories;
+    @FXML private Button boutonClients;
+    @FXML private Button boutonCommandes;
+    @FXML private Button boutonProduits;
     @FXML private TabPane tabPane;
-    @FXML private TableView<Produit> tableCategorie;
-    @FXML private TableView<Produit> tableClient;
-    @FXML private TableView<Produit> tableCommande;
+    @FXML private TableView<Categorie> tableCategorie;
+    @FXML private TableView<Client> tableClient;
+    @FXML private TableView<Commande> tableCommande;
     @FXML private TableView<Produit> tableProduit;
     @FXML private RadioMenuItem online;
     @FXML private RadioMenuItem offline;
     @FXML private RadioMenuItem nightMode;
+    @FXML private Button boutonDetails;
+    @FXML private Button boutonAjouter;
+    @FXML private Button boutonModifier;
+    @FXML private Button boutonSupprimer;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -54,10 +64,91 @@ public class MenuPrincipalController implements Initializable{
             catch (Exception e) {
                 e.printStackTrace();
             }
+            if(daos.getPersistanceActuelle().equals("MySQL")){
+                this.online.setSelected(true);
+                this.offline.setSelected(false);
+            }
+            else if(daos.getPersistanceActuelle().equals("ListeMemoire")){
+                this.offline.setSelected(true);
+                this.online.setSelected(false);
+            }
         }
         
     }
-    
+
+    @FXML
+    public void afficherCategories() throws SQLException {
+        
+        Tab tabCategorie = new Tab("Catégories", tableCategorie = new TableView<Categorie>());
+        this.tabPane.getTabs().add(tabCategorie);
+        
+        TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
+        colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
+
+        TableColumn<Categorie, String> colVisuel = new TableColumn<>("Visuel");
+        colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
+
+        this.tableCategorie.getColumns().setAll(colTitre,colVisuel);
+
+        this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
+    }
+
+    @FXML
+    public void afficherClients() throws SQLException {
+        Tab tabClient = new Tab("Clients", tableClient = new TableView<Client>());
+        
+        if(!this.tabPane.getTabs().contains(tabClient))
+        {
+        this.tabPane.getTabs().add(tabClient);
+        }
+        
+        TableColumn<Client, String> colNom = new TableColumn<>("Nom");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
+
+        TableColumn<Client, String> colPrenom = new TableColumn<>("Prenom");
+        colPrenom.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
+
+        TableColumn<Client, String> colAdrNumero = new TableColumn<>("Numéro");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
+        
+        TableColumn<Client, String> colAdrVoie = new TableColumn<>("Voie");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
+
+        TableColumn<Client, String> colAdrCodePostal = new TableColumn<>("CP");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrCodePostal"));
+
+        TableColumn<Client, String> colAdrVille = new TableColumn<>("Ville");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVille"));
+
+        TableColumn<Client, String> colAdrPays = new TableColumn<>("Pays");
+        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
+
+        this.tableClient.getColumns().setAll(colNom, colPrenom, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
+
+        this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
+    }
+
+    @FXML
+    public void afficherCommandes() throws SQLException {
+        
+        Tab tabCommande = new Tab("Commandes", tableCommande = new TableView<Commande>());
+        this.tabPane.getTabs().add(tabCommande);
+        
+        TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
+        colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
+
+        TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
+        colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
+
+        TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
+        colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
+
+        this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
+
+        this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
+    }
+
+        
     @FXML
     public void afficherProduits() throws SQLException {
         
@@ -77,4 +168,5 @@ public class MenuPrincipalController implements Initializable{
 
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
     }
+
 }
