@@ -45,6 +45,7 @@ public class MenuPrincipalController implements Initializable{
     @FXML private Button boutonAjouter;
     @FXML private Button boutonModifier;
     @FXML private Button boutonSupprimer;
+    @FXML private AnchorPane affichageTableau;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -110,8 +111,8 @@ public class MenuPrincipalController implements Initializable{
     @FXML
     public void afficherCategories() throws SQLException{
         
-        Tab tabCategorie = new Tab("Catégories", tableCategorie = new TableView<Categorie>());
-        this.tabPane.getTabs().add(tabCategorie);
+        tableCategorie = new TableView<Categorie>();
+        this.tableCategorie.setMinSize(871, 623);
 
         TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
@@ -123,13 +124,15 @@ public class MenuPrincipalController implements Initializable{
 
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
 
+        this.affichageTableau.getChildren().clear();
+        this.affichageTableau.getChildren().addAll(tableCategorie);
     }
 
     @FXML
     public void afficherClients() throws SQLException {
 
-        Tab tabClient = new Tab("Clients", tableClient = new TableView<Client>());
-        this.tabPane.getTabs().add(tabClient);
+        tableClient = new TableView<Client>();
+        this.tableClient.setMinSize(871, 623);
         
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
@@ -155,13 +158,16 @@ public class MenuPrincipalController implements Initializable{
         this.tableClient.getColumns().setAll(colNom, colPrenom, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
 
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
+
+        this.affichageTableau.getChildren().clear();
+        this.affichageTableau.getChildren().addAll(tableClient);
     }
 
     @FXML
     public void afficherCommandes() throws SQLException {
-        
-        Tab tabCommande = new Tab("Commandes", tableCommande = new TableView<Commande>());
-        this.tabPane.getTabs().add(tabCommande);
+
+        tableCommande = new TableView<Commande>();
+        this.tableCommande.setMinSize(871, 623);
         
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
@@ -175,15 +181,18 @@ public class MenuPrincipalController implements Initializable{
         this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
 
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
+
+        this.affichageTableau.getChildren().clear();
+        this.affichageTableau.getChildren().addAll(tableCommande);
     }
 
         
     @FXML
     public void afficherProduits() throws SQLException {
-        
-        Tab tabProduit = new Tab("Produits", tableProduit = new TableView<Produit>());
-        this.tabPane.getTabs().add(tabProduit);
-        
+
+        tableProduit = new TableView<Produit>();
+        this.tableProduit.setMinSize(871, 623);
+
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
 
@@ -196,6 +205,9 @@ public class MenuPrincipalController implements Initializable{
         this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
 
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
+
+        this.affichageTableau.getChildren().clear();
+        this.affichageTableau.getChildren().addAll(tableProduit);
     }
 
 }

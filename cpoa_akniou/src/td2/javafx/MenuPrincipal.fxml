@@ -5,7 +5,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -87,11 +86,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false">
-                           <children>
-                              <TabPane fx:id="tabPane" accessibleRole="BUTTON" layoutX="-1.0" minHeight="-Infinity" prefHeight="625.0" prefWidth="1064.0" tabClosingPolicy="ALL_TABS" />
-                           </children>
-                        </AnchorPane>
+                      <AnchorPane fx:id="affichageTableau" minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false" />
                     </items>
                   </SplitPane>
                </children>
