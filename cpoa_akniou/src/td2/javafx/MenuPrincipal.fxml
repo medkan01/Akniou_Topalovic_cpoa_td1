@@ -40,9 +40,9 @@
           </MenuBar>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="980.0">
                <children>
-                  <SplitPane dividerPositions="0.29797979797979796" layoutX="-2.0" layoutY="-4.0" prefHeight="625.0" prefWidth="980.0">
+                  <SplitPane dividerPositions="0.20756646216768918" layoutX="-2.0" layoutY="-4.0" pickOnBounds="false" prefHeight="625.0" prefWidth="980.0">
                     <items>
-                      <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
+                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                            <children>
                               <Button fx:id="boutonCategories" mnemonicParsing="false" onAction="#afficherCategories" prefHeight="41.0" prefWidth="200.0" text="Catégories" />
                               <Button fx:id="boutonClients" layoutY="52.0" mnemonicParsing="false" onAction="#afficherClients" prefHeight="41.0" prefWidth="200.0" text="Clients" />
@@ -86,7 +86,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                      <AnchorPane fx:id="affichageTableau" minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="375.0" SplitPane.resizableWithParent="false" />
+                      <AnchorPane fx:id="affichageTableau" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="870.0" SplitPane.resizableWithParent="false" />
                     </items>
                   </SplitPane>
                </children>

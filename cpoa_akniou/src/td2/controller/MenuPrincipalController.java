@@ -112,7 +112,7 @@ public class MenuPrincipalController implements Initializable{
     public void afficherCategories() throws SQLException{
         
         tableCategorie = new TableView<Categorie>();
-        this.tableCategorie.setMinSize(871, 623);
+        this.tableCategorie.setMinSize(870, 620);
 
         TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
@@ -132,7 +132,7 @@ public class MenuPrincipalController implements Initializable{
     public void afficherClients() throws SQLException {
 
         tableClient = new TableView<Client>();
-        this.tableClient.setMinSize(871, 623);
+        this.tableClient.setMinSize(870, 620);
         
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
@@ -167,7 +167,7 @@ public class MenuPrincipalController implements Initializable{
     public void afficherCommandes() throws SQLException {
 
         tableCommande = new TableView<Commande>();
-        this.tableCommande.setMinSize(871, 623);
+        this.tableCommande.setMinSize(870, 620);
         
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
@@ -191,15 +191,21 @@ public class MenuPrincipalController implements Initializable{
     public void afficherProduits() throws SQLException {
 
         tableProduit = new TableView<Produit>();
-        this.tableProduit.setMinSize(871, 623);
+        this.tableProduit.setMinSize(870, 620);
 
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
+        colTarif.setMinWidth(50);
+        colTarif.setMaxWidth(50);
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
 
         TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
+        colLibelle.setMinWidth(120);
+        colLibelle.setMaxWidth(120);
         colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
 
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
+        colDescription.setMinWidth(700);
+        colDescription.setMaxWidth(700);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
 
         this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
