@@ -11,8 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,7 +31,6 @@ public class MenuPrincipalController implements Initializable{
     @FXML private Button boutonClients;
     @FXML private Button boutonCommandes;
     @FXML private Button boutonProduits;
-    @FXML private TabPane tabPane;
     @FXML private TableView<Categorie> tableCategorie;
     @FXML private TableView<Client> tableClient;
     @FXML private TableView<Commande> tableCommande;
@@ -46,6 +43,7 @@ public class MenuPrincipalController implements Initializable{
     @FXML private Button boutonModifier;
     @FXML private Button boutonSupprimer;
     @FXML private AnchorPane affichageTableau;
+    @FXML private Pane panelBoutonInteraction;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -94,7 +92,8 @@ public class MenuPrincipalController implements Initializable{
 
             if(controller.seConnecter()){
                 this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-                this.tabPane.getTabs().clear();
+                this.affichageTableau.getChildren().clear();
+                this.panelBoutonInteraction.
            }
         }
         catch (Exception e) {
@@ -106,6 +105,7 @@ public class MenuPrincipalController implements Initializable{
     public void setInstanceOffline(){
         this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         this.tabPane.getTabs().clear();
+        this.boutonAjouter.setDisable(true);
     }
 
     @FXML
@@ -126,6 +126,8 @@ public class MenuPrincipalController implements Initializable{
 
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCategorie);
+
+        this.boutonAjouter.setDisable(false);
     }
 
     @FXML
@@ -135,32 +137,45 @@ public class MenuPrincipalController implements Initializable{
         this.tableClient.setMinSize(870, 620);
         
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
+        colNom.setPrefWidth(100);
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
 
         TableColumn<Client, String> colPrenom = new TableColumn<>("Prenom");
+        colPrenom.setPrefWidth(100);
         colPrenom.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
 
-        TableColumn<Client, String> colAdrNumero = new TableColumn<>("Numéro");
-        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
+        TableColumn<Client, String> colIdentifiant = new TableColumn<>("E-mail");
+        colIdentifiant.setPrefWidth(200);
+        colIdentifiant.setCellValueFactory(new PropertyValueFactory<Client, String>("identifiant"));
+
+        TableColumn<Client, String> colAdrNumero = new TableColumn<>("N°");
+        colAdrNumero.setPrefWidth(30);
+        colAdrNumero.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
         
         TableColumn<Client, String> colAdrVoie = new TableColumn<>("Voie");
-        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
+        colAdrVoie.setPrefWidth(150);
+        colAdrVoie.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
 
         TableColumn<Client, String> colAdrCodePostal = new TableColumn<>("CP");
-        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrCodePostal"));
+        colAdrCodePostal.setPrefWidth(40);
+        colAdrCodePostal.setCellValueFactory(new PropertyValueFactory<Client, String>("adrCodePostal"));
 
         TableColumn<Client, String> colAdrVille = new TableColumn<>("Ville");
-        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVille"));
+        colAdrVille.setPrefWidth(75);
+        colAdrVille.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVille"));
 
         TableColumn<Client, String> colAdrPays = new TableColumn<>("Pays");
-        colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
+        colAdrPays.setPrefWidth(75);
+        colAdrPays.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
 
-        this.tableClient.getColumns().setAll(colNom, colPrenom, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
+        this.tableClient.getColumns().setAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
 
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
 
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableClient);
+
+        this.boutonAjouter.setDisable(false);
     }
 
     @FXML
@@ -184,6 +199,8 @@ public class MenuPrincipalController implements Initializable{
 
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCommande);
+
+        this.boutonAjouter.setDisable(false);
     }
 
         
@@ -194,18 +211,15 @@ public class MenuPrincipalController implements Initializable{
         this.tableProduit.setMinSize(870, 620);
 
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
-        colTarif.setMinWidth(50);
-        colTarif.setMaxWidth(50);
+        colTarif.setPrefWidth(50);
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
 
         TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
-        colLibelle.setMinWidth(120);
-        colLibelle.setMaxWidth(120);
+        colLibelle.setPrefWidth(120);
         colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
 
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
-        colDescription.setMinWidth(700);
-        colDescription.setMaxWidth(700);
+        colDescription.setPrefWidth(700);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
 
         this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
@@ -214,6 +228,26 @@ public class MenuPrincipalController implements Initializable{
 
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableProduit);
+
+        this.boutonAjouter.setDisable(false);
     }
 
+    @FXML
+    public void Ajouter(){
+        if(this.affichageTableau.getChildren().contains(tableCategorie))
+        {
+
+        }
+        else if(this.affichageTableau.getChildren().contains(tableClient))
+        {
+
+        }
+        else if(this.affichageTableau.getChildren().contains(tableCommande))
+        {
+
+        }
+        else if(this.affichageTableau.getChildren().contains(tableProduit)){
+
+        }
+    }
 }

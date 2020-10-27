@@ -36,7 +36,10 @@
                   </Label>
                   <Button fx:id="boutonLocal" layoutX="448.0" layoutY="468.0" mnemonicParsing="false" onAction="#localHost" prefHeight="32.0" prefWidth="87.0" text="Local" />
                   <Label layoutX="188.0" layoutY="546.0" prefHeight="17.0" prefWidth="673.0" text="*En mode local vous pourrez effectuer uniquement des tests. Ils n'auront aucun impact sur votre boutique en ligne." />
-                  <Label fx:id="labelConnecter" layoutX="439.0" layoutY="317.0" />
+                  <Label fx:id="labelConnecter" layoutX="416.0" layoutY="312.0" textFill="#52d044">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
           </AnchorPane>
         </children>
