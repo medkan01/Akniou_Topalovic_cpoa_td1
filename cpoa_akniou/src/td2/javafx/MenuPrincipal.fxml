@@ -21,11 +21,12 @@
             <menus>
               <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Mode Nuit">
+                        <RadioMenuItem mnemonicParsing="false" text="Sombre">
                            <toggleGroup>
                               <ToggleGroup fx:id="groupeModeNuit" />
                            </toggleGroup>
                         </RadioMenuItem>
+                        <RadioMenuItem mnemonicParsing="false" selected="true" text="Claire" toggleGroup="$groupeModeNuit" />
                      </items>
               </Menu>
               <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">

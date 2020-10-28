@@ -19,7 +19,7 @@ import td2.pojo.Produit;
 
 public class AjoutProduitController implements Initializable {
 
-    static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+    private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
     @FXML private Button boutonCreer;
     @FXML private Label labelResumeProduit;
@@ -60,11 +60,21 @@ public class AjoutProduitController implements Initializable {
         return true;
     }
 
+
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
         } catch (Exception e) {
             this.labelResumeProduit.setText("erreur Categorie");
+        }
+    }
+    @FXML
+    public void setDaos(String persistance){
+        if(persistance.equals("MySQL")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(persistance.equals("ListeMemoire")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
     }
 }

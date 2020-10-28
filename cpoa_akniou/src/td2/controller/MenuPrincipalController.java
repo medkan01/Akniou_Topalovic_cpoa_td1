@@ -14,7 +14,9 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
@@ -58,6 +60,7 @@ public class MenuPrincipalController implements Initializable{
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
                 connexionStage.setResizable(false);
+                connexionStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 connexionStage.showAndWait();
                 daos=controller.getDaos();
             }
@@ -88,12 +91,13 @@ public class MenuPrincipalController implements Initializable{
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);
             connexionStage.setResizable(false);
+            connexionStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
             connexionStage.showAndWait();
 
             if(controller.seConnecter()){
                 this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
                 this.affichageTableau.getChildren().clear();
-                this.panelBoutonInteraction.
+                this.panelBoutonInteraction.setDisable(true);
            }
         }
         catch (Exception e) {
@@ -104,8 +108,8 @@ public class MenuPrincipalController implements Initializable{
     @FXML 
     public void setInstanceOffline(){
         this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
-        this.tabPane.getTabs().clear();
-        this.boutonAjouter.setDisable(true);
+        this.affichageTableau.getChildren().clear();
+        this.panelBoutonInteraction.setDisable(true);
     }
 
     @FXML
@@ -127,7 +131,7 @@ public class MenuPrincipalController implements Initializable{
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCategorie);
 
-        this.boutonAjouter.setDisable(false);
+        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
@@ -175,7 +179,7 @@ public class MenuPrincipalController implements Initializable{
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableClient);
 
-        this.boutonAjouter.setDisable(false);
+        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
@@ -200,7 +204,7 @@ public class MenuPrincipalController implements Initializable{
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCommande);
 
-        this.boutonAjouter.setDisable(false);
+        this.panelBoutonInteraction.setDisable(false);
     }
 
         
@@ -229,25 +233,90 @@ public class MenuPrincipalController implements Initializable{
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableProduit);
 
-        this.boutonAjouter.setDisable(false);
+        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
     public void Ajouter(){
+        Stage ajoutStage = new Stage();
         if(this.affichageTableau.getChildren().contains(tableCategorie))
         {
+            try{
+            URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutCategorie.fxml");
+            FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+            Node rootConnexion = fxmlLoaderConnexion.load();
+           // AccueilController controller = fxmlLoaderConnexion.getController();
+            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 430);
+            ajoutStage.setScene(sceneConnexion);
+            ajoutStage.setTitle("Ajout Categorie");
+            ajoutStage.initModality(Modality.APPLICATION_MODAL);
+            ajoutStage.setResizable(false);
+            ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            ajoutStage.showAndWait();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         }
         else if(this.affichageTableau.getChildren().contains(tableClient))
         {
-
+            try{
+                URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutClient.fxml");
+                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+                Node rootConnexion = fxmlLoaderConnexion.load();
+               // AccueilController controller = fxmlLoaderConnexion.getController();
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 430);
+                ajoutStage.setScene(sceneConnexion);
+                ajoutStage.setTitle("Ajout Categorie");
+                ajoutStage.initModality(Modality.APPLICATION_MODAL);
+                ajoutStage.setResizable(false);
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.showAndWait();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        else if(this.affichageTableau.getChildren().contains(tableCommande))
+       /* else if(this.affichageTableau.getChildren().contains(tableCommande))
         {
-
-        }
+            try{
+                URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutCommande.fxml");
+                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+                Node rootConnexion = fxmlLoaderConnexion.load();
+               // AccueilController controller = fxmlLoaderConnexion.getController();
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 430);
+                ajoutStage.setScene(sceneConnexion);
+                ajoutStage.setTitle("Ajout Categorie");
+                ajoutStage.initModality(Modality.APPLICATION_MODAL);
+                ajoutStage.setResizable(false);
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.showAndWait();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
         else if(this.affichageTableau.getChildren().contains(tableProduit)){
-
+            try{
+                URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutProduit.fxml");
+                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+                Node rootConnexion = fxmlLoaderConnexion.load();
+                AjoutProduitController controller = fxmlLoaderConnexion.getController();
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
+                controller.setDaos(daos.getPersistanceActuelle());
+                ajoutStage.setScene(sceneConnexion);
+                ajoutStage.setTitle("Ajout Produit");
+                ajoutStage.initModality(Modality.APPLICATION_MODAL);
+                ajoutStage.setResizable(false);
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.showAndWait();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
+
 }

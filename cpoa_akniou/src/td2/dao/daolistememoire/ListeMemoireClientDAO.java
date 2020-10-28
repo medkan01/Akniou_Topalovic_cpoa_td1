@@ -20,7 +20,8 @@ public class ListeMemoireClientDAO implements ClientDAO{
     private ListeMemoireClientDAO() {
         donnees = new ArrayList<Client>();
         this.donnees.add(new Client(1, "Laroche", "Pierre", "laroche5@ul.fr", "toto", "12", "Rue des etudiants", "57000", "Metz", "France"));
-		this.donnees.add(new Client(2, "Akniou", "Mehdi", "mehdiakniou@gmail.com", "toto", "12", "Rue des etudiants", "57000", "Metz", "France"));
+        this.donnees.add(new Client(2, "Akniou", "Mehdi", "mehdiakniou@gmail.com", "toto", "12", "Rue des etudiants", "57000", "Metz", "France"));
+        this.donnees.add(new Client(2, "Topalovic", "Ajdin", "ajdintpc@gmail.com", "toto", "12", "Rue des etudiants", "57000", "Hagondange", "France"));
     }
     
     public boolean insert(Client objet){

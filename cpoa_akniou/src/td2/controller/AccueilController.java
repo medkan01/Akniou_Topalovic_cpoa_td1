@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,7 +45,8 @@ public class AccueilController extends Stage{
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);
             connexionStage.setResizable(false);
-            connexionStage.showAndWait();
+            connexionStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            connexionStage.showAndWait();  
 
             if(controller.seConnecter()){
                 this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);

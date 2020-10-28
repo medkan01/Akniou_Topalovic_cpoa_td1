@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ public class Main extends Application{
             primaryStage.setTitle("EZGestion");
             primaryStage.show();
             primaryStage.setResizable(false);
+            primaryStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
         } catch (Exception e) {
             e.printStackTrace();
         }
