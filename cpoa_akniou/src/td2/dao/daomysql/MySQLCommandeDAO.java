@@ -80,17 +80,11 @@ public class MySQLCommandeDAO implements CommandeDAO{
 	public ArrayList<Commande> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT Commande.id_commande, date_commande, Commande.id_client, Ligne_commande.id_produit, "+
-		"quantite, tarif_unitaire, nom, description, tarif, visuel, id_categorie FROM akniou1u_cpoa.Commande, akniou1u_cpoa.Ligne_commande, akniou1u_cpoa.Produit "+
-		"WHERE Commande.id_commande = Ligne_commande.id_commande AND Produit.id_produit = Ligne_commande.id_produit;");
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Commande");
 		ResultSet res = requete.getResultSet();
 		ArrayList<Commande> liste = new ArrayList<Commande>();
 		while (res.next()) {
-			Commande commande = new Commande(res.getInt("id_commande"),res.getDate("date_commande").toLocalDate(),res.getInt("id_client"));
-			
-			Produit produit = new Produit(res.getInt("Ligne_commande.id_produit"), res.getString("nom"), res.getString("description"), res.getDouble("tarif"), res.getString("visuel"), res.getInt("id_categorie"));
-			LigneCommande ligneCommande = new LigneCommande(res.getInt("quantite"), res.getDouble("tarif_unitaire"));
-			commande.ajouterLigne(produit, ligneCommande);
+			Commande commande = new Commande(res.getInt("id_commande"), res.getDate("date_commande").toLocalDate(), res.getInt("id_client"));
 			liste.add(commande);
 		}
 		return liste;

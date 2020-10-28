@@ -21,7 +21,7 @@ public class ModifierCategorieController {
     @FXML private TextField saisieTitre, saisieVisuel;
     @FXML private TableView<Categorie> tableCategorie;
     String dao = DAOFactory.getPersistanceActuelle();
-    DAOFactory daos = DAOFactory.getDAOFactory(Persistance.dao);
+    DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
     
     public void modifierCategorie() {
         try {
@@ -42,8 +42,9 @@ public class ModifierCategorieController {
             colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
 
             tableCategorie.getColumns().setAll(colTitre, colVisuel);
-			tableCatogorie.getItems().addAll(daos.getProduitDAO().getAll());
+			tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
         } catch(Exception e) {
             
         }
+    }
 }

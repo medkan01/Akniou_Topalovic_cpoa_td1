@@ -20,7 +20,7 @@ public class Main extends Application{
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((AnchorPane) root, 980, 650);
-            scene.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
+            //scene.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.setTitle("EZGestion");
             primaryStage.show();

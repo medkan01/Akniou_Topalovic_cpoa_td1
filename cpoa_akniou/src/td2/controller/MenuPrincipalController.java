@@ -189,18 +189,18 @@ public class MenuPrincipalController implements Initializable{
         tableCommande = new TableView<Commande>();
         this.tableCommande.setMinSize(870, 620);
         
-        TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
-        colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
+        TableColumn<Commande, Integer> colIdCommande = new TableColumn<>("ID Commande");
+        colIdCommande.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("id"));
 
-        TableColumn<Produit,String> colLibelle = new TableColumn<>("Nom");
-        colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
+        TableColumn<Commande,String> colDate = new TableColumn<>("Date");
+        colDate.setCellValueFactory(new PropertyValueFactory<Commande, String>("date"));
 
-        TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
-        colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
+        TableColumn<Commande, Integer> colIdClient = new TableColumn<>("ID Client");
+        colIdClient.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("idClient"));
 
-        this.tableProduit.getColumns().setAll(colTarif,colLibelle,colDescription);
+        this.tableCommande.getColumns().setAll(colIdCommande,colDate,colIdClient);
 
-        this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
+        this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
 
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCommande);
