@@ -115,7 +115,7 @@ public class MenuPrincipalController implements Initializable{
     }
 
     @FXML
-    public void afficherCategories() throws SQLException{
+    public void afficherCategorie() throws SQLException{
         
         tableCategorie = new TableView<Categorie>();
         this.tableCategorie.setMinSize(870, 620);
@@ -247,7 +247,8 @@ public class MenuPrincipalController implements Initializable{
             URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutCategorie.fxml");
             FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
             Node rootConnexion = fxmlLoaderConnexion.load();
-           // AccueilController controller = fxmlLoaderConnexion.getController();
+            AjoutCategorieController controller = fxmlLoaderConnexion.getController();
+            controller.setDaos(DAOFactory.getPersistanceActuelle());
             Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 550, 180);
             ajoutStage.setScene(sceneConnexion);
             ajoutStage.setTitle("Ajout Categorie");
@@ -259,7 +260,13 @@ public class MenuPrincipalController implements Initializable{
         catch (Exception e) {
             e.printStackTrace();
         }
-
+        this.affichageTableau.getChildren().clear();
+        try{
+        afficherCategorie();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         }
         else if(this.affichageTableau.getChildren().contains(tableClient))
         {
@@ -305,7 +312,7 @@ public class MenuPrincipalController implements Initializable{
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AjoutProduitController controller = fxmlLoaderConnexion.getController();
-                controller.setDaos(daos.getPersistanceActuelle());
+                controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
                 ajoutStage.setScene(sceneConnexion);
                 ajoutStage.setTitle("Ajout Produit");
@@ -327,6 +334,34 @@ public class MenuPrincipalController implements Initializable{
             }
         }
 
+    }
+
+    public void modifier() {
+        try{
+            if(this.affichageTableau.getChildren().contains(tableCategorie)){
+                Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
+                Stage modifierStage = new Stage();
+
+                //Creation et affichage de la fenetre
+                URL fxmlURLConnexion=getClass().getResource("../javafx/ModifierCategorie.fxml");
+                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
+                Node rootConnexion = fxmlLoaderConnexion.load();
+                ModifierCategorieController controller = fxmlLoaderConnexion.getController();
+                controller.setCategorie(categorie);
+                controller.setDaos(DAOFactory.getPersistanceActuelle());
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 145);
+                modifierStage.setScene(sceneConnexion);
+                modifierStage.setTitle("Modifier categorie");
+                modifierStage.initModality(Modality.APPLICATION_MODAL);
+                modifierStage.setResizable(false);
+                modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                modifierStage.showAndWait();
+                this.affichageTableau.getChildren().clear();
+                afficherCategorie();
+            }
+        } catch(Exception e) {
+
+        }
     }
 
 }

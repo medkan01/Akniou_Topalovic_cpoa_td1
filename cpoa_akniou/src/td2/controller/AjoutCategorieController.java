@@ -19,7 +19,7 @@ public class AjoutCategorieController {
     @FXML private AnchorPane panelFenetreCategorie;
     @FXML private TextField saisieTitre;
     @FXML private GridPane gridPaneResume, gridPaneSaisie;
-    static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+    private DAOFactory daos;
     
     @FXML
     public boolean creerCategorie(){
@@ -40,5 +40,15 @@ public class AjoutCategorieController {
         }
 
         return true;
+    }
+
+    @FXML 
+    public void setDaos(String persistance){
+        if(persistance.equals("MySQL")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(persistance.equals("ListeMemoire")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        }
     }
 }

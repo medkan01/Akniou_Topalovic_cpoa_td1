@@ -1,50 +1,59 @@
 package td2.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.mysql.cj.xdevapi.Table;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
 
-public class ModifierCategorieController {
-    
+public class ModifierCategorieController{
+
     @FXML private Button boutonValider, boutonAnnuler;
     @FXML private TextField saisieTitre, saisieVisuel;
     @FXML private TableView<Categorie> tableCategorie;
-    String dao = DAOFactory.getPersistanceActuelle();
-    DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-    
+    @FXML private Label labelResume;
+    private DAOFactory daos;
+    private int id;
+
     public void modifierCategorie() {
         try {
-            
-        } catch(Exception e) {
-
+            String titre = saisieTitre.getText();
+            String visuel = saisieVisuel.getText();
+            if(daos.getCategorieDAO().update(new Categorie(id, titre, visuel))){
+                labelResume.setTextFill(Color.web("#52D044"));
+                labelResume.setText("Categorie ajoutée avec succés !");
+            }
+        } catch (Exception e) {
+            labelResume.setTextFill(Color.web("#FF0000"));
+            labelResume.setText(e.getMessage());
         }
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
+    @FXML
+    public void annuler(){
+        Stage fenetre = (Stage) boutonAnnuler.getScene().getWindow();
+        fenetre.close();
+    }
 
-            // Table de tous les produits
-            TableColumn<Categorie, String> colTitre = new TableColumn<Categorie, String>("Titre");
-            TableColumn<Categorie, String> colVisuel = new TableColumn<Categorie, String>("Visuel");
+    public void setCategorie(Categorie obj) throws Exception{
+        this.id = obj.getId();
+        this.saisieTitre.setText(obj.getTitre());
+        this.saisieVisuel.setText(obj.getVisuel());
+    }
 
-            colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
-            colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
+    @FXML 
+    public void setDaos(String persistance){
 
-            tableCategorie.getColumns().setAll(colTitre, colVisuel);
-			tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
-        } catch(Exception e) {
-            
+        if(persistance.equals("MySQL")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(persistance.equals("ListeMemoire")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
     }
 }
