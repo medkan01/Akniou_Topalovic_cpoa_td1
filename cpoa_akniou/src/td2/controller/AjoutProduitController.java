@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -62,19 +63,24 @@ public class AjoutProduitController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
+        URL fxmlURLMenuPrincipal = getClass().getResource("../javafx/MenuPrincipal.fxml");
+        FXMLLoader fxmlLoaderMenuPrincipal = new FXMLLoader(fxmlURLMenuPrincipal);
+        MenuPrincipalController controller =  fxmlLoaderMenuPrincipal.getController();
+
+        if(controller.getDaos().equals("MySQL"))
+        {
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(controller.getDaos().equals("ListeMemoire"))
+        {
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        }
+
         try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
         } catch (Exception e) {
             this.labelResumeProduit.setText("erreur Categorie");
         }
     }
-    @FXML
-    public void setDaos(String persistance){
-        if(persistance.equals("MySQL")){
-            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-        }
-        else if(persistance.equals("ListeMemoire")){
-            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
-        }
-    }
+
 }

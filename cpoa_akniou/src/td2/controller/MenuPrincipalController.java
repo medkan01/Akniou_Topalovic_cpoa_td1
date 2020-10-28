@@ -79,6 +79,12 @@ public class MenuPrincipalController implements Initializable{
         }
         
     }
+
+    @FXML
+    public String getDaos(){
+        return this.daos.getPersistanceActuelle();
+    }
+
     @FXML 
     public void setInstanceOnline(){
         Stage connexionStage = new Stage();
@@ -247,7 +253,7 @@ public class MenuPrincipalController implements Initializable{
             FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
             Node rootConnexion = fxmlLoaderConnexion.load();
            // AccueilController controller = fxmlLoaderConnexion.getController();
-            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 430);
+            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 550, 180);
             ajoutStage.setScene(sceneConnexion);
             ajoutStage.setTitle("Ajout Categorie");
             ajoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -303,9 +309,7 @@ public class MenuPrincipalController implements Initializable{
                 URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutProduit.fxml");
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
                 Node rootConnexion = fxmlLoaderConnexion.load();
-                AjoutProduitController controller = fxmlLoaderConnexion.getController();
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
-                controller.setDaos(daos.getPersistanceActuelle());
                 ajoutStage.setScene(sceneConnexion);
                 ajoutStage.setTitle("Ajout Produit");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
