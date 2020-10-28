@@ -1,24 +1,20 @@
 package td2.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
 import td2.pojo.Produit;
 
-public class AjoutProduitController implements Initializable {
+public class AjoutProduitController{
 
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
@@ -47,40 +43,34 @@ public class AjoutProduitController implements Initializable {
             }
             Produit p = new Produit(0, nom, description, tarif, "", categorie.getId());
             if (daos.getProduitDAO().insert(p) == true){
-                labelResumeProduit.setTextFill(Color.web("#000000"));
-                labelResumeProduit.setText(p.toString());
+                this.labelResumeProduit.setTextFill(Color.web("#000000"));
+                this.labelResumeProduit.setText(p.toString());
             }
             else{
                throw new IllegalArgumentException("Impossible d'ajouter le produit");
             }
         } catch (Exception e){
-            labelResumeProduit.setTextFill(Color.web("#FF0000"));
-            labelResumeProduit.setText(e.getMessage());
+            this.labelResumeProduit.setTextFill(Color.web("#FF0000"));
+            this.labelResumeProduit.setText(e.getMessage());
         }
-
         return true;
     }
+    
+    @FXML 
+    public void setDaos(String persistance){
 
-
-    public void initialize(URL location, ResourceBundle resources) {
-        URL fxmlURLMenuPrincipal = getClass().getResource("../javafx/MenuPrincipal.fxml");
-        FXMLLoader fxmlLoaderMenuPrincipal = new FXMLLoader(fxmlURLMenuPrincipal);
-        MenuPrincipalController controller =  fxmlLoaderMenuPrincipal.getController();
-
-        if(controller.getDaos().equals("MySQL"))
-        {
+        if(persistance.equals("MySQL")){
             this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
         }
-        else if(controller.getDaos().equals("ListeMemoire"))
-        {
+        else if(persistance.equals("ListeMemoire")){
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
 
         try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
         } catch (Exception e) {
+            this.labelResumeProduit.setTextFill(Color.web("#FF0000"));
             this.labelResumeProduit.setText("erreur Categorie");
         }
     }
-
 }

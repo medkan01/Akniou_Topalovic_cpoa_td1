@@ -11,14 +11,14 @@ public class ConnexionController {
     @FXML TextField saisieUtilisateur;
     @FXML PasswordField saisieMotDePasse;
     @FXML Label labelErreur;
-    @FXML Button bouttonConnexion;
-    @FXML Button bouttonAnnuler;
+    @FXML Button boutonConnexion;
+    @FXML Button boutonAnnuler;
 
     @FXML
     public boolean seConnecter(){
     if((this.saisieUtilisateur.getText().equals("admin"))&&(this.saisieMotDePasse.getText().equals("motdepasse")))
     {
-        Stage fenetre = (Stage) bouttonAnnuler.getScene().getWindow();
+        Stage fenetre = (Stage) boutonConnexion.getScene().getWindow();
         fenetre.close();
         return true;
     }
@@ -30,7 +30,7 @@ public class ConnexionController {
 
     @FXML
     public void Retour(){
-        Stage fenetre = (Stage) bouttonAnnuler.getScene().getWindow();
+        Stage fenetre = (Stage) boutonAnnuler.getScene().getWindow();
         fenetre.close();
     }
 }

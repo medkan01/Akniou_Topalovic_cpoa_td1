@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ConnexionController">
    <children>
       <Label layoutX="209.0" layoutY="102.0" prefHeight="17.0" prefWidth="61.0" text="Utilisateur :" />
@@ -20,7 +19,7 @@
          </font>
       </Label>
       <Label fx:id="labelErreur" layoutX="120.0" layoutY="251.0" textFill="RED" />
-      <Button fx:id="bouttonConnexion" layoutX="418.0" layoutY="275.0" mnemonicParsing="false" onAction="#seConnecter" text="Connexion" />
-      <Button fx:id="bouttonAnnuler" layoutX="350.0" layoutY="275.0" mnemonicParsing="false" onAction="#Retour" text="Annuler" />
+      <Button fx:id="boutonConnexion" layoutX="418.0" layoutY="275.0" mnemonicParsing="false" onAction="#seConnecter" text="Connexion" />
+      <Button fx:id="boutonAnnuler" layoutX="350.0" layoutY="275.0" mnemonicParsing="false" onAction="#Retour" text="Annuler" />
    </children>
 </AnchorPane>

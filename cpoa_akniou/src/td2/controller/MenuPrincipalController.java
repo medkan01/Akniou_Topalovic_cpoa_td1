@@ -56,7 +56,7 @@ public class MenuPrincipalController implements Initializable{
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AccueilController controller = fxmlLoaderConnexion.getController();
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 980, 650);
-            //    sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
+            //sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
                 connexionStage.setScene(sceneConnexion);
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
@@ -78,11 +78,6 @@ public class MenuPrincipalController implements Initializable{
             }
         }
         
-    }
-
-    @FXML
-    public String getDaos(){
-        return this.daos.getPersistanceActuelle();
     }
 
     @FXML 
@@ -309,6 +304,8 @@ public class MenuPrincipalController implements Initializable{
                 URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutProduit.fxml");
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
                 Node rootConnexion = fxmlLoaderConnexion.load();
+                AjoutProduitController controller = fxmlLoaderConnexion.getController();
+                controller.setDaos(daos.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
                 ajoutStage.setScene(sceneConnexion);
                 ajoutStage.setTitle("Ajout Produit");
@@ -316,6 +313,14 @@ public class MenuPrincipalController implements Initializable{
                 ajoutStage.setResizable(false);
                 ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 ajoutStage.showAndWait();
+                
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.affichageTableau.getChildren().clear();
+            try{
+            afficherProduits();
             }
             catch (Exception e) {
                 e.printStackTrace();
