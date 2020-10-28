@@ -137,7 +137,7 @@ public class Client {
 		if(adrVille=="") {
 			throw new IllegalArgumentException("La ville saisie est vide");
 		} else {
-
+			this.adrVille = adrVille;
 		}
 	}
 

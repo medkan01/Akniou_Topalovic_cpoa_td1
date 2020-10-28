@@ -56,6 +56,7 @@ public class MenuPrincipalController implements Initializable{
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AccueilController controller = fxmlLoaderConnexion.getController();
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 980, 650);
+            //    sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
                 connexionStage.setScene(sceneConnexion);
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
