@@ -28,7 +28,7 @@ public class AjoutCategorieController {
             this.labelResume.setText("");;
             Categorie categorie = new Categorie(1, titre, titre+".png");
             if (daos.getCategorieDAO().insert(categorie) == true){
-                labelResume.setTextFill(Color.web("#000000"));
+                labelResume.setTextFill(Color.web("#52D044"));
                 labelResume.setText("La categorie "+ categorie.toString() + " a ete ajoutee avec succes");
             }
             else{
