@@ -1,5 +1,9 @@
 package td2.controller;
 
+import java.util.regex.Pattern;
+
+import com.mysql.cj.util.StringUtils;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,8 +35,10 @@ public class AjoutProduitController{
 
             if (saisieTarif.getText().isEmpty()) {
                 throw new IllegalArgumentException("La case tarif est vide");
+            } else if(!isNumeric(this.saisieTarif.getText().trim())){
+                throw new IllegalArgumentException("Le tarif saisie est incorrect");
             } else {
-                tarif = Double.parseDouble(saisieTarif.getText().trim());
+                tarif = Double.parseDouble(this.saisieTarif.getText().trim());
             }
 
             Categorie categorie = this.cbxCategorie.getValue();
@@ -70,6 +76,16 @@ public class AjoutProduitController{
         } catch (Exception e) {
             this.labelResumeProduit.setTextFill(Color.web("#FF0000"));
             this.labelResumeProduit.setText("erreur Categorie");
+        }
+    }
+
+    private static boolean isNumeric(String str){
+        try {
+            Double.parseDouble(str);
+            return true;
+
+        } catch(NumberFormatException e) {
+            return false;
         }
     }
 }
