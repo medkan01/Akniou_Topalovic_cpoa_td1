@@ -16,7 +16,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("../javafx/AjoutCommande.fxml");
+            URL fxmlURL=getClass().getResource("../javafx/MenuPrincipal.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((AnchorPane) root, 980, 650);

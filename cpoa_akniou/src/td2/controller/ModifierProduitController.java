@@ -32,8 +32,10 @@ public class ModifierProduitController {
 
             if (saisieTarif.getText().isEmpty()) {
                 throw new IllegalArgumentException("La case tarif est vide");
+            } else if(!isNumeric(this.saisieTarif.getText().trim())) {
+                throw new IllegalArgumentException("Le tarif saisie est incorrect");
             } else {
-                tarif = Double.parseDouble(saisieTarif.getText().trim());
+                tarif = Double.parseDouble(this.saisieTarif.getText().trim());
             }
 
             Categorie categorie = this.cbxCategorie.getValue();
@@ -42,7 +44,7 @@ public class ModifierProduitController {
                 throw new IllegalArgumentException("Aucune catégorie selectionnée");
             }
             Produit p = new Produit(id, nom, description, tarif, "", categorie.getId());
-            if (daos.getProduitDAO().insert(p) == true){
+            if (daos.getProduitDAO().update(p) == true){
                 this.labelResumeProduit.setTextFill(Color.web("#000000"));
                 this.labelResumeProduit.setText(p.toString());
             }
@@ -57,11 +59,12 @@ public class ModifierProduitController {
     }
 
     @FXML
-    public void setClient(Produit obj) throws Exception{
+    public void setProduit(Produit obj) throws Exception{
         this.id = obj.getId();
         this.saisieNom.setText(obj.getNom());
         this.saisieDescription.setText(obj.getDescription());
         this.saisieTarif.setText(String.valueOf(obj.getTarif()));
+        this.cbxCategorie.setValue(daos.getCategorieDAO().getById(obj.getIdCategorie()));
     }
 
     @FXML 
@@ -79,6 +82,16 @@ public class ModifierProduitController {
         } catch (Exception e) {
             this.labelResumeProduit.setTextFill(Color.web("#FF0000"));
             this.labelResumeProduit.setText("erreur Categorie");
+        }
+    }
+
+    private static boolean isNumeric(String str){
+        try {
+            Double.parseDouble(str);
+            return true;
+
+        } catch(NumberFormatException e) {
+            return false;
         }
     }
 }

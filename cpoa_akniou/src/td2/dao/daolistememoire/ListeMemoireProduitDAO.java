@@ -26,7 +26,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
     private ListeMemoireProduitDAO() {
         donnees = new ArrayList<Produit>();
         this.donnees.add(new Produit(1, "Sonic te claque", "Sonic te claque parce qu'il est mechant", 25.2, "sonic.png", 1));
-		this.donnees.add(new Produit(2, "MarioGros", "Il a grossi", 25.2, "mario.png", 1));
+		this.donnees.add(new Produit(2, "MarioGros", "Il a grossi", 25.2, "mario.png", 2));
     }
 
 	public boolean delete(Produit objet) {
