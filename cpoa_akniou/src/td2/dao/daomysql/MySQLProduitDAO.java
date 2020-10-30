@@ -2,6 +2,8 @@ package td2.dao.daomysql;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import td2.controller.Categorie;
 import td2.dao.daofactory.ProduitDAO;
 import td2.pojo.Produit;
 
@@ -80,7 +82,18 @@ public class MySQLProduitDAO implements ProduitDAO {
 			res.getInt("id_categorie"));
 		return produit;
 	}
-	
+
+	public Categorie getCategorie(int id) throws SQLException{
+		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
+		Connection c = Connexion.getInstance().getMaConnexion();
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
+		ResultSet res = requete.getResultSet();
+		res.next();
+		Categorie categorie = new Categorie("id_categorie", "titre","visuel");
+		return categorie;
+	}
+
 	public ArrayList<Produit> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();

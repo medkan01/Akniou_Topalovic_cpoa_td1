@@ -2,10 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -53,7 +55,7 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
@@ -86,6 +88,7 @@
                               <Insets />
                            </opaqueInsets>
                         </Button>
+                        <Label text="Label" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <GridPane fx:id="gridTable">
@@ -101,7 +104,20 @@
                         <TableView fx:id="tableProduitSelectionne" prefHeight="403.0" prefWidth="306.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Label fx:id="labelResume" maxWidth="-Infinity" prefWidth="400.0" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Catégorie :">
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </Label>
+                        <ChoiceBox fx:id="cbxCategorie" prefHeight="25.0" prefWidth="108.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ChoiceBox>
+                     </children>
+                  </FlowPane>
                </children>
             </GridPane>
          </children>

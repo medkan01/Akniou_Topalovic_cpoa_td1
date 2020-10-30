@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
