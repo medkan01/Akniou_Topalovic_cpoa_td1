@@ -67,7 +67,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonAjouter" mnemonicParsing="false" onAction="#Ajouter">
+                                          <Button fx:id="boutonAjouter" mnemonicParsing="false" onAction="#ajouter">
                                              <graphic>
                                                 <ImageView fx:id="imageAdd" fitHeight="59.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

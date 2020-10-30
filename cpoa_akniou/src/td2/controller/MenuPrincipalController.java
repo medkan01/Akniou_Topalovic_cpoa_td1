@@ -238,7 +238,7 @@ public class MenuPrincipalController implements Initializable{
     }
 
     @FXML
-    public void Ajouter(){
+    public void ajouter(){
         Stage ajoutStage = new Stage();
         if(this.affichageTableau.getChildren().contains(tableCategorie)) {
             try{
@@ -360,13 +360,13 @@ public class MenuPrincipalController implements Initializable{
                 Stage modifierStage = new Stage();
 
                 //Creation et affichage de la fenetre
-                URL fxmlURLConnexion=getClass().getResource("../javafx/ModifierCategorie.fxml");
+                URL fxmlURLConnexion=getClass().getResource("../javafx/ModifierClient.fxml");
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
                 Node rootConnexion = fxmlLoaderConnexion.load();
-                ModifierCategorieController controller = fxmlLoaderConnexion.getController();
-                //controller.setClient(client);
+                ModifierClientController controller = fxmlLoaderConnexion.getController();
+                controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 145);
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
                 modifierStage.setScene(sceneConnexion);
                 modifierStage.setTitle("Modifier client");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
@@ -374,7 +374,7 @@ public class MenuPrincipalController implements Initializable{
                 modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 modifierStage.showAndWait();
                 this.affichageTableau.getChildren().clear();
-                afficherCategorie();
+                afficherClients();
             }
         } catch(Exception e) {
 
