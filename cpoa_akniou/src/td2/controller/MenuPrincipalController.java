@@ -289,15 +289,16 @@ public class MenuPrincipalController implements Initializable{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } /* else if(this.affichageTableau.getChildren().contains(tableCommande)) {
+        }else if(this.affichageTableau.getChildren().contains(tableCommande)) {
             try{
                 URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutCommande.fxml");
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
                 Node rootConnexion = fxmlLoaderConnexion.load();
-               // AccueilController controller = fxmlLoaderConnexion.getController();
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 430);
+                AjoutCommandeController controller = fxmlLoaderConnexion.getController();
+                controller.setDaos(DAOFactory.getPersistanceActuelle());
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
                 ajoutStage.setScene(sceneConnexion);
-                ajoutStage.setTitle("Ajout Categorie");
+                ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
                 ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
@@ -305,7 +306,7 @@ public class MenuPrincipalController implements Initializable{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/else if(this.affichageTableau.getChildren().contains(tableProduit)){
+        }else if(this.affichageTableau.getChildren().contains(tableProduit)){
             try{
                 URL fxmlURLConnexion=getClass().getResource("../javafx/AjoutProduit.fxml");
                 FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);

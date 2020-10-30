@@ -1,26 +1,30 @@
 package td2.controller;
 
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Produit;
 
-public class AjoutCommandeController implements Initializable {
+public class AjoutCommandeController{
     
-    static DAOFactory daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+    static DAOFactory daos;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
@@ -42,7 +46,34 @@ public class AjoutCommandeController implements Initializable {
         return true;
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void ajouter(){
+        Stage quantiteStage = new Stage();
+        try{
+        URL fxmlURLQuantite = getClass().getResource("../javafx/ChoisirQuantiteLigneCommande.fxml");
+        FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLQuantite);
+        Node rootQuantite = fxmlLoaderConnexion.load();
+        Scene sceneConnexion = new Scene((AnchorPane) rootQuantite, 150, 105);
+        quantiteStage.setScene(sceneConnexion);
+        quantiteStage.setTitle("Choix quantité");
+        quantiteStage.initModality(Modality.APPLICATION_MODAL);
+        quantiteStage.setResizable(false);
+        quantiteStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+        quantiteStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML 
+    public void setDaos(String persistance){
+
+        if(persistance.equals("MySQL")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(persistance.equals("ListeMemoire")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        }
         try {
 
             // Table de tous les produits
