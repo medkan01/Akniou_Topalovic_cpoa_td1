@@ -95,7 +95,7 @@ public class AjoutCommandeController{
 
             this.tableProduit.getColumns().setAll(colNomProd, colTarifProd);
 
-            this.tableProduit.getItems().addAll(daos.getProduitDAO().getByCategorie());
+            this.tableProduit.getItems().addAll(daos.getProduitDAO().());
 
             //Table des produits a ajouter
             

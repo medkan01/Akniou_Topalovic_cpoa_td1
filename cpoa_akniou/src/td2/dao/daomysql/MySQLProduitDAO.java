@@ -97,18 +97,6 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return liste;
 	}
 
-	public Categorie getByCategorie(int idProduit) throws SQLException{
-		if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
-		Connection c = Connexion.getInstance().getMaConnexion();
-		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT Categorie.id_categorie, Categorie.titre, Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE Produit.id_produit = "+idProduit+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
-		ResultSet res = requete.getResultSet();
-		res.next();
-		Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
-
-		return categorie;
-	}
-
 	public ArrayList<Produit> getAll() throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
