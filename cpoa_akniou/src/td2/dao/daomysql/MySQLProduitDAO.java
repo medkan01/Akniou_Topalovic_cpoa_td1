@@ -83,8 +83,22 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return produit;
 	}
 
-	public Categorie getByCategorie(int id) throws SQLException{
+	public ArrayList<Categorie> getAllByCategorie(int id) throws SQLException{
 		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
+		Connection c = Connexion.getInstance().getMaConnexion();
+		Statement requete = c.createStatement();
+		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
+		ResultSet res = requete.getResultSet();
+		ArrayList<Categorie> liste = new ArrayList<Categorie>();
+		while (res.next()){
+			Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
+			liste.add(categorie);
+		}
+		return liste;
+	}
+
+	public Categorie getByCategorie(int idCategorie,int idProduit) throws SQLException{
+		if((idCategorie<=0)||((idProduit<=0))) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
 		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
