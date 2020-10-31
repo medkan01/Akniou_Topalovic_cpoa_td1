@@ -1,7 +1,10 @@
 package td2.dao.daolistememoire;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.ProduitDAO;
 import td2.pojo.Categorie;
 import td2.pojo.Produit;
@@ -10,6 +13,7 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
 
     private static ListeMemoireProduitDAO instance;
     private List<Produit> donnees;
+    private DAOFactory daos;
 
     public static ListeMemoireProduitDAO getInstance(){
         if (instance == null){
@@ -78,15 +82,15 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
 
     }
 
-    public Categorie getByCategorie(int idProduit){
+    public Categorie getCategorie(int idProduit) throws SQLException {
         if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
         int idCategorie;
-            for (int i = 0; i<this.donnees.size();i++){
+        for (int i = 0; i<this.donnees.size();i++){
             if(this.donnees.get(i).getId()==idProduit){
                 idCategorie = this.donnees.get(i).getIdCategorie();             
-                return ListeMemoireCategorieDAO.getById(idCategorie);
+                return daos.getCategorieDAO().getById(idCategorie);
             }
         }
-		throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
-	}
+        throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
+    }
 }
