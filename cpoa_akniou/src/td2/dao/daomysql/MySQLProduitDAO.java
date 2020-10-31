@@ -83,28 +83,29 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return produit;
 	}
 
-	public ArrayList<Categorie> getAllByCategorie(int id) throws SQLException{
-		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
+	public ArrayList<Produit> getAllByCategorie(int idProduit) throws SQLException{
+		if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
+		requete.executeQuery("SELECT Produit.id_produit, Produit.nom, Produit.description, Produit.tarif, Produit.visuel, Produit.id_categorie FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE Produit.id_categorie = "+idProduit+"AND akniou1u_cpoa.Produit.id_categorie =  akniou1u_cpoa.Categorie.id_categorie");
 		ResultSet res = requete.getResultSet();
-		ArrayList<Categorie> liste = new ArrayList<Categorie>();
+		ArrayList<Produit> liste = new ArrayList<Produit>();
 		while (res.next()){
-			Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
-			liste.add(categorie);
+			Produit produit = new Produit(res.getInt("id_produit"),res.getString("nom"),res.getString("description"),res.getLong("tarif"),res.getString("visuel"),res.getInt("id_categorie"));
+			liste.add(produit);
 		}
 		return liste;
 	}
 
-	public Categorie getByCategorie(int idCategorie,int idProduit) throws SQLException{
-		if((idCategorie<=0)||((idProduit<=0))) throw new IllegalArgumentException("ID Incorrect");
+	public Categorie getByCategorie(int idProduit) throws SQLException{
+		if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
+		requete.executeQuery("SELECT Categorie.id_categorie, Categorie.titre, Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE Produit.id_produit = "+idProduit+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
 		ResultSet res = requete.getResultSet();
 		res.next();
 		Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
+
 		return categorie;
 	}
 

@@ -5,8 +5,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import td2.dao.daofactory.CommandeDAO;
 import td2.pojo.Commande;
-import td2.pojo.LigneCommande;
-import td2.pojo.Produit;
 
 public class MySQLCommandeDAO implements CommandeDAO{
 
