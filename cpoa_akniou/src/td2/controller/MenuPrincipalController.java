@@ -81,10 +81,11 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
                 connexionStage.setResizable(false);
-                connexionStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                connexionStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 connexionStage.showAndWait();
                 daos = controller.getDaos();
+
+                this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimer.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);});
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -119,7 +120,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
             if (controller.seConnecter()) {
                 this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
                 this.affichageTableau.getChildren().clear();
-                this.panelBoutonInteraction.setDisable(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,7 +130,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
     public void setInstanceOffline() {
         this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         this.affichageTableau.getChildren().clear();
-        this.panelBoutonInteraction.setDisable(true);
     }
 
     @FXML
@@ -152,7 +151,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCategorie);
 
-        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
@@ -201,7 +199,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableClient);
 
-        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
@@ -226,7 +223,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCommande);
 
-        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML
@@ -254,7 +250,6 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableProduit);
 
-        this.panelBoutonInteraction.setDisable(false);
     }
 
     @FXML

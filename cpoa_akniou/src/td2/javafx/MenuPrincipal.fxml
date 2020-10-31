@@ -51,7 +51,7 @@
                               <Button fx:id="boutonClients" layoutY="52.0" mnemonicParsing="false" onAction="#afficherClients" prefHeight="41.0" prefWidth="200.0" text="Clients" />
                               <Button fx:id="boutonCommandes" layoutY="102.0" mnemonicParsing="false" onAction="#afficherCommandes" prefHeight="41.0" prefWidth="200.0" text="Commandes" />
                               <Button fx:id="boutonProduits" layoutY="152.0" mnemonicParsing="false" onAction="#afficherProduits" prefHeight="41.0" prefWidth="200.0" text="Produits" />
-                              <Pane fx:id="panelBoutonInteraction" disable="true" layoutX="68.0" layoutY="279.0">
+                              <Pane fx:id="panelBoutonInteraction" layoutX="68.0" layoutY="279.0">
                                  <children>
                                     <VBox prefHeight="224.0" prefWidth="25.0">
                                        <children>
@@ -79,7 +79,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonModifier" mnemonicParsing="false" onAction="#modifier">
+                                          <Button fx:id="boutonModifier" mnemonicParsing="false"  disable="true" onAction="#modifier">
                                              <graphic>
                                                 <ImageView fx:id="imageEdit" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -91,7 +91,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonSupprimer" mnemonicParsing="false" onAction="#supprimer">
+                                          <Button fx:id="boutonSupprimer" mnemonicParsing="false" disable="true" onAction="#supprimer">
                                              <graphic>
                                                 <ImageView fx:id="imageDelete" fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
