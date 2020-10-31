@@ -3,9 +3,9 @@ package td2.dao.daomysql;
 import java.sql.*;
 import java.util.ArrayList;
 
-import td2.controller.Categorie;
 import td2.dao.daofactory.ProduitDAO;
 import td2.pojo.Produit;
+import td2.pojo.Categorie;
 
 public class MySQLProduitDAO implements ProduitDAO {
 
@@ -83,14 +83,14 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return produit;
 	}
 
-	public Categorie getCategorie(int id) throws SQLException{
+	public Categorie getByCategorie(int id) throws SQLException{
 		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
 		requete.executeQuery("SELECT akniou1u_cpoa.Categorie.id_categorie, akniou1u_cpoa.Categorie.titre, akniou1u_cpoa.Categorie.visuel FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE akniou1u_cpoa.Produit.id_categorie = "+id+" AND akniou1u_cpoa.Categorie.id_categorie =  akniou1u_cpoa.Produit.id_categorie");
 		ResultSet res = requete.getResultSet();
 		res.next();
-		Categorie categorie = new Categorie("id_categorie", "titre","visuel");
+		Categorie categorie = new Categorie(res.getInt("id_categorie"),res.getString("titre"),res.getString("visuel"));
 		return categorie;
 	}
 
