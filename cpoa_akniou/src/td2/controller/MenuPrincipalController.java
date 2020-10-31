@@ -1,7 +1,6 @@
 package td2.controller;
 
 import java.net.URL;
-import java.net.http.WebSocket.Listener;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -20,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
@@ -85,7 +85,7 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
                 connexionStage.showAndWait();
                 daos = controller.getDaos();
 
-                this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimer.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);});
+               
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -135,6 +135,10 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
     @FXML
     public void afficherCategorie() throws SQLException {
 
+        this.boutonDetails.setDisable(true);
+        this.boutonModifier.setDisable(true);
+        this.boutonSupprimer.setDisable(true);
+
         tableCategorie = new TableView<Categorie>();
         this.tableCategorie.setMinSize(870, 620);
 
@@ -151,10 +155,15 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCategorie);
 
+        this.tableCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
     @FXML
     public void afficherClients() throws SQLException {
+
+        this.boutonDetails.setDisable(true);
+        this.boutonModifier.setDisable(true);
+        this.boutonSupprimer.setDisable(true);
 
         tableClient = new TableView<Client>();
         this.tableClient.setMinSize(870, 620);
@@ -199,10 +208,15 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableClient);
 
+        this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
     @FXML
     public void afficherCommandes() throws SQLException {
+
+        this.boutonDetails.setDisable(true);
+        this.boutonModifier.setDisable(true);
+        this.boutonSupprimer.setDisable(true);
 
         tableCommande = new TableView<Commande>();
         this.tableCommande.setMinSize(870, 620);
@@ -223,10 +237,16 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableCommande);
 
+        this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
+
     }
 
     @FXML
     public void afficherProduits() throws SQLException {
+
+        this.boutonDetails.setDisable(true);
+        this.boutonModifier.setDisable(true);
+        this.boutonSupprimer.setDisable(true);
 
         tableProduit = new TableView<Produit>();
         this.tableProduit.setMinSize(870, 620);
@@ -250,6 +270,7 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
         this.affichageTableau.getChildren().clear();
         this.affichageTableau.getChildren().addAll(tableProduit);
 
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
     @FXML
@@ -370,8 +391,7 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
                 modifierStage.setTitle("Modifier categorie");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);
-                modifierStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 modifierStage.showAndWait();
                 this.affichageTableau.getChildren().clear();
                 afficherCategorie();

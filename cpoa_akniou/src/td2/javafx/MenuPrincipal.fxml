@@ -55,18 +55,6 @@
                                  <children>
                                     <VBox prefHeight="224.0" prefWidth="25.0">
                                        <children>
-                                          <Button fx:id="boutonDetails" mnemonicParsing="false">
-                                             <graphic>
-                                                <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/imageView.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <VBox.margin>
-                                                <Insets bottom="20.0" />
-                                             </VBox.margin>
-                                          </Button>
                                           <Button fx:id="boutonAjouter" mnemonicParsing="false" onAction="#ajouter">
                                              <graphic>
                                                 <ImageView fx:id="imageAdd" fitHeight="59.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
@@ -79,7 +67,19 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonModifier" mnemonicParsing="false"  disable="true" onAction="#modifier">
+                                          <Button fx:id="boutonDetails" disable="true" mnemonicParsing="false">
+                                             <graphic>
+                                                <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/imageView.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button fx:id="boutonModifier" disable="true" mnemonicParsing="false" onAction="#modifier">
                                              <graphic>
                                                 <ImageView fx:id="imageEdit" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -91,7 +91,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonSupprimer" mnemonicParsing="false" disable="true" onAction="#supprimer">
+                                          <Button fx:id="boutonSupprimer" disable="true" mnemonicParsing="false" onAction="#supprimer">
                                              <graphic>
                                                 <ImageView fx:id="imageDelete" fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

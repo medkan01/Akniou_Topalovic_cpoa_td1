@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,12 +57,12 @@ public class AjoutCommandeController{
         int quantite;
         try{
         URL fxmlURLQuantite = getClass().getResource("../javafx/ChoisirQuantiteLigneCommande.fxml");
-        FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLQuantite);
-        Node rootQuantite = fxmlLoaderConnexion.load();
-        ChoisirQuantiteLigneCommandeController controller = fxmlLoaderConnexion.getController();
-        quantite = controller.ajouter();
-        Scene sceneConnexion = new Scene((AnchorPane) rootQuantite, 150, 105);
-        quantiteStage.setScene(sceneConnexion);
+        FXMLLoader fxmlLoaderQuantite = new FXMLLoader(fxmlURLQuantite);
+        Node rootQuantite = fxmlLoaderQuantite.load();
+        ChoisirQuantiteLigneCommandeController controller = fxmlLoaderQuantite.getController();
+        //quantite = controller.ajouter();
+        Scene sceneQuantite = new Scene((AnchorPane) rootQuantite, 150, 105);
+        quantiteStage.setScene(sceneQuantite);
         quantiteStage.setTitle("Choix quantité");
         quantiteStage.initModality(Modality.APPLICATION_MODAL);
         quantiteStage.setResizable(false);
@@ -70,9 +71,9 @@ public class AjoutCommandeController{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
+       // Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
 
-       this.tableProduitSelectionne.getColumns().add();
+      // this.tableProduitSelectionne.getColumns().add();
     }
 
     @FXML 
@@ -95,7 +96,7 @@ public class AjoutCommandeController{
 
             this.tableProduit.getColumns().setAll(colNomProd, colTarifProd);
 
-            this.tableProduit.getItems().addAll(daos.getProduitDAO().());
+          //  this.tableProduit.getItems().addAll(daos.getProduitDAO().());
 
             //Table des produits a ajouter
             
