@@ -29,43 +29,26 @@ import td2.pojo.Client;
 import td2.pojo.Commande;
 import td2.pojo.Produit;
 
-public class MenuPrincipalController implements Initializable, ChangeListener<Button> {
+public class MenuPrincipalController implements Initializable {
 
     private DAOFactory daos;
-    @FXML
-    private Button boutonCategories;
-    @FXML
-    private Button boutonClients;
-    @FXML
-    private Button boutonCommandes;
-    @FXML
-    private Button boutonProduits;
-    @FXML
-    private TableView<Categorie> tableCategorie;
-    @FXML
-    private TableView<Client> tableClient;
-    @FXML
-    private TableView<Commande> tableCommande;
-    @FXML
-    private TableView<Produit> tableProduit;
-    @FXML
-    private RadioMenuItem online;
-    @FXML
-    private RadioMenuItem offline;
-    @FXML
-    private RadioMenuItem nightMode;
-    @FXML
-    private Button boutonDetails;
-    @FXML
-    private Button boutonAjouter;
-    @FXML
-    private Button boutonModifier;
-    @FXML
-    private Button boutonSupprimer;
-    @FXML
-    private AnchorPane affichageTableau;
-    @FXML
-    private Pane panelBoutonInteraction;
+    @FXML private Button boutonCategories;
+    @FXML private Button boutonClients;
+    @FXML private Button boutonCommandes;
+    @FXML private Button boutonProduits;
+    @FXML private TableView<Categorie> tableCategorie;
+    @FXML private TableView<Client> tableClient;
+    @FXML private TableView<Commande> tableCommande;
+    @FXML private TableView<Produit> tableProduit;
+    @FXML private RadioMenuItem online;
+    @FXML private RadioMenuItem offline;
+    @FXML private RadioMenuItem nightMode;
+    @FXML private Button boutonDetails;
+    @FXML private Button boutonAjouter;
+    @FXML private Button boutonModifier;
+    @FXML private Button boutonSupprimer;
+    @FXML private AnchorPane affichageTableau;
+    @FXML private Pane panelBoutonInteraction;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -89,10 +72,10 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (daos.getPersistanceActuelle().equals("MySQL")) {
+            if (DAOFactory.getPersistanceActuelle().equals("MySQL")) {
                 this.online.setSelected(true);
                 this.offline.setSelected(false);
-            } else if (daos.getPersistanceActuelle().equals("ListeMemoire")) {
+            } else if (DAOFactory.getPersistanceActuelle().equals("ListeMemoire")) {
                 this.offline.setSelected(true);
                 this.online.setSelected(false);
             }
@@ -474,11 +457,4 @@ public class MenuPrincipalController implements Initializable, ChangeListener<Bu
 
         }
     }
-
-    @Override
-    public void changed(ObservableValue<? extends Button> observableValue, Button oldValue, Button newValue) {
-        
-
-    }
-
 }

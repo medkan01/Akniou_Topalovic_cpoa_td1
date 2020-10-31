@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import td2.pojo.Produit;
 
 public interface ProduitDAO extends DAO<Produit>{
+    
     Produit getById(int id)throws SQLException;
     ArrayList<Produit> getAll() throws SQLException;
     boolean insert(Produit obj)throws SQLException;

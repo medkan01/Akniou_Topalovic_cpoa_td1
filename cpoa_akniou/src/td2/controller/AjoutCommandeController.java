@@ -1,6 +1,8 @@
 package td2.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

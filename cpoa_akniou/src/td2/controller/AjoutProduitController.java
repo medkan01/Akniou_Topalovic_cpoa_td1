@@ -1,9 +1,5 @@
 package td2.controller;
 
-import java.util.regex.Pattern;
-
-import com.mysql.cj.util.StringUtils;
-
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
