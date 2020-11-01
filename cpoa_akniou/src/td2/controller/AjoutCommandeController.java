@@ -1,8 +1,6 @@
 package td2.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -11,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,7 +36,6 @@ public class AjoutCommandeController{
     @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonSuppAll, boutonAjouterCommande, boutonAnnuler;
     @FXML private TableView<Produit> tableProduit;
     @FXML private TableView<String> tableProduitSelectionne;
-    @FXML private Label labelErreur;
 
     @FXML
     public boolean creerCommande(){
@@ -128,7 +124,7 @@ public class AjoutCommandeController{
 
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
 
-            //this.tableProduitSelectionne.get
+            this.tableProduitSelectionne.get
 
         } catch (Exception e) {
             this.labelResume.setText("erreur produit");
@@ -137,8 +133,8 @@ public class AjoutCommandeController{
         try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
         } catch (Exception e) {
-            this.labelErreur.setTextFill(Color.web("#FF0000"));
-            this.labelErreur.setText("erreur Categorie");
+            this.labelResume.setTextFill(Color.web("#FF0000"));
+            this.labelResume.setText("erreur Categorie");
         }
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
         this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});

@@ -9,11 +9,11 @@ public abstract class DAOFactory {
         switch (cible){
             case MySQL:
                 daoF = new MySQLDAOFactory();
-                persistanceActuelle = "MySQL";
+                persistanceActuelle = "En Ligne";
                 break;
             case ListeMemoire:
                 daoF = new ListeMemoireDAOFactory();
-                persistanceActuelle = "ListeMemoire";
+                persistanceActuelle = "Local";
                 break;
         }
         return daoF;

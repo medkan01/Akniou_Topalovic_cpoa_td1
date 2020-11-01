@@ -60,10 +60,10 @@ public class AjoutProduitController{
     @FXML 
     public void setDaos(String persistance){
 
-        if(persistance.equals("MySQL")){
+        if(persistance.equals("En Ligne")){
             this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
         }
-        else if(persistance.equals("ListeMemoire")){
+        else if(persistance.equals("Local")){
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
 

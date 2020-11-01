@@ -51,15 +51,25 @@
                   </GridPane>
                   <GridPane fx:id="gridTable" prefHeight="408.0" prefWidth="768.0">
                     <columnConstraints>
+<<<<<<< Updated upstream
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="168.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="370.0" />
+=======
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+>>>>>>> Stashed changes
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
+<<<<<<< Updated upstream
                         <TableView fx:id="tableProduit" maxWidth="-Infinity" prefHeight="408.0" prefWidth="230.0" />
                         <TableView fx:id="tableProduitSelectionne" prefHeight="408.0" prefWidth="443.0" GridPane.columnIndex="1" />
+=======
+                        <TableView fx:id="tableProduit" prefHeight="408.0" prefWidth="297.0" />
+                        <TableView fx:id="tableProduitSelectionne" prefHeight="403.0" prefWidth="306.0" GridPane.columnIndex="1" />
+>>>>>>> Stashed changes
                      </children>
                   </GridPane>
                   <Label fx:id="labelResume" maxWidth="-Infinity" prefWidth="400.0" textAlignment="CENTER" GridPane.rowIndex="1" />

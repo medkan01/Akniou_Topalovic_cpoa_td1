@@ -71,10 +71,10 @@ public class MenuPrincipalController implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (DAOFactory.getPersistanceActuelle().equals("MySQL")) {
+            if (DAOFactory.getPersistanceActuelle().equals("En Ligne")) {
                 this.online.setSelected(true);
                 this.offline.setSelected(false);
-            } else if (DAOFactory.getPersistanceActuelle().equals("ListeMemoire")) {
+            } else if (DAOFactory.getPersistanceActuelle().equals("Local")) {
                 this.offline.setSelected(true);
                 this.online.setSelected(false);
             }
