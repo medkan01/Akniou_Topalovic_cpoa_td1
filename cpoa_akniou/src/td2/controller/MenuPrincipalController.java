@@ -287,7 +287,7 @@ public class MenuPrincipalController implements Initializable {
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AjoutCommandeController controller = fxmlLoaderConnexion.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 1000, 500);
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 900, 500);
                 ajoutStage.setScene(sceneConnexion);
                 ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);

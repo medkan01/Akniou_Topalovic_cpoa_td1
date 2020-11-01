@@ -54,18 +54,18 @@ public class AjoutCommandeController{
         Stage quantiteStage = new Stage();
         int quantite;
         try{
-        URL fxmlURLQuantite = getClass().getResource("../javafx/ChoisirQuantiteLigneCommande.fxml");
-        FXMLLoader fxmlLoaderQuantite = new FXMLLoader(fxmlURLQuantite);
-        Node rootQuantite = fxmlLoaderQuantite.load();
-        ChoisirQuantiteLigneCommandeController controller = fxmlLoaderQuantite.getController();
-        quantite = controller.ajouter();
-        Scene sceneQuantite = new Scene((AnchorPane) rootQuantite, 150, 105);
-        quantiteStage.setScene(sceneQuantite);
-        quantiteStage.setTitle("Choix quantité");
-        quantiteStage.initModality(Modality.APPLICATION_MODAL);
-        quantiteStage.setResizable(false);
-        quantiteStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
-        quantiteStage.showAndWait();
+            URL fxmlURLQuantite = getClass().getResource("../javafx/ChoisirQuantiteLigneCommande.fxml");
+            FXMLLoader fxmlLoaderQuantite = new FXMLLoader(fxmlURLQuantite);
+            Node rootQuantite = fxmlLoaderQuantite.load();
+            ChoisirQuantiteLigneCommandeController controller = fxmlLoaderQuantite.getController();
+            Scene sceneQuantite = new Scene((AnchorPane) rootQuantite, 150, 105);
+            quantiteStage.setScene(sceneQuantite);
+            quantiteStage.setTitle("Choix quantité");
+            quantiteStage.initModality(Modality.APPLICATION_MODAL);
+            quantiteStage.setResizable(false);
+            quantiteStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            quantiteStage.showAndWait();
+            quantite = controller.getQuantite();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,10 +77,10 @@ public class AjoutCommandeController{
     @FXML 
     public void setDaos(String persistance){
 
-        if(persistance.equals("MySQL")){
+        if(persistance.equals("En Ligne")){
             this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
         }
-        else if(persistance.equals("ListeMemoire")){
+        else if(persistance.equals("Local")){
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
         try {
@@ -109,12 +109,12 @@ public class AjoutCommandeController{
             TableColumn<String, Double> colTarifProdLigneCom = new TableColumn<String, Double>("Tarif unitaire");
             TableColumn<String, Integer> colQuantiteProdLigneCom = new TableColumn<String, Integer>("Quantite");
             //Tailles des colonnes
-            /*
-            colNomProdLigneCom.setPrefWidth();
-            colCategorieProdLigneCom.setPrefWidth();
-            colTarifProdLigneCom.setPrefWidth();
-            colQuantiteProdLigneCom.setPrefWidth();
-            */
+     
+            colNomProdLigneCom.setPrefWidth(130);
+            colCategorieProdLigneCom.setPrefWidth(130);
+            colTarifProdLigneCom.setPrefWidth(79);
+            colQuantiteProdLigneCom.setPrefWidth(79);
+        
             //setResizable à l'etat faux
             colNomProdLigneCom.setResizable(false);
             colCategorieProdLigneCom.setResizable(false);
@@ -123,8 +123,6 @@ public class AjoutCommandeController{
 
 
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
-
-            this.tableProduitSelectionne.get
 
         } catch (Exception e) {
             this.labelResume.setText("erreur produit");
@@ -136,7 +134,7 @@ public class AjoutCommandeController{
             this.labelResume.setTextFill(Color.web("#FF0000"));
             this.labelResume.setText("erreur Categorie");
         }
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
     }
 }
