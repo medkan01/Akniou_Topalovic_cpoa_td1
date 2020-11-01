@@ -88,24 +88,43 @@ public class AjoutCommandeController{
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
         try {
-
-            // Table de tous les produits
+            //Premiere table contenant tous les produits
+            //Creation des colonnes de la table contenant tous les produits
             TableColumn<Produit, String> colNomProd = new TableColumn<Produit, String>("Nom");
             TableColumn<Produit, Double> colTarifProd = new TableColumn<Produit, Double>("Tarif unitaire");
-
+            //Taille des colonnes
+            colNomProd.setPrefWidth(130);
+            colTarifProd.setPrefWidth(98);
+            //setResizable à l'etat faux
+            colNomProd.setResizable(false);
+            colTarifProd.setResizable(false);
+            //Format du type des cellules pour chaque colonne
             colNomProd.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
             colTarifProd.setCellValueFactory(new PropertyValueFactory<Produit, Double>("tarif"));
-
+            //Ajout des colonnes à la table
             this.tableProduit.getColumns().setAll(colNomProd, colTarifProd);
+            //Remplissage de la table
+            this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
 
-          //  this.tableProduit.getItems().addAll(daos.getProduitDAO().());
-
-            //Table des produits a ajouter
-            
+            //Deuxieme tables contenant les produits à ajouter à la commande
+            //Creation des colonnes de la table contenant les produits à ajouter à la commande
             TableColumn<String, String> colNomProdLigneCom = new TableColumn<String, String>("Nom");
             TableColumn<String, String> colCategorieProdLigneCom = new TableColumn<String, String>("Categorie");
             TableColumn<String, Double> colTarifProdLigneCom = new TableColumn<String, Double>("Tarif unitaire");
             TableColumn<String, Integer> colQuantiteProdLigneCom = new TableColumn<String, Integer>("Quantite");
+            //Tailles des colonnes
+            /*
+            colNomProdLigneCom.setPrefWidth();
+            colCategorieProdLigneCom.setPrefWidth();
+            colTarifProdLigneCom.setPrefWidth();
+            colQuantiteProdLigneCom.setPrefWidth();
+            */
+            //setResizable à l'etat faux
+            colNomProdLigneCom.setResizable(false);
+            colCategorieProdLigneCom.setResizable(false);
+            colTarifProdLigneCom.setResizable(false);
+            colQuantiteProdLigneCom.setResizable(false);
+
 
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
 

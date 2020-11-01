@@ -268,8 +268,7 @@ public class MenuPrincipalController implements Initializable {
                 ajoutStage.setTitle("Ajout client");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
-                ajoutStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 ajoutStage.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -288,7 +287,7 @@ public class MenuPrincipalController implements Initializable {
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AjoutCommandeController controller = fxmlLoaderConnexion.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
+                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 1000, 500);
                 ajoutStage.setScene(sceneConnexion);
                 ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
