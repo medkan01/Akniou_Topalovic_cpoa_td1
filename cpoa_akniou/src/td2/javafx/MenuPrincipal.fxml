@@ -22,12 +22,12 @@
             <menus>
               <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Sombre">
+                        <RadioMenuItem fx:id="nightMode" mnemonicParsing="false" text="Sombre">
                            <toggleGroup>
                               <ToggleGroup fx:id="groupeModeNuit" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" selected="true" text="Claire" toggleGroup="$groupeModeNuit" />
+                        <RadioMenuItem fx:id="lightMode" mnemonicParsing="false" selected="true" text="Claire" toggleGroup="$groupeModeNuit" />
                      </items>
               </Menu>
               <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
@@ -68,7 +68,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </Button>
-                                          <Button fx:id="boutonDetails" disable="true" mnemonicParsing="false">
+                                          <Button fx:id="boutonDetails" disable="true" mnemonicParsing="false" onAction="#details">
                                              <graphic>
                                                 <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

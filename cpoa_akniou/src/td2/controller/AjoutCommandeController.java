@@ -27,7 +27,7 @@ import td2.pojo.Categorie;
 
 public class AjoutCommandeController{
     
-    static DAOFactory daos;
+    private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;

@@ -26,7 +26,7 @@ public class ModifierCategorieController{
             String visuel = saisieVisuel.getText();
             if(daos.getCategorieDAO().update(new Categorie(id, titre, visuel))){
                 labelResume.setTextFill(Color.web("#52D044"));
-                labelResume.setText("Categorie ajoutée avec succés !");
+                labelResume.setText("Categorie modifié avec succés !");
             }
         } catch (Exception e) {
             labelResume.setTextFill(Color.web("#FF0000"));
@@ -49,10 +49,10 @@ public class ModifierCategorieController{
     @FXML 
     public void setDaos(String persistance){
 
-        if(persistance.equals("MySQL")){
+        if(persistance.equals("En Ligne")){
             this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
         }
-        else if(persistance.equals("ListeMemoire")){
+        else if(persistance.equals("Local")){
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
     }

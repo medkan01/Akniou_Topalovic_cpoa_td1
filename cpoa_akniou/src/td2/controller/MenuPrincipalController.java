@@ -30,21 +30,12 @@ import td2.pojo.Produit;
 public class MenuPrincipalController implements Initializable {
 
     private DAOFactory daos;
-    @FXML private Button boutonCategories;
-    @FXML private Button boutonClients;
-    @FXML private Button boutonCommandes;
-    @FXML private Button boutonProduits;
+    @FXML private Button boutonCategories, boutonClients, boutonCommandes,boutonProduits, boutonDetails, boutonAjouter, boutonModifier, boutonSupprimer;
+    @FXML private RadioMenuItem online, offline, nightMode, lightMode;
     @FXML private TableView<Categorie> tableCategorie;
     @FXML private TableView<Client> tableClient;
     @FXML private TableView<Commande> tableCommande;
     @FXML private TableView<Produit> tableProduit;
-    @FXML private RadioMenuItem online;
-    @FXML private RadioMenuItem offline;
-    @FXML private RadioMenuItem nightMode;
-    @FXML private Button boutonDetails;
-    @FXML private Button boutonAjouter;
-    @FXML private Button boutonModifier;
-    @FXML private Button boutonSupprimer;
     @FXML private AnchorPane affichageTableau;
     @FXML private Pane panelBoutonInteraction;
     @FXML private Label labelInstance;
@@ -80,7 +71,6 @@ public class MenuPrincipalController implements Initializable {
             }
             this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
         }
-
     }
 
     @FXML
@@ -108,8 +98,8 @@ public class MenuPrincipalController implements Initializable {
                 this.boutonSupprimer.setDisable(true);
                 this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -326,11 +316,68 @@ public class MenuPrincipalController implements Initializable {
         }
     }
 
+    public void details() {
+        Stage detailsStage = new Stage();
+        try{
+            if(this.affichageTableau.getChildren().contains(tableCategorie)){
+                Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
+                URL fxmlURLdetailsCategorie = getClass().getResource("../javafx/DetailsCategorie.fxml");
+                FXMLLoader fxmlLoaderdetailsCategorie = new FXMLLoader(fxmlURLdetailsCategorie);
+                Node rootdetailsCategorie = fxmlLoaderdetailsCategorie.load();
+                DetailsCategorieController controller = fxmlLoaderdetailsCategorie.getController();
+                controller.setCategorie(categorie);
+                Scene sceneDetailsCategorie = new Scene((AnchorPane) rootdetailsCategorie, 430, 220);
+                detailsStage.setScene(sceneDetailsCategorie);
+                detailsStage.setTitle("Details categorie");
+                detailsStage.initModality(Modality.APPLICATION_MODAL);
+                detailsStage.setResizable(false);
+                detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                detailsStage.showAndWait();
+            } else if (this.affichageTableau.getChildren().contains(tableClient)) {
+                Client client = this.tableClient.getSelectionModel().getSelectedItem();
+                URL fxmlURLdetailsClient = getClass().getResource("../javafx/DetailsClient.fxml");
+                FXMLLoader fxmlLoaderdetailsClient = new FXMLLoader(fxmlURLdetailsClient);
+                Node rootdetailsClient = fxmlLoaderdetailsClient.load();
+                DetailsClientController controller = fxmlLoaderdetailsClient.getController();
+                controller.setClient(client);
+                Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 285, 410);
+                detailsStage.setScene(sceneDetailsClient);
+                detailsStage.setTitle("Details Client");
+                detailsStage.initModality(Modality.APPLICATION_MODAL);
+                detailsStage.setResizable(false);
+                detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                detailsStage.showAndWait();
+           
+        }  else if (this.affichageTableau.getChildren().contains(tableCommande)) {
+
+
+        }  else if (this.affichageTableau.getChildren().contains(tableProduit)){
+            Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
+            URL fxmlURLdetailsProduit = getClass().getResource("../javafx/DetailsProduit.fxml");
+            FXMLLoader fxmlLoaderdetailsProduit = new FXMLLoader(fxmlURLdetailsProduit);
+            Node rootdetailsProduit = fxmlLoaderdetailsProduit.load();
+            DetailsProduitController controller = fxmlLoaderdetailsProduit.getController();
+            controller.setDaos(DAOFactory.getPersistanceActuelle());
+            controller.setProduit(produit);
+            Scene sceneDetailsProduit = new Scene((AnchorPane) rootdetailsProduit, 595, 280);
+            detailsStage.setScene(sceneDetailsProduit);
+            detailsStage.setTitle("Details Produit");
+            detailsStage.initModality(Modality.APPLICATION_MODAL);
+            detailsStage.setResizable(false);
+            detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            detailsStage.showAndWait();
+        }
+
+    }catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
+
     public void modifier() {
+        Stage modifierStage = new Stage();
         try {
             if (this.affichageTableau.getChildren().contains(tableCategorie)) {
                 Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
-                Stage modifierStage = new Stage();
 
                 // Creation et affichage de la fenetre
                 URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierCategorie.fxml");
@@ -350,7 +397,6 @@ public class MenuPrincipalController implements Initializable {
                 afficherCategorie();
             } else if (this.affichageTableau.getChildren().contains(tableClient)) {
                 Client client = this.tableClient.getSelectionModel().getSelectedItem();
-                Stage modifierStage = new Stage();
 
                 // Creation et affichage de la fenetre
                 URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierClient.fxml");
@@ -369,9 +415,15 @@ public class MenuPrincipalController implements Initializable {
                 modifierStage.showAndWait();
                 this.affichageTableau.getChildren().clear();
                 afficherClients();
-            } else if (this.affichageTableau.getChildren().contains(tableProduit)) {
+              }  else if (this.affichageTableau.getChildren().contains(tableCommande)) {
+                  try{
+
+                  } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            
+              }  else if (this.affichageTableau.getChildren().contains(tableProduit)) {
                 Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
-                Stage modifierStage = new Stage();
 
                 // Creation et affichage de la fenetre
                 URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierProduit.fxml");
@@ -423,7 +475,7 @@ public class MenuPrincipalController implements Initializable {
                 afficherProduits();
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
     }
 }
