@@ -12,6 +12,20 @@ public class ChoisirQuantiteLigneCommandeController {
     
     @FXML
     public int ajouter(){
-        return Integer.parseInt(saisieQuantite.getText().trim()); 
+        if(!isNumeric(this.saisieQuantite.getText().trim()))
+            throw new IllegalArgumentException("Le tarif saisie est incorrect");
+        else
+             return Integer.parseInt(this.saisieQuantite.getText().trim());
     }  
+
+    
+    private static boolean isNumeric(String str){
+        try {
+            Integer.parseInt(str.trim());
+            return true;
+
+        } catch(NumberFormatException e) {
+            return false;
+        }
+    }
 }

@@ -36,7 +36,7 @@ public class AjoutCommandeController{
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
     @FXML private Label labelResume;
-    @FXML private Button boutonAjouterCommande, boutonAjouterLigneCommande, boutonAnnuler, boutonSuppAll, boutonSuppLigneCommande;
+    @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonSuppAll, boutonAjouterCommande, boutonAnnuler;
     @FXML private TableView<Produit> tableProduit;
     @FXML private TableView<String> tableProduitSelectionne;
     @FXML private Label labelErreur;
@@ -62,7 +62,7 @@ public class AjoutCommandeController{
         FXMLLoader fxmlLoaderQuantite = new FXMLLoader(fxmlURLQuantite);
         Node rootQuantite = fxmlLoaderQuantite.load();
         ChoisirQuantiteLigneCommandeController controller = fxmlLoaderQuantite.getController();
-        //quantite = controller.ajouter();
+        quantite = controller.ajouter();
         Scene sceneQuantite = new Scene((AnchorPane) rootQuantite, 150, 105);
         quantiteStage.setScene(sceneQuantite);
         quantiteStage.setTitle("Choix quantité");
@@ -121,5 +121,7 @@ public class AjoutCommandeController{
             this.labelErreur.setTextFill(Color.web("#FF0000"));
             this.labelErreur.setText("erreur Categorie");
         }
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
     }
 }
