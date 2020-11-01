@@ -72,7 +72,7 @@ public class MySQLCategorieDAO implements CategorieDAO{
 		return categorieRes;
 	}
 
-	public Categorie getCategorieDeProduit(int idProduit) throws SQLException{
+	public Categorie getCategorieByProduit(int idProduit) throws SQLException{
 		if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();

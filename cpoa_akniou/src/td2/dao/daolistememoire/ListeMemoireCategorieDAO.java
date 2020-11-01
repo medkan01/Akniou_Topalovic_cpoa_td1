@@ -1,5 +1,6 @@
 package td2.dao.daolistememoire;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import td2.dao.daofactory.CategorieDAO;
 import td2.pojo.Categorie;
@@ -55,6 +56,18 @@ public class ListeMemoireCategorieDAO implements CategorieDAO{
             }
         }
 		throw new IllegalArgumentException("Aucune categorie ne possède cet identifiant");
+    }
+
+    public Categorie getCategorieByProduit(int idProduit) {
+        if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
+        int idCategorie;
+        for (int i = 0; i<this.donnees.size();i++){
+            if(this.donnees.get(i).getId()==idProduit){
+                idCategorie = this.donnees.get(i).getId();             
+                return getById(idCategorie);
+            }
+        }
+        throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
     }
 
     public ArrayList<Categorie> getAll(){

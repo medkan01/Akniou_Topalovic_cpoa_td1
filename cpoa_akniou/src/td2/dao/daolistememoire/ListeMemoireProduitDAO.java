@@ -67,30 +67,17 @@ public class ListeMemoireProduitDAO implements ProduitDAO {
         return (ArrayList<Produit>) this.donnees;
     }
 
-    public ArrayList<Produit> getAllByCategorie(int idProduit){
-        if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
+    public ArrayList<Produit> getAllByCategorie(int idCategorie){
+        if(idCategorie<=0) throw new IllegalArgumentException("ID Incorrect");
         ArrayList<Produit> liste = new ArrayList<Produit>();
         for (int i = 0; i<this.donnees.size();i++){
-            if(this.donnees.get(i).getIdCategorie()==idProduit)
+            if(this.donnees.get(i).getIdCategorie()==idCategorie)
             {
                 liste.add(this.donnees.get(i));
             }
         }
-
         if (liste.isEmpty()) throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
         else return liste;
 
-    }
-
-    public Categorie getCategorie(int idProduit) throws SQLException {
-        if(idProduit<=0) throw new IllegalArgumentException("ID Incorrect");
-        int idCategorie;
-        for (int i = 0; i<this.donnees.size();i++){
-            if(this.donnees.get(i).getId()==idProduit){
-                idCategorie = this.donnees.get(i).getIdCategorie();             
-                return daos.getCategorieDAO().getById(idCategorie);
-            }
-        }
-        throw new IllegalArgumentException("Aucun produit ne possède cet identifiant");
     }
 }

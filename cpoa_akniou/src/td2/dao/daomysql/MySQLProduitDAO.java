@@ -81,7 +81,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 		return produit;
 	}
 
-	public ArrayList<Produit> getAllCategorie(int idCategorie) throws SQLException{
+	public ArrayList<Produit> getAllByCategorie(int idCategorie) throws SQLException{
 		if(idCategorie<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
