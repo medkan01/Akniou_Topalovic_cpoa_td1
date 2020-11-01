@@ -77,7 +77,7 @@ public class AjoutProduitController{
 
     private static boolean isNumeric(String str){
         try {
-            Double.parseDouble(str);
+            Double.parseDouble(str.trim());
             return true;
 
         } catch(NumberFormatException e) {

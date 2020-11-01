@@ -4,14 +4,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
@@ -49,6 +47,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML private Button boutonSupprimer;
     @FXML private AnchorPane affichageTableau;
     @FXML private Pane panelBoutonInteraction;
+    @FXML private Label labelInstance;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -79,6 +78,7 @@ public class MenuPrincipalController implements Initializable {
                 this.offline.setSelected(true);
                 this.online.setSelected(false);
             }
+            this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
         }
 
     }
@@ -96,13 +96,17 @@ public class MenuPrincipalController implements Initializable {
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);
             connexionStage.setResizable(false);
-            connexionStage.getIcons()
-                    .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            connexionStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
             connexionStage.showAndWait();
 
             if (controller.seConnecter()) {
                 this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
                 this.affichageTableau.getChildren().clear();
+                this.boutonAjouter.setDisable(true);
+                this.boutonDetails.setDisable(true);
+                this.boutonModifier.setDisable(true);
+                this.boutonSupprimer.setDisable(true);
+                this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,11 +117,13 @@ public class MenuPrincipalController implements Initializable {
     public void setInstanceOffline() {
         this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         this.affichageTableau.getChildren().clear();
+        this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
     }
 
     @FXML
     public void afficherCategorie() throws SQLException {
 
+        this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
@@ -144,6 +150,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     public void afficherClients() throws SQLException {
 
+        this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
@@ -197,6 +204,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     public void afficherCommandes() throws SQLException {
 
+        this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
@@ -227,6 +235,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     public void afficherProduits() throws SQLException {
 
+        this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);

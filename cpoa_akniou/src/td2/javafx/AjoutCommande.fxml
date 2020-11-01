@@ -68,12 +68,12 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="boutonAjouterLigneCommande" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ajouter" prefWidth="150.0" text="Ajouter le produit">
+                              <Button fx:id="boutonAjouterLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ajouter" prefWidth="150.0" text="Ajouter le produit">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="boutonSupprimerLigneCom" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Supprimer le produit" GridPane.rowIndex="1">
+                              <Button fx:id="boutonSupprimerLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Supprimer le produit" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
@@ -105,15 +105,15 @@
                   </GridPane>
                   <GridPane fx:id="gridTable">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="168.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.0" minWidth="10.0" prefWidth="370.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TableView fx:id="tableProduit" prefHeight="408.0" prefWidth="297.0" />
-                        <TableView fx:id="tableProduitSelectionne" prefHeight="403.0" prefWidth="306.0" GridPane.columnIndex="1" />
+                        <TableView fx:id="tableProduit" prefHeight="408.0" prefWidth="234.0" />
+                        <TableView fx:id="tableProduitSelectionne" prefHeight="408.0" prefWidth="344.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Label fx:id="labelResume" maxWidth="-Infinity" prefWidth="400.0" textAlignment="CENTER" GridPane.rowIndex="1" />
