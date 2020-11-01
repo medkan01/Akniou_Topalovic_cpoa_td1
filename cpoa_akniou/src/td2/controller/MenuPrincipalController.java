@@ -122,146 +122,109 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     public void afficherCategorie() throws SQLException {
-
+        this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-
         tableCategorie = new TableView<Categorie>();
         this.tableCategorie.setMinSize(870, 620);
-
         TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
-
         TableColumn<Categorie, String> colVisuel = new TableColumn<>("Visuel");
         colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
-
         this.tableCategorie.getColumns().setAll(colTitre, colVisuel);
-
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
-
-        this.affichageTableau.getChildren().clear();
+        this.tableCategorie.requestLayout();
         this.affichageTableau.getChildren().addAll(tableCategorie);
-
         this.tableCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
     @FXML
     public void afficherClients() throws SQLException {
-
+        this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-
         tableClient = new TableView<Client>();
         this.tableClient.setMinSize(870, 620);
-
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
         colNom.setPrefWidth(100);
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
-
         TableColumn<Client, String> colPrenom = new TableColumn<>("Prenom");
         colPrenom.setPrefWidth(100);
         colPrenom.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
-
         TableColumn<Client, String> colIdentifiant = new TableColumn<>("E-mail");
         colIdentifiant.setPrefWidth(200);
         colIdentifiant.setCellValueFactory(new PropertyValueFactory<Client, String>("identifiant"));
-
         TableColumn<Client, String> colAdrNumero = new TableColumn<>("N°");
         colAdrNumero.setPrefWidth(30);
         colAdrNumero.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
-
         TableColumn<Client, String> colAdrVoie = new TableColumn<>("Voie");
         colAdrVoie.setPrefWidth(150);
         colAdrVoie.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
-
         TableColumn<Client, String> colAdrCodePostal = new TableColumn<>("CP");
         colAdrCodePostal.setPrefWidth(40);
         colAdrCodePostal.setCellValueFactory(new PropertyValueFactory<Client, String>("adrCodePostal"));
-
         TableColumn<Client, String> colAdrVille = new TableColumn<>("Ville");
         colAdrVille.setPrefWidth(75);
         colAdrVille.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVille"));
-
         TableColumn<Client, String> colAdrPays = new TableColumn<>("Pays");
         colAdrPays.setPrefWidth(75);
         colAdrPays.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
-
-        this.tableClient.getColumns().setAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie,
-                colAdrCodePostal, colAdrVille, colAdrPays);
-
+        this.tableClient.getColumns().setAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie,colAdrCodePostal, colAdrVille, colAdrPays);
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
-
-        this.affichageTableau.getChildren().clear();
+        this.tableClient.requestLayout();
         this.affichageTableau.getChildren().addAll(tableClient);
-
         this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
     @FXML
     public void afficherCommandes() throws SQLException {
-
+        this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-
         tableCommande = new TableView<Commande>();
         this.tableCommande.setMinSize(870, 620);
-
         TableColumn<Commande, Integer> colIdCommande = new TableColumn<>("ID Commande");
         colIdCommande.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("id"));
-
         TableColumn<Commande, String> colDate = new TableColumn<>("Date");
         colDate.setCellValueFactory(new PropertyValueFactory<Commande, String>("date"));
-
         TableColumn<Commande, Integer> colIdClient = new TableColumn<>("ID Client");
         colIdClient.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("idClient"));
-
         this.tableCommande.getColumns().setAll(colIdCommande, colDate, colIdClient);
-
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
-
-        this.affichageTableau.getChildren().clear();
+        this.tableCommande.requestLayout();;
         this.affichageTableau.getChildren().addAll(tableCommande);
-
         this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
     }
 
     @FXML
     public void afficherProduits() throws SQLException {
-
+        this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-
         tableProduit = new TableView<Produit>();
         this.tableProduit.setMinSize(870, 620);
-
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
         colTarif.setPrefWidth(50);
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
-
         TableColumn<Produit, String> colLibelle = new TableColumn<>("Nom");
         colLibelle.setPrefWidth(120);
         colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
-
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
         colDescription.setPrefWidth(700);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-
         this.tableProduit.getColumns().setAll(colTarif, colLibelle, colDescription);
-
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
-
-        this.affichageTableau.getChildren().clear();
+        this.tableProduit.requestLayout();
         this.affichageTableau.getChildren().addAll(tableProduit);
-
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
@@ -330,8 +293,7 @@ public class MenuPrincipalController implements Initializable {
                 ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
-                ajoutStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 ajoutStage.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -424,8 +386,7 @@ public class MenuPrincipalController implements Initializable {
                 modifierStage.setTitle("Modifier produit");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);
-                modifierStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 modifierStage.showAndWait();
                 this.affichageTableau.getChildren().clear();
                 afficherProduits();

@@ -21,7 +21,7 @@ public class MySQLCommandeDAO implements CommandeDAO{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u_cpoa.Commande (date_commande, id_client) VALUES (?, ?)",Statement.RETURN_GENERATED_KEYS);
-			requete.setDate(1,  java.sql.Date.valueOf(commande.getDate()));
+			requete.setDate(1, java.sql.Date.valueOf(commande.getDate()));
 			requete.setInt(2, commande.getIdClient());
 		int nbligne = requete.executeUpdate();
 		ResultSet res = requete.getGeneratedKeys();
