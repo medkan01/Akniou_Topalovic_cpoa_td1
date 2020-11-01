@@ -66,12 +66,15 @@ public class AjoutCommandeController{
             quantiteStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
             quantiteStage.showAndWait();
             quantite = controller.getQuantite();
+            Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
+            String nomProd = produit.getNom();
+            String categorieProd = daos.getCategorieDAO().getById(produit.getIdCategorie()).getTitre();
+            double tarif = produit.getTarif();
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
+        
 
-      // this.tableProduitSelectionne.getColumns().add();
     }
 
     @FXML 
@@ -109,19 +112,16 @@ public class AjoutCommandeController{
             TableColumn<String, Double> colTarifProdLigneCom = new TableColumn<String, Double>("Tarif unitaire");
             TableColumn<String, Integer> colQuantiteProdLigneCom = new TableColumn<String, Integer>("Quantite");
             //Tailles des colonnes
-     
             colNomProdLigneCom.setPrefWidth(130);
             colCategorieProdLigneCom.setPrefWidth(130);
             colTarifProdLigneCom.setPrefWidth(79);
             colQuantiteProdLigneCom.setPrefWidth(79);
-        
             //setResizable à l'etat faux
             colNomProdLigneCom.setResizable(false);
             colCategorieProdLigneCom.setResizable(false);
             colTarifProdLigneCom.setResizable(false);
             colQuantiteProdLigneCom.setResizable(false);
-
-
+            //Ajout des colonnes à la table contenant les produits à ajouter à la commande
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
 
         } catch (Exception e) {
@@ -135,6 +135,6 @@ public class AjoutCommandeController{
             this.labelResume.setText("erreur Categorie");
         }
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);});   
     }
 }
