@@ -118,7 +118,7 @@ public class AjoutCommandeController{
             e.printStackTrace();
         }
 
-        try {
+        try { 
             this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {
             this.labelResume.setTextFill(Color.web("#FF0000"));
@@ -202,6 +202,7 @@ public class AjoutCommandeController{
             alert.setContentText(erreur);alert.showAndWait();
         }
         
+        this.cbxCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.tableProduit.getItems().clear();try{this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));}catch(Exception e){System.out.print(e.getMessage());}});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
         this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduit.getSelectionModel().clearSelection();});
         
