@@ -153,4 +153,22 @@ public class Client {
 			this.adrPays = adrPays;
 		}
 	}
+
+
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + id + "'" +
+			", nom='" + nom + "'" +
+			", prenom='" + prenom + "'" +
+			", identifiant='" + identifiant + "'" +
+			", motDePasse='" + motDePasse + "'" +
+			", adrNumero='" + adrNumero + "'" +
+			", adrVoie='" + adrVoie + "'" +
+			", adrCodePostal='" + adrCodePostal + "'" +
+			", adrVille='" + adrVille + "'" +
+			", adrPays='" + adrPays + "'" +
+			"}";
+	}
+
 }
