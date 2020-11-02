@@ -353,7 +353,7 @@ public class MenuPrincipalController implements Initializable {
                 DetailsClientController controller = fxmlLoaderdetailsClient.getController();
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 610, 410);
+                Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 500, 410);
                 sceneDetailsClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
                 detailsStage.setScene(sceneDetailsClient);
                 detailsStage.setTitle("Details Client");

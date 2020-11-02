@@ -1,21 +1,30 @@
 package td2.controller;
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Client;
+import td2.pojo.Commande;
 
 public class DetailsClientController {
 
     private DAOFactory daos;
+    Client client;
     @FXML Button boutonTermine;
     @FXML Label labelId, labelNom, labelPrenom, labelIdentifiant, labelMotDePasse, labelNumero, labelRue, labelCP, labelVille, labelPays;
+    @FXML TableView<Commande> tableCommande;
 
     @FXML
     public void setClient(Client obj) throws Exception{
+        client = obj;
         this.labelId.setText(String.valueOf(obj.getId()));
         this.labelNom.setText(obj.getNom());
         this.labelPrenom.setText(obj.getPrenom());
@@ -36,17 +45,42 @@ public class DetailsClientController {
 
     @FXML 
     public void setDaos(String persistance){
-        if(persistance.equals("En Ligne")){
-            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
-        }
-        else if(persistance.equals("Local")){
-            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        try{  
+            if(persistance.equals("En Ligne")){
+                this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+            }
+            else if(persistance.equals("Local")){
+                this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+            }
+            this.afficheCommandeClient();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
     
     @FXML
     public void afficheCommandeClient(){
-        
+        try{
+            //Table contenant toutes les commandes du client
+            //Creation des colonnes de la table contenant toutes les commandes du client
+            TableColumn<Commande, Integer> colId = new TableColumn<Commande, Integer>("ID");
+            TableColumn<Commande, LocalDate> colDate = new TableColumn<Commande, LocalDate>("Date");
+            //Taille des colonnes
+            colId.setPrefWidth(40);
+            colDate.setPrefWidth(167);
+            //setResizable à l'etat faux
+            colId.setResizable(false);
+            colDate.setResizable(false);
+            //Format du type des cellules pour chaque colonne
+            colId.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("id"));
+            colDate.setCellValueFactory(new PropertyValueFactory<Commande, LocalDate>("date"));
+            //Ajout des colonnes à la table
+            this.tableCommande.getColumns().setAll(colId, colDate);
+            //Remplissage de la table
+            this.tableCommande.getItems().addAll(daos.getCommandeDAO().getByIdClient(client.getId()));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
