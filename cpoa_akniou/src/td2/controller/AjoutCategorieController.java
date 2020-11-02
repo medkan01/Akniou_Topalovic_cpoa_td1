@@ -30,6 +30,7 @@ public class AjoutCategorieController {
             if (daos.getCategorieDAO().insert(categorie) == true){
                 labelResume.setTextFill(Color.web("#52D044"));
                 labelResume.setText("La categorie "+ categorie.toString() + " a ete ajoutee avec succes");
+                this.saisieTitre.clear();
             }
             else{
                throw new IllegalArgumentException("Impossible d'ajouter la categorie");

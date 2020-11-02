@@ -2,6 +2,7 @@ package td2.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -44,7 +45,7 @@ public class AjoutProduitController{
             }
             Produit p = new Produit(0, nom, description, tarif, nom+".png", categorie.getId());
             if (daos.getProduitDAO().insert(p) == true){
-                this.labelResumeProduit.setTextFill(Color.web("#000000"));
+                this.labelResumeProduit.setTextFill(Color.web("#52D044"));
                 this.labelResumeProduit.setText(p.toString());
                 this.saisieNom.clear();
                 this.saisieDescription.clear();
@@ -55,8 +56,11 @@ public class AjoutProduitController{
                throw new IllegalArgumentException("Impossible d'ajouter le produit");
             }
         } catch (Exception e){
-            this.labelResumeProduit.setTextFill(Color.web("#FF0000"));
-            this.labelResumeProduit.setText(e.getMessage());
+            String erreur = "Une erreur à été rencontré lors de la saisie";
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(e.getMessage());
+            alert.setContentText(erreur);alert.showAndWait();
         }
         return true;
     }

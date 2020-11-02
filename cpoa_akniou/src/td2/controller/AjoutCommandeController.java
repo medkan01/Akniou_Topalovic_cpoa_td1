@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -25,12 +26,13 @@ import td2.dao.daofactory.Persistance;
 import td2.pojo.Produit;
 import td2.pojo.ProduitSelectionne;
 import td2.pojo.Categorie;
+import td2.pojo.Client;
 
 public class AjoutCommandeController{
     
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
-    @FXML private ChoiceBox<Categorie> cbxClient;
+    @FXML private ChoiceBox<Client> cbxClient;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
@@ -96,8 +98,43 @@ public class AjoutCommandeController{
     }
 
     @FXML
+    public void ajouterClient(){
+        Stage ajoutStage = new Stage();
+        try {
+            URL fxmlURLAjouterClient = getClass().getResource("../javafx/AjoutClient.fxml");
+            FXMLLoader fxmlLoaderAjouterClient = new FXMLLoader(fxmlURLAjouterClient);
+            Node rootAjouterClient = fxmlLoaderAjouterClient.load();
+            AjoutClientController controller = fxmlLoaderAjouterClient.getController();
+            controller.setDaos(DAOFactory.getPersistanceActuelle());
+            Scene sceneAjouterClient = new Scene((AnchorPane) rootAjouterClient, 800, 500);
+            sceneAjouterClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+            ajoutStage.setScene(sceneAjouterClient);
+            ajoutStage.setTitle("Ajout client");
+            ajoutStage.initModality(Modality.APPLICATION_MODAL);
+            ajoutStage.setResizable(false);
+            ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            ajoutStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
+        } catch (Exception e) {
+            this.labelResume.setTextFill(Color.web("#FF0000"));
+            this.labelResume.setText("erreur Client");
+        }
+    }
+
+    @FXML
     public void ajouterCommande(){
 
+    }
+
+    @FXML
+    public void annuler(){
+        Stage fenetre = (Stage) boutonAnnuler.getScene().getWindow();
+        fenetre.close();
     }
 
     @FXML 
@@ -113,13 +150,10 @@ public class AjoutCommandeController{
             //Premiere table contenant tous les produits
             //Creation des colonnes de la table contenant tous les produits
             TableColumn<Produit, String> colNomProd = new TableColumn<Produit, String>("Nom");
-            TableColumn<Produit, Double> colTarifProd = new TableColumn<Produit, Double>("Tarif unitaire");
+            TableColumn<Produit, Double> colTarifProd = new TableColumn<Produit, Double>("Tarif");
             //Taille des colonnes
             colNomProd.setPrefWidth(130);
-            colTarifProd.setPrefWidth(98);
-            //setResizable à l'etat faux
-            colNomProd.setResizable(false);
-            colTarifProd.setResizable(false);
+            colTarifProd.setPrefWidth(90);
             //Format du type des cellules pour chaque colonne
             colNomProd.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
             colTarifProd.setCellValueFactory(new PropertyValueFactory<Produit, Double>("tarif"));
@@ -132,18 +166,13 @@ public class AjoutCommandeController{
             //Creation des colonnes de la table contenant les produits à ajouter à la commande
             TableColumn<ProduitSelectionne, String> colNomProdLigneCom = new TableColumn<ProduitSelectionne, String>("Nom");
             TableColumn<ProduitSelectionne, String> colNomCategorieProdLigneCom = new TableColumn<ProduitSelectionne, String>("Categorie");
-            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif unitaire");
-            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantite");
+            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif");
+            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantité");
             //Tailles des colonnes
             colNomProdLigneCom.setPrefWidth(130);
             colNomCategorieProdLigneCom.setPrefWidth(130);
             colTarifProdLigneCom.setPrefWidth(79);
             colQuantiteProdLigneCom.setPrefWidth(79);
-            //setResizable à l'etat faux
-            colNomProdLigneCom.setResizable(false);
-            colNomCategorieProdLigneCom.setResizable(false);
-            colTarifProdLigneCom.setResizable(false);
-            colQuantiteProdLigneCom.setResizable(false);
             //Format du type des cellules pour chaque colonne
             colNomProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomProduit"));
             colNomCategorieProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomCategorie"));
@@ -162,8 +191,19 @@ public class AjoutCommandeController{
             this.labelResume.setTextFill(Color.web("#FF0000"));
             this.labelResume.setText("erreur Categorie");
         }
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
-    this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); /*this.tableProduit.getSelectionModel().clearSelection();*/});
+
+        try {
+            this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
+        } catch (Exception e) {
+            String erreur = "Erreur lors de la recherche de tous les clients";
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur Client");
+            alert.setHeaderText("Veuillez vérifier que vous êtes bien connecté à la base de données");
+            alert.setContentText(erreur);alert.showAndWait();
+        }
+        
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduit.getSelectionModel().clearSelection();});
         
     }
 }
