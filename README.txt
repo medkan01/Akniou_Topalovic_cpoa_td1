@@ -15,3 +15,6 @@ Il est possible de passer d'un thème clair à sombre.
 Il est possible d'afficher les détails des produits. Afficher les détails d'un client va permettre de voir les commandes qu'il a passé.
 Il est possible de trier les produits ainsi que de les rechercher à l'aide d'une barre de recherche. Il est aussi possible de rechercher par le nom de l'objet ou par une autre colonne.
 Dans la fenetre d'ajout/modification de commande, il est possible de filtrer les produits par catégorie.
+
+
+Pour la répartition des taches, on a fait cela selon les envies sur le moment présent, on n'avait pas vraiment une répartition exact des taches car par moment l'un de nous deux avais une solution à un problème par exemple.
