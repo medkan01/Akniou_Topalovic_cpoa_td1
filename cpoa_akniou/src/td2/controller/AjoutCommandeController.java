@@ -297,9 +297,22 @@ public class AjoutCommandeController{
             alert.showAndWait();
         }
         
-        this.cbxCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAfficherTousLesProduits.setDisable(false);this.tableProduit.getItems().clear();try{this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));}catch(Exception e){System.out.print(e.getMessage());}});
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(false); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduit.getSelectionModel().clearSelection();});
+        this.cbxCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.boutonAfficherTousLesProduits.setDisable(false);
+            this.tableProduit.getItems().clear();
+            try{
+                this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));
+            } catch(Exception e){
+                System.out.print(e.getMessage());
+            }
+        });
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.boutonAjouterLigneCommande.setDisable(false);
+        });
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.boutonSupprimerLigneCommande.setDisable(newValue == null);
+            this.tableProduitSelectionne.getSelectionModel().select(-1);
+        });
         
     }
 }
