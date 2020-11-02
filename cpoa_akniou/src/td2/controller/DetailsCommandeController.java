@@ -7,8 +7,10 @@ import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
@@ -24,6 +26,8 @@ public class DetailsCommandeController{
     private DAOFactory daos;
     @FXML private TableView<ProduitSelectionne> tableProduitSelectionne;
     @FXML private Label labelIdCommande, labelDateCommande, labelIdClient;
+    @FXML private Button boutonTerminer;
+
 
 	public void setCommande(Commande obj){
         try{
@@ -42,7 +46,10 @@ public class DetailsCommandeController{
                 listeProduitSelectionnes.add(produitSelectionne);
             }
             this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);
+            this.labelIdCommande.setText(String.valueOf(commande.getIdClient()));
+            this.labelDateCommande.setText(String.valueOf(commande.getIdClient()));
             this.labelIdClient.setText(String.valueOf(commande.getIdClient()));
+            
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -53,7 +60,7 @@ public class DetailsCommandeController{
             }
         }
 
-        @FXML 
+    @FXML 
     public void setDaos(String persistance){
 
         if(persistance.equals("En Ligne")){
@@ -64,4 +71,10 @@ public class DetailsCommandeController{
         }
 
     }
-}
+
+    @FXML
+    public void close(){
+		Stage fenetre = (Stage) this.boutonTerminer.getScene().getWindow();
+        fenetre.close();
+    }
+}   

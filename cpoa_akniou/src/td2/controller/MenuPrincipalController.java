@@ -530,9 +530,9 @@ public class MenuPrincipalController implements Initializable {
             FXMLLoader fxmlLoaderdetailsCommande = new FXMLLoader(fxmlURLdetailsCommande);
             Node rootdetailsCommande = fxmlLoaderdetailsCommande.load();
             DetailsCommandeController controller = fxmlLoaderdetailsCommande.getController();
-            //controller.setDaos(DAOFactory.getPersistanceActuelle());
-            //controller.setCommande(commande);
-            Scene sceneDetailsCommande = new Scene((AnchorPane) rootdetailsCommande, 595, 280);
+            controller.setDaos(DAOFactory.getPersistanceActuelle());
+            controller.setCommande(commande);
+            Scene sceneDetailsCommande = new Scene((AnchorPane) rootdetailsCommande, 600, 400);
             sceneDetailsCommande.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
             detailsStage.setScene(sceneDetailsCommande);
             detailsStage.setTitle("Details Commande");
