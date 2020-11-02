@@ -67,10 +67,13 @@ public class AjoutCommandeController{
             double tarifUnitaire = produit.getTarif();
             int quantite = controller.getQuantite();
             ProduitSelectionne produitSelectionne = new ProduitSelectionne(idProduit,nomProduit, nomCategorie, tarifUnitaire, quantite);
-            if(this.tableProduitSelectionne.getItems().contains(produitSelectionne)){
-                this.tableProduitSelectionne.getSelectionModel().select(produitSelectionne);
+            if(contient(produit.getId(),this.tableProduitSelectionne)){
+                this.tableProduitSelectionne.getSelectionModel().select(position(produit.getId(),this.tableProduitSelectionne));
                 produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
-                produitSelectionne.setQuantite(produitSelectionne.getQuantite()+quantite);
+                int nouvelleQuantite = quantite + produitSelectionne.getQuantite();
+                produitSelectionne = new ProduitSelectionne(idProduit, nomProduit, nomCategorie, tarifUnitaire, nouvelleQuantite);
+                this.tableProduitSelectionne.getItems().remove(position(produit.getId(),this.tableProduitSelectionne));
+                this.tableProduitSelectionne.getItems().add(produitSelectionne);
             } else{
                 this.tableProduitSelectionne.getItems().add(produitSelectionne);
             }
@@ -89,10 +92,31 @@ public class AjoutCommandeController{
             this.boutonToutSupprimer.setDisable(false);
         }
     }
+
     @FXML
     public void supprimer(){
         ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
         this.tableProduitSelectionne.getItems().remove(produitSelectionne);
+    }
+
+    public boolean contient(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
+        for(int i = 0 ; i < tableProduitSelectionne.getItems().size(); i++){
+            tableProduitSelectionne.getSelectionModel().select(i);
+            if(idProduit == tableProduitSelectionne.getSelectionModel().getSelectedItem().getIdProduit()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int position(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
+        for(int i = 0 ; i < tableProduitSelectionne.getItems().size(); i++){
+            tableProduitSelectionne.getSelectionModel().select(i);
+            if(idProduit == tableProduitSelectionne.getSelectionModel().getSelectedItem().getIdProduit()){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @FXML
@@ -173,10 +197,15 @@ public class AjoutCommandeController{
             return false;
         }
         }
+        this.tableProduitSelectionne.getItems().clear();
+        this.cbxCategorie.getSelectionModel().select(-1);
+        this.cbxClients.getSelectionModel().select(-1);
+        this.boutonToutSupprimer.setDisable(true);
+        this.boutonAjouterLigneCommande.setDisable(true);
+        this.boutonSupprimerLigneCommande.setDisable(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout commande");
-        alert.setHeaderText("Resultat:");
-        alert.setContentText("Commander ajouté avec succès !");
+        alert.setHeaderText("Commande ajouté avec succès !");
  
         alert.showAndWait();
         return true;

@@ -102,7 +102,11 @@ public class MenuPrincipalController implements Initializable {
                 this.boutonModifier.setDisable(true);
                 this.boutonSupprimer.setDisable(true);
                 this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
+            }   else{
+                this.offline.setSelected(true);
+                this.online.setSelected(false);
             }
+
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -262,8 +266,7 @@ public class MenuPrincipalController implements Initializable {
                 ajoutStage.setTitle("Ajout Categorie");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
-                ajoutStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 ajoutStage.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -315,6 +318,13 @@ public class MenuPrincipalController implements Initializable {
                 ajoutStage.setResizable(false);
                 ajoutStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 ajoutStage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            this.affichageTableau.getChildren().clear();
+            try {
+                afficherCommandes();
             } catch (Exception e) {
                 e.printStackTrace();
             }
