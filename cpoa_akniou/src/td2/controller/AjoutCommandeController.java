@@ -36,18 +36,17 @@ public class AjoutCommandeController{
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
-    @FXML private Label labelResume;
     @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonSuppAll, boutonAjouterCommande, boutonAnnuler;
     @FXML private TableView<Produit> tableProduit;
     @FXML private TableView<ProduitSelectionne> tableProduitSelectionne;
+    @FXML private Button boutonAfficherTousLesProduits;
 
     @FXML
     public boolean creerCommande(){
         try {
 
         } catch(Exception e) {
-            labelResume.setTextFill(Color.web("#FF0000"));
-            labelResume.setText(e.getMessage());
+            
         }
 
         return true;
@@ -121,9 +120,25 @@ public class AjoutCommandeController{
         try { 
             this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {
-            this.labelResume.setTextFill(Color.web("#FF0000"));
-            this.labelResume.setText("erreur Client");
+           
         }
+    }
+
+    @FXML
+    public void afficherTousLesProduits(){
+        this.cbxCategorie.getSelectionModel().select(-1);
+        this.tableProduit.getItems().clear();
+        this.boutonAfficherTousLesProduits.setDisable(true);
+        try{
+        this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
+    }catch(Exception e){
+        String erreur = "Erreur";
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur Ajout Commande");
+            alert.setHeaderText(e.getMessage());
+            alert.setContentText(erreur);
+            alert.showAndWait();
+    }
     }
 
     @FXML
@@ -180,29 +195,18 @@ public class AjoutCommandeController{
             colQuantiteProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("quantite"));
             //Ajout des colonnes à la table contenant les produits à ajouter à la commande
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colNomCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
-
-        } catch (Exception e) {
-            this.labelResume.setText("erreur produit");
-        }
-        
-        try {
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
-        } catch (Exception e) {
-            this.labelResume.setTextFill(Color.web("#FF0000"));
-            this.labelResume.setText("erreur Categorie");
-        }
-
-        try {
             this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {
-            String erreur = "Erreur lors de la recherche de tous les clients";
+            String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur Client");
-            alert.setHeaderText("Veuillez vérifier que vous êtes bien connecté à la base de données");
-            alert.setContentText(erreur);alert.showAndWait();
+            alert.setTitle("Erreur Ajout Commande");
+            alert.setHeaderText(e.getMessage());
+            alert.setContentText(erreur);
+            alert.showAndWait();
         }
         
-        this.cbxCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.tableProduit.getItems().clear();try{this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));}catch(Exception e){System.out.print(e.getMessage());}});
+        this.cbxCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAfficherTousLesProduits.setDisable(false);;this.tableProduit.getItems().clear();try{this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));}catch(Exception e){System.out.print(e.getMessage());}});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
         this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().select(-1); this.tableProduit.getSelectionModel().clearSelection();});
         

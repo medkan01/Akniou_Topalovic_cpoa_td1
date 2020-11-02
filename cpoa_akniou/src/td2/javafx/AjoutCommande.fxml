@@ -64,7 +64,6 @@
                         <TableView fx:id="tableProduitSelectionne" maxWidth="-Infinity" prefWidth="420.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Label fx:id="labelResume" maxWidth="-Infinity" prefWidth="400.0" textAlignment="CENTER" GridPane.rowIndex="1" />
                   <FlowPane alignment="TOP_RIGHT" orientation="VERTICAL" prefHeight="408.0" prefWidth="211.0" vgap="5.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="Catégorie :">
@@ -73,6 +72,7 @@
                            </opaqueInsets>
                         </Label>
                         <ChoiceBox fx:id="cbxCategorie" prefHeight="25.0" prefWidth="185.0" />
+                        <Button fx:id="boutonAfficherTousLesProduits" disable="true" mnemonicParsing="false" onAction="#afficherTousLesProduits" prefHeight="25.0" prefWidth="185.0" text="Afficher tous les produits" />
                         <Button fx:id="boutonAjouterLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="185.0" text="Ajouter le produit">
                            <FlowPane.margin>
                               <Insets top="40.0" />
