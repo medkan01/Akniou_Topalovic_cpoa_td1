@@ -120,7 +120,7 @@ public class MenuPrincipalController implements Initializable {
                 this.boutonModifier.setDisable(true);
                 this.boutonSupprimer.setDisable(true);
                 this.cbxChoixRecherche.setDisable(true);
-                this.saisieRecherche.setEditable(false);
+                this.saisieRecherche.setVisible(false);
                 this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
             }   else{
                 this.offline.setSelected(true);
@@ -142,7 +142,7 @@ public class MenuPrincipalController implements Initializable {
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
         this.cbxChoixRecherche.setDisable(true);
-        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setVisible(false);
     }
 
     @FXML
@@ -153,7 +153,7 @@ public class MenuPrincipalController implements Initializable {
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setVisible(false);
         this.saisieRecherche.setText("");
         tableCategorie = new TableView<Categorie>();
         this.tableCategorie.setMinSize(870, 620);
@@ -169,7 +169,7 @@ public class MenuPrincipalController implements Initializable {
         this.affichageTableau.getChildren().addAll(tableCategorie);
         this.cbxChoixRecherche.getItems().clear();
         this.cbxChoixRecherche.getItems().addAll("Titre","Visuel");
-        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
         
@@ -199,7 +199,7 @@ public class MenuPrincipalController implements Initializable {
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setVisible(false);
         this.saisieRecherche.setText("");
         tableClient = new TableView<Client>();
         this.tableClient.setMinSize(870, 620);
@@ -236,29 +236,47 @@ public class MenuPrincipalController implements Initializable {
         colTableClient.add(colAdrCodePostal);
         colTableClient.add(colAdrVille);
         colTableClient.add(colAdrPays);
-        this.tableClient.getColumns().setAll(colTableClient);
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
         this.tableClient.requestLayout();
         this.affichageTableau.getChildren().addAll(tableClient);
         this.cbxChoixRecherche.getItems().clear();
-        this.cbxChoixRecherche.getItems().addAll("Nom","Prenom","Identifiant","Numéro d'adresse", "Rue","Code Postal","Ville","Pays");
-        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
+        this.cbxChoixRecherche.getItems().addAll("Nom","Prenom","E-Mail","Numéro d'adresse", "Rue","Code Postal","Ville","Pays");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
-        FilteredList<Categorie> filtreCategorie = new FilteredList(this.tableCategorie.getItems(), p -> true);
-        tableCategorie.setItems(filtreCategorie);
-        tableCategorie.getColumns().addAll(colNom, colVisuel);
+        FilteredList<Client> filtreClient = new FilteredList(this.tableClient.getItems(), p -> true);
+        tableClient.setItems(filtreClient);
+        tableClient.getColumns().addAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
 
         saisieRecherche.setOnKeyReleased(keyEvent ->
         {
             switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
             {
-                case "Titre":
-                filtreCategorie.setPredicate(p -> p.getTitre().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                case "Nom":
+                filtreClient.setPredicate(p -> p.getNom().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
                     break;
-                case "Visuel":
-                filtreCategorie.setPredicate(p -> p.getVisuel().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                case "Prenom":
+                filtreClient.setPredicate(p -> p.getPrenom().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
                     break;
+                case "E-Mail":
+                filtreClient.setPredicate(p -> p.getIdentifiant().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Numéro d'adresse":
+                filtreClient.setPredicate(p -> p.getAdrNumero().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Rue":
+                filtreClient.setPredicate(p -> p.getAdrVoie().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Code Postal":
+                filtreClient.setPredicate(p -> p.getAdrCodePostal().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Ville":
+                filtreClient.setPredicate(p -> p.getAdrVille().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Pays":
+                filtreClient.setPredicate(p -> p.getAdrPays().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                break;
+
             }
         });
     }
@@ -271,7 +289,7 @@ public class MenuPrincipalController implements Initializable {
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setVisible(false);
         this.saisieRecherche.setText("");
         tableCommande = new TableView<Commande>();
         this.tableCommande.setMinSize(870, 620);
@@ -294,7 +312,7 @@ public class MenuPrincipalController implements Initializable {
         this.affichageTableau.getChildren().addAll(tableCommande);
         this.cbxChoixRecherche.getItems().clear();
         this.cbxChoixRecherche.getItems().addAll("IdCommande","Date","IdClient");
-        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
     }
@@ -307,7 +325,7 @@ public class MenuPrincipalController implements Initializable {
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
-        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setVisible(false);
         this.saisieRecherche.setText("");
         tableProduit = new TableView<Produit>();
         this.tableProduit.setMinSize(870, 620);
@@ -330,7 +348,7 @@ public class MenuPrincipalController implements Initializable {
         this.affichageTableau.getChildren().addAll(tableProduit);
         this.cbxChoixRecherche.getItems().clear();
         this.cbxChoixRecherche.getItems().addAll("Tarif","Nom","Description");
-        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
