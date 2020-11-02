@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
@@ -36,7 +35,7 @@ public class AjoutClientController implements Initializable {
             String email = this.saisieEmail.getText();
             String motDePasse = this.saisieMotDePasse.getText();
 
-            Client client = new Client(1,nom,prenom,email,motDePasse,numero,voie,codePostal,ville,pays);
+            Client client = new Client(1,nom.toUpperCase(),prenom,email,motDePasse,numero,voie,codePostal,ville,pays);
 
             if(this.daos.getClientDAO().insert(client) == true) {
                 Stage fenetre = (Stage) boutonSuivant.getScene().getWindow();

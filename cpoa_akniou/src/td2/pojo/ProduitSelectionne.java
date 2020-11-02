@@ -4,16 +4,25 @@ public class ProduitSelectionne {
 
     private String nomProduit, nomCategorie;
     private double tarifUnitaire;
-    private int quantite;
+    private int quantite, idProduit;
 
-    public ProduitSelectionne(String nomProduit, String nomCategorie, double tarifUnitaire, int quantite) {
+    public ProduitSelectionne(int idProduit, String nomProduit, String nomCategorie, double tarifUnitaire, int quantite) {
+        this.setIdProduit(idProduit);
         this.setNomProduit(nomProduit);
         this.setNomCategorie(nomCategorie);
         this.setTarifUnitaire(tarifUnitaire);
         this.setQuantite(quantite);
     }
 
-    public void setNomProduit(String nomProduit){
+    private void setIdProduit(int idProduit) {
+        this.idProduit = idProduit;
+    }
+
+    public int getIdProduit() {
+        return this.idProduit;
+    }
+
+    public void setNomProduit(String nomProduit) {
         if(nomProduit.trim() == "") {
             throw new IllegalArgumentException("Le nom du produit saisie est vide");
         } else {

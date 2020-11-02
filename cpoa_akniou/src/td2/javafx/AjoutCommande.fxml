@@ -83,7 +83,7 @@
                               <Insets top="10.0" />
                            </FlowPane.margin>
                         </Button>
-                        <Button fx:id="boutonSuppAll" disable="true" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="185.0" text="Tout supprimer">
+                        <Button fx:id="boutonToutSupprimer" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#toutSupprimer" prefWidth="185.0" text="Tout supprimer">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

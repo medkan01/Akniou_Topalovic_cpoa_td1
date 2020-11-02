@@ -157,7 +157,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return id + "-" + nom.toUpperCase() + "-" + prenom.substring(0, 1)+ prenom.substring(1);
+		return id + " - " + nom.toUpperCase() + " - " + prenom.substring(0, 1)+ prenom.substring(1);
 	}
 
 }
