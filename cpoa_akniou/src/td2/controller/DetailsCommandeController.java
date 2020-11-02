@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
@@ -69,6 +71,38 @@ public class DetailsCommandeController{
         else if(persistance.equals("Local")){
             this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
+           //Deuxieme tables contenant les produits à ajouter à la commande
+            //Creation des colonnes de la table contenant les produits à ajouter à la commande
+            TableColumn<ProduitSelectionne, String> colNomProdLigneCom = new TableColumn<ProduitSelectionne, String>("Nom");
+            TableColumn<ProduitSelectionne, String> colNomCategorieProdLigneCom = new TableColumn<ProduitSelectionne, String>("Categorie");
+            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif");
+            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantité");
+            TableColumn<ProduitSelectionne, Integer> colIdProduit = new TableColumn<ProduitSelectionne, Integer>("idProduit");
+            //Tailles des colonnes
+            colNomProdLigneCom.setPrefWidth(128);
+            colNomCategorieProdLigneCom.setPrefWidth(128);
+            colTarifProdLigneCom.setPrefWidth(77);
+            colQuantiteProdLigneCom.setPrefWidth(77);
+            colIdProduit.setVisible(false);
+            //setResizable = false
+            colNomProdLigneCom.setResizable(false);
+            colNomCategorieProdLigneCom.setResizable(false);
+            colTarifProdLigneCom.setResizable(false);
+            colQuantiteProdLigneCom.setResizable(false);
+            //Format du type des cellules pour chaque colonne
+            colIdProduit.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("idProduit"));
+            colNomProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomProduit"));
+            colNomCategorieProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomCategorie"));
+            colTarifProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Double>("tarifUnitaire"));
+            colQuantiteProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("quantite"));
+            //Ajout des colonnes à la table contenant les produits à ajouter à la commande
+            ArrayList<TableColumn<ProduitSelectionne,?>> colTableProduitSelectionne = new ArrayList<TableColumn<ProduitSelectionne,?>>();
+            colTableProduitSelectionne.add(colIdProduit);
+            colTableProduitSelectionne.add(colNomProdLigneCom);
+            colTableProduitSelectionne.add(colNomCategorieProdLigneCom);
+            colTableProduitSelectionne.add(colTarifProdLigneCom);
+            colTableProduitSelectionne.add(colQuantiteProdLigneCom);
+            this.tableProduitSelectionne.getColumns().setAll(colTableProduitSelectionne);
 
     }
 
