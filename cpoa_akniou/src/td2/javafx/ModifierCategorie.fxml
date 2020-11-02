@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ModifierCategorieController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.modifierController.ModifierCategorieController">
    <children>
       <GridPane prefHeight="139.0" prefWidth="417.0">
         <columnConstraints>
@@ -34,12 +34,12 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="boutonAnnuler" mnemonicParsing="false" text="Annuler" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" onAction="#annuler">
+            <Button fx:id="boutonAnnuler" mnemonicParsing="false" onAction="#annuler" text="Annuler" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" right="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="boutonValider" mnemonicParsing="false" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" onAction="#modifierCategorie">
+            <Button fx:id="boutonValider" mnemonicParsing="false" onAction="#modifierCategorie" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" right="100.0" />
                </GridPane.margin>

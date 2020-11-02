@@ -1,4 +1,4 @@
-package td2.controller;
+package td2.controller.detailsController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

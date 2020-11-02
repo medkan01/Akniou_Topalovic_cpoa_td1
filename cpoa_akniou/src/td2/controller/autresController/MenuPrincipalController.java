@@ -1,4 +1,4 @@
-package td2.controller;
+package td2.controller.autresController;
 
 import java.net.URL;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package td2.controller;
+package td2.controller.ajoutController;
 
 import java.net.URL;
 
