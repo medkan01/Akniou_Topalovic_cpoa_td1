@@ -306,7 +306,6 @@ public class MenuPrincipalController implements Initializable {
         colTableCommande.add(colIdCommande);
         colTableCommande.add(colDate);
         colTableCommande.add(colIdClient);
-        this.tableCommande.getColumns().setAll(colTableCommande);
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
         this.tableCommande.requestLayout();;
         this.affichageTableau.getChildren().addAll(tableCommande);
@@ -315,6 +314,26 @@ public class MenuPrincipalController implements Initializable {
         this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
+        FilteredList<Commande> filtreCommande = new FilteredList(this.tableCommande.getItems(), p -> true);
+        tableCommande.setItems(filtreCommande);
+        tableCommande.getColumns().addAll(colIdCommande, colDate, colIdClient);
+
+        saisieRecherche.setOnKeyReleased(keyEvent ->
+        {
+            switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
+            {
+                case "IdCommande":
+                filtreCommande.setPredicate(p -> String.valueOf(p.getId()).toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Date":
+                filtreCommande.setPredicate(p -> String.valueOf(p.getDate()).toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "IdClient":
+                filtreCommande.setPredicate(p -> String.valueOf(p.getIdClient()).toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+
+            }
+        });
     }
 
     @FXML
@@ -342,7 +361,6 @@ public class MenuPrincipalController implements Initializable {
         colTableProduit.add(colTarif);
         colTableProduit.add(colLibelle);
         colTableProduit.add(colDescription);
-        this.tableProduit.getColumns().setAll(colTableProduit);
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
         this.tableProduit.requestLayout();
         this.affichageTableau.getChildren().addAll(tableProduit);
@@ -350,6 +368,27 @@ public class MenuPrincipalController implements Initializable {
         this.cbxChoixRecherche.getItems().addAll("Tarif","Nom","Description");
         this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
+
+        FilteredList<Produit> filtreProduit = new FilteredList(this.tableProduit.getItems(), p -> true);
+        tableProduit.setItems(filtreProduit);
+        tableProduit.getColumns().addAll(colTarif, colLibelle, colDescription);
+
+        saisieRecherche.setOnKeyReleased(keyEvent ->
+        {
+            switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
+            {
+                case "Tarif":
+                filtreProduit.setPredicate(p -> String.valueOf(p.getTarif()).toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Nom":
+                filtreProduit.setPredicate(p -> p.getNom().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Description":
+                filtreProduit.setPredicate(p -> p.getDescription().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+
+            }
+        });
     }
 
     @FXML
