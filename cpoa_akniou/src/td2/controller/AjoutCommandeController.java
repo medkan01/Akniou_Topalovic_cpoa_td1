@@ -179,13 +179,18 @@ public class AjoutCommandeController{
             alert.showAndWait();
             return false;
         }
-        ObservableList<ProduitSelectionne> liste = this.tableProduitSelectionne.getItems();
-        for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
-        LigneCommande ligneCommande = new LigneCommande(liste.iterator().next().getQuantite(),liste.iterator().next().getTarifUnitaire()); 
-        Commande commande = new Commande(900,LocalDate.now(),idClient);
+ 
         try{
-        daos.getCommandeDAO().insert(commande);
-        daos.getLigneCommandeDAO().insert(commande.getId(),liste.iterator().next().getIdProduit(), ligneCommande);
+            ObservableList<ProduitSelectionne> liste = this.tableProduitSelectionne.getItems();
+            Commande commande = new Commande(1,LocalDate.now(),idClient);
+            for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
+                ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getItems().get(i);
+                Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());
+                LigneCommande ligneCommande = new LigneCommande(produitSelectionne.getQuantite(), produitSelectionne.getTarifUnitaire());
+                commande.ajouterLigne(produit, ligneCommande);
+                daos.getLigneCommandeDAO().insert(commande.getId(), produit.getId(), ligneCommande);
+            }
+            daos.getCommandeDAO().insert(commande);
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -195,7 +200,7 @@ public class AjoutCommandeController{
             alert.showAndWait();
             return false;
         }
-        }
+        
         this.tableProduitSelectionne.getItems().clear();
         this.cbxCategorie.getSelectionModel().select(-1);
         this.cbxClients.getSelectionModel().select(-1);

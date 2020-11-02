@@ -607,8 +607,25 @@ public class MenuPrincipalController implements Initializable {
                 afficherClients();
               }  else if (this.affichageTableau.getChildren().contains(tableCommande)) {
                   try{
-
-                  } catch (Exception e) {
+                    Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
+                    // Creation et affichage de la fenetre
+                    URL fxmlURLModifierCommande = getClass().getResource("../javafx/ModifierCommande.fxml");
+                    FXMLLoader fxmlLoaderModifierCommande = new FXMLLoader(fxmlURLModifierCommande);
+                    Node rootModifierCommande = fxmlLoaderModifierCommande.load();
+                    ModifierCommandeController controller = fxmlLoaderModifierCommande.getController();
+                    controller.setDaos(DAOFactory.getPersistanceActuelle());
+                    controller.setCommande(commande);
+                    Scene sceneModifierProduit = new Scene((AnchorPane) rootModifierCommande, 900, 500);
+                    sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                    modifierStage.setScene(sceneModifierProduit);
+                    modifierStage.setTitle("Modifier produit");
+                    modifierStage.initModality(Modality.APPLICATION_MODAL);
+                    modifierStage.setResizable(false);
+                    modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                    modifierStage.showAndWait();
+                    this.affichageTableau.getChildren().clear();
+                    afficherCommandes();
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             

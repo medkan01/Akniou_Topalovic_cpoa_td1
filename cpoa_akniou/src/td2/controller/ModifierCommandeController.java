@@ -4,6 +4,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+
+import javax.swing.plaf.synth.SynthSplitPaneUI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,13 +37,15 @@ import td2.pojo.LigneCommande;
 
 public class ModifierCommandeController {
         
+    private int idCom;
+    private LocalDate date;
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
     @FXML private ChoiceBox<Client> cbxClients;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
-    @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonToutSupprimer, boutonAjouterCommande, boutonAnnuler;
+    @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonToutSupprimer, boutonModifierCommande, boutonAnnuler;
     @FXML private TableView<Produit> tableProduit;
     @FXML private TableView<ProduitSelectionne> tableProduitSelectionne;
     @FXML private Button boutonAfficherTousLesProduits;
@@ -67,10 +73,13 @@ public class ModifierCommandeController {
             double tarifUnitaire = produit.getTarif();
             int quantite = controller.getQuantite();
             ProduitSelectionne produitSelectionne = new ProduitSelectionne(idProduit,nomProduit, nomCategorie, tarifUnitaire, quantite);
-            if(this.tableProduitSelectionne.getItems().contains(produitSelectionne)){
-                this.tableProduitSelectionne.getSelectionModel().select(produitSelectionne);
+            if(contient(produit.getId(),this.tableProduitSelectionne)){
+                this.tableProduitSelectionne.getSelectionModel().select(position(produit.getId(),this.tableProduitSelectionne));
                 produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
-                produitSelectionne.setQuantite(produitSelectionne.getQuantite()+quantite);
+                int nouvelleQuantite = quantite + produitSelectionne.getQuantite();
+                produitSelectionne = new ProduitSelectionne(idProduit, nomProduit, nomCategorie, tarifUnitaire, nouvelleQuantite);
+                this.tableProduitSelectionne.getItems().remove(position(produit.getId(),this.tableProduitSelectionne));
+                this.tableProduitSelectionne.getItems().add(produitSelectionne);
             } else{
                 this.tableProduitSelectionne.getItems().add(produitSelectionne);
             }
@@ -93,6 +102,26 @@ public class ModifierCommandeController {
     public void supprimer(){
         ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
         this.tableProduitSelectionne.getItems().remove(produitSelectionne);
+    }
+
+    public boolean contient(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
+        for(int i = 0 ; i < tableProduitSelectionne.getItems().size(); i++){
+            tableProduitSelectionne.getSelectionModel().select(i);
+            if(idProduit == tableProduitSelectionne.getSelectionModel().getSelectedItem().getIdProduit()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int position(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
+        for(int i = 0 ; i < tableProduitSelectionne.getItems().size(); i++){
+            tableProduitSelectionne.getSelectionModel().select(i);
+            if(idProduit == tableProduitSelectionne.getSelectionModel().getSelectedItem().getIdProduit()){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @FXML
@@ -142,7 +171,7 @@ public class ModifierCommandeController {
     }
 
     @FXML
-    public boolean ajouterCommande(){
+    public boolean modifierCommande(){
         int idClient = -1;
         try {
             idClient = this.cbxClients.getSelectionModel().getSelectedItem().getId();
@@ -157,8 +186,8 @@ public class ModifierCommandeController {
             return false;
         }
         ObservableList<ProduitSelectionne> liste = this.tableProduitSelectionne.getItems();
-        Commande commande = new Commande(1,LocalDate.now(),idClient);
         try{
+            Commande commande = new Commande(this.idCom, this.date, idClient);
             for(int i = 0; i<liste.size(); i++){
                 ProduitSelectionne produitSelectionne = liste.get(i);
                 LigneCommande ligneCommande = new LigneCommande(liste.get(i).getQuantite(),liste.get(i).getTarifUnitaire()); 
@@ -169,6 +198,7 @@ public class ModifierCommandeController {
             daos.getCommandeDAO().update(commande);
         } catch(Exception e){
             String erreur = "Erreur";
+            System.out.println(e.getMessage());
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur Ajout Commande");
             alert.setHeaderText(e.getMessage());
@@ -274,17 +304,21 @@ public class ModifierCommandeController {
     public void setCommande(Commande obj){
         try{
             Commande commande = obj;
+            this.idCom = commande.getId();
+            this.date = commande.getDate();
             HashMap<Produit, LigneCommande> listeLigneCommande = commande.getLigneCommande();
             ArrayList<ProduitSelectionne> listeProduitSelectionnes = new ArrayList<ProduitSelectionne>();
-            Produit[] keys = (Produit[]) listeLigneCommande.keySet().toArray();
-            for(int i = 0; i<keys.length;i++){
-                Produit produit = keys[i];
+            Set<Produit> keys = listeLigneCommande.keySet();
+            ArrayList<Produit> listeProduitLigneCommande = new ArrayList<Produit>(keys);
+            for(int i = 0; i<listeProduitLigneCommande.size();i++){
+                Produit produit = listeProduitLigneCommande.get(i);
                 Categorie categorie = daos.getCategorieDAO().getById(produit.getIdCategorie());
                 LigneCommande ligneCommande = listeLigneCommande.get(produit);
                 ProduitSelectionne produitSelectionne = new ProduitSelectionne(produit.getId(), produit.getNom(), categorie.getTitre(), ligneCommande.getTarifUnitaire(), ligneCommande.getQuantite());
                 listeProduitSelectionnes.add(produitSelectionne);
             }
             this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);
+            this.cbxClients.setValue(daos.getClientDAO().getById(commande.getIdClient()));
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);

@@ -55,11 +55,7 @@ public class Commande {
 	
 	// METHODES
 	public void ajouterLigne(Produit produit, LigneCommande ligne) {
-		if (lignes.containsKey(produit)) {
-			throw new IllegalArgumentException("Produit deja existant dans la liste");
-		} else {
 			lignes.put(produit, ligne);
-		}
 	}
 
 	public void supprimerLigne(Produit produit) {
@@ -71,11 +67,7 @@ public class Commande {
 	}
 
 	public void modifierLigne(Produit produit, LigneCommande ligne) {
-		if (lignes.containsKey(produit) == false) {
-			throw new IllegalArgumentException("Produit n'existe pas dans la liste");
-		} else {
-			lignes.replace(produit, ligne);
-		}
+		lignes.replace(produit, ligne);
 	}
 
 	public String afficher() {

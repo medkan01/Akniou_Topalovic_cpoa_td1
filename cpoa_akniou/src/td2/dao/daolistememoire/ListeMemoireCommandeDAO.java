@@ -3,12 +3,15 @@ package td2.dao.daolistememoire;
 import java.time.LocalDate;
 import java.util.*;
 import td2.dao.daofactory.CommandeDAO;
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.*;
 
 public class ListeMemoireCommandeDAO implements CommandeDAO {
 
     private static ListeMemoireCommandeDAO instance;
     private List<Commande> donnees;
+    DAOFactory daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
 
     public static ListeMemoireCommandeDAO getInstance() {
         if (instance == null) {
@@ -18,17 +21,20 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
     }
 
     private ListeMemoireCommandeDAO() {
-        donnees = new ArrayList<Commande>();
-        Produit p1 = new Produit(2, "Pomme","Pomme verte",1,"Pomme.jpg",3);
-        Produit p2 = new Produit(3, "Pommmme","Pomme verte",1,"Pomme.jpg",3);
-        LigneCommande l1 = new LigneCommande(2, 1);
-        LigneCommande l2 = new LigneCommande(3, 1);
-        Commande commande1 = new Commande(1, LocalDate.now(), 1);
-        Commande commande2 = new Commande(2, LocalDate.now(), 3);
-        commande1.ajouterLigne(p1, l1);
-        commande2.ajouterLigne(p2, l2);
-        this.donnees.add(commande1);
-        this.donnees.add(commande2);
+        try{
+            donnees = new ArrayList<Commande>();
+            Produit p1 = daos.getProduitDAO().getById(1);
+            Produit p2 = daos.getProduitDAO().getById(2);
+            LigneCommande l1 = new LigneCommande(2, p1.getTarif());
+            LigneCommande l2 = new LigneCommande(3, p2.getTarif());
+            Commande commande1 = new Commande(1, LocalDate.now(), 1);
+            commande1.ajouterLigne(p1, l1);
+            commande1.ajouterLigne(p2, l2);
+            this.donnees.add(commande1);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
 	}
 
     public boolean insert(Commande objet){
