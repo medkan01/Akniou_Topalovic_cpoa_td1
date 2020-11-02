@@ -26,7 +26,7 @@ public class DetailsClientController {
 
     private DAOFactory daos;
     Client client;
-    @FXML Button boutonTermine;
+    @FXML Button boutonTerminer, boutonDetailsCommande;
     @FXML Label labelId, labelNom, labelPrenom, labelIdentifiant, labelMotDePasse, labelNumero, labelRue, labelCP, labelVille, labelPays;
     @FXML TableView<Commande> tableCommande;
 
@@ -47,7 +47,7 @@ public class DetailsClientController {
 
     @FXML
     public void close(){
-        Stage fenetre = (Stage) boutonTermine.getScene().getWindow();
+        Stage fenetre = (Stage) boutonTerminer.getScene().getWindow();
         fenetre.close();
     }
 
@@ -64,10 +64,15 @@ public class DetailsClientController {
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
+        this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.boutonDetailsCommande.setDisable(newValue == null);
+        });
+        
     }
+
     @FXML
     public void afficherDetailsCommande(){
-        Stage detailsStage = new Stage;
+        Stage detailsStage = new Stage();
         try{    
             Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
             URL fxmlURLDetailsCommande = getClass().getResource("../javafx/DetailsCommande.fxml");
