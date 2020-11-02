@@ -1,4 +1,4 @@
-package td2.controller.autresController;
+package td2.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,16 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import td2.controller.ajoutController.AjoutCategorieController;
-import td2.controller.ajoutController.AjoutClientController;
-import td2.controller.ajoutController.AjoutCommandeController;
-import td2.controller.ajoutController.AjoutProduitController;
-import td2.controller.detailsController.DetailsCategorieController;
-import td2.controller.detailsController.DetailsClientController;
-import td2.controller.detailsController.DetailsProduitController;
-import td2.controller.modifierController.ModifierCategorieController;
-import td2.controller.modifierController.ModifierClientController;
-import td2.controller.modifierController.ModifierProduitController;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;

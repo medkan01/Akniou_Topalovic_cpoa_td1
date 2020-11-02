@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="panelAjoutCategorie" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ajoutController.ajoutController.ajoutC.AjoutCategorieController">
+<AnchorPane fx:id="panelAjoutCategorie" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ajoutController.ajoutC.AjoutCategorieController">
    <children>
       <VBox fx:id="vBoxFenetreCategorie" layoutX="-1.0" layoutY="-2.0" prefHeight="180.0" prefWidth="550.0">
          <padding>

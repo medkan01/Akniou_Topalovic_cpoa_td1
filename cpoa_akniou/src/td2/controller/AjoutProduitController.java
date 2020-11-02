@@ -1,4 +1,4 @@
-package td2.controller.modifierController;
+package td2.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -13,14 +13,14 @@ import td2.dao.daofactory.Persistance;
 import td2.pojo.Categorie;
 import td2.pojo.Produit;
 
-public class ModifierProduitController {
+public class AjoutProduitController{
+
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
-    @FXML private Button boutonValider;
+    @FXML private Button boutonCreer;
     @FXML private Label labelResumeProduit;
     @FXML private TextField saisieNom,saisieTarif;
     @FXML private TextArea saisieDescription;
-    int id;
 
     @FXML
     public boolean creerProduit(){
@@ -31,7 +31,7 @@ public class ModifierProduitController {
 
             if (saisieTarif.getText().isEmpty()) {
                 throw new IllegalArgumentException("La case tarif est vide");
-            } else if(!isNumeric(this.saisieTarif.getText().trim())) {
+            } else if(!isNumeric(this.saisieTarif.getText().trim())){
                 throw new IllegalArgumentException("Le tarif saisie est incorrect");
             } else {
                 tarif = Double.parseDouble(this.saisieTarif.getText().trim());
@@ -42,8 +42,8 @@ public class ModifierProduitController {
             if(categorie == null){
                 throw new IllegalArgumentException("Aucune catégorie selectionnée");
             }
-            Produit p = new Produit(id, nom, description, tarif, "", categorie.getId());
-            if (daos.getProduitDAO().update(p) == true){
+            Produit p = new Produit(0, nom, description, tarif, "", categorie.getId());
+            if (daos.getProduitDAO().insert(p) == true){
                 this.labelResumeProduit.setTextFill(Color.web("#000000"));
                 this.labelResumeProduit.setText(p.toString());
             }
@@ -56,16 +56,7 @@ public class ModifierProduitController {
         }
         return true;
     }
-
-    @FXML
-    public void setProduit(Produit obj) throws Exception{
-        this.id = obj.getId();
-        this.saisieNom.setText(obj.getNom());
-        this.saisieDescription.setText(obj.getDescription());
-        this.saisieTarif.setText(String.valueOf(obj.getTarif()));
-        this.cbxCategorie.setValue(daos.getCategorieDAO().getById(obj.getIdCategorie()));
-    }
-
+    
     @FXML 
     public void setDaos(String persistance){
 
@@ -86,7 +77,7 @@ public class ModifierProduitController {
 
     private static boolean isNumeric(String str){
         try {
-            Double.parseDouble(str);
+            Double.parseDouble(str.trim());
             return true;
 
         } catch(NumberFormatException e) {

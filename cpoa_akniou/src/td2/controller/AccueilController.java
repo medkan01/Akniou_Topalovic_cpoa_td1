@@ -1,4 +1,4 @@
-package td2.controller.autresController;
+package td2.controller;
 
 import java.net.URL;
 
