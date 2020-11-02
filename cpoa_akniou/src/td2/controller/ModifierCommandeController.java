@@ -34,7 +34,7 @@ import td2.pojo.LigneCommande;
 
 public class ModifierCommandeController {
         
-    private int idCom;
+    private int idCom, idClient;
     private LocalDate date;
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
@@ -141,7 +141,6 @@ public class ModifierCommandeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         try { 
             this.cbxClients.getItems().clear();
             this.cbxClients.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
@@ -303,6 +302,7 @@ public class ModifierCommandeController {
             Commande commande = obj;
             this.idCom = commande.getId();
             this.date = commande.getDate();
+            this.idClient = commande.getIdClient();
             HashMap<Produit, LigneCommande> listeLigneCommande = commande.getLigneCommande();
             ArrayList<ProduitSelectionne> listeProduitSelectionnes = new ArrayList<ProduitSelectionne>();
             Set<Produit> keys = listeLigneCommande.keySet();
@@ -315,7 +315,7 @@ public class ModifierCommandeController {
                 listeProduitSelectionnes.add(produitSelectionne);
             }
             this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);
-            this.cbxClients.setValue(daos.getClientDAO().getById(commande.getIdClient()));
+            this.cbxClients.setValue(daos.getClientDAO().getById(idClient));
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);
