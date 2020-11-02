@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import td2.pojo.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -46,8 +47,12 @@ public class AjoutClientController implements Initializable {
             }
 
         } catch(Exception e) {
-            labelResume.setTextFill(Color.web("#FF0000"));
-            labelResume.setText(e.getMessage());
+            String erreur = "Erreur";
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur Ajout Commande");
+            alert.setHeaderText(e.getMessage());
+            alert.setContentText(erreur);
+            alert.showAndWait();
         }
     }
 
