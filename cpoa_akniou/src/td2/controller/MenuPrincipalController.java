@@ -223,10 +223,10 @@ public class MenuPrincipalController implements Initializable {
         Stage ajoutStage = new Stage();
         if (this.affichageTableau.getChildren().contains(tableCategorie)) {
             try {
-                URL fxmlURLConnexion = getClass().getResource("../javafx/AjoutCategorie.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                AjoutCategorieController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLAjouterCategorie = getClass().getResource("../javafx/AjoutCategorie.fxml");
+                FXMLLoader fxmlLoaderAjouterCategorie = new FXMLLoader(fxmlURLAjouterCategorie);
+                Node rootConnexion = fxmlLoaderAjouterCategorie.load();
+                AjoutCategorieController controller = fxmlLoaderAjouterCategorie.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 550, 180);
                 ajoutStage.setScene(sceneConnexion);
@@ -248,10 +248,10 @@ public class MenuPrincipalController implements Initializable {
             }
         } else if (this.affichageTableau.getChildren().contains(tableClient)) {
             try {
-                URL fxmlURLConnexion = getClass().getResource("../javafx/AjoutClient.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                AjoutClientController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLAjouterClient = getClass().getResource("../javafx/AjoutClient.fxml");
+                FXMLLoader fxmlLoaderAjouterClient = new FXMLLoader(fxmlURLAjouterClient);
+                Node rootConnexion = fxmlLoaderAjouterClient.load();
+                AjoutClientController controller = fxmlLoaderAjouterClient.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
                 ajoutStage.setScene(sceneConnexion);
@@ -272,10 +272,10 @@ public class MenuPrincipalController implements Initializable {
             }
         } else if (this.affichageTableau.getChildren().contains(tableCommande)) {
             try {
-                URL fxmlURLConnexion = getClass().getResource("../javafx/AjoutCommande.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                AjoutCommandeController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLAjouterCommande = getClass().getResource("../javafx/AjoutCommande.fxml");
+                FXMLLoader fxmlLoaderAjouterCommande = new FXMLLoader(fxmlURLAjouterCommande);
+                Node rootConnexion = fxmlLoaderAjouterCommande.load();
+                AjoutCommandeController controller = fxmlLoaderAjouterCommande.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 900, 500);
                 ajoutStage.setScene(sceneConnexion);
@@ -289,10 +289,10 @@ public class MenuPrincipalController implements Initializable {
             }
         } else if (this.affichageTableau.getChildren().contains(tableProduit)) {
             try {
-                URL fxmlURLConnexion = getClass().getResource("../javafx/AjoutProduit.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                AjoutProduitController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLAjouterProduit = getClass().getResource("../javafx/AjoutProduit.fxml");
+                FXMLLoader fxmlLoaderAjouterProduit = new FXMLLoader(fxmlURLAjouterProduit);
+                Node rootConnexion = fxmlLoaderAjouterProduit.load();
+                AjoutProduitController controller = fxmlLoaderAjouterProduit.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
                 ajoutStage.setScene(sceneConnexion);
@@ -321,10 +321,10 @@ public class MenuPrincipalController implements Initializable {
         try{
             if(this.affichageTableau.getChildren().contains(tableCategorie)){
                 Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
-                URL fxmlURLdetailsCategorie = getClass().getResource("../javafx/DetailsCategorie.fxml");
-                FXMLLoader fxmlLoaderdetailsCategorie = new FXMLLoader(fxmlURLdetailsCategorie);
-                Node rootdetailsCategorie = fxmlLoaderdetailsCategorie.load();
-                DetailsCategorieController controller = fxmlLoaderdetailsCategorie.getController();
+                URL fxmlURLDetailsCategorie = getClass().getResource("../javafx/DetailsCategorie.fxml");
+                FXMLLoader fxmlLoaderDetailsCategorie = new FXMLLoader(fxmlURLDetailsCategorie);
+                Node rootdetailsCategorie = fxmlLoaderDetailsCategorie.load();
+                DetailsCategorieController controller = fxmlLoaderDetailsCategorie.getController();
                 controller.setCategorie(categorie);
                 Scene sceneDetailsCategorie = new Scene((AnchorPane) rootdetailsCategorie, 430, 220);
                 detailsStage.setScene(sceneDetailsCategorie);
@@ -380,10 +380,10 @@ public class MenuPrincipalController implements Initializable {
                 Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
 
                 // Creation et affichage de la fenetre
-                URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierCategorie.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                ModifierCategorieController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLModifierCategorie = getClass().getResource("../javafx/ModifierCategorie.fxml");
+                FXMLLoader fxmlLoaderModiferCategorie = new FXMLLoader(fxmlURLModifierCategorie);
+                Node rootConnexion = fxmlLoaderModiferCategorie.load();
+                ModifierCategorieController controller = fxmlLoaderModiferCategorie.getController();
                 controller.setCategorie(categorie);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 145);
@@ -399,10 +399,10 @@ public class MenuPrincipalController implements Initializable {
                 Client client = this.tableClient.getSelectionModel().getSelectedItem();
 
                 // Creation et affichage de la fenetre
-                URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierClient.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                ModifierClientController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLModifierClient = getClass().getResource("../javafx/ModifierClient.fxml");
+                FXMLLoader fxmlLoaderModifierClient = new FXMLLoader(fxmlURLModifierClient);
+                Node rootConnexion = fxmlLoaderModifierClient.load();
+                ModifierClientController controller = fxmlLoaderModifierClient.getController();
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
@@ -410,8 +410,7 @@ public class MenuPrincipalController implements Initializable {
                 modifierStage.setTitle("Modifier client");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);
-                modifierStage.getIcons()
-                        .add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+                modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 modifierStage.showAndWait();
                 this.affichageTableau.getChildren().clear();
                 afficherClients();
@@ -426,10 +425,10 @@ public class MenuPrincipalController implements Initializable {
                 Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
 
                 // Creation et affichage de la fenetre
-                URL fxmlURLConnexion = getClass().getResource("../javafx/ModifierProduit.fxml");
-                FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
-                Node rootConnexion = fxmlLoaderConnexion.load();
-                ModifierProduitController controller = fxmlLoaderConnexion.getController();
+                URL fxmlURLModifierProduit = getClass().getResource("../javafx/ModifierProduit.fxml");
+                FXMLLoader fxmlLoaderModifierProduit = new FXMLLoader(fxmlURLModifierProduit);
+                Node rootConnexion = fxmlLoaderModifierProduit.load();
+                ModifierProduitController controller = fxmlLoaderModifierProduit.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 controller.setProduit(produit);
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);

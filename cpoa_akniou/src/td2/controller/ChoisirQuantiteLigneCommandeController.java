@@ -35,7 +35,6 @@ public class ChoisirQuantiteLigneCommandeController {
         return quantite;
     }
 
-
     private static boolean isNumeric(String str){
         try {
             Integer.parseInt(str.trim());
@@ -45,5 +44,4 @@ public class ChoisirQuantiteLigneCommandeController {
             return false;
         }
     }
-    
 }
