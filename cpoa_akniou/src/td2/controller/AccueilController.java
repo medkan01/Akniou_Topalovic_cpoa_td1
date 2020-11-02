@@ -40,7 +40,8 @@ public class AccueilController extends Stage{
             FXMLLoader fxmlLoaderConnexion = new FXMLLoader(fxmlURLConnexion);
             Node rootConnexion = fxmlLoaderConnexion.load();
             ConnexionController controller = fxmlLoaderConnexion.getController();
-            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 505, 315);
+            Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 510, 310);
+            sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
             connexionStage.setScene(sceneConnexion);
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);

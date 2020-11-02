@@ -4,9 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import td2.dao.daofactory.DAOFactory;
+import td2.dao.daofactory.Persistance;
 import td2.pojo.Client;
 
 public class DetailsClientController {
+
+    private DAOFactory daos;
     @FXML Button boutonTermine;
     @FXML Label labelId, labelNom, labelPrenom, labelIdentifiant, labelMotDePasse, labelNumero, labelRue, labelCP, labelVille, labelPays;
 
@@ -28,6 +32,22 @@ public class DetailsClientController {
     public void close(){
         Stage fenetre = (Stage) boutonTermine.getScene().getWindow();
         fenetre.close();
+    }
+
+    @FXML 
+    public void setDaos(String persistance){
+
+        if(persistance.equals("En Ligne")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
+        }
+        else if(persistance.equals("Local")){
+            this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+        }
+    }
+    
+    @FXML
+    public void afficheCommandeClient(){
+        
     }
 }
 

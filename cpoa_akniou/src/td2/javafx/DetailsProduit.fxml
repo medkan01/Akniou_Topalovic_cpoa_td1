@@ -36,6 +36,6 @@
             <Label fx:id="labelCategorie" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button fx:id="boutonTerminer" layoutX="271.0" layoutY="243.0" mnemonicParsing="false" onAction="#close" text="Termine" />
+      <Button fx:id="boutonTermine" layoutX="271.0" layoutY="243.0" mnemonicParsing="false" onAction="#close" text="Terminer" />
    </children>
 </AnchorPane>

@@ -23,7 +23,7 @@ public class ConnexionController {
         return true;
     }
     else{
-        this.labelErreur.setText("Utilisateur ou mot de passe incorrect veuillez réessayer");
+        this.labelErreur.setText("Utilisateur ou mot de passe incorrect, veuillez réessayer");
     }
     return false;
     }

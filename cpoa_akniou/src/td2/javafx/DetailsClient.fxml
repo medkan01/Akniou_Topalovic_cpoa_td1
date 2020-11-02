@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="285.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.DetailsClientController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.DetailsClientController">
    <children>
       <ImageView fitHeight="96.0" fitWidth="101.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -107,10 +108,20 @@
             <Label fx:id="labelPrenom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="boutonTermine" layoutX="211.0" layoutY="371.0" mnemonicParsing="false" onAction="#close" text="Terminé" />
+      <Button fx:id="boutonTermine" layoutX="14.0" layoutY="371.0" mnemonicParsing="false" onAction="#close" text="Terminer" />
       <Line endX="-72.0" endY="-11.0" layoutX="355.0" layoutY="200.0" startX="-355.0" startY="-11.0" />
       <Line endX="446.0" layoutX="-163.0" layoutY="119.0" startX="163.0" />
       <Line endX="301.0" layoutX="-18.0" layoutY="360.0" startX="18.0" />
-      <Button fx:id="boutonVoirCommande" layoutX="90.0" layoutY="371.0" mnemonicParsing="false" text="Voir Commande" />
+      <Line endX="436.0" endY="-134.0" layoutX="-153.0" layoutY="129.0" startX="436.0" startY="281.29290771484375" />
+      <TableView fx:id="tableCommande" layoutX="283.0" layoutY="-5.0" prefHeight="416.0" prefWidth="347.0" />
+      <Button layoutX="229.0" layoutY="368.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/imageView.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

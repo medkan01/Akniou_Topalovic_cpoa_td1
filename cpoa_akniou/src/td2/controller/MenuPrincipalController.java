@@ -49,7 +49,7 @@ public class MenuPrincipalController implements Initializable {
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AccueilController controller = fxmlLoaderConnexion.getController();
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 980, 650);
-                // sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeSombre.css").toExternalForm());
+                sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
                 connexionStage.setScene(sceneConnexion);
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
@@ -82,6 +82,7 @@ public class MenuPrincipalController implements Initializable {
             Node rootConnexion = fxmlLoaderConnexion.load();
             ConnexionController controller = fxmlLoaderConnexion.getController();
             Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 505, 315);
+            sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
             connexionStage.setScene(sceneConnexion);
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);
@@ -149,10 +150,10 @@ public class MenuPrincipalController implements Initializable {
         colIdentifiant.setPrefWidth(200);
         colIdentifiant.setCellValueFactory(new PropertyValueFactory<Client, String>("identifiant"));
         TableColumn<Client, String> colAdrNumero = new TableColumn<>("N°");
-        colAdrNumero.setPrefWidth(30);
+        colAdrNumero.setPrefWidth(40);
         colAdrNumero.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
         TableColumn<Client, String> colAdrVoie = new TableColumn<>("Voie");
-        colAdrVoie.setPrefWidth(150);
+        colAdrVoie.setPrefWidth(140);
         colAdrVoie.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
         TableColumn<Client, String> colAdrCodePostal = new TableColumn<>("CP");
         colAdrCodePostal.setPrefWidth(40);
@@ -181,10 +182,13 @@ public class MenuPrincipalController implements Initializable {
         this.tableCommande.setMinSize(870, 620);
         TableColumn<Commande, Integer> colIdCommande = new TableColumn<>("ID Commande");
         colIdCommande.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("id"));
+        colIdCommande.setPrefWidth(200);
         TableColumn<Commande, String> colDate = new TableColumn<>("Date");
         colDate.setCellValueFactory(new PropertyValueFactory<Commande, String>("date"));
+        colDate.setPrefWidth(200);
         TableColumn<Commande, Integer> colIdClient = new TableColumn<>("ID Client");
         colIdClient.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("idClient"));
+        colIdClient.setPrefWidth(200);
         this.tableCommande.getColumns().setAll(colIdCommande, colDate, colIdClient);
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
         this.tableCommande.requestLayout();;
@@ -203,13 +207,13 @@ public class MenuPrincipalController implements Initializable {
         tableProduit = new TableView<Produit>();
         this.tableProduit.setMinSize(870, 620);
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
-        colTarif.setPrefWidth(50);
+        colTarif.setPrefWidth(75);
         colTarif.setCellValueFactory(new PropertyValueFactory<Produit, String>("tarif"));
         TableColumn<Produit, String> colLibelle = new TableColumn<>("Nom");
         colLibelle.setPrefWidth(120);
         colLibelle.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
-        colDescription.setPrefWidth(700);
+        colDescription.setPrefWidth(675);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
         this.tableProduit.getColumns().setAll(colTarif, colLibelle, colDescription);
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
@@ -340,6 +344,7 @@ public class MenuPrincipalController implements Initializable {
                 Node rootdetailsClient = fxmlLoaderdetailsClient.load();
                 DetailsClientController controller = fxmlLoaderdetailsClient.getController();
                 controller.setClient(client);
+                controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 285, 410);
                 detailsStage.setScene(sceneDetailsClient);
                 detailsStage.setTitle("Details Client");

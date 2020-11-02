@@ -107,6 +107,7 @@
                               </Pane>
                               <Label layoutX="18.0" layoutY="233.0" text="Instance :" />
                               <Label fx:id="labelInstance" layoutX="75.0" layoutY="233.0" textFill="#0004ff" />
+                              <Label layoutX="35.0" layoutY="598.0" text="EZGestion by HKCorp. ®" />
                            </children>
                         </AnchorPane>
                       <AnchorPane id="pane" fx:id="affichageTableau" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="870.0" SplitPane.resizableWithParent="false" />
