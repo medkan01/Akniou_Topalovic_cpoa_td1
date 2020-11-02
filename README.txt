@@ -18,3 +18,7 @@ Dans la fenetre d'ajout/modification de commande, il est possible de filtrer les
 
 
 Pour la répartition des taches, on a fait cela selon les envies sur le moment présent, on n'avait pas vraiment une répartition exact des taches car par moment l'un de nous deux avais une solution à un problème par exemple.
+
+Connexion au lancement du programme:
+Identifiant: admin
+Mot de passe : motdepasse
