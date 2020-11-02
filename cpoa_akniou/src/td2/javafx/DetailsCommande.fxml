@@ -31,7 +31,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="idDateCommande" layoutX="88.0" layoutY="133.0">
+      <Label fx:id="labelDateCommande" layoutX="88.0" layoutY="133.0">
          <font>
             <Font size="18.0" />
          </font>
