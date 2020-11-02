@@ -114,7 +114,7 @@
       <Line endX="301.0" layoutX="-18.0" layoutY="360.0" startX="18.0" />
       <Line endX="436.0" endY="-134.0" layoutX="-153.0" layoutY="129.0" startX="436.0" startY="281.29290771484375" />
       <TableView fx:id="tableCommande" layoutX="283.0" layoutY="-5.0" maxWidth="-Infinity" prefHeight="416.0" prefWidth="217.0" />
-      <Button layoutX="200.0" layoutY="368.0" mnemonicParsing="false">
+      <Button fx:id="boutonDetailsCommande" layoutX="200.0" layoutY="368.0" mnemonicParsing="false" onAction="#afficherDetailsCommande">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <image>

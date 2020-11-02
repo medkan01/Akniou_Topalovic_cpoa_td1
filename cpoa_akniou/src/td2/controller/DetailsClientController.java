@@ -1,14 +1,21 @@
 package td2.controller;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
@@ -55,6 +62,29 @@ public class DetailsClientController {
             }
             this.afficheCommandeClient();
         } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    @FXML
+    public void afficherDetailsCommande(){
+        Stage detailsStage = new Stage;
+        try{    
+            Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
+            URL fxmlURLDetailsCommande = getClass().getResource("../javafx/DetailsCommande.fxml");
+            FXMLLoader fxmlLoaderDetailsCommande = new FXMLLoader(fxmlURLDetailsCommande);
+            Node rootdetailsCommande = fxmlLoaderDetailsCommande.load();
+            DetailsCommandeController controller = fxmlLoaderDetailsCommande.getController();
+            controller.setDaos(DAOFactory.getPersistanceActuelle());
+            controller.setCommande(commande);
+            Scene sceneDetailsCommande = new Scene((AnchorPane) rootdetailsCommande, 600, 400);
+            sceneDetailsCommande.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm()); 
+            detailsStage.setScene(sceneDetailsCommande);
+            detailsStage.setTitle("Details Commande");
+            detailsStage.initModality(Modality.APPLICATION_MODAL);
+            detailsStage.setResizable(false);
+            detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            detailsStage.showAndWait();
+        } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

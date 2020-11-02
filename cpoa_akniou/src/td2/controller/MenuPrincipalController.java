@@ -507,6 +507,7 @@ public class MenuPrincipalController implements Initializable {
                 detailsStage.setResizable(false);
                 detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
                 detailsStage.showAndWait();
+
             } else if (this.affichageTableau.getChildren().contains(tableClient)) {
                 Client client = this.tableClient.getSelectionModel().getSelectedItem();
                 URL fxmlURLdetailsClient = getClass().getResource("../javafx/DetailsClient.fxml");
@@ -526,10 +527,10 @@ public class MenuPrincipalController implements Initializable {
            
         }  else if (this.affichageTableau.getChildren().contains(tableCommande)) {
             Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
-            URL fxmlURLdetailsCommande = getClass().getResource("../javafx/DetailsCommande.fxml");
-            FXMLLoader fxmlLoaderdetailsCommande = new FXMLLoader(fxmlURLdetailsCommande);
-            Node rootdetailsCommande = fxmlLoaderdetailsCommande.load();
-            DetailsCommandeController controller = fxmlLoaderdetailsCommande.getController();
+            URL fxmlURLDetailsCommande = getClass().getResource("../javafx/DetailsCommande.fxml");
+            FXMLLoader fxmlLoaderDetailsCommande = new FXMLLoader(fxmlURLDetailsCommande);
+            Node rootdetailsCommande = fxmlLoaderDetailsCommande.load();
+            DetailsCommandeController controller = fxmlLoaderDetailsCommande.getController();
             controller.setDaos(DAOFactory.getPersistanceActuelle());
             controller.setCommande(commande);
             Scene sceneDetailsCommande = new Scene((AnchorPane) rootdetailsCommande, 600, 400);
