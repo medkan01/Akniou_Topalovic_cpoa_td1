@@ -525,7 +525,21 @@ public class MenuPrincipalController implements Initializable {
                 detailsStage.showAndWait();
            
         }  else if (this.affichageTableau.getChildren().contains(tableCommande)) {
-
+            Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
+            URL fxmlURLdetailsCommande = getClass().getResource("../javafx/DetailsCommande.fxml");
+            FXMLLoader fxmlLoaderdetailsCommande = new FXMLLoader(fxmlURLdetailsCommande);
+            Node rootdetailsCommande = fxmlLoaderdetailsCommande.load();
+            DetailsCommandeController controller = fxmlLoaderdetailsCommande.getController();
+            //controller.setDaos(DAOFactory.getPersistanceActuelle());
+            //controller.setCommande(commande);
+            Scene sceneDetailsCommande = new Scene((AnchorPane) rootdetailsCommande, 595, 280);
+            sceneDetailsCommande.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
+            detailsStage.setScene(sceneDetailsCommande);
+            detailsStage.setTitle("Details Commande");
+            detailsStage.initModality(Modality.APPLICATION_MODAL);
+            detailsStage.setResizable(false);
+            detailsStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
+            detailsStage.showAndWait();
 
         }  else if (this.affichageTableau.getChildren().contains(tableProduit)){
             Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
