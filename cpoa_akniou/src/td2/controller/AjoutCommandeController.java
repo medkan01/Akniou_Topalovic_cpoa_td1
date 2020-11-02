@@ -180,7 +180,7 @@ public class AjoutCommandeController{
         }
  
         try{
-            Commande commande = new Commande(1,LocalDate.now(),idClient);
+            Commande commande = new Commande((int) Math.random()*200, LocalDate.now(), idClient);
             for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
                 ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getItems().get(i);
                 Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());

@@ -72,7 +72,7 @@
                            </opaqueInsets>
                         </Label>
                         <ChoiceBox fx:id="cbxCategorie" prefHeight="25.0" prefWidth="185.0" />
-                        <Button fx:id="boutonAfficherTousLesProduits" disable="true" mnemonicParsing="false" onAction="#afficherTousLesProduits" prefHeight="25.0" prefWidth="185.0" text="Afficher tous les produits" />
+                        <Button fx:id="boutonAfficherTousLesProduits" disable="true" mnemonicParsing="false" onAction="#afficherTousLesProduits" prefHeight="25.0" prefWidth="185.0" text="Voir tous les produits" wrapText="true" />
                         <Button fx:id="boutonAjouterLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="185.0" text="Ajouter le produit">
                            <FlowPane.margin>
                               <Insets top="40.0" />
