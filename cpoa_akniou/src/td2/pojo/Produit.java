@@ -78,7 +78,7 @@ public class Produit {
 	}
 
 	public String toString() {
-		return "le produit: " +	this.nom + " à été correctement ajouté pour un montant de " + this.tarif + " avec comme description: " + this.description ;
+		return "le produit: " +	this.nom + " à été correctement ajouté pour un montant de " + this.tarif + "€ avec comme description: " + this.description ;
 	}
 	
 	

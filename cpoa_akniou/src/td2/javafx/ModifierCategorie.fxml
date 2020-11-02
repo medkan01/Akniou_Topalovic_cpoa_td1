@@ -41,10 +41,10 @@
             </Button>
             <Button fx:id="boutonValider" mnemonicParsing="false" onAction="#modifierCategorie" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets bottom="10.0" right="100.0" />
+                  <Insets bottom="10.0" right="130.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="labelResume" prefHeight="111.0" prefWidth="178.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="labelResume" prefHeight="46.0" prefWidth="106.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

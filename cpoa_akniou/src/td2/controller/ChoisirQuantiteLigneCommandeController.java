@@ -19,7 +19,7 @@ public class ChoisirQuantiteLigneCommandeController {
     
     public void valider(){
         try{
-            if(!isNumeric(this.saisieQuantite.getText().trim())){
+            if(!isNumeric(this.saisieQuantite.getText().trim())||(Integer.parseInt(this.saisieQuantite.getText().trim())==0)){
                 throw new IllegalArgumentException("Quantité incorrect");
             } else {
                 setQuantite();

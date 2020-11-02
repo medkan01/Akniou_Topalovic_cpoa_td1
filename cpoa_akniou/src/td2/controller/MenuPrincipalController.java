@@ -229,11 +229,12 @@ public class MenuPrincipalController implements Initializable {
             try {
                 URL fxmlURLAjouterCategorie = getClass().getResource("../javafx/AjoutCategorie.fxml");
                 FXMLLoader fxmlLoaderAjouterCategorie = new FXMLLoader(fxmlURLAjouterCategorie);
-                Node rootConnexion = fxmlLoaderAjouterCategorie.load();
+                Node rootAjouterCategorie = fxmlLoaderAjouterCategorie.load();
                 AjoutCategorieController controller = fxmlLoaderAjouterCategorie.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 550, 180);
-                ajoutStage.setScene(sceneConnexion);
+                Scene sceneAjouterCategorie = new Scene((AnchorPane) rootAjouterCategorie, 550, 180);
+                sceneAjouterCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                ajoutStage.setScene(sceneAjouterCategorie);
                 ajoutStage.setTitle("Ajout Categorie");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
@@ -254,11 +255,12 @@ public class MenuPrincipalController implements Initializable {
             try {
                 URL fxmlURLAjouterClient = getClass().getResource("../javafx/AjoutClient.fxml");
                 FXMLLoader fxmlLoaderAjouterClient = new FXMLLoader(fxmlURLAjouterClient);
-                Node rootConnexion = fxmlLoaderAjouterClient.load();
+                Node rootAjouterClient = fxmlLoaderAjouterClient.load();
                 AjoutClientController controller = fxmlLoaderAjouterClient.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
-                ajoutStage.setScene(sceneConnexion);
+                Scene sceneAjouterClient = new Scene((AnchorPane) rootAjouterClient, 800, 500);
+                sceneAjouterClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                ajoutStage.setScene(sceneAjouterClient);
                 ajoutStage.setTitle("Ajout client");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
@@ -278,11 +280,12 @@ public class MenuPrincipalController implements Initializable {
             try {
                 URL fxmlURLAjouterCommande = getClass().getResource("../javafx/AjoutCommande.fxml");
                 FXMLLoader fxmlLoaderAjouterCommande = new FXMLLoader(fxmlURLAjouterCommande);
-                Node rootConnexion = fxmlLoaderAjouterCommande.load();
+                Node rootAjouterCommande = fxmlLoaderAjouterCommande.load();
                 AjoutCommandeController controller = fxmlLoaderAjouterCommande.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 900, 500);
-                ajoutStage.setScene(sceneConnexion);
+                Scene sceneAjouterCommande = new Scene((AnchorPane) rootAjouterCommande, 900, 500);
+                sceneAjouterCommande.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                ajoutStage.setScene(sceneAjouterCommande);
                 ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
@@ -295,11 +298,12 @@ public class MenuPrincipalController implements Initializable {
             try {
                 URL fxmlURLAjouterProduit = getClass().getResource("../javafx/AjoutProduit.fxml");
                 FXMLLoader fxmlLoaderAjouterProduit = new FXMLLoader(fxmlURLAjouterProduit);
-                Node rootConnexion = fxmlLoaderAjouterProduit.load();
+                Node rootAjouterProduit = fxmlLoaderAjouterProduit.load();
                 AjoutProduitController controller = fxmlLoaderAjouterProduit.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
-                ajoutStage.setScene(sceneConnexion);
+                Scene sceneAjouterProduit = new Scene((AnchorPane) rootAjouterProduit, 680, 450);
+                sceneAjouterProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                ajoutStage.setScene(sceneAjouterProduit);
                 ajoutStage.setTitle("Ajout Produit");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
                 ajoutStage.setResizable(false);
@@ -331,6 +335,7 @@ public class MenuPrincipalController implements Initializable {
                 DetailsCategorieController controller = fxmlLoaderDetailsCategorie.getController();
                 controller.setCategorie(categorie);
                 Scene sceneDetailsCategorie = new Scene((AnchorPane) rootdetailsCategorie, 430, 220);
+                sceneDetailsCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
                 detailsStage.setScene(sceneDetailsCategorie);
                 detailsStage.setTitle("Details categorie");
                 detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -345,7 +350,8 @@ public class MenuPrincipalController implements Initializable {
                 DetailsClientController controller = fxmlLoaderdetailsClient.getController();
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 285, 410);
+                Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 610, 410);
+                sceneDetailsClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
                 detailsStage.setScene(sceneDetailsClient);
                 detailsStage.setTitle("Details Client");
                 detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -365,6 +371,7 @@ public class MenuPrincipalController implements Initializable {
             controller.setDaos(DAOFactory.getPersistanceActuelle());
             controller.setProduit(produit);
             Scene sceneDetailsProduit = new Scene((AnchorPane) rootdetailsProduit, 595, 280);
+            sceneDetailsProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
             detailsStage.setScene(sceneDetailsProduit);
             detailsStage.setTitle("Details Produit");
             detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -387,12 +394,13 @@ public class MenuPrincipalController implements Initializable {
                 // Creation et affichage de la fenetre
                 URL fxmlURLModifierCategorie = getClass().getResource("../javafx/ModifierCategorie.fxml");
                 FXMLLoader fxmlLoaderModiferCategorie = new FXMLLoader(fxmlURLModifierCategorie);
-                Node rootConnexion = fxmlLoaderModiferCategorie.load();
+                Node rootModifierCategorie = fxmlLoaderModiferCategorie.load();
                 ModifierCategorieController controller = fxmlLoaderModiferCategorie.getController();
                 controller.setCategorie(categorie);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 420, 145);
-                modifierStage.setScene(sceneConnexion);
+                Scene sceneModifierCategorie = new Scene((AnchorPane) rootModifierCategorie, 420, 145);
+                sceneModifierCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                modifierStage.setScene(sceneModifierCategorie);
                 modifierStage.setTitle("Modifier categorie");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);
@@ -406,12 +414,13 @@ public class MenuPrincipalController implements Initializable {
                 // Creation et affichage de la fenetre
                 URL fxmlURLModifierClient = getClass().getResource("../javafx/ModifierClient.fxml");
                 FXMLLoader fxmlLoaderModifierClient = new FXMLLoader(fxmlURLModifierClient);
-                Node rootConnexion = fxmlLoaderModifierClient.load();
+                Node rootModifierClient = fxmlLoaderModifierClient.load();
                 ModifierClientController controller = fxmlLoaderModifierClient.getController();
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 800, 500);
-                modifierStage.setScene(sceneConnexion);
+                Scene sceneModifierClient = new Scene((AnchorPane) rootModifierClient, 800, 500);
+                sceneModifierClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                modifierStage.setScene(sceneModifierClient);
                 modifierStage.setTitle("Modifier client");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);
@@ -432,12 +441,13 @@ public class MenuPrincipalController implements Initializable {
                 // Creation et affichage de la fenetre
                 URL fxmlURLModifierProduit = getClass().getResource("../javafx/ModifierProduit.fxml");
                 FXMLLoader fxmlLoaderModifierProduit = new FXMLLoader(fxmlURLModifierProduit);
-                Node rootConnexion = fxmlLoaderModifierProduit.load();
+                Node rootModifierProduit = fxmlLoaderModifierProduit.load();
                 ModifierProduitController controller = fxmlLoaderModifierProduit.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 controller.setProduit(produit);
-                Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 680, 550);
-                modifierStage.setScene(sceneConnexion);
+                Scene sceneModifierProduit = new Scene((AnchorPane) rootModifierProduit, 680, 550);
+                sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                modifierStage.setScene(sceneModifierProduit);
                 modifierStage.setTitle("Modifier produit");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
                 modifierStage.setResizable(false);

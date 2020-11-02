@@ -42,10 +42,14 @@ public class AjoutProduitController{
             if(categorie == null){
                 throw new IllegalArgumentException("Aucune catégorie selectionnée");
             }
-            Produit p = new Produit(0, nom, description, tarif, "", categorie.getId());
+            Produit p = new Produit(0, nom, description, tarif, nom+".png", categorie.getId());
             if (daos.getProduitDAO().insert(p) == true){
                 this.labelResumeProduit.setTextFill(Color.web("#000000"));
                 this.labelResumeProduit.setText(p.toString());
+                this.saisieNom.clear();
+                this.saisieDescription.clear();
+                this.saisieTarif.clear();
+                this.cbxCategorie.getSelectionModel().select(-1);
             }
             else{
                throw new IllegalArgumentException("Impossible d'ajouter le produit");
@@ -56,7 +60,7 @@ public class AjoutProduitController{
         }
         return true;
     }
-    
+
     @FXML 
     public void setDaos(String persistance){
 

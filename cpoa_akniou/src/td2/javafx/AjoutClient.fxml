@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutClientController">
@@ -31,60 +32,39 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </Label>
-            <FlowPane alignment="BOTTOM_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" rowValignment="BOTTOM" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <children>
-                  <Button fx:id="boutonAnnuler" mnemonicParsing="false" onAction="#annuler" text="Annuler">
-                     <FlowPane.margin>
-                        <Insets bottom="20.0" left="20.0" />
-                     </FlowPane.margin>
-                  </Button>
-                  <Button fx:id="boutonSuivant" mnemonicParsing="false" onAction="#panelSuivant" text="Suivant">
-                     <FlowPane.margin>
-                        <Insets bottom="20.0" left="20.0" />
-                     </FlowPane.margin>
-                  </Button>
-                  <Button fx:id="boutonPrecedent" mnemonicParsing="false" onAction="#panelPrecedent" text="Precedent">
-                     <FlowPane.margin>
-                        <Insets bottom="20.0" left="20.0" />
-                     </FlowPane.margin>
-                  </Button>
-                  <Label fx:id="labelResume" prefHeight="40.0" prefWidth="381.0">
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" left="100.0" />
-                     </FlowPane.margin>
-                  </Label>
-               </children>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </FlowPane>
             <AnchorPane fx:id="panelNom" prefHeight="197.0" prefWidth="800.0" visible="false" GridPane.rowIndex="1">
                <children>
                   <GridPane prefHeight="348.0" prefWidth="800.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="150.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="685.0" minWidth="10.0" prefWidth="685.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="238.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="685.0" minWidth="10.0" prefWidth="562.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="325.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="348.0" prefWidth="142.0" vgap="25.0">
+                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="348.0" prefWidth="142.0" vgap="40.0">
                            <children>
-                              <Label text="Nom : " />
-                              <Label text="Prenom : " />
+                              <Label text="Nom : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Prenom : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                            </children>
                            <padding>
-                              <Insets top="125.0" />
+                              <Insets top="145.0" />
                            </padding>
                         </FlowPane>
-                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="20.0" GridPane.columnIndex="1">
+                        <FlowPane orientation="VERTICAL" prefHeight="284.0" prefWidth="668.0" vgap="20.0" GridPane.columnIndex="1">
                            <children>
                               <TextField fx:id="saisieNom" maxHeight="-Infinity" maxWidth="200.0" />
                               <TextField fx:id="saisiePrenom" maxWidth="-Infinity" prefWidth="200.0" />
                            </children>
                            <padding>
-                              <Insets top="120.0" />
+                              <Insets top="140.0" />
                            </padding>
                         </FlowPane>
                      </children>
@@ -102,13 +82,28 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="25.0" GridPane.halignment="RIGHT">
+                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="41.0" GridPane.halignment="RIGHT">
                            <children>
-                              <Label text="Numero : " />
-                              <Label text="Rue : " />
-                              <Label text="Code postal : " />
-                              <Label text="Ville : " />
-                              <Label text="Pays : " />
+                              <Label text="Numero : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Rue : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Code postal : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Ville : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Pays : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                            </children>
                            <GridPane.margin>
                               <Insets />
@@ -117,9 +112,9 @@
                               <Insets top="60.0" />
                            </padding>
                         </FlowPane>
-                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="17.0" GridPane.columnIndex="1">
+                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="24.0" GridPane.columnIndex="1">
                            <children>
-                              <TextField fx:id="saisieNumero" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                              <TextField fx:id="saisieNumero" maxWidth="-Infinity" prefHeight="25.0" prefWidth="82.0" />
                               <TextField fx:id="saisieVoie" maxWidth="-Infinity" prefWidth="200.0" />
                               <TextField fx:id="saisieCodePostal" maxWidth="-Infinity" prefWidth="75.0" />
                               <TextField fx:id="saisieVille" maxWidth="-Infinity" prefWidth="150.0" />
@@ -144,16 +139,22 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="348.0" prefWidth="142.0" vgap="25.0">
+                        <FlowPane alignment="TOP_RIGHT" columnHalignment="RIGHT" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="348.0" prefWidth="142.0" vgap="33.0">
                            <children>
-                              <Label text="E-mail : " />
-                              <Label text="Mot de passe :  " />
+                              <Label text="E-mail : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label text="Mot de passe :  ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                            </children>
                            <padding>
                               <Insets top="125.0" />
                            </padding>
                         </FlowPane>
-                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="20.0" GridPane.columnIndex="1">
+                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" vgap="15.0" GridPane.columnIndex="1">
                            <children>
                               <TextField fx:id="saisieEmail" maxHeight="-Infinity" maxWidth="200.0" />
                               <TextField fx:id="saisieMotDePasse" maxWidth="-Infinity" prefWidth="200.0" />
@@ -166,7 +167,25 @@
                   </GridPane>
                </children>
             </AnchorPane>
+            <FlowPane alignment="CENTER_RIGHT" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="labelResume" prefHeight="40.0" prefWidth="381.0" />
+                  <Button fx:id="boutonPrecedent" mnemonicParsing="false" onAction="#panelPrecedent" text="Precedent" />
+                  <Button fx:id="boutonSuivant" mnemonicParsing="false" onAction="#panelSuivant" text="Suivant">
+                     <FlowPane.margin>
+                        <Insets left="10.0" />
+                     </FlowPane.margin>
+                  </Button>
+                  <Button fx:id="boutonAnnuler" mnemonicParsing="false" onAction="#annuler" text="Annuler">
+                     <FlowPane.margin>
+                        <Insets left="40.0" right="15.0" />
+                     </FlowPane.margin>
+                  </Button>
+               </children>
+            </FlowPane>
          </children>
       </GridPane>
+      <Line endX="1028.0" endY="74.0" layoutX="-228.0" layoutY="15.0" startX="228.0" startY="74.0" />
+      <Line endX="989.0000610351562" endY="261.0" layoutX="-189.0" layoutY="171.0" startX="189.0" startY="261.0" />
    </children>
 </AnchorPane>

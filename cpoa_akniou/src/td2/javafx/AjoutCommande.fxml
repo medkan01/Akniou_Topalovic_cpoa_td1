@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -37,7 +39,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="boutonAjouterCommande" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Ajouter" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Button fx:id="boutonAjouterCommande" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ajouterCommande" text="Ajouter" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets right="30.0" />
                            </GridPane.margin>
@@ -76,7 +78,7 @@
                               <Insets top="40.0" />
                            </FlowPane.margin>
                         </Button>
-                        <Button fx:id="boutonSupprimerLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Supprimer le produit">
+                        <Button fx:id="boutonSupprimerLigneCommande" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#supprimer" prefWidth="150.0" text="Supprimer le produit">
                            <FlowPane.margin>
                               <Insets top="10.0" />
                            </FlowPane.margin>
@@ -96,6 +98,23 @@
                      <padding>
                         <Insets right="50.0" top="50.0" />
                      </padding>
+                  </FlowPane>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" GridPane.rowIndex="1">
+                     <children>
+                        <ChoiceBox fx:id="cbxClients" prefHeight="25.0" prefWidth="378.0" />
+                        <Button fx:id="boutonAjouterClient" mnemonicParsing="false" onAction="#ajouterClient" prefHeight="22.0" prefWidth="0.0">
+                           <FlowPane.margin>
+                              <Insets left="20.0" />
+                           </FlowPane.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/imageAdd.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
                   </FlowPane>
                </children>
             </GridPane>

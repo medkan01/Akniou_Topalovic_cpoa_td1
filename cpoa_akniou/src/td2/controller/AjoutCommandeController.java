@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import td2.controller.ChoisirQuantiteLigneCommandeController;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Produit;
@@ -31,6 +30,7 @@ public class AjoutCommandeController{
     
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
+    @FXML private ChoiceBox<Categorie> cbxClient;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
@@ -73,16 +73,30 @@ public class AjoutCommandeController{
             double tarifUnitaire = produit.getTarif();
             int quantite = controller.getQuantite();
             ProduitSelectionne produitSelectionne = new ProduitSelectionne(nomProduit, nomCategorie, tarifUnitaire, quantite);
-            //Ajout du produit dans la table des produits selectionnes
-            this.tableProduitSelectionne.getItems().add(produitSelectionne);
+            if(this.tableProduitSelectionne.getItems().contains(produitSelectionne)){
+                this.tableProduitSelectionne.getSelectionModel().select(produitSelectionne);
+                produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
+                produitSelectionne.setQuantite(produitSelectionne.getQuantite()+quantite);
+            } else{
+                this.tableProduitSelectionne.getItems().add(produitSelectionne);
+            }
             //Fermeture de la fenetre quantite apres recuperation des donnees necessaire
             quantiteStage.close();
             this.tableProduit.getSelectionModel().clearSelection();
             this.tableProduitSelectionne.getSelectionModel().clearSelection();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-        
+    }
+    @FXML
+    public void supprimer(){
+        ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
+        this.tableProduitSelectionne.getItems().remove(produitSelectionne);
+    }
+
+    @FXML
+    public void ajouterCommande(){
 
     }
 
@@ -148,8 +162,8 @@ public class AjoutCommandeController{
             this.labelResume.setTextFill(Color.web("#FF0000"));
             this.labelResume.setText("erreur Categorie");
         }
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.tableProduitSelectionne.getSelectionModel().clearSelection();});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);this.tableProduit.getSelectionModel().clearSelection();});
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
+    this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); /*this.tableProduit.getSelectionModel().clearSelection();*/});
         
     }
 }
