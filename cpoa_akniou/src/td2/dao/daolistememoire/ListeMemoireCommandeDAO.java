@@ -68,4 +68,16 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
     public ArrayList<Commande> getAll(){
         return (ArrayList<Commande>) this.donnees;
     }
+
+    public ArrayList<Commande> getByIdClient(int idClient){
+        ArrayList<Commande> listeAll = this.getAll();
+        ArrayList<Commande> listeCommande = this.getAll();
+
+        for(int i=0;i<listeAll.size();i++){
+            if(listeAll.get(i).getIdClient() == idClient){
+                listeCommande.add(listeAll.get(i));
+            }
+        }
+        return listeCommande;
+    }
 }

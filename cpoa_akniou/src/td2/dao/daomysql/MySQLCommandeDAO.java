@@ -88,5 +88,17 @@ public class MySQLCommandeDAO implements CommandeDAO{
 		return liste;
 	}
 
+	public ArrayList<Commande> getByIdClient(int idClient) throws SQLException{
+		Connection c = Connexion.getInstance().getMaConnexion();
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u_cpoa.Commande WHERE id_client=?");
+			requete.setInt(1, idClient);
+		ResultSet res = requete.executeQuery();
+		ArrayList<Commande> liste = new ArrayList<Commande>();
+		while (res.next()) {
+			Commande commande = new Commande(res.getInt("id_commande"), res.getDate("date_commande").toLocalDate(), res.getInt("id_client"));
+			liste.add(commande);
+		}
+		return liste;
+	}
 }
 

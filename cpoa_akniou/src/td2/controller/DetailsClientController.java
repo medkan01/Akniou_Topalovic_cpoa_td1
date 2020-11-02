@@ -36,7 +36,6 @@ public class DetailsClientController {
 
     @FXML 
     public void setDaos(String persistance){
-
         if(persistance.equals("En Ligne")){
             this.daos = DAOFactory.getDAOFactory(Persistance.MySQL);
         }

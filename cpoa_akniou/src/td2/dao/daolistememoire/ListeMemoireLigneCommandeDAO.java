@@ -1,7 +1,7 @@
 package td2.dao.daolistememoire;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
 import td2.dao.daofactory.LigneCommandeDAO;
 import td2.pojo.Commande;
 import td2.pojo.LigneCommande;
@@ -50,7 +50,12 @@ public class ListeMemoireLigneCommandeDAO implements LigneCommandeDAO {
 
     }
 
-    public HashMap<Produit, LigneCommande> getLigneCommandeByIdClient(int idClient){
-        
+    public HashMap<Produit, LigneCommande> getByIdClient(int idClient){
+        ArrayList<Commande> listeCommande = commandeInstance.getByIdClient(idClient);
+        HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
+        for(int i=0;i<listeCommande.size();i++){
+            hash.putAll(listeCommande.get(i).getLigneCommande());
+        }
+        return hash;
     }
 }

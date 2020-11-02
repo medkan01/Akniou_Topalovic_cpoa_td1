@@ -75,7 +75,7 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		return hash;
 	}
 
-	public HashMap<Produit, LigneCommande> getLigneCommandeByIdClient(int idClient) throws SQLException{
+	public HashMap<Produit, LigneCommande> getByIdClient(int idClient) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
 		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE id_client =? ORDER BY id_commande ASC");
