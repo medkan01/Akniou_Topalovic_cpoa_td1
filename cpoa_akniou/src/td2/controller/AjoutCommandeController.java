@@ -4,7 +4,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -181,7 +180,6 @@ public class AjoutCommandeController{
         }
  
         try{
-            ObservableList<ProduitSelectionne> liste = this.tableProduitSelectionne.getItems();
             Commande commande = new Commande(1,LocalDate.now(),idClient);
             for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
                 ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getItems().get(i);

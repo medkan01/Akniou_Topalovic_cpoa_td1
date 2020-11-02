@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -161,9 +158,6 @@ public class MenuPrincipalController implements Initializable {
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
         TableColumn<Categorie, String> colVisuel = new TableColumn<>("Visuel");
         colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
-        ArrayList<TableColumn<Categorie,?>> colTableCategorie = new ArrayList<TableColumn<Categorie,?>>();
-        colTableCategorie.add(colTitre);
-        colTableCategorie.add(colVisuel);
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
         this.tableCategorie.requestLayout();
         this.affichageTableau.getChildren().addAll(tableCategorie);
@@ -171,12 +165,12 @@ public class MenuPrincipalController implements Initializable {
         this.cbxChoixRecherche.getItems().addAll("Titre","Visuel");
         this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
-
-        
-        FilteredList<Categorie> filtreCategorie = new FilteredList(this.tableCategorie.getItems(), p -> true);
+        FilteredList<Categorie> filtreCategorie = new FilteredList<Categorie>(this.tableCategorie.getItems(), p -> true);
         tableCategorie.setItems(filtreCategorie);
-        tableCategorie.getColumns().addAll(colTitre, colVisuel);
-
+        ArrayList<TableColumn<Categorie,?>> colTableCategorie = new ArrayList<TableColumn<Categorie,?>>();
+        colTableCategorie.add(colTitre);
+        colTableCategorie.add(colVisuel);
+        tableCategorie.getColumns().addAll(colTableCategorie);
         saisieRecherche.setOnKeyReleased(keyEvent ->
         {
             switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
@@ -227,6 +221,15 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Client, String> colAdrPays = new TableColumn<>("Pays");
         colAdrPays.setPrefWidth(75);
         colAdrPays.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
+        this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
+        this.tableClient.requestLayout();
+        this.affichageTableau.getChildren().addAll(tableClient);
+        this.cbxChoixRecherche.getItems().clear();
+        this.cbxChoixRecherche.getItems().addAll("Nom","Prenom","E-Mail","Numéro d'adresse", "Rue","Code Postal","Ville","Pays");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
+        this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
+        FilteredList<Client> filtreClient = new FilteredList<Client>(this.tableClient.getItems(), p -> true);
+        tableClient.setItems(filtreClient);
         ArrayList<TableColumn<Client,?>> colTableClient = new ArrayList<TableColumn<Client,?>>();
         colTableClient.add(colNom);
         colTableClient.add(colPrenom);
@@ -236,18 +239,7 @@ public class MenuPrincipalController implements Initializable {
         colTableClient.add(colAdrCodePostal);
         colTableClient.add(colAdrVille);
         colTableClient.add(colAdrPays);
-        this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
-        this.tableClient.requestLayout();
-        this.affichageTableau.getChildren().addAll(tableClient);
-        this.cbxChoixRecherche.getItems().clear();
-        this.cbxChoixRecherche.getItems().addAll("Nom","Prenom","E-Mail","Numéro d'adresse", "Rue","Code Postal","Ville","Pays");
-        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
-        this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
-
-        FilteredList<Client> filtreClient = new FilteredList(this.tableClient.getItems(), p -> true);
-        tableClient.setItems(filtreClient);
-        tableClient.getColumns().addAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie, colAdrCodePostal, colAdrVille, colAdrPays);
-
+        tableClient.getColumns().addAll(colTableClient);
         saisieRecherche.setOnKeyReleased(keyEvent ->
         {
             switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
@@ -302,10 +294,6 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Commande, Integer> colIdClient = new TableColumn<>("ID Client");
         colIdClient.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("idClient"));
         colIdClient.setPrefWidth(200);
-        ArrayList<TableColumn<Commande,?>> colTableCommande = new ArrayList<TableColumn<Commande,?>>();
-        colTableCommande.add(colIdCommande);
-        colTableCommande.add(colDate);
-        colTableCommande.add(colIdClient);
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
         this.tableCommande.requestLayout();;
         this.affichageTableau.getChildren().addAll(tableCommande);
@@ -313,11 +301,13 @@ public class MenuPrincipalController implements Initializable {
         this.cbxChoixRecherche.getItems().addAll("IdCommande","Date","IdClient");
         this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
-
-        FilteredList<Commande> filtreCommande = new FilteredList(this.tableCommande.getItems(), p -> true);
+        FilteredList<Commande> filtreCommande = new FilteredList<Commande>(this.tableCommande.getItems(), p -> true);
         tableCommande.setItems(filtreCommande);
-        tableCommande.getColumns().addAll(colIdCommande, colDate, colIdClient);
-
+        ArrayList<TableColumn<Commande,?>> colTableCommande = new ArrayList<TableColumn<Commande,?>>();
+        colTableCommande.add(colIdCommande);
+        colTableCommande.add(colDate);
+        colTableCommande.add(colIdClient);
+        tableCommande.getColumns().addAll(colTableCommande);
         saisieRecherche.setOnKeyReleased(keyEvent ->
         {
             switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
@@ -357,10 +347,6 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
         colDescription.setPrefWidth(675);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-        ArrayList<TableColumn<Produit,?>> colTableProduit = new ArrayList<TableColumn<Produit,?>>();
-        colTableProduit.add(colTarif);
-        colTableProduit.add(colLibelle);
-        colTableProduit.add(colDescription);
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
         this.tableProduit.requestLayout();
         this.affichageTableau.getChildren().addAll(tableProduit);
@@ -368,10 +354,13 @@ public class MenuPrincipalController implements Initializable {
         this.cbxChoixRecherche.getItems().addAll("Tarif","Nom","Description");
         this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setVisible(!(newValue == null));});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
-
-        FilteredList<Produit> filtreProduit = new FilteredList(this.tableProduit.getItems(), p -> true);
+        FilteredList<Produit> filtreProduit = new FilteredList<Produit>(this.tableProduit.getItems(), p -> true);
         tableProduit.setItems(filtreProduit);
-        tableProduit.getColumns().addAll(colTarif, colLibelle, colDescription);
+        ArrayList<TableColumn<Produit,?>> colTableProduit = new ArrayList<TableColumn<Produit,?>>();
+        colTableProduit.add(colTarif);
+        colTableProduit.add(colLibelle);
+        colTableProduit.add(colDescription);
+        tableProduit.getColumns().addAll(colTableProduit);
 
         saisieRecherche.setOnKeyReleased(keyEvent ->
         {
