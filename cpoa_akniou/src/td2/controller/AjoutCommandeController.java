@@ -2,6 +2,7 @@ package td2.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -214,7 +215,10 @@ public class AjoutCommandeController{
             colNomProd.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
             colTarifProd.setCellValueFactory(new PropertyValueFactory<Produit, Double>("tarif"));
             //Ajout des colonnes à la table
-            this.tableProduit.getColumns().setAll(colNomProd, colTarifProd);
+            ArrayList<TableColumn<Produit,?>> colTableProduit = new ArrayList<TableColumn<Produit,?>>();
+            colTableProduit.add(colNomProd);
+            colTableProduit.add(colTarifProd);
+            this.tableProduit.getColumns().setAll(colTableProduit);
             //Remplissage de la table
             this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
 
@@ -231,14 +235,25 @@ public class AjoutCommandeController{
             colTarifProdLigneCom.setPrefWidth(77);
             colQuantiteProdLigneCom.setPrefWidth(77);
             colIdProduit.setVisible(false);
+            //setResizable = false
+            colNomProdLigneCom.setResizable(false);
+            colNomCategorieProdLigneCom.setResizable(false);
+            colTarifProdLigneCom.setResizable(false);
+            colQuantiteProdLigneCom.setResizable(false);
             //Format du type des cellules pour chaque colonne
+            colIdProduit.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("idProduit"));
             colNomProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomProduit"));
             colNomCategorieProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomCategorie"));
             colTarifProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Double>("tarifUnitaire"));
             colQuantiteProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("quantite"));
-            colIdProduit.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("idProduit"));
             //Ajout des colonnes à la table contenant les produits à ajouter à la commande
-            this.tableProduitSelectionne.getColumns().setAll(colIdProduit,colNomProdLigneCom, colNomCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
+            ArrayList<TableColumn<ProduitSelectionne,?>> colTableProduitSelectionne = new ArrayList<TableColumn<ProduitSelectionne,?>>();
+            colTableProduitSelectionne.add(colIdProduit);
+            colTableProduitSelectionne.add(colNomProdLigneCom);
+            colTableProduitSelectionne.add(colNomCategorieProdLigneCom);
+            colTableProduitSelectionne.add(colTarifProdLigneCom);
+            colTableProduitSelectionne.add(colQuantiteProdLigneCom);
+            this.tableProduitSelectionne.getColumns().setAll(colTableProduitSelectionne);
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
             this.cbxClients.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {

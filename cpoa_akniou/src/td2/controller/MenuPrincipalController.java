@@ -2,6 +2,7 @@ package td2.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -127,7 +128,10 @@ public class MenuPrincipalController implements Initializable {
         colTitre.setCellValueFactory(new PropertyValueFactory<Categorie, String>("titre"));
         TableColumn<Categorie, String> colVisuel = new TableColumn<>("Visuel");
         colVisuel.setCellValueFactory(new PropertyValueFactory<Categorie, String>("visuel"));
-        this.tableCategorie.getColumns().setAll(colTitre, colVisuel);
+        ArrayList<TableColumn<Categorie,?>> colTableCategorie = new ArrayList<TableColumn<Categorie,?>>();
+        colTableCategorie.add(colTitre);
+        colTableCategorie.add(colVisuel);
+        this.tableCategorie.getColumns().setAll(colTableCategorie);
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
         this.tableCategorie.requestLayout();
         this.affichageTableau.getChildren().addAll(tableCategorie);
@@ -167,7 +171,16 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Client, String> colAdrPays = new TableColumn<>("Pays");
         colAdrPays.setPrefWidth(75);
         colAdrPays.setCellValueFactory(new PropertyValueFactory<Client, String>("adrPays"));
-        this.tableClient.getColumns().setAll(colNom, colPrenom, colIdentifiant, colAdrNumero, colAdrVoie,colAdrCodePostal, colAdrVille, colAdrPays);
+        ArrayList<TableColumn<Client,?>> colTableClient = new ArrayList<TableColumn<Client,?>>();
+        colTableClient.add(colNom);
+        colTableClient.add(colPrenom);
+        colTableClient.add(colIdentifiant);
+        colTableClient.add(colAdrNumero);
+        colTableClient.add(colAdrVoie);
+        colTableClient.add(colAdrCodePostal);
+        colTableClient.add(colAdrVille);
+        colTableClient.add(colAdrPays);
+        this.tableClient.getColumns().setAll(colTableClient);
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
         this.tableClient.requestLayout();
         this.affichageTableau.getChildren().addAll(tableClient);
@@ -192,7 +205,11 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Commande, Integer> colIdClient = new TableColumn<>("ID Client");
         colIdClient.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("idClient"));
         colIdClient.setPrefWidth(200);
-        this.tableCommande.getColumns().setAll(colIdCommande, colDate, colIdClient);
+        ArrayList<TableColumn<Commande,?>> colTableCommande = new ArrayList<TableColumn<Commande,?>>();
+        colTableCommande.add(colIdCommande);
+        colTableCommande.add(colDate);
+        colTableCommande.add(colIdClient);
+        this.tableCommande.getColumns().setAll(colTableCommande);
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
         this.tableCommande.requestLayout();;
         this.affichageTableau.getChildren().addAll(tableCommande);
@@ -218,7 +235,11 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Produit, String> colDescription = new TableColumn<>("Description");
         colDescription.setPrefWidth(675);
         colDescription.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-        this.tableProduit.getColumns().setAll(colTarif, colLibelle, colDescription);
+        ArrayList<TableColumn<Produit,?>> colTableProduit = new ArrayList<TableColumn<Produit,?>>();
+        colTableProduit.add(colTarif);
+        colTableProduit.add(colLibelle);
+        colTableProduit.add(colDescription);
+        this.tableProduit.getColumns().setAll(colTableProduit);
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
         this.tableProduit.requestLayout();
         this.affichageTableau.getChildren().addAll(tableProduit);

@@ -1,6 +1,7 @@
 package td2.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -75,7 +76,10 @@ public class DetailsClientController {
             colId.setCellValueFactory(new PropertyValueFactory<Commande, Integer>("id"));
             colDate.setCellValueFactory(new PropertyValueFactory<Commande, LocalDate>("date"));
             //Ajout des colonnes à la table
-            this.tableCommande.getColumns().setAll(colId, colDate);
+            ArrayList<TableColumn<Commande,?>> colTableCommande = new ArrayList<TableColumn<Commande,?>>();
+            colTableCommande.add(colId);
+            colTableCommande.add(colDate);
+            this.tableCommande.getColumns().setAll(colTableCommande);
             //Remplissage de la table
             this.tableCommande.getItems().addAll(daos.getCommandeDAO().getByIdClient(client.getId()));
         } catch(Exception e) {
