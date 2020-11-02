@@ -148,8 +148,8 @@ public class AjoutCommandeController{
             this.labelResume.setTextFill(Color.web("#FF0000"));
             this.labelResume.setText("erreur Categorie");
         }
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduit.getSelectionModel().clearSelection();});
-        //if(this.tableProduit.getSelectionModel().selectedItemProperty().get() != null) this.tableProduitSelectionne.getSelectionModel().select(-1);
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);this.tableProduitSelectionne.getSelectionModel().clearSelection();});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);this.tableProduit.getSelectionModel().clearSelection();});
+        
     }
 }
