@@ -157,18 +157,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "{" +
-			" id='" + id + "'" +
-			", nom='" + nom + "'" +
-			", prenom='" + prenom + "'" +
-			", identifiant='" + identifiant + "'" +
-			", motDePasse='" + motDePasse + "'" +
-			", adrNumero='" + adrNumero + "'" +
-			", adrVoie='" + adrVoie + "'" +
-			", adrCodePostal='" + adrCodePostal + "'" +
-			", adrVille='" + adrVille + "'" +
-			", adrPays='" + adrPays + "'" +
-			"}";
+		return id + "-" + nom.toUpperCase() + "-" + prenom.substring(0, 1);
 	}
 
 }
