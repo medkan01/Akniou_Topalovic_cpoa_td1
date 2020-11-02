@@ -76,13 +76,13 @@ public class DetailsCommandeController{
             TableColumn<ProduitSelectionne, String> colNomProdLigneCom = new TableColumn<ProduitSelectionne, String>("Nom");
             TableColumn<ProduitSelectionne, String> colNomCategorieProdLigneCom = new TableColumn<ProduitSelectionne, String>("Categorie");
             TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif");
-            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantité");
+            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Qte");
             TableColumn<ProduitSelectionne, Integer> colIdProduit = new TableColumn<ProduitSelectionne, Integer>("idProduit");
             //Tailles des colonnes
-            colNomProdLigneCom.setPrefWidth(128);
-            colNomCategorieProdLigneCom.setPrefWidth(128);
-            colTarifProdLigneCom.setPrefWidth(77);
-            colQuantiteProdLigneCom.setPrefWidth(77);
+            colNomProdLigneCom.setPrefWidth(120);
+            colNomCategorieProdLigneCom.setPrefWidth(120);
+            colTarifProdLigneCom.setPrefWidth(70);
+            colQuantiteProdLigneCom.setPrefWidth(60);
             colIdProduit.setVisible(false);
             //setResizable = false
             colNomProdLigneCom.setResizable(false);
