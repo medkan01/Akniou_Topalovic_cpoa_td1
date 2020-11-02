@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.MenuPrincipalController">
@@ -22,12 +23,12 @@
             <menus>
               <Menu fx:id="menuOption" mnemonicParsing="false" text="Option">
                      <items>
-                        <RadioMenuItem fx:id="nightMode" mnemonicParsing="false" text="Sombre">
+                        <RadioMenuItem fx:id="nightMode" mnemonicParsing="false" onAction="#modeNuit" text="Sombre">
                            <toggleGroup>
                               <ToggleGroup fx:id="groupeModeNuit" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem fx:id="lightMode" mnemonicParsing="false" selected="true" text="Claire" toggleGroup="$groupeModeNuit" />
+                        <RadioMenuItem fx:id="lightMode" mnemonicParsing="false" onAction="#modeJour" selected="true" text="Claire" toggleGroup="$groupeModeNuit" />
                      </items>
               </Menu>
               <Menu fx:id="menuInstance" mnemonicParsing="false" text="Instance">
@@ -52,62 +53,51 @@
                               <Button fx:id="boutonClients" layoutY="52.0" mnemonicParsing="false" onAction="#afficherClients" prefHeight="41.0" prefWidth="200.0" text="Clients" />
                               <Button fx:id="boutonCommandes" layoutY="102.0" mnemonicParsing="false" onAction="#afficherCommandes" prefHeight="41.0" prefWidth="200.0" text="Commandes" />
                               <Button fx:id="boutonProduits" layoutY="152.0" mnemonicParsing="false" onAction="#afficherProduits" prefHeight="41.0" prefWidth="200.0" text="Produits" />
-                              <Pane fx:id="panelBoutonInteraction" layoutX="68.0" layoutY="279.0">
+                              <FlowPane hgap="50.0" layoutX="16.0" layoutY="255.0" prefHeight="143.0" prefWidth="178.0" vgap="50.0">
                                  <children>
-                                    <VBox prefHeight="224.0" prefWidth="25.0">
-                                       <children>
-                                          <Button fx:id="boutonAjouter" disable="true" mnemonicParsing="false" onAction="#ajouter">
-                                             <graphic>
-                                                <ImageView fx:id="imageAdd" fitHeight="59.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/imageAdd.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <VBox.margin>
-                                                <Insets bottom="20.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                          <Button fx:id="boutonDetails" disable="true" mnemonicParsing="false" onAction="#details">
-                                             <graphic>
-                                                <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/imageView.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <VBox.margin>
-                                                <Insets bottom="20.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                          <Button fx:id="boutonModifier" disable="true" mnemonicParsing="false" onAction="#modifier">
-                                             <graphic>
-                                                <ImageView fx:id="imageEdit" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/imageEdit.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <VBox.margin>
-                                                <Insets bottom="20.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                          <Button fx:id="boutonSupprimer" disable="true" mnemonicParsing="false" onAction="#supprimer">
-                                             <graphic>
-                                                <ImageView fx:id="imageDelete" fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/imageDelete.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </children>
-                                    </VBox>
+                                    <Button id="noCss" fx:id="boutonAjouter" disable="true" mnemonicParsing="false" onAction="#ajouter">
+                                       <graphic>
+                                          <ImageView fx:id="imageAdd" fitHeight="59.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/imageAdd.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button id="noCss" fx:id="boutonDetails" disable="true" mnemonicParsing="false" onAction="#details">
+                                       <graphic>
+                                          <ImageView fx:id="imageView" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/imageView.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button id="noCss" fx:id="boutonModifier" disable="true" mnemonicParsing="false" onAction="#modifier">
+                                       <graphic>
+                                          <ImageView fx:id="imageEdit" fitHeight="56.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/imageEdit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button id="noCss" fx:id="boutonSupprimer" disable="true" mnemonicParsing="false" onAction="#supprimer">
+                                       <graphic>
+                                          <ImageView fx:id="imageDelete" fitHeight="57.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/imageDelete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
                                  </children>
-                              </Pane>
-                              <Label layoutX="18.0" layoutY="233.0" text="Instance :" />
-                              <Label fx:id="labelInstance" layoutX="75.0" layoutY="233.0" textFill="#0004ff" />
+                              </FlowPane>
+                              <Label layoutX="14.0" layoutY="219.0" text="Instance :" />
+                              <Label fx:id="labelInstance" layoutX="71.0" layoutY="219.0" textFill="#0004ff" />
                               <Label layoutX="35.0" layoutY="598.0" text="EZGestion by HKCorp. ®" />
+                              <TextField fx:id="saisieRecherche" editable="false" layoutX="16.0" layoutY="490.0" prefHeight="25.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="cbxChoixRecherche" disable="true" layoutX="25.0" layoutY="532.0" prefHeight="25.0" prefWidth="139.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane id="pane" fx:id="affichageTableau" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="870.0" SplitPane.resizableWithParent="false" />

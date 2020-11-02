@@ -1,6 +1,7 @@
 package td2.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -28,8 +29,10 @@ public class AjoutCategorieController {
             this.labelResume.setText("");;
             Categorie categorie = new Categorie(1, titre, titre+".png");
             if (daos.getCategorieDAO().insert(categorie) == true){
-                labelResume.setTextFill(Color.web("#52D044"));
-                labelResume.setText("La categorie "+ categorie.toString() + " a ete ajoutee avec succes");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout catégorie");
+                alert.setHeaderText("Catégorie "+this.saisieTitre.getText()+" ajoutée avec succès !");
+                alert.showAndWait();
                 this.saisieTitre.clear();
             }
             else{

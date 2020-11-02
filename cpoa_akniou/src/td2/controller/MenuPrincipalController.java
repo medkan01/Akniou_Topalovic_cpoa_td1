@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,10 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +38,7 @@ import td2.pojo.Produit;
 
 public class MenuPrincipalController implements Initializable {
 
+    private String css="themeClaire";
     private DAOFactory daos;
     @FXML private Button boutonCategories, boutonClients, boutonCommandes,boutonProduits, boutonDetails, boutonAjouter, boutonModifier, boutonSupprimer;
     @FXML private RadioMenuItem online, offline, nightMode, lightMode;
@@ -40,9 +46,11 @@ public class MenuPrincipalController implements Initializable {
     @FXML private TableView<Client> tableClient;
     @FXML private TableView<Commande> tableCommande;
     @FXML private TableView<Produit> tableProduit;
+    @FXML private ChoiceBox<String> cbxChoixRecherche;
     @FXML private AnchorPane affichageTableau;
     @FXML private Pane panelBoutonInteraction;
     @FXML private Label labelInstance;
+    @FXML private TextField saisieRecherche;
 
     public void initialize(URL location, ResourceBundle resources) {
         Stage connexionStage = new Stage();
@@ -53,7 +61,7 @@ public class MenuPrincipalController implements Initializable {
                 Node rootConnexion = fxmlLoaderConnexion.load();
                 AccueilController controller = fxmlLoaderConnexion.getController();
                 Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 980, 650);
-                sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 connexionStage.setScene(sceneConnexion);
                 connexionStage.setTitle("Connexion");
                 connexionStage.initModality(Modality.APPLICATION_MODAL);
@@ -78,6 +86,16 @@ public class MenuPrincipalController implements Initializable {
     }
 
     @FXML
+    public void modeNuit(){
+        this.css = "themeSombre";
+    }
+
+    @FXML
+    public void modeJour(){
+        this.css = "themeClaire";
+    }
+
+    @FXML
     public void setInstanceOnline() {
         Stage connexionStage = new Stage();
         try {
@@ -86,7 +104,7 @@ public class MenuPrincipalController implements Initializable {
             Node rootConnexion = fxmlLoaderConnexion.load();
             ConnexionController controller = fxmlLoaderConnexion.getController();
             Scene sceneConnexion = new Scene((AnchorPane) rootConnexion, 505, 315);
-            sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+            sceneConnexion.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
             connexionStage.setScene(sceneConnexion);
             connexionStage.setTitle("Connexion");
             connexionStage.initModality(Modality.APPLICATION_MODAL);
@@ -101,6 +119,8 @@ public class MenuPrincipalController implements Initializable {
                 this.boutonDetails.setDisable(true);
                 this.boutonModifier.setDisable(true);
                 this.boutonSupprimer.setDisable(true);
+                this.cbxChoixRecherche.setDisable(true);
+                this.saisieRecherche.setEditable(false);
                 this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
             }   else{
                 this.offline.setSelected(true);
@@ -117,15 +137,24 @@ public class MenuPrincipalController implements Initializable {
         this.daos = DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         this.affichageTableau.getChildren().clear();
         this.labelInstance.setText(DAOFactory.getPersistanceActuelle());
+        this.boutonAjouter.setDisable(true);
+        this.boutonDetails.setDisable(true);
+        this.boutonModifier.setDisable(true);
+        this.boutonSupprimer.setDisable(true);
+        this.cbxChoixRecherche.setDisable(true);
+        this.saisieRecherche.setEditable(false);
     }
 
     @FXML
     public void afficherCategorie() throws SQLException {
         this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
+        this.cbxChoixRecherche.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
+        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setText("");
         tableCategorie = new TableView<Categorie>();
         this.tableCategorie.setMinSize(870, 620);
         TableColumn<Categorie, String> colTitre = new TableColumn<>("Titre");
@@ -135,20 +164,43 @@ public class MenuPrincipalController implements Initializable {
         ArrayList<TableColumn<Categorie,?>> colTableCategorie = new ArrayList<TableColumn<Categorie,?>>();
         colTableCategorie.add(colTitre);
         colTableCategorie.add(colVisuel);
-        this.tableCategorie.getColumns().setAll(colTableCategorie);
         this.tableCategorie.getItems().addAll(daos.getCategorieDAO().getAll());
         this.tableCategorie.requestLayout();
         this.affichageTableau.getChildren().addAll(tableCategorie);
+        this.cbxChoixRecherche.getItems().clear();
+        this.cbxChoixRecherche.getItems().addAll("Titre","Visuel");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
         this.tableCategorie.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
+
+        
+        FilteredList<Categorie> filtreCategorie = new FilteredList(this.tableCategorie.getItems(), p -> true);
+        tableCategorie.setItems(filtreCategorie);
+        tableCategorie.getColumns().addAll(colTitre, colVisuel);
+
+        saisieRecherche.setOnKeyReleased(keyEvent ->
+        {
+            switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
+            {
+                case "Titre":
+                filtreCategorie.setPredicate(p -> p.getTitre().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Visuel":
+                filtreCategorie.setPredicate(p -> p.getVisuel().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+            }
+        });
     }
 
     @FXML
     public void afficherClients() throws SQLException {
         this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
+        this.cbxChoixRecherche.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
+        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setText("");
         tableClient = new TableView<Client>();
         this.tableClient.setMinSize(870, 620);
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
@@ -188,16 +240,39 @@ public class MenuPrincipalController implements Initializable {
         this.tableClient.getItems().addAll(daos.getClientDAO().getAll());
         this.tableClient.requestLayout();
         this.affichageTableau.getChildren().addAll(tableClient);
+        this.cbxChoixRecherche.getItems().clear();
+        this.cbxChoixRecherche.getItems().addAll("Nom","Prenom","Identifiant","Numéro d'adresse", "Rue","Code Postal","Ville","Pays");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
         this.tableClient.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
+
+        FilteredList<Categorie> filtreCategorie = new FilteredList(this.tableCategorie.getItems(), p -> true);
+        tableCategorie.setItems(filtreCategorie);
+        tableCategorie.getColumns().addAll(colNom, colVisuel);
+
+        saisieRecherche.setOnKeyReleased(keyEvent ->
+        {
+            switch (cbxChoixRecherche.getValue())//Switch on choiceBox value
+            {
+                case "Titre":
+                filtreCategorie.setPredicate(p -> p.getTitre().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+                case "Visuel":
+                filtreCategorie.setPredicate(p -> p.getVisuel().toLowerCase().contains(saisieRecherche.getText().toLowerCase().trim()));
+                    break;
+            }
+        });
     }
 
     @FXML
     public void afficherCommandes() throws SQLException {
         this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
+        this.cbxChoixRecherche.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
+        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setText("");
         tableCommande = new TableView<Commande>();
         this.tableCommande.setMinSize(870, 620);
         TableColumn<Commande, Integer> colIdCommande = new TableColumn<>("ID Commande");
@@ -217,6 +292,9 @@ public class MenuPrincipalController implements Initializable {
         this.tableCommande.getItems().addAll(daos.getCommandeDAO().getAll());
         this.tableCommande.requestLayout();;
         this.affichageTableau.getChildren().addAll(tableCommande);
+        this.cbxChoixRecherche.getItems().clear();
+        this.cbxChoixRecherche.getItems().addAll("IdCommande","Date","IdClient");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
         this.tableCommande.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
 
     }
@@ -225,9 +303,12 @@ public class MenuPrincipalController implements Initializable {
     public void afficherProduits() throws SQLException {
         this.affichageTableau.getChildren().clear();
         this.boutonAjouter.setDisable(false);
+        this.cbxChoixRecherche.setDisable(false);
         this.boutonDetails.setDisable(true);
         this.boutonModifier.setDisable(true);
         this.boutonSupprimer.setDisable(true);
+        this.saisieRecherche.setEditable(false);
+        this.saisieRecherche.setText("");
         tableProduit = new TableView<Produit>();
         this.tableProduit.setMinSize(870, 620);
         TableColumn<Produit, String> colTarif = new TableColumn<>("Tarif");
@@ -247,6 +328,9 @@ public class MenuPrincipalController implements Initializable {
         this.tableProduit.getItems().addAll(daos.getProduitDAO().getAll());
         this.tableProduit.requestLayout();
         this.affichageTableau.getChildren().addAll(tableProduit);
+        this.cbxChoixRecherche.getItems().clear();
+        this.cbxChoixRecherche.getItems().addAll("Tarif","Nom","Description");
+        this.cbxChoixRecherche.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.saisieRecherche.setEditable(!(newValue == null));});
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonDetails.setDisable(newValue == null);this.boutonModifier.setDisable(newValue == null);this.boutonSupprimer.setDisable(newValue == null);});
     }
 
@@ -261,7 +345,7 @@ public class MenuPrincipalController implements Initializable {
                 AjoutCategorieController controller = fxmlLoaderAjouterCategorie.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneAjouterCategorie = new Scene((AnchorPane) rootAjouterCategorie, 550, 180);
-                sceneAjouterCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneAjouterCategorie.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 ajoutStage.setScene(sceneAjouterCategorie);
                 ajoutStage.setTitle("Ajout Categorie");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -286,7 +370,7 @@ public class MenuPrincipalController implements Initializable {
                 AjoutClientController controller = fxmlLoaderAjouterClient.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneAjouterClient = new Scene((AnchorPane) rootAjouterClient, 800, 500);
-                sceneAjouterClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneAjouterClient.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 ajoutStage.setScene(sceneAjouterClient);
                 ajoutStage.setTitle("Ajout client");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -311,7 +395,7 @@ public class MenuPrincipalController implements Initializable {
                 AjoutCommandeController controller = fxmlLoaderAjouterCommande.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneAjouterCommande = new Scene((AnchorPane) rootAjouterCommande, 900, 500);
-                sceneAjouterCommande.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneAjouterCommande.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 ajoutStage.setScene(sceneAjouterCommande);
                 ajoutStage.setTitle("Ajout Commande");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -336,7 +420,7 @@ public class MenuPrincipalController implements Initializable {
                 AjoutProduitController controller = fxmlLoaderAjouterProduit.getController();
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneAjouterProduit = new Scene((AnchorPane) rootAjouterProduit, 680, 450);
-                sceneAjouterProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneAjouterProduit.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 ajoutStage.setScene(sceneAjouterProduit);
                 ajoutStage.setTitle("Ajout Produit");
                 ajoutStage.initModality(Modality.APPLICATION_MODAL);
@@ -358,6 +442,7 @@ public class MenuPrincipalController implements Initializable {
         }
     }
 
+    @FXML
     public void details() {
         Stage detailsStage = new Stage();
         try{
@@ -369,7 +454,7 @@ public class MenuPrincipalController implements Initializable {
                 DetailsCategorieController controller = fxmlLoaderDetailsCategorie.getController();
                 controller.setCategorie(categorie);
                 Scene sceneDetailsCategorie = new Scene((AnchorPane) rootdetailsCategorie, 430, 220);
-                sceneDetailsCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneDetailsCategorie.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 detailsStage.setScene(sceneDetailsCategorie);
                 detailsStage.setTitle("Details categorie");
                 detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -385,7 +470,7 @@ public class MenuPrincipalController implements Initializable {
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneDetailsClient = new Scene((AnchorPane) rootdetailsClient, 500, 410);
-                sceneDetailsClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneDetailsClient.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 detailsStage.setScene(sceneDetailsClient);
                 detailsStage.setTitle("Details Client");
                 detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -405,7 +490,7 @@ public class MenuPrincipalController implements Initializable {
             controller.setDaos(DAOFactory.getPersistanceActuelle());
             controller.setProduit(produit);
             Scene sceneDetailsProduit = new Scene((AnchorPane) rootdetailsProduit, 595, 280);
-            sceneDetailsProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+            sceneDetailsProduit.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
             detailsStage.setScene(sceneDetailsProduit);
             detailsStage.setTitle("Details Produit");
             detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -419,6 +504,7 @@ public class MenuPrincipalController implements Initializable {
     }
 }
 
+    @FXML
     public void modifier() {
         Stage modifierStage = new Stage();
         try {
@@ -433,7 +519,7 @@ public class MenuPrincipalController implements Initializable {
                 controller.setCategorie(categorie);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneModifierCategorie = new Scene((AnchorPane) rootModifierCategorie, 420, 145);
-                sceneModifierCategorie.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneModifierCategorie.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 modifierStage.setScene(sceneModifierCategorie);
                 modifierStage.setTitle("Modifier categorie");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
@@ -453,7 +539,7 @@ public class MenuPrincipalController implements Initializable {
                 controller.setClient(client);
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 Scene sceneModifierClient = new Scene((AnchorPane) rootModifierClient, 800, 500);
-                sceneModifierClient.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneModifierClient.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 modifierStage.setScene(sceneModifierClient);
                 modifierStage.setTitle("Modifier client");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
@@ -480,7 +566,7 @@ public class MenuPrincipalController implements Initializable {
                 controller.setDaos(DAOFactory.getPersistanceActuelle());
                 controller.setProduit(produit);
                 Scene sceneModifierProduit = new Scene((AnchorPane) rootModifierProduit, 680, 550);
-                sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                 modifierStage.setScene(sceneModifierProduit);
                 modifierStage.setTitle("Modifier produit");
                 modifierStage.initModality(Modality.APPLICATION_MODAL);
@@ -495,6 +581,7 @@ public class MenuPrincipalController implements Initializable {
         }
     }
 
+    @FXML
     public void supprimer() {
         try {
             if (this.affichageTableau.getChildren().contains(tableCategorie)) {
@@ -534,7 +621,7 @@ public class MenuPrincipalController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
-    
+
         public boolean confirmation(){
             String msg = "êtes vous sûr de vouloir supprimer cette ligne ?";
             Alert alert=new Alert(Alert.AlertType.CONFIRMATION);

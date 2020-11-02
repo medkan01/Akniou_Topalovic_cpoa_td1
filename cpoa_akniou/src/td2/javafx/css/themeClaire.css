@@ -17,6 +17,14 @@
     -fx-padding: 5;
 }
 
+#noCss{
+    -fx-padding: 5;   
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
