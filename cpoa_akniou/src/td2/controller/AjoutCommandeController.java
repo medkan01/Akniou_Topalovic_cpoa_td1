@@ -3,7 +3,6 @@ package td2.controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -205,8 +204,7 @@ public class AjoutCommandeController{
         this.boutonSupprimerLigneCommande.setDisable(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout commande");
-        alert.setHeaderText("Commande ajouté avec succès !");
- 
+        alert.setHeaderText("Commande ajoutée avec succès !");
         alert.showAndWait();
         return true;
     }
