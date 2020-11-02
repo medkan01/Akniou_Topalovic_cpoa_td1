@@ -32,7 +32,7 @@ public class AjoutCommandeController{
     
     private DAOFactory daos;
     @FXML private ChoiceBox<Categorie> cbxCategorie;
-    @FXML private ChoiceBox<Client> cbxClient;
+    @FXML private ChoiceBox<Client> cbxClients;
     @FXML private AnchorPane panelFenetre;
     @FXML private VBox vBoxFenetre;
     @FXML private GridPane gridFenetre, gridTable, gridBoutonBas, gridBoutonHaut, gridLigneCommande;
@@ -118,7 +118,8 @@ public class AjoutCommandeController{
         }
 
         try { 
-            this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
+            this.cbxClients.getItems().clear();
+            this.cbxClients.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {
            
         }
@@ -196,7 +197,7 @@ public class AjoutCommandeController{
             //Ajout des colonnes à la table contenant les produits à ajouter à la commande
             this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colNomCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
             this.cbxCategorie.setItems(FXCollections.observableArrayList(daos.getCategorieDAO().getAll()));
-            this.cbxClient.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
+            this.cbxClients.setItems(FXCollections.observableArrayList(daos.getClientDAO().getAll()));
         } catch (Exception e) {
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);

@@ -49,4 +49,8 @@ public class ListeMemoireLigneCommandeDAO implements LigneCommandeDAO {
         return commande.getLigneCommande();
 
     }
+
+    public HashMap<Produit, LigneCommande> getLigneCommandeByIdClient(int idClient){
+        
+    }
 }
