@@ -2,6 +2,7 @@ package td2.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -9,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
@@ -466,30 +469,56 @@ public class MenuPrincipalController implements Initializable {
             if (this.affichageTableau.getChildren().contains(tableCategorie)) {
                 // Récuperation des données de l'item séléctionné puis suppression
                 Categorie categorie = this.tableCategorie.getSelectionModel().getSelectedItem();
+                if(confirmation()){
                 daos.getCategorieDAO().delete(categorie);
                 this.affichageTableau.getChildren().clear();
                 afficherCategorie();
+                }
             } else if (this.affichageTableau.getChildren().contains(tableClient)) {
                 // Récuperation des données de l'item séléctionné puis suppression
                 Client client = this.tableClient.getSelectionModel().getSelectedItem();
+                if(confirmation()){
                 daos.getClientDAO().delete(client);
                 this.affichageTableau.getChildren().clear();
                 afficherClients();
+                }
             } else if (this.affichageTableau.getChildren().contains(tableCommande)) {
                 // Récuperation des données de l'item séléctionné puis suppression
                 Commande commande = this.tableCommande.getSelectionModel().getSelectedItem();
+                if(confirmation()){
                 daos.getCommandeDAO().delete(commande);
                 this.affichageTableau.getChildren().clear();
                 afficherCommandes();
+                }
             } else if (this.affichageTableau.getChildren().contains(tableProduit)) {
                 // Récuperation des données de l'item séléctionné puis suppression
                 Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
+                if(confirmation()){
                 daos.getProduitDAO().delete(produit);
                 this.affichageTableau.getChildren().clear();
                 afficherProduits();
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-}
+    
+        public boolean confirmation(){
+            String msg = "êtes vous sûr de vouloir supprimer cette ligne ?";
+            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Suppression");
+            alert.setTitle("Confirmation");
+            alert.setContentText(msg);
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == null) {
+                return false;
+             } else if (option.get() == ButtonType.OK) {
+                return true;
+             } else if (option.get() == ButtonType.CANCEL) {
+                return false;
+             } else{
+                 return false;
+             }
+        }
+    }

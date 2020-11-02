@@ -169,10 +169,10 @@ public class AjoutCommandeController{
             TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif");
             TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantité");
             //Tailles des colonnes
-            colNomProdLigneCom.setPrefWidth(130);
-            colNomCategorieProdLigneCom.setPrefWidth(130);
-            colTarifProdLigneCom.setPrefWidth(79);
-            colQuantiteProdLigneCom.setPrefWidth(79);
+            colNomProdLigneCom.setPrefWidth(128);
+            colNomCategorieProdLigneCom.setPrefWidth(128);
+            colTarifProdLigneCom.setPrefWidth(77);
+            colQuantiteProdLigneCom.setPrefWidth(77);
             //Format du type des cellules pour chaque colonne
             colNomProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomProduit"));
             colNomCategorieProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomCategorie"));
