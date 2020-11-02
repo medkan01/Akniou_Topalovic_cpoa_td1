@@ -39,8 +39,8 @@ public class AjoutClientController implements Initializable {
             Client client = new Client(1,nom,prenom,email,motDePasse,numero,voie,codePostal,ville,pays);
 
             if(this.daos.getClientDAO().insert(client) == true) {
-                this.labelResume.setTextFill(Color.web("#52D044"));
-                this.labelResume.setText("Le client a ete ajoute avec succes");
+                Stage fenetre = (Stage) boutonSuivant.getScene().getWindow();
+                fenetre.close();
             }
             else{
                throw new IllegalArgumentException("Impossible d'ajouter ce client");
@@ -70,8 +70,6 @@ public class AjoutClientController implements Initializable {
             panelActuel = panelEmail;
         } else if(panelActuel == panelEmail) {
             creerClient();
-            Stage fenetre = (Stage) boutonSuivant.getScene().getWindow();
-            fenetre.close();
         }
     }
 
