@@ -24,7 +24,7 @@ public class ChoisirQuantiteLigneCommandeController {
             } else {
                 setQuantite();
                 Stage fenetre = (Stage) boutonValider.getScene().getWindow();
-                fenetre.close();
+                fenetre.hide();
             }
         } catch(Exception e) {
             this.labelErreur.setText(e.getMessage());

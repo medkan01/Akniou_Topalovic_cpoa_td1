@@ -20,9 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import td2.controller.ChoisirQuantiteLigneCommandeController;
 import td2.dao.daofactory.DAOFactory;
 import td2.dao.daofactory.Persistance;
 import td2.pojo.Produit;
+import td2.pojo.ProduitSelectionne;
 import td2.pojo.Categorie;
 
 public class AjoutCommandeController{
@@ -35,7 +37,7 @@ public class AjoutCommandeController{
     @FXML private Label labelResume;
     @FXML private Button boutonAjouterLigneCommande, boutonSupprimerLigneCommande, boutonSuppAll, boutonAjouterCommande, boutonAnnuler;
     @FXML private TableView<Produit> tableProduit;
-    @FXML private TableView<String> tableProduitSelectionne;
+    @FXML private TableView<ProduitSelectionne> tableProduitSelectionne;
 
     @FXML
     public boolean creerCommande(){
@@ -52,7 +54,6 @@ public class AjoutCommandeController{
     @FXML
     public void ajouter(){
         Stage quantiteStage = new Stage();
-        int quantite;
         try{
             URL fxmlURLQuantite = getClass().getResource("../javafx/ChoisirQuantiteLigneCommande.fxml");
             FXMLLoader fxmlLoaderQuantite = new FXMLLoader(fxmlURLQuantite);
@@ -65,11 +66,19 @@ public class AjoutCommandeController{
             quantiteStage.setResizable(false);
             quantiteStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));
             quantiteStage.showAndWait();
-            quantite = controller.getQuantite();
+            //Creation du produit selectionne
             Produit produit = this.tableProduit.getSelectionModel().getSelectedItem();
-            String nomProd = produit.getNom();
-            String categorieProd = daos.getCategorieDAO().getById(produit.getIdCategorie()).getTitre();
-            double tarif = produit.getTarif();
+            String nomProduit = produit.getNom();
+            String nomCategorie = daos.getCategorieDAO().getById(produit.getIdCategorie()).getTitre();
+            double tarifUnitaire = produit.getTarif();
+            int quantite = controller.getQuantite();
+            ProduitSelectionne produitSelectionne = new ProduitSelectionne(nomProduit, nomCategorie, tarifUnitaire, quantite);
+            //Ajout du produit dans la table des produits selectionnes
+            this.tableProduitSelectionne.getItems().add(produitSelectionne);
+            //Fermeture de la fenetre quantite apres recuperation des donnees necessaire
+            quantiteStage.close();
+            this.tableProduit.getSelectionModel().clearSelection();
+            this.tableProduitSelectionne.getSelectionModel().clearSelection();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,22 +116,27 @@ public class AjoutCommandeController{
 
             //Deuxieme tables contenant les produits à ajouter à la commande
             //Creation des colonnes de la table contenant les produits à ajouter à la commande
-            TableColumn<String, String> colNomProdLigneCom = new TableColumn<String, String>("Nom");
-            TableColumn<String, String> colCategorieProdLigneCom = new TableColumn<String, String>("Categorie");
-            TableColumn<String, Double> colTarifProdLigneCom = new TableColumn<String, Double>("Tarif unitaire");
-            TableColumn<String, Integer> colQuantiteProdLigneCom = new TableColumn<String, Integer>("Quantite");
+            TableColumn<ProduitSelectionne, String> colNomProdLigneCom = new TableColumn<ProduitSelectionne, String>("Nom");
+            TableColumn<ProduitSelectionne, String> colNomCategorieProdLigneCom = new TableColumn<ProduitSelectionne, String>("Categorie");
+            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif unitaire");
+            TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantite");
             //Tailles des colonnes
             colNomProdLigneCom.setPrefWidth(130);
-            colCategorieProdLigneCom.setPrefWidth(130);
+            colNomCategorieProdLigneCom.setPrefWidth(130);
             colTarifProdLigneCom.setPrefWidth(79);
             colQuantiteProdLigneCom.setPrefWidth(79);
             //setResizable à l'etat faux
             colNomProdLigneCom.setResizable(false);
-            colCategorieProdLigneCom.setResizable(false);
+            colNomCategorieProdLigneCom.setResizable(false);
             colTarifProdLigneCom.setResizable(false);
             colQuantiteProdLigneCom.setResizable(false);
+            //Format du type des cellules pour chaque colonne
+            colNomProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomProduit"));
+            colNomCategorieProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, String>("nomCategorie"));
+            colTarifProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Double>("tarifUnitaire"));
+            colQuantiteProdLigneCom.setCellValueFactory(new PropertyValueFactory<ProduitSelectionne, Integer>("quantite"));
             //Ajout des colonnes à la table contenant les produits à ajouter à la commande
-            this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
+            this.tableProduitSelectionne.getColumns().setAll(colNomProdLigneCom, colNomCategorieProdLigneCom, colTarifProdLigneCom, colQuantiteProdLigneCom);
 
         } catch (Exception e) {
             this.labelResume.setText("erreur produit");
@@ -134,7 +148,8 @@ public class AjoutCommandeController{
             this.labelResume.setTextFill(Color.web("#FF0000"));
             this.labelResume.setText("erreur Categorie");
         }
-        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null);});
-        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null);});   
+        this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonAjouterLigneCommande.setDisable(newValue == null); this.tableProduitSelectionne.getSelectionModel().clearSelection();});
+        this.tableProduitSelectionne.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {this.boutonSupprimerLigneCommande.setDisable(newValue == null); this.tableProduit.getSelectionModel().clearSelection();});
+        //if(this.tableProduit.getSelectionModel().selectedItemProperty().get() != null) this.tableProduitSelectionne.getSelectionModel().select(-1);
     }
 }
