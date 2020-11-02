@@ -47,7 +47,7 @@ public class DetailsCommandeController{
             }
             this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);
             this.labelIdCommande.setText(String.valueOf(commande.getIdClient()));
-            this.labelDateCommande.setText(String.valueOf(commande.getIdClient()));
+            this.labelDateCommande.setText(String.valueOf(commande.getDate()));
             this.labelIdClient.setText(String.valueOf(commande.getIdClient()));
             
         } catch(Exception e){
