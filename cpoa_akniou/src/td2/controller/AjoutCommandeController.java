@@ -98,7 +98,7 @@ public class AjoutCommandeController{
     public void supprimer(){
         ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
         this.tableProduitSelectionne.getItems().remove(produitSelectionne);
-        if(this.tableProduitSelectionne.getItems().size()!=0){
+        if(this.tableProduitSelectionne.getItems().size()==0){
             this.boutonToutSupprimer.setDisable(true);
         }
     }

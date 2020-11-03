@@ -75,7 +75,7 @@ public class MySQLClientDAO implements ClientDAO{
 		if(id<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Client WHERE id_client="+id+";");
+		requete.executeQuery("SELECT * FROM akniou1u_cpoa.Client WHERE id_client= "+id+" ;");
 		ResultSet res = requete.getResultSet();
 		res.next();
 		Client client = new Client(

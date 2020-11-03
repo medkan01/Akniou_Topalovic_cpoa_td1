@@ -43,7 +43,11 @@ public class ProduitSelectionne {
     }
 
     public void setQuantite(int quantite) {
-        this.quantite = quantite;
+        if(quantite==0){
+            throw new IllegalArgumentException("la quantite saisie est egale a 0");
+        } else{
+            this.quantite = quantite;
+        }
     }
 
     public String getNomProduit() {

@@ -95,10 +95,14 @@ public class ModifierCommandeController {
             this.boutonToutSupprimer.setDisable(false);
         }
     }
+
     @FXML
     public void supprimer(){
         ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
         this.tableProduitSelectionne.getItems().remove(produitSelectionne);
+        if(this.tableProduitSelectionne.getItems().size()==0){
+            this.boutonToutSupprimer.setDisable(true);
+        }
     }
 
     public boolean contient(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
@@ -190,6 +194,8 @@ public class ModifierCommandeController {
                 LigneCommande ligneCommande = new LigneCommande(liste.get(i).getQuantite(),liste.get(i).getTarifUnitaire()); 
                 Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());
                 commande.ajouterLigne(produit, ligneCommande);
+                int test = commande.getId();
+                int test2 = liste.get(i).getIdProduit();
                 daos.getLigneCommandeDAO().update(commande.getId(),liste.get(i).getIdProduit(), ligneCommande);
             }
             daos.getCommandeDAO().update(commande);
@@ -304,7 +310,8 @@ public class ModifierCommandeController {
             this.idCom = commande.getId();
             this.date = commande.getDate();
             this.idClient = commande.getIdClient();
-            HashMap<Produit, LigneCommande> listeLigneCommande = commande.getLigneCommande();
+            this.cbxClients.setValue(daos.getClientDAO().getById(idClient));
+            HashMap<Produit, LigneCommande> listeLigneCommande = daos.getLigneCommandeDAO().getAll(commande.getId());
             ArrayList<ProduitSelectionne> listeProduitSelectionnes = new ArrayList<ProduitSelectionne>();
             Set<Produit> keys = listeLigneCommande.keySet();
             ArrayList<Produit> listeProduitLigneCommande = new ArrayList<Produit>(keys);
@@ -315,8 +322,7 @@ public class ModifierCommandeController {
                 ProduitSelectionne produitSelectionne = new ProduitSelectionne(produit.getId(), produit.getNom(), categorie.getTitre(), ligneCommande.getTarifUnitaire(), ligneCommande.getQuantite());
                 listeProduitSelectionnes.add(produitSelectionne);
             }
-            this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);
-            this.cbxClients.setValue(daos.getClientDAO().getById(idClient));
+            this.tableProduitSelectionne.getItems().addAll(listeProduitSelectionnes);         
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);
