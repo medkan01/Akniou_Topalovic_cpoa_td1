@@ -7,7 +7,7 @@ Ajdin : 50%
 DAOFactory : La DAOFactory fonctionne correctement et il est possible de changer entre ListeMemoire et MySQL sans que cela pose de soucis dans le code.
 Pojo : Tout fonctionne à priori.
 ListeMemoire : Tout fonctionne à priori.
-MySQL : Problème au niveau de l'ajout d'une commande ou de la modification. (à cause des IDs)
+MySQL : Tout fonctionne à prioris.
 Affichage : Globalement l'affichage fonctionne bien, sauf au niveau de la commande, lorsqu'un item est selectionné dans une table, l'item de l'autre table ne se deselectionne pas.
 
 Il est donc possible d'ajouter, supprimer et modifier des catégories, des clients, des commandes, des lignes de commande et des produits.
