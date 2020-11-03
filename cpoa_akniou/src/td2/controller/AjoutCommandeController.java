@@ -3,6 +3,8 @@ package td2.controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -95,6 +98,9 @@ public class AjoutCommandeController{
     public void supprimer(){
         ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getSelectionModel().getSelectedItem();
         this.tableProduitSelectionne.getItems().remove(produitSelectionne);
+        if(this.tableProduitSelectionne.getItems().size()!=0){
+            this.boutonToutSupprimer.setDisable(true);
+        }
     }
 
     public boolean contient(int idProduit, TableView<ProduitSelectionne> tableProduitSelectionne){
@@ -178,9 +184,15 @@ public class AjoutCommandeController{
             alert.showAndWait();
             return false;
         }
- 
+
+        if(this.tableProduitSelectionne.getItems().size()==0){
+            if(!confirmation()){
+                return false;
+            }
+        }
+        
+        Commande commande = new Commande(1, LocalDate.now(), idClient);
         try{
-            Commande commande = new Commande(1, LocalDate.now(), idClient);
             for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
                 ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getItems().get(i);
                 Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());
@@ -211,11 +223,29 @@ public class AjoutCommandeController{
         alert.showAndWait();
         return true;
     }
-    
+
+    public boolean confirmation(){
+        String msg = "la commande est vide. etes-vous sur de vouloir ajouter cette commande ?";
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Commande vide");
+        alert.setTitle("Confirmation");
+        alert.setContentText(msg);
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == null) {
+            return false;
+         } else if (option.get() == ButtonType.OK) {
+            return true;
+         } else if (option.get() == ButtonType.CANCEL) {
+            return false;
+         } else{
+             return false;
+         }
+    }
+
     @FXML
     public void toutSupprimer(){
         this.tableProduitSelectionne.getItems().clear();
-        this.boutonToutSupprimer.setDisable(true);
+        this.boutonToutSupprimer.setDisable(true);    
     }
 
     @FXML
@@ -256,7 +286,7 @@ public class AjoutCommandeController{
             //Creation des colonnes de la table contenant les produits à ajouter à la commande
             TableColumn<ProduitSelectionne, String> colNomProdLigneCom = new TableColumn<ProduitSelectionne, String>("Nom");
             TableColumn<ProduitSelectionne, String> colNomCategorieProdLigneCom = new TableColumn<ProduitSelectionne, String>("Categorie");
-            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif");
+            TableColumn<ProduitSelectionne, Double> colTarifProdLigneCom = new TableColumn<ProduitSelectionne, Double>("Tarif unt.");
             TableColumn<ProduitSelectionne, Integer> colQuantiteProdLigneCom = new TableColumn<ProduitSelectionne, Integer>("Quantité");
             TableColumn<ProduitSelectionne, Integer> colIdProduit = new TableColumn<ProduitSelectionne, Integer>("idProduit");
             //Tailles des colonnes
@@ -301,7 +331,6 @@ public class AjoutCommandeController{
             try{
                 this.tableProduit.getItems().addAll(daos.getProduitDAO().getAllByCategorie(this.cbxCategorie.getSelectionModel().getSelectedItem().getId()));
             } catch(Exception e){
-                System.out.print(e.getMessage());
             }
         });
         this.tableProduit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

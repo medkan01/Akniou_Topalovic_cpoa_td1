@@ -181,6 +181,7 @@ public class ModifierCommandeController {
             alert.showAndWait();
             return false;
         }
+        
         ObservableList<ProduitSelectionne> liste = this.tableProduitSelectionne.getItems();
         try{
             Commande commande = new Commande(this.idCom, this.date, idClient);

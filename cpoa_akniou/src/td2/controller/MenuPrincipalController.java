@@ -85,11 +85,17 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     public void modeNuit(){
         this.css = "themeSombre";
+        Scene fenetre =  boutonAjouter.getScene();
+        fenetre.getStylesheets().clear();
+        fenetre.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
     }
 
     @FXML
     public void modeJour(){
         this.css = "themeClaire";
+        Scene fenetre =  boutonAjouter.getScene();
+        fenetre.getStylesheets().clear();
+        fenetre.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
     }
 
     @FXML
@@ -209,7 +215,7 @@ public class MenuPrincipalController implements Initializable {
         TableColumn<Client, String> colAdrNumero = new TableColumn<>("N°");
         colAdrNumero.setPrefWidth(40);
         colAdrNumero.setCellValueFactory(new PropertyValueFactory<Client, String>("adrNumero"));
-        TableColumn<Client, String> colAdrVoie = new TableColumn<>("Voie");
+        TableColumn<Client, String> colAdrVoie = new TableColumn<>("Rue");
         colAdrVoie.setPrefWidth(140);
         colAdrVoie.setCellValueFactory(new PropertyValueFactory<Client, String>("adrVoie"));
         TableColumn<Client, String> colAdrCodePostal = new TableColumn<>("CP");
@@ -620,9 +626,9 @@ public class MenuPrincipalController implements Initializable {
                     controller.setDaos(DAOFactory.getPersistanceActuelle());
                     controller.setCommande(commande);
                     Scene sceneModifierProduit = new Scene((AnchorPane) rootModifierCommande, 900, 500);
-                    sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/themeClaire.css").toExternalForm());
+                    sceneModifierProduit.getStylesheets().add(getClass().getResource("../javafx/css/"+this.css+".css").toExternalForm());
                     modifierStage.setScene(sceneModifierProduit);
-                    modifierStage.setTitle("Modifier produit");
+                    modifierStage.setTitle("Modifier Commande");
                     modifierStage.initModality(Modality.APPLICATION_MODAL);
                     modifierStage.setResizable(false);
                     modifierStage.getIcons().add(new Image(getClass().getResource("../javafx/images/iconLogo.png").toExternalForm()));

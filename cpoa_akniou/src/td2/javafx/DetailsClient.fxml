@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.DetailsClientController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.DetailsClientController">
    <children>
       <ImageView fitHeight="96.0" fitWidth="101.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -109,12 +109,12 @@
          </children>
       </GridPane>
       <Button fx:id="boutonTerminer" layoutX="14.0" layoutY="371.0" mnemonicParsing="false" onAction="#close" text="Terminer" />
-      <Line endX="-72.0" endY="-11.0" layoutX="355.0" layoutY="200.0" startX="-355.0" startY="-11.0" />
-      <Line endX="443.0" layoutX="-163.0" layoutY="119.0" startX="163.0" />
-      <Line endX="301.0" layoutX="-18.0" layoutY="360.0" startX="18.0" />
-      <Line endX="436.0" endY="-134.0" layoutX="-153.0" layoutY="129.0" startX="436.0" startY="281.29290771484375" />
+      <Line endX="-72.0" endY="-11.0" layoutX="355.0" layoutY="200.0" startX="-355.0" startY="-11.0" stroke="GREY" />
+      <Line endX="443.0" layoutX="-163.0" layoutY="119.0" startX="163.0" stroke="GREY" />
+      <Line endX="301.0" layoutX="-18.0" layoutY="360.0" startX="18.0" stroke="GREY" />
+      <Line endX="436.0" endY="-134.0" layoutX="-153.0" layoutY="129.0" startX="436.0" startY="281.29290771484375" stroke="GREY" />
       <TableView fx:id="tableCommande" layoutX="283.0" layoutY="-5.0" maxWidth="-Infinity" prefHeight="416.0" prefWidth="217.0" />
-      <Button fx:id="boutonDetailsCommande" disable="true" layoutX="200.0" layoutY="368.0" mnemonicParsing="false" onAction="#afficherDetailsCommande">
+      <Button id="noCss" fx:id="boutonDetailsCommande" disable="true" layoutX="231.0" layoutY="368.0" mnemonicParsing="false" onAction="#afficherDetailsCommande">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <image>

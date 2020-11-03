@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="panelFenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutCommandeController">
+<AnchorPane id="pane" fx:id="panelFenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutCommandeController">
    <children>
       <VBox fx:id="vBoxFenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0">
          <children>
@@ -101,8 +101,8 @@
                   </FlowPane>
                   <FlowPane alignment="CENTER" columnHalignment="CENTER" GridPane.rowIndex="1">
                      <children>
-                        <ChoiceBox fx:id="cbxClients" prefHeight="25.0" prefWidth="303.0" />
-                        <Button fx:id="boutonAjouterClient" mnemonicParsing="false" onAction="#ajouterClient" prefHeight="22.0" prefWidth="0.0">
+                        <ChoiceBox fx:id="cbxClients" prefHeight="25.0" prefWidth="250.0" />
+                        <Button id="noCss" fx:id="boutonAjouterClient" mnemonicParsing="false" onAction="#ajouterClient" prefHeight="22.0" prefWidth="0.0">
                            <FlowPane.margin>
                               <Insets left="20.0" />
                            </FlowPane.margin>

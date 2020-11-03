@@ -10,6 +10,7 @@ public class Connexion {
 	private Connexion(){
 		creeConnexion();
 	}
+	
 	private void creeConnexion() {
 		String url ="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr";
 		url += "?serverTimezone=Europe/Paris";

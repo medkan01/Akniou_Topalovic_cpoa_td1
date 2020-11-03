@@ -85,7 +85,7 @@ public class MySQLProduitDAO implements ProduitDAO {
 		if(idCategorie<=0) throw new IllegalArgumentException("ID Incorrect");
 		Connection c = Connexion.getInstance().getMaConnexion();
 		Statement requete = c.createStatement();
-		requete.executeQuery("SELECT Produit.id_produit, Produit.nom, Produit.description, Produit.tarif, Produit.visuel, Produit.id_categorie FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE Produit.id_categorie = "+idCategorie+"AND akniou1u_cpoa.Produit.id_categorie =  akniou1u_cpoa.Categorie.id_categorie");
+		requete.executeQuery("SELECT Produit.id_produit, Produit.nom, Produit.description, Produit.tarif, Produit.visuel, Produit.id_categorie FROM akniou1u_cpoa.Categorie, akniou1u_cpoa.Produit  WHERE Produit.id_categorie = "+idCategorie+" AND akniou1u_cpoa.Produit.id_categorie =  akniou1u_cpoa.Categorie.id_categorie");
 		ResultSet res = requete.getResultSet();
 		ArrayList<Produit> liste = new ArrayList<Produit>();
 		while (res.next()){

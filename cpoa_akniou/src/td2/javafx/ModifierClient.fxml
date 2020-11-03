@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ModifierClientController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.ModifierClientController">
    <children>
       <GridPane prefHeight="500.0" prefWidth="800.0">
         <columnConstraints>
@@ -185,7 +185,7 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <Line endX="1028.2928466796875" endY="58.0" layoutX="-218.0" layoutY="25.0" startX="218.0" startY="58.0" />
-      <Line endX="979.0" endY="248.0" layoutX="-179.0" layoutY="181.0" startX="179.0" startY="248.0" />
+      <Line endX="1018.0" endY="58.0" layoutX="-218.0" layoutY="25.0" startX="218.0" startY="58.0" stroke="GREY" />
+      <Line endX="979.0" endY="248.0" layoutX="-179.0" layoutY="181.0" startX="179.0" startY="248.0" stroke="GREY" />
    </children>
 </AnchorPane>

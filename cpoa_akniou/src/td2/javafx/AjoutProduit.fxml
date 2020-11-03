@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="panellFenetreProduit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutProduitController">
+<AnchorPane id="pane" fx:id="panellFenetreProduit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="td2.controller.AjoutProduitController">
    <children>
       <GridPane fx:id="gridPaneSaisie" alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" prefHeight="331.0" prefWidth="584.0" style="-fx-border-color: black; -fx-border-width: 2px;">
         <columnConstraints>
@@ -52,7 +52,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Label fx:id="labelResumeProduit" alignment="CENTER" layoutX="39.0" layoutY="408.0" text="" />
+      <Label fx:id="labelResumeProduit" alignment="CENTER" layoutX="27.0" layoutY="392.0" prefHeight="49.0" prefWidth="627.0" text="" wrapText="true" />
       <Button fx:id="boutonCreer" alignment="CENTER" layoutX="311.0" layoutY="367.0" mnemonicParsing="false" onAction="#creerProduit" text="Créer" textAlignment="CENTER" />
    </children>
 </AnchorPane>
