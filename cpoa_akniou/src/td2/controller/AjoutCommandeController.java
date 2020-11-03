@@ -193,6 +193,7 @@ public class AjoutCommandeController{
         
         Commande commande = new Commande(1, LocalDate.now(), idClient);
         try{
+            daos.getCommandeDAO().insert(commande);
             for(int i=0; i < this.tableProduitSelectionne.getItems().size() ; i++){
                 ProduitSelectionne produitSelectionne = this.tableProduitSelectionne.getItems().get(i);
                 Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());
@@ -200,7 +201,6 @@ public class AjoutCommandeController{
                 commande.ajouterLigne(produit, ligneCommande);
                 daos.getLigneCommandeDAO().insert(commande.getId(), produit.getId(), ligneCommande);
             }
-            daos.getCommandeDAO().insert(commande);
         } catch(Exception e){
             String erreur = "Erreur";
             Alert alert=new Alert(Alert.AlertType.ERROR);

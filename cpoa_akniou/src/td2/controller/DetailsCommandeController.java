@@ -30,7 +30,7 @@ public class DetailsCommandeController{
 	public void setCommande(Commande obj){
         try{
             Commande commande = obj;
-            HashMap<Produit, LigneCommande> listeLigneCommande = commande.getLigneCommande();
+            HashMap<Produit, LigneCommande> listeLigneCommande = daos.getLigneCommandeDAO().getAll(commande.getId());
             ArrayList<ProduitSelectionne> listeProduitSelectionnes = new ArrayList<ProduitSelectionne>();
             Set<Produit> keys = listeLigneCommande.keySet();
             ArrayList<Produit> listeProduitLigneCommande = new ArrayList<Produit>(keys);

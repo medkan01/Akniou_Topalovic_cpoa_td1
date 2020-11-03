@@ -19,7 +19,7 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 		return instance;
 	}
 
-	public boolean insert(int idProduit,int idCommande,LigneCommande ligne) throws SQLException{
+	public boolean insert(int idCommande, int idProduit,LigneCommande ligne) throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		PreparedStatement requete = c.prepareStatement(
 		"INSERT INTO akniou1u_cpoa.Ligne_commande (id_commande, id_produit, quantite, tarif_unitaire) VALUES (?, ?, ?, ?);");
@@ -64,7 +64,7 @@ public class MySQLLigneCommandeDAO implements LigneCommandeDAO{
 	public HashMap<Produit, LigneCommande> getAll(int idCommande)throws SQLException{
 		Connection c = Connexion.getInstance().getMaConnexion();
 		HashMap<Produit, LigneCommande> hash = new HashMap<Produit,LigneCommande>();
-		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE id_commande =? ORDER BY id_commande ASC");
+		PreparedStatement requete = c.prepareStatement("SELECT * FROM akniou1u_cpoa.Ligne_commande WHERE id_commande = ? ORDER BY id_commande ASC");
 			requete.setInt(1, idCommande);
 		ResultSet res = requete.executeQuery();
 		while (res.next()){
