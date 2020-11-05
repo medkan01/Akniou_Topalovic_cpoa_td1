@@ -194,8 +194,6 @@ public class ModifierCommandeController {
                 LigneCommande ligneCommande = new LigneCommande(liste.get(i).getQuantite(),liste.get(i).getTarifUnitaire()); 
                 Produit produit = daos.getProduitDAO().getById(produitSelectionne.getIdProduit());
                 commande.ajouterLigne(produit, ligneCommande);
-                int test = commande.getId();
-                int test2 = liste.get(i).getIdProduit();
                 daos.getLigneCommandeDAO().update(commande.getId(),liste.get(i).getIdProduit(), ligneCommande);
             }
             daos.getCommandeDAO().update(commande);
